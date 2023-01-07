@@ -3,40 +3,40 @@ use super::*;
 // wxEvent
 wxwidgets! {
     /// An event is a structure holding information about an event passed to a callback or member function.
-    /// - [`Event`] represents a C++ `wxEvent` class instance which your code has ownership, [`EventInRust`]`<false>` represents one which don't own.
+    /// - [`Event`] represents a C++ `wxEvent` class instance which your code has ownership, [`EventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Event`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_event.html) for more details.
     #[doc(alias = "wxEvent")]
     #[doc(alias = "Event")]
     class Event
-        = EventInRust<true>(wxEvent) impl
+        = EventFromCpp<true>(wxEvent) impl
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> EventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> EventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for EventInRust<false> {
+impl Clone for EventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<EventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: EventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: EventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for EventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for EventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for EventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for EventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -45,39 +45,39 @@ impl<const IN_RUST: bool> Drop for EventInRust<IN_RUST> {
 // wxEvtHandler
 wxwidgets! {
     /// A class that can handle events from the windowing system.
-    /// - [`EvtHandler`] represents a C++ `wxEvtHandler` class instance which your code has ownership, [`EvtHandlerInRust`]`<false>` represents one which don't own.
+    /// - [`EvtHandler`] represents a C++ `wxEvtHandler` class instance which your code has ownership, [`EvtHandlerFromCpp`]`<false>` represents one which don't own.
     /// - Use [`EvtHandler`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxEvtHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html) for more details.
     #[doc(alias = "wxEvtHandler")]
     #[doc(alias = "EvtHandler")]
     class EvtHandler
-        = EvtHandlerInRust<true>(wxEvtHandler) impl
+        = EvtHandlerFromCpp<true>(wxEvtHandler) impl
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> EvtHandlerInRust<IN_RUST> {
+impl<const FROM_CPP: bool> EvtHandlerFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxEvtHandler::wxEvtHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html#a3f0166c4154227d05575b01eb2c8d4be).
-    pub fn new() -> EvtHandlerInRust<IN_RUST> {
-        unsafe { EvtHandlerInRust(ffi::wxEvtHandler_new()) }
+    pub fn new() -> EvtHandlerFromCpp<FROM_CPP> {
+        unsafe { EvtHandlerFromCpp(ffi::wxEvtHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for EvtHandlerInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for EvtHandlerFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<EvtHandlerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: EvtHandlerInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EvtHandlerFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: EvtHandlerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for EvtHandlerInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxEvtHandler_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for EvtHandlerFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxEvtHandler_CLASSINFO()) }
     }
 }

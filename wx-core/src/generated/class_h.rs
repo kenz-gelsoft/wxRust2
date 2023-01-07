@@ -3,57 +3,57 @@ use super::*;
 // wxHScrolledWindow
 wxwidgets! {
     /// In the name of this class, "H" stands for "horizontal" because it can be used for scrolling columns of variable widths.
-    /// - [`HScrolledWindow`] represents a C++ `wxHScrolledWindow` class instance which your code has ownership, [`HScrolledWindowInRust`]`<false>` represents one which don't own.
+    /// - [`HScrolledWindow`] represents a C++ `wxHScrolledWindow` class instance which your code has ownership, [`HScrolledWindowFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HScrolledWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHScrolledWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_h_scrolled_window.html) for more details.
     #[doc(alias = "wxHScrolledWindow")]
     #[doc(alias = "HScrolledWindow")]
     class HScrolledWindow
-        = HScrolledWindowInRust<true>(wxHScrolledWindow) impl
+        = HScrolledWindowFromCpp<true>(wxHScrolledWindow) impl
         HScrolledWindowMethods,
         PanelMethods,
         // WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> HScrolledWindowInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HScrolledWindowFromCpp<FROM_CPP> {
     // BLOCKED: fn wxHScrolledWindow()
     // BLOCKED: fn wxHScrolledWindow1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for HScrolledWindowInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for HScrolledWindowFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HScrolledWindowInRust<IN_RUST>> for PanelInRust<IN_RUST> {
-    fn from(o: HScrolledWindowInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HScrolledWindowFromCpp<FROM_CPP>> for PanelFromCpp<FROM_CPP> {
+    fn from(o: HScrolledWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HScrolledWindowInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: HScrolledWindowInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HScrolledWindowFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: HScrolledWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HScrolledWindowInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: HScrolledWindowInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HScrolledWindowFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: HScrolledWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HScrolledWindowInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: HScrolledWindowInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HScrolledWindowFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: HScrolledWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for HScrolledWindowInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxHScrolledWindow_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for HScrolledWindowFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHScrolledWindow_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> WindowMethods for HScrolledWindowInRust<IN_RUST> {
+impl<const FROM_CPP: bool> WindowMethods for HScrolledWindowFromCpp<FROM_CPP> {
     /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
     ///
     /// See [C++ `wxHScrolledWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_h_scrolled_window.html#a5982d08464fabd3b47543d298b710224).
@@ -83,50 +83,52 @@ impl<const IN_RUST: bool> WindowMethods for HScrolledWindowInRust<IN_RUST> {
 // wxHTMLDataObject
 wxwidgets! {
     /// wxHTMLDataObject is used for working with HTML-formatted text.
-    /// - [`HTMLDataObject`] represents a C++ `wxHTMLDataObject` class instance which your code has ownership, [`HTMLDataObjectInRust`]`<false>` represents one which don't own.
+    /// - [`HTMLDataObject`] represents a C++ `wxHTMLDataObject` class instance which your code has ownership, [`HTMLDataObjectFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HTMLDataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHTMLDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_h_t_m_l_data_object.html) for more details.
     #[doc(alias = "wxHTMLDataObject")]
     #[doc(alias = "HTMLDataObject")]
     class HTMLDataObject
-        = HTMLDataObjectInRust<true>(wxHTMLDataObject) impl
+        = HTMLDataObjectFromCpp<true>(wxHTMLDataObject) impl
         HTMLDataObjectMethods,
         DataObjectSimpleMethods,
         DataObjectMethods
 }
-impl<const IN_RUST: bool> HTMLDataObjectInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HTMLDataObjectFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxHTMLDataObject::wxHTMLDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_h_t_m_l_data_object.html#a3e09f114be84aef40c05809ddfe83333).
-    pub fn new(html: &str) -> HTMLDataObjectInRust<IN_RUST> {
+    pub fn new(html: &str) -> HTMLDataObjectFromCpp<FROM_CPP> {
         unsafe {
             let html = WxString::from(html);
             let html = html.as_ptr();
-            HTMLDataObjectInRust(ffi::wxHTMLDataObject_new(html))
+            HTMLDataObjectFromCpp(ffi::wxHTMLDataObject_new(html))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for HTMLDataObjectInRust<false> {
+impl Clone for HTMLDataObjectFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HTMLDataObjectInRust<IN_RUST>> for DataObjectSimpleInRust<IN_RUST> {
-    fn from(o: HTMLDataObjectInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HTMLDataObjectFromCpp<FROM_CPP>>
+    for DataObjectSimpleFromCpp<FROM_CPP>
+{
+    fn from(o: HTMLDataObjectFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HTMLDataObjectInRust<IN_RUST>> for DataObjectInRust<IN_RUST> {
-    fn from(o: HTMLDataObjectInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HTMLDataObjectFromCpp<FROM_CPP>> for DataObjectFromCpp<FROM_CPP> {
+    fn from(o: HTMLDataObjectFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> Drop for HTMLDataObjectInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for HTMLDataObjectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxHTMLDataObject_delete(self.0) }
         }
     }
@@ -135,57 +137,57 @@ impl<const IN_RUST: bool> Drop for HTMLDataObjectInRust<IN_RUST> {
 // wxHVScrolledWindow
 wxwidgets! {
     /// This window inherits all functionality of both vertical and horizontal, variable scrolled windows.
-    /// - [`HVScrolledWindow`] represents a C++ `wxHVScrolledWindow` class instance which your code has ownership, [`HVScrolledWindowInRust`]`<false>` represents one which don't own.
+    /// - [`HVScrolledWindow`] represents a C++ `wxHVScrolledWindow` class instance which your code has ownership, [`HVScrolledWindowFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HVScrolledWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHVScrolledWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_h_v_scrolled_window.html) for more details.
     #[doc(alias = "wxHVScrolledWindow")]
     #[doc(alias = "HVScrolledWindow")]
     class HVScrolledWindow
-        = HVScrolledWindowInRust<true>(wxHVScrolledWindow) impl
+        = HVScrolledWindowFromCpp<true>(wxHVScrolledWindow) impl
         HVScrolledWindowMethods,
         PanelMethods,
         // WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> HVScrolledWindowInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HVScrolledWindowFromCpp<FROM_CPP> {
     // BLOCKED: fn wxHVScrolledWindow()
     // BLOCKED: fn wxHVScrolledWindow1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for HVScrolledWindowInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for HVScrolledWindowFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HVScrolledWindowInRust<IN_RUST>> for PanelInRust<IN_RUST> {
-    fn from(o: HVScrolledWindowInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HVScrolledWindowFromCpp<FROM_CPP>> for PanelFromCpp<FROM_CPP> {
+    fn from(o: HVScrolledWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HVScrolledWindowInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: HVScrolledWindowInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HVScrolledWindowFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: HVScrolledWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HVScrolledWindowInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: HVScrolledWindowInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HVScrolledWindowFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: HVScrolledWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HVScrolledWindowInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: HVScrolledWindowInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HVScrolledWindowFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: HVScrolledWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for HVScrolledWindowInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxHVScrolledWindow_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for HVScrolledWindowFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHVScrolledWindow_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> WindowMethods for HVScrolledWindowInRust<IN_RUST> {
+impl<const FROM_CPP: bool> WindowMethods for HVScrolledWindowFromCpp<FROM_CPP> {
     /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
     ///
     /// See [C++ `wxHVScrolledWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_h_v_scrolled_window.html#ae14453b61a87766376e8c64653c90ed6).
@@ -215,28 +217,28 @@ impl<const IN_RUST: bool> WindowMethods for HVScrolledWindowInRust<IN_RUST> {
 // wxHeaderColumn
 wxwidgets! {
     /// Represents a column header in controls displaying tabular data such as wxDataViewCtrl or wxGrid.
-    /// - [`HeaderColumn`] represents a C++ `wxHeaderColumn` class instance which your code has ownership, [`HeaderColumnInRust`]`<false>` represents one which don't own.
+    /// - [`HeaderColumn`] represents a C++ `wxHeaderColumn` class instance which your code has ownership, [`HeaderColumnFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HeaderColumn`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderColumn` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_column.html) for more details.
     #[doc(alias = "wxHeaderColumn")]
     #[doc(alias = "HeaderColumn")]
     class HeaderColumn
-        = HeaderColumnInRust<true>(wxHeaderColumn) impl
+        = HeaderColumnFromCpp<true>(wxHeaderColumn) impl
         HeaderColumnMethods
 }
-impl<const IN_RUST: bool> HeaderColumnInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HeaderColumnFromCpp<FROM_CPP> {
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for HeaderColumnInRust<false> {
+impl Clone for HeaderColumnFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for HeaderColumnInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for HeaderColumnFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxHeaderColumn_delete(self.0) }
         }
     }
@@ -245,18 +247,18 @@ impl<const IN_RUST: bool> Drop for HeaderColumnInRust<IN_RUST> {
 // wxHeaderColumnSimple
 wxwidgets! {
     /// Simple container for the information about the column.
-    /// - [`HeaderColumnSimple`] represents a C++ `wxHeaderColumnSimple` class instance which your code has ownership, [`HeaderColumnSimpleInRust`]`<false>` represents one which don't own.
+    /// - [`HeaderColumnSimple`] represents a C++ `wxHeaderColumnSimple` class instance which your code has ownership, [`HeaderColumnSimpleFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HeaderColumnSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderColumnSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_column_simple.html) for more details.
     #[doc(alias = "wxHeaderColumnSimple")]
     #[doc(alias = "HeaderColumnSimple")]
     class HeaderColumnSimple
-        = HeaderColumnSimpleInRust<true>(wxHeaderColumnSimple) impl
+        = HeaderColumnSimpleFromCpp<true>(wxHeaderColumnSimple) impl
         HeaderColumnSimpleMethods,
         SettableHeaderColumnMethods,
         HeaderColumnMethods
 }
-impl<const IN_RUST: bool> HeaderColumnSimpleInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HeaderColumnSimpleFromCpp<FROM_CPP> {
     /// Constructor for a column header.
     ///
     /// See [C++ `wxHeaderColumnSimple::wxHeaderColumnSimple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_header_column_simple.html#a219431d463c61334f8de7ac45ebb16f0).
@@ -265,11 +267,11 @@ impl<const IN_RUST: bool> HeaderColumnSimpleInRust<IN_RUST> {
         width: c_int,
         align: c_int,
         flags: c_int,
-    ) -> HeaderColumnSimpleInRust<IN_RUST> {
+    ) -> HeaderColumnSimpleFromCpp<FROM_CPP> {
         unsafe {
             let title = WxString::from(title);
             let title = title.as_ptr();
-            HeaderColumnSimpleInRust(ffi::wxHeaderColumnSimple_new(title, width, align, flags))
+            HeaderColumnSimpleFromCpp(ffi::wxHeaderColumnSimple_new(title, width, align, flags))
         }
     }
     ///
@@ -279,36 +281,38 @@ impl<const IN_RUST: bool> HeaderColumnSimpleInRust<IN_RUST> {
         width: c_int,
         align: c_int,
         flags: c_int,
-    ) -> HeaderColumnSimpleInRust<IN_RUST> {
+    ) -> HeaderColumnSimpleFromCpp<FROM_CPP> {
         unsafe {
             let bitmap = bitmap.as_ptr();
-            HeaderColumnSimpleInRust(ffi::wxHeaderColumnSimple_new1(bitmap, width, align, flags))
+            HeaderColumnSimpleFromCpp(ffi::wxHeaderColumnSimple_new1(bitmap, width, align, flags))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for HeaderColumnSimpleInRust<false> {
+impl Clone for HeaderColumnSimpleFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HeaderColumnSimpleInRust<IN_RUST>>
-    for SettableHeaderColumnInRust<IN_RUST>
+impl<const FROM_CPP: bool> From<HeaderColumnSimpleFromCpp<FROM_CPP>>
+    for SettableHeaderColumnFromCpp<FROM_CPP>
 {
-    fn from(o: HeaderColumnSimpleInRust<IN_RUST>) -> Self {
+    fn from(o: HeaderColumnSimpleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderColumnSimpleInRust<IN_RUST>> for HeaderColumnInRust<IN_RUST> {
-    fn from(o: HeaderColumnSimpleInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderColumnSimpleFromCpp<FROM_CPP>>
+    for HeaderColumnFromCpp<FROM_CPP>
+{
+    fn from(o: HeaderColumnSimpleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> Drop for HeaderColumnSimpleInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for HeaderColumnSimpleFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxHeaderColumnSimple_delete(self.0) }
         }
     }
@@ -317,57 +321,57 @@ impl<const IN_RUST: bool> Drop for HeaderColumnSimpleInRust<IN_RUST> {
 // wxHeaderCtrl
 wxwidgets! {
     /// wxHeaderCtrl is the control containing the column headings which is usually used for display of tabular data.
-    /// - [`HeaderCtrl`] represents a C++ `wxHeaderCtrl` class instance which your code has ownership, [`HeaderCtrlInRust`]`<false>` represents one which don't own.
+    /// - [`HeaderCtrl`] represents a C++ `wxHeaderCtrl` class instance which your code has ownership, [`HeaderCtrlFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HeaderCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl.html) for more details.
     #[doc(alias = "wxHeaderCtrl")]
     #[doc(alias = "HeaderCtrl")]
     class HeaderCtrl
-        = HeaderCtrlInRust<true>(wxHeaderCtrl) impl
+        = HeaderCtrlFromCpp<true>(wxHeaderCtrl) impl
         HeaderCtrlMethods,
         ControlMethods,
         // WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> HeaderCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HeaderCtrlFromCpp<FROM_CPP> {
     // BLOCKED: fn wxHeaderCtrl()
     // BLOCKED: fn wxHeaderCtrl1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for HeaderCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for HeaderCtrlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: HeaderCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: HeaderCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: HeaderCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: HeaderCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for HeaderCtrlInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxHeaderCtrl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for HeaderCtrlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHeaderCtrl_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> WindowMethods for HeaderCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> WindowMethods for HeaderCtrlFromCpp<FROM_CPP> {
     /// Create the header control window.
     ///
     /// See [C++ `wxHeaderCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl.html#a1f8ff3be92e0fb2bd59e25642447c2d5).
@@ -397,66 +401,68 @@ impl<const IN_RUST: bool> WindowMethods for HeaderCtrlInRust<IN_RUST> {
 // wxHeaderCtrlEvent
 wxwidgets! {
     /// Event class representing the events generated by wxHeaderCtrl.
-    /// - [`HeaderCtrlEvent`] represents a C++ `wxHeaderCtrlEvent` class instance which your code has ownership, [`HeaderCtrlEventInRust`]`<false>` represents one which don't own.
+    /// - [`HeaderCtrlEvent`] represents a C++ `wxHeaderCtrlEvent` class instance which your code has ownership, [`HeaderCtrlEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HeaderCtrlEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderCtrlEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_event.html) for more details.
     #[doc(alias = "wxHeaderCtrlEvent")]
     #[doc(alias = "HeaderCtrlEvent")]
     class HeaderCtrlEvent
-        = HeaderCtrlEventInRust<true>(wxHeaderCtrlEvent) impl
+        = HeaderCtrlEventFromCpp<true>(wxHeaderCtrlEvent) impl
         HeaderCtrlEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> HeaderCtrlEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HeaderCtrlEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxHeaderCtrlEvent()
     ///
     /// See [C++ `wxHeaderCtrlEvent::wxHeaderCtrlEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_event.html#aa9c9fdd75b48ea8dfcb976ed16dbfcd1).
-    pub fn new<H: HeaderCtrlEventMethods>(event: &H) -> HeaderCtrlEventInRust<IN_RUST> {
+    pub fn new<H: HeaderCtrlEventMethods>(event: &H) -> HeaderCtrlEventFromCpp<FROM_CPP> {
         unsafe {
             let event = event.as_ptr();
-            HeaderCtrlEventInRust(ffi::wxHeaderCtrlEvent_new1(event))
+            HeaderCtrlEventFromCpp(ffi::wxHeaderCtrlEvent_new1(event))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for HeaderCtrlEventInRust<false> {
+impl Clone for HeaderCtrlEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlEventInRust<IN_RUST>> for NotifyEventInRust<IN_RUST> {
-    fn from(o: HeaderCtrlEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlEventFromCpp<FROM_CPP>> for NotifyEventFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
-    fn from(o: HeaderCtrlEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlEventFromCpp<FROM_CPP>>
+    for CommandEventFromCpp<FROM_CPP>
+{
+    fn from(o: HeaderCtrlEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: HeaderCtrlEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: HeaderCtrlEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for HeaderCtrlEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxHeaderCtrlEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for HeaderCtrlEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHeaderCtrlEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for HeaderCtrlEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for HeaderCtrlEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -465,13 +471,13 @@ impl<const IN_RUST: bool> Drop for HeaderCtrlEventInRust<IN_RUST> {
 // wxHeaderCtrlSimple
 wxwidgets! {
     /// wxHeaderCtrlSimple is a concrete header control which can be used directly, without inheriting from it as you need to do when using wxHeaderCtrl itself.
-    /// - [`HeaderCtrlSimple`] represents a C++ `wxHeaderCtrlSimple` class instance which your code has ownership, [`HeaderCtrlSimpleInRust`]`<false>` represents one which don't own.
+    /// - [`HeaderCtrlSimple`] represents a C++ `wxHeaderCtrlSimple` class instance which your code has ownership, [`HeaderCtrlSimpleFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HeaderCtrlSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderCtrlSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_simple.html) for more details.
     #[doc(alias = "wxHeaderCtrlSimple")]
     #[doc(alias = "HeaderCtrlSimple")]
     class HeaderCtrlSimple
-        = HeaderCtrlSimpleInRust<true>(wxHeaderCtrlSimple) impl
+        = HeaderCtrlSimpleFromCpp<true>(wxHeaderCtrlSimple) impl
         HeaderCtrlSimpleMethods,
         HeaderCtrlMethods,
         ControlMethods,
@@ -479,12 +485,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> HeaderCtrlSimpleInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HeaderCtrlSimpleFromCpp<FROM_CPP> {
     /// Default constructor not creating the underlying window.
     ///
     /// See [C++ `wxHeaderCtrlSimple::wxHeaderCtrlSimple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_simple.html#a9a0288a46b35b0ebc7e8704a082dbd58).
-    pub fn new_2step() -> HeaderCtrlSimpleInRust<IN_RUST> {
-        unsafe { HeaderCtrlSimpleInRust(ffi::wxHeaderCtrlSimple_new()) }
+    pub fn new_2step() -> HeaderCtrlSimpleFromCpp<FROM_CPP> {
+        unsafe { HeaderCtrlSimpleFromCpp(ffi::wxHeaderCtrlSimple_new()) }
     }
     /// Constructor creating the window.
     ///
@@ -496,7 +502,7 @@ impl<const IN_RUST: bool> HeaderCtrlSimpleInRust<IN_RUST> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> HeaderCtrlSimpleInRust<IN_RUST> {
+    ) -> HeaderCtrlSimpleFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -506,7 +512,7 @@ impl<const IN_RUST: bool> HeaderCtrlSimpleInRust<IN_RUST> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            HeaderCtrlSimpleInRust(ffi::wxHeaderCtrlSimple_new1(
+            HeaderCtrlSimpleFromCpp(ffi::wxHeaderCtrlSimple_new1(
                 parent, winid, pos, size, style, name,
             ))
         }
@@ -515,58 +521,58 @@ impl<const IN_RUST: bool> HeaderCtrlSimpleInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for HeaderCtrlSimpleInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for HeaderCtrlSimpleFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for HeaderCtrlInRust<IN_RUST> {
-    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlSimpleFromCpp<FROM_CPP>> for HeaderCtrlFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlSimpleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlSimpleFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlSimpleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlSimpleFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlSimpleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlSimpleFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlSimpleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HeaderCtrlSimpleFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: HeaderCtrlSimpleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for HeaderCtrlSimpleInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxHeaderCtrlSimple_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for HeaderCtrlSimpleFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHeaderCtrlSimple_CLASSINFO()) }
     }
 }
 
 // wxHelpEvent
 wxwidgets! {
     /// A help event is sent when the user has requested context-sensitive help.
-    /// - [`HelpEvent`] represents a C++ `wxHelpEvent` class instance which your code has ownership, [`HelpEventInRust`]`<false>` represents one which don't own.
+    /// - [`HelpEvent`] represents a C++ `wxHelpEvent` class instance which your code has ownership, [`HelpEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HelpEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHelpEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_help_event.html) for more details.
     #[doc(alias = "wxHelpEvent")]
     #[doc(alias = "HelpEvent")]
     class HelpEvent
-        = HelpEventInRust<true>(wxHelpEvent) impl
+        = HelpEventFromCpp<true>(wxHelpEvent) impl
         HelpEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> HelpEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HelpEventFromCpp<FROM_CPP> {
     //  ENUM: Origin
     pub const Origin_Unknown: c_int = 0;
     pub const Origin_Keyboard: c_int = 0 + 1;
@@ -577,34 +583,34 @@ impl<const IN_RUST: bool> HelpEventInRust<IN_RUST> {
         None
     }
 }
-impl Clone for HelpEventInRust<false> {
+impl Clone for HelpEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HelpEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
-    fn from(o: HelpEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HelpEventFromCpp<FROM_CPP>> for CommandEventFromCpp<FROM_CPP> {
+    fn from(o: HelpEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HelpEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: HelpEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HelpEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: HelpEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HelpEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: HelpEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HelpEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: HelpEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for HelpEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxHelpEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for HelpEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHelpEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for HelpEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for HelpEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -613,24 +619,24 @@ impl<const IN_RUST: bool> Drop for HelpEventInRust<IN_RUST> {
 // wxHyperlinkCtrl
 wxwidgets! {
     /// This class shows a static text element which links to an URL.
-    /// - [`HyperlinkCtrl`] represents a C++ `wxHyperlinkCtrl` class instance which your code has ownership, [`HyperlinkCtrlInRust`]`<false>` represents one which don't own.
+    /// - [`HyperlinkCtrl`] represents a C++ `wxHyperlinkCtrl` class instance which your code has ownership, [`HyperlinkCtrlFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HyperlinkCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHyperlinkCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_hyperlink_ctrl.html) for more details.
     #[doc(alias = "wxHyperlinkCtrl")]
     #[doc(alias = "HyperlinkCtrl")]
     class HyperlinkCtrl
-        = HyperlinkCtrlInRust<true>(wxHyperlinkCtrl) impl
+        = HyperlinkCtrlFromCpp<true>(wxHyperlinkCtrl) impl
         HyperlinkCtrlMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> HyperlinkCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HyperlinkCtrlFromCpp<FROM_CPP> {
     ///
     /// See [C++ `wxHyperlinkCtrl::wxHyperlinkCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_hyperlink_ctrl.html#a9b0d333830376d2d437f35f31656405f).
-    pub fn new_2step() -> HyperlinkCtrlInRust<IN_RUST> {
-        unsafe { HyperlinkCtrlInRust(ffi::wxHyperlinkCtrl_new()) }
+    pub fn new_2step() -> HyperlinkCtrlFromCpp<FROM_CPP> {
+        unsafe { HyperlinkCtrlFromCpp(ffi::wxHyperlinkCtrl_new()) }
     }
     /// Constructor.
     ///
@@ -644,7 +650,7 @@ impl<const IN_RUST: bool> HyperlinkCtrlInRust<IN_RUST> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> HyperlinkCtrlInRust<IN_RUST> {
+    ) -> HyperlinkCtrlFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -658,7 +664,7 @@ impl<const IN_RUST: bool> HyperlinkCtrlInRust<IN_RUST> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            HyperlinkCtrlInRust(ffi::wxHyperlinkCtrl_new1(
+            HyperlinkCtrlFromCpp(ffi::wxHyperlinkCtrl_new1(
                 parent, id, label, url, pos, size, style, name,
             ))
         }
@@ -667,53 +673,53 @@ impl<const IN_RUST: bool> HyperlinkCtrlInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for HyperlinkCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for HyperlinkCtrlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HyperlinkCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: HyperlinkCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HyperlinkCtrlFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: HyperlinkCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HyperlinkCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: HyperlinkCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HyperlinkCtrlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: HyperlinkCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HyperlinkCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: HyperlinkCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HyperlinkCtrlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: HyperlinkCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HyperlinkCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: HyperlinkCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HyperlinkCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: HyperlinkCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for HyperlinkCtrlInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxHyperlinkCtrl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for HyperlinkCtrlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHyperlinkCtrl_CLASSINFO()) }
     }
 }
 
 // wxHyperlinkEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxHyperlinkCtrl.
-    /// - [`HyperlinkEvent`] represents a C++ `wxHyperlinkEvent` class instance which your code has ownership, [`HyperlinkEventInRust`]`<false>` represents one which don't own.
+    /// - [`HyperlinkEvent`] represents a C++ `wxHyperlinkEvent` class instance which your code has ownership, [`HyperlinkEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`HyperlinkEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHyperlinkEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_hyperlink_event.html) for more details.
     #[doc(alias = "wxHyperlinkEvent")]
     #[doc(alias = "HyperlinkEvent")]
     class HyperlinkEvent
-        = HyperlinkEventInRust<true>(wxHyperlinkEvent) impl
+        = HyperlinkEventFromCpp<true>(wxHyperlinkEvent) impl
         HyperlinkEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> HyperlinkEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> HyperlinkEventFromCpp<FROM_CPP> {
     /// The constructor is not normally used by the user code.
     ///
     /// See [C++ `wxHyperlinkEvent::wxHyperlinkEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_hyperlink_event.html#aa80a85f87e14160f23feca68f8819740).
@@ -721,7 +727,7 @@ impl<const IN_RUST: bool> HyperlinkEventInRust<IN_RUST> {
         generator: Option<&O>,
         id: c_int,
         url: &str,
-    ) -> HyperlinkEventInRust<IN_RUST> {
+    ) -> HyperlinkEventFromCpp<FROM_CPP> {
         unsafe {
             let generator = match generator {
                 Some(r) => r.as_ptr(),
@@ -729,41 +735,41 @@ impl<const IN_RUST: bool> HyperlinkEventInRust<IN_RUST> {
             };
             let url = WxString::from(url);
             let url = url.as_ptr();
-            HyperlinkEventInRust(ffi::wxHyperlinkEvent_new(generator, id, url))
+            HyperlinkEventFromCpp(ffi::wxHyperlinkEvent_new(generator, id, url))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for HyperlinkEventInRust<false> {
+impl Clone for HyperlinkEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<HyperlinkEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
-    fn from(o: HyperlinkEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HyperlinkEventFromCpp<FROM_CPP>> for CommandEventFromCpp<FROM_CPP> {
+    fn from(o: HyperlinkEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HyperlinkEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: HyperlinkEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HyperlinkEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: HyperlinkEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<HyperlinkEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: HyperlinkEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<HyperlinkEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: HyperlinkEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for HyperlinkEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxHyperlinkEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for HyperlinkEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHyperlinkEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for HyperlinkEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for HyperlinkEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

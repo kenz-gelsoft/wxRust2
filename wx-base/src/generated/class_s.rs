@@ -3,16 +3,16 @@ use super::*;
 // wxStandardPaths
 wxwidgets! {
     /// wxStandardPaths returns the standard locations in the file system and should be used by applications to find their data files in a portable way.
-    /// - [`StandardPaths`] represents a C++ `wxStandardPaths` class instance which your code has ownership, [`StandardPathsInRust`]`<false>` represents one which don't own.
+    /// - [`StandardPaths`] represents a C++ `wxStandardPaths` class instance which your code has ownership, [`StandardPathsFromCpp`]`<false>` represents one which don't own.
     /// - Use [`StandardPaths`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxStandardPaths` class's documentation](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html) for more details.
     #[doc(alias = "wxStandardPaths")]
     #[doc(alias = "StandardPaths")]
     class StandardPaths
-        = StandardPathsInRust<true>(wxStandardPaths) impl
+        = StandardPathsFromCpp<true>(wxStandardPaths) impl
         StandardPathsMethods
 }
-impl<const IN_RUST: bool> StandardPathsInRust<IN_RUST> {
+impl<const FROM_CPP: bool> StandardPathsFromCpp<FROM_CPP> {
     //  ENUM: ResourceCat
     pub const ResourceCat_None: c_int = 0;
     pub const ResourceCat_Messages: c_int = 0 + 1;
@@ -38,14 +38,14 @@ impl<const IN_RUST: bool> StandardPathsInRust<IN_RUST> {
         None
     }
 }
-impl Clone for StandardPathsInRust<false> {
+impl Clone for StandardPathsFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for StandardPathsInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for StandardPathsFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxStandardPaths_delete(self.0) }
         }
     }

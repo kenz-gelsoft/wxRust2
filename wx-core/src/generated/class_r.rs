@@ -3,25 +3,25 @@ use super::*;
 // wxRadioBox
 wxwidgets! {
     /// A radio box item is used to select one of number of mutually exclusive choices.
-    /// - [`RadioBox`] represents a C++ `wxRadioBox` class instance which your code has ownership, [`RadioBoxInRust`]`<false>` represents one which don't own.
+    /// - [`RadioBox`] represents a C++ `wxRadioBox` class instance which your code has ownership, [`RadioBoxFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RadioBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRadioBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html) for more details.
     #[doc(alias = "wxRadioBox")]
     #[doc(alias = "RadioBox")]
     class RadioBox
-        = RadioBoxInRust<true>(wxRadioBox) impl
+        = RadioBoxFromCpp<true>(wxRadioBox) impl
         RadioBoxMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> RadioBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RadioBoxFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxRadioBox::wxRadioBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#a2821fb98e7a2b2f52b0966c784bf4864).
-    pub fn new_2step() -> RadioBoxInRust<IN_RUST> {
-        unsafe { RadioBoxInRust(ffi::wxRadioBox_new()) }
+    pub fn new_2step() -> RadioBoxFromCpp<FROM_CPP> {
+        unsafe { RadioBoxFromCpp(ffi::wxRadioBox_new()) }
     }
     // NOT_SUPPORTED: fn wxRadioBox1()
     /// Constructor, creating and showing a radiobox.
@@ -44,7 +44,7 @@ impl<const IN_RUST: bool> RadioBoxInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RadioBoxInRust<IN_RUST> {
+    ) -> RadioBoxFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -58,7 +58,7 @@ impl<const IN_RUST: bool> RadioBoxInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RadioBoxInRust(ffi::wxRadioBox_new2(
+            RadioBoxFromCpp(ffi::wxRadioBox_new2(
                 parent,
                 id,
                 label,
@@ -76,38 +76,38 @@ impl<const IN_RUST: bool> RadioBoxInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for RadioBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for RadioBoxFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<RadioBoxInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: RadioBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RadioBoxFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: RadioBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RadioBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: RadioBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RadioBoxFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: RadioBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RadioBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: RadioBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RadioBoxFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: RadioBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RadioBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: RadioBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RadioBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: RadioBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for RadioBoxInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for RadioBoxFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxRadioBox
-impl<const IN_RUST: bool> ItemContainerImmutableMethods for RadioBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerImmutableMethods for RadioBoxFromCpp<FROM_CPP> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxRadioBox_AsItemContainerImmutable(self.as_ptr()) }
     }
@@ -116,25 +116,25 @@ impl<const IN_RUST: bool> ItemContainerImmutableMethods for RadioBoxInRust<IN_RU
 // wxRadioButton
 wxwidgets! {
     /// A radio button item is a button which usually denotes one of several mutually exclusive options.
-    /// - [`RadioButton`] represents a C++ `wxRadioButton` class instance which your code has ownership, [`RadioButtonInRust`]`<false>` represents one which don't own.
+    /// - [`RadioButton`] represents a C++ `wxRadioButton` class instance which your code has ownership, [`RadioButtonFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RadioButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRadioButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html) for more details.
     #[doc(alias = "wxRadioButton")]
     #[doc(alias = "RadioButton")]
     class RadioButton
-        = RadioButtonInRust<true>(wxRadioButton) impl
+        = RadioButtonFromCpp<true>(wxRadioButton) impl
         RadioButtonMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> RadioButtonInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RadioButtonFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxRadioButton::wxRadioButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html#a295e680547c57d9ad5bfbc835770ed2b).
-    pub fn new_2step() -> RadioButtonInRust<IN_RUST> {
-        unsafe { RadioButtonInRust(ffi::wxRadioButton_new()) }
+    pub fn new_2step() -> RadioButtonFromCpp<FROM_CPP> {
+        unsafe { RadioButtonFromCpp(ffi::wxRadioButton_new()) }
     }
     /// Constructor, creating and showing a radio button.
     ///
@@ -148,7 +148,7 @@ impl<const IN_RUST: bool> RadioButtonInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RadioButtonInRust<IN_RUST> {
+    ) -> RadioButtonFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -161,7 +161,7 @@ impl<const IN_RUST: bool> RadioButtonInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RadioButtonInRust(ffi::wxRadioButton_new1(
+            RadioButtonFromCpp(ffi::wxRadioButton_new1(
                 parent, id, label, pos, size, style, validator, name,
             ))
         }
@@ -170,83 +170,83 @@ impl<const IN_RUST: bool> RadioButtonInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for RadioButtonInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for RadioButtonFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<RadioButtonInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: RadioButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RadioButtonFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: RadioButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RadioButtonInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: RadioButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RadioButtonFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: RadioButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RadioButtonInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: RadioButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RadioButtonFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: RadioButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RadioButtonInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: RadioButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RadioButtonFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: RadioButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for RadioButtonInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxRadioButton_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for RadioButtonFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRadioButton_CLASSINFO()) }
     }
 }
 
 // wxRealPoint
 wxwidgets! {
     /// A wxRealPoint is a useful data structure for graphics operations.
-    /// - [`RealPoint`] represents a C++ `wxRealPoint` class instance which your code has ownership, [`RealPointInRust`]`<false>` represents one which don't own.
+    /// - [`RealPoint`] represents a C++ `wxRealPoint` class instance which your code has ownership, [`RealPointFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RealPoint`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRealPoint` class's documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html) for more details.
     #[doc(alias = "wxRealPoint")]
     #[doc(alias = "RealPoint")]
     class RealPoint
-        = RealPointInRust<true>(wxRealPoint) impl
+        = RealPointFromCpp<true>(wxRealPoint) impl
         RealPointMethods
 }
-impl<const IN_RUST: bool> RealPointInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RealPointFromCpp<FROM_CPP> {
     /// Initializes to zero the x and y members.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a9c4d38e144bb23d0e5ce94f7653e7887).
-    pub fn new() -> RealPointInRust<IN_RUST> {
-        unsafe { RealPointInRust(ffi::wxRealPoint_new()) }
+    pub fn new() -> RealPointFromCpp<FROM_CPP> {
+        unsafe { RealPointFromCpp(ffi::wxRealPoint_new()) }
     }
     /// Initializes the point with the given coordinates.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a672ffa73a517579bfee8c32198c5d948).
-    pub fn new_with_double(x: c_double, y: c_double) -> RealPointInRust<IN_RUST> {
-        unsafe { RealPointInRust(ffi::wxRealPoint_new1(x, y)) }
+    pub fn new_with_double(x: c_double, y: c_double) -> RealPointFromCpp<FROM_CPP> {
+        unsafe { RealPointFromCpp(ffi::wxRealPoint_new1(x, y)) }
     }
     /// Converts the given wxPoint (with integer coordinates) to a wxRealPoint.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#ae09522b031b035db4472500e48a0e2d3).
-    pub fn new_with_point<P: PointMethods>(pt: &P) -> RealPointInRust<IN_RUST> {
+    pub fn new_with_point<P: PointMethods>(pt: &P) -> RealPointFromCpp<FROM_CPP> {
         unsafe {
             let pt = pt.as_ptr();
-            RealPointInRust(ffi::wxRealPoint_new2(pt))
+            RealPointFromCpp(ffi::wxRealPoint_new2(pt))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RealPointInRust<false> {
+impl Clone for RealPointFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for RealPointInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for RealPointFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxRealPoint_delete(self.0) }
         }
     }
@@ -255,25 +255,25 @@ impl<const IN_RUST: bool> Drop for RealPointInRust<IN_RUST> {
 // wxRearrangeCtrl
 wxwidgets! {
     /// A composite control containing a wxRearrangeList and the buttons allowing to move the items in it.
-    /// - [`RearrangeCtrl`] represents a C++ `wxRearrangeCtrl` class instance which your code has ownership, [`RearrangeCtrlInRust`]`<false>` represents one which don't own.
+    /// - [`RearrangeCtrl`] represents a C++ `wxRearrangeCtrl` class instance which your code has ownership, [`RearrangeCtrlFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RearrangeCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html) for more details.
     #[doc(alias = "wxRearrangeCtrl")]
     #[doc(alias = "RearrangeCtrl")]
     class RearrangeCtrl
-        = RearrangeCtrlInRust<true>(wxRearrangeCtrl) impl
+        = RearrangeCtrlFromCpp<true>(wxRearrangeCtrl) impl
         RearrangeCtrlMethods,
         PanelMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> RearrangeCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RearrangeCtrlFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeCtrl::wxRearrangeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html#ad47b3bbeddb36e799feb7d463376c929).
-    pub fn new_2step() -> RearrangeCtrlInRust<IN_RUST> {
-        unsafe { RearrangeCtrlInRust(ffi::wxRearrangeCtrl_new()) }
+    pub fn new_2step() -> RearrangeCtrlFromCpp<FROM_CPP> {
+        unsafe { RearrangeCtrlFromCpp(ffi::wxRearrangeCtrl_new()) }
     }
     /// Constructor really creating the control.
     ///
@@ -295,7 +295,7 @@ impl<const IN_RUST: bool> RearrangeCtrlInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RearrangeCtrlInRust<IN_RUST> {
+    ) -> RearrangeCtrlFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -308,7 +308,7 @@ impl<const IN_RUST: bool> RearrangeCtrlInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RearrangeCtrlInRust(ffi::wxRearrangeCtrl_new1(
+            RearrangeCtrlFromCpp(ffi::wxRearrangeCtrl_new1(
                 parent, id, pos, size, order, items, style, validator, name,
             ))
         }
@@ -317,47 +317,47 @@ impl<const IN_RUST: bool> RearrangeCtrlInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for RearrangeCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for RearrangeCtrlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<RearrangeCtrlInRust<IN_RUST>> for PanelInRust<IN_RUST> {
-    fn from(o: RearrangeCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeCtrlFromCpp<FROM_CPP>> for PanelFromCpp<FROM_CPP> {
+    fn from(o: RearrangeCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: RearrangeCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeCtrlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: RearrangeCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: RearrangeCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeCtrlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: RearrangeCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: RearrangeCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: RearrangeCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for RearrangeCtrlInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeCtrl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for RearrangeCtrlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRearrangeCtrl_CLASSINFO()) }
     }
 }
 
 // wxRearrangeDialog
 wxwidgets! {
     /// A dialog allowing the user to rearrange the specified items.
-    /// - [`RearrangeDialog`] represents a C++ `wxRearrangeDialog` class instance which your code has ownership, [`RearrangeDialogInRust`]`<false>` represents one which don't own.
+    /// - [`RearrangeDialog`] represents a C++ `wxRearrangeDialog` class instance which your code has ownership, [`RearrangeDialogFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RearrangeDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html) for more details.
     #[doc(alias = "wxRearrangeDialog")]
     #[doc(alias = "RearrangeDialog")]
     class RearrangeDialog
-        = RearrangeDialogInRust<true>(wxRearrangeDialog) impl
+        = RearrangeDialogFromCpp<true>(wxRearrangeDialog) impl
         RearrangeDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -366,12 +366,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> RearrangeDialogInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RearrangeDialogFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeDialog::wxRearrangeDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html#ad230c6d3baf27e7d3f516a37e62e0d58).
-    pub fn new_2step() -> RearrangeDialogInRust<IN_RUST> {
-        unsafe { RearrangeDialogInRust(ffi::wxRearrangeDialog_new()) }
+    pub fn new_2step() -> RearrangeDialogFromCpp<FROM_CPP> {
+        unsafe { RearrangeDialogFromCpp(ffi::wxRearrangeDialog_new()) }
     }
     /// Constructor creating the dialog.
     ///
@@ -384,7 +384,7 @@ impl<const IN_RUST: bool> RearrangeDialogInRust<IN_RUST> {
         items: &A2,
         pos: &P,
         name: &str,
-    ) -> RearrangeDialogInRust<IN_RUST> {
+    ) -> RearrangeDialogFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -399,7 +399,7 @@ impl<const IN_RUST: bool> RearrangeDialogInRust<IN_RUST> {
             let pos = pos.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RearrangeDialogInRust(ffi::wxRearrangeDialog_new1(
+            RearrangeDialogFromCpp(ffi::wxRearrangeDialog_new1(
                 parent, message, title, order, items, pos, name,
             ))
         }
@@ -408,57 +408,61 @@ impl<const IN_RUST: bool> RearrangeDialogInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for RearrangeDialogInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for RearrangeDialogFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for DialogInRust<IN_RUST> {
-    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeDialogFromCpp<FROM_CPP>> for DialogFromCpp<FROM_CPP> {
+    fn from(o: RearrangeDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for TopLevelWindowInRust<IN_RUST> {
-    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeDialogFromCpp<FROM_CPP>>
+    for TopLevelWindowFromCpp<FROM_CPP>
+{
+    fn from(o: RearrangeDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for NonOwnedWindowInRust<IN_RUST> {
-    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeDialogFromCpp<FROM_CPP>>
+    for NonOwnedWindowFromCpp<FROM_CPP>
+{
+    fn from(o: RearrangeDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeDialogFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: RearrangeDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeDialogFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: RearrangeDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeDialogFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: RearrangeDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for RearrangeDialogInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeDialog_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for RearrangeDialogFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRearrangeDialog_CLASSINFO()) }
     }
 }
 
 // wxRearrangeList
 wxwidgets! {
     /// A listbox-like control allowing the user to rearrange the items and to enable or disable them.
-    /// - [`RearrangeList`] represents a C++ `wxRearrangeList` class instance which your code has ownership, [`RearrangeListInRust`]`<false>` represents one which don't own.
+    /// - [`RearrangeList`] represents a C++ `wxRearrangeList` class instance which your code has ownership, [`RearrangeListFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RearrangeList`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeList` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html) for more details.
     #[doc(alias = "wxRearrangeList")]
     #[doc(alias = "RearrangeList")]
     class RearrangeList
-        = RearrangeListInRust<true>(wxRearrangeList) impl
+        = RearrangeListFromCpp<true>(wxRearrangeList) impl
         RearrangeListMethods,
         CheckListBoxMethods,
         ListBoxMethods,
@@ -467,12 +471,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> RearrangeListInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RearrangeListFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeList::wxRearrangeList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#ab211f32339f81867de12d14dc962d76c).
-    pub fn new_2step() -> RearrangeListInRust<IN_RUST> {
-        unsafe { RearrangeListInRust(ffi::wxRearrangeList_new()) }
+    pub fn new_2step() -> RearrangeListFromCpp<FROM_CPP> {
+        unsafe { RearrangeListFromCpp(ffi::wxRearrangeList_new()) }
     }
     /// Constructor really creating the control.
     ///
@@ -494,7 +498,7 @@ impl<const IN_RUST: bool> RearrangeListInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RearrangeListInRust<IN_RUST> {
+    ) -> RearrangeListFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -507,7 +511,7 @@ impl<const IN_RUST: bool> RearrangeListInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RearrangeListInRust(ffi::wxRearrangeList_new1(
+            RearrangeListFromCpp(ffi::wxRearrangeList_new1(
                 parent, id, pos, size, order, items, style, validator, name,
             ))
         }
@@ -516,53 +520,53 @@ impl<const IN_RUST: bool> RearrangeListInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for RearrangeListInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for RearrangeListFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for CheckListBoxInRust<IN_RUST> {
-    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeListFromCpp<FROM_CPP>> for CheckListBoxFromCpp<FROM_CPP> {
+    fn from(o: RearrangeListFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for ListBoxInRust<IN_RUST> {
-    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeListFromCpp<FROM_CPP>> for ListBoxFromCpp<FROM_CPP> {
+    fn from(o: RearrangeListFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeListFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: RearrangeListFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeListFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: RearrangeListFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeListFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: RearrangeListFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RearrangeListFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: RearrangeListFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for RearrangeListInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeList_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for RearrangeListFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRearrangeList_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxRearrangeList
-impl<const IN_RUST: bool> ItemContainerMethods for RearrangeListInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerMethods for RearrangeListFromCpp<FROM_CPP> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxRearrangeList_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> ItemContainerImmutableMethods for RearrangeListInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerImmutableMethods for RearrangeListFromCpp<FROM_CPP> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxRearrangeList_AsItemContainer(self.as_ptr()) }
     }
@@ -571,27 +575,27 @@ impl<const IN_RUST: bool> ItemContainerImmutableMethods for RearrangeListInRust<
 // wxRect
 wxwidgets! {
     /// Represents a rectangle with integer coordinates.
-    /// - [`Rect`] represents a C++ `wxRect` class instance which your code has ownership, [`RectInRust`]`<false>` represents one which don't own.
+    /// - [`Rect`] represents a C++ `wxRect` class instance which your code has ownership, [`RectFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Rect`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRect` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html) for more details.
     #[doc(alias = "wxRect")]
     #[doc(alias = "Rect")]
     class Rect
-        = RectInRust<true>(wxRect) impl
+        = RectFromCpp<true>(wxRect) impl
         RectMethods
 }
-impl<const IN_RUST: bool> RectInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RectFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a19b68679edc9030cba102a8602febded).
-    pub fn new() -> RectInRust<IN_RUST> {
-        unsafe { RectInRust(ffi::wxRect_new()) }
+    pub fn new() -> RectFromCpp<FROM_CPP> {
+        unsafe { RectFromCpp(ffi::wxRect_new()) }
     }
     /// Creates a wxRect object from x, y, width and height values.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#aefb674bdc6d9d66a5c3746e5acc845d4).
-    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectInRust<IN_RUST> {
-        unsafe { RectInRust(ffi::wxRect_new1(x, y, width, height)) }
+    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectFromCpp<FROM_CPP> {
+        unsafe { RectFromCpp(ffi::wxRect_new1(x, y, width, height)) }
     }
     /// Creates a wxRect object from top-left and bottom-right points.
     ///
@@ -599,11 +603,11 @@ impl<const IN_RUST: bool> RectInRust<IN_RUST> {
     pub fn new_with_point_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
-    ) -> RectInRust<IN_RUST> {
+    ) -> RectFromCpp<FROM_CPP> {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
-            RectInRust(ffi::wxRect_new2(top_left, bottom_right))
+            RectFromCpp(ffi::wxRect_new2(top_left, bottom_right))
         }
     }
     /// Creates a wxRect object from position pos and size values.
@@ -612,34 +616,34 @@ impl<const IN_RUST: bool> RectInRust<IN_RUST> {
     pub fn new_with_point_size<P: PointMethods, S: SizeMethods>(
         pos: &P,
         size: &S,
-    ) -> RectInRust<IN_RUST> {
+    ) -> RectFromCpp<FROM_CPP> {
         unsafe {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            RectInRust(ffi::wxRect_new3(pos, size))
+            RectFromCpp(ffi::wxRect_new3(pos, size))
         }
     }
     /// Creates a wxRect object from size values at the origin.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a806ffe715a971157753890bab59d7d16).
-    pub fn new_with_size<S: SizeMethods>(size: &S) -> RectInRust<IN_RUST> {
+    pub fn new_with_size<S: SizeMethods>(size: &S) -> RectFromCpp<FROM_CPP> {
         unsafe {
             let size = size.as_ptr();
-            RectInRust(ffi::wxRect_new4(size))
+            RectFromCpp(ffi::wxRect_new4(size))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RectInRust<false> {
+impl Clone for RectFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for RectInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for RectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxRect_delete(self.0) }
         }
     }
@@ -648,23 +652,23 @@ impl<const IN_RUST: bool> Drop for RectInRust<IN_RUST> {
 // wxRegion
 wxwidgets! {
     /// A wxRegion represents a simple or complex region on a device context or window.
-    /// - [`Region`] represents a C++ `wxRegion` class instance which your code has ownership, [`RegionInRust`]`<false>` represents one which don't own.
+    /// - [`Region`] represents a C++ `wxRegion` class instance which your code has ownership, [`RegionFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Region`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRegion` class's documentation](https://docs.wxwidgets.org/3.2/classwx_region.html) for more details.
     #[doc(alias = "wxRegion")]
     #[doc(alias = "Region")]
     class Region
-        = RegionInRust<true>(wxRegion) impl
+        = RegionFromCpp<true>(wxRegion) impl
         RegionMethods,
         GDIObjectMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> RegionInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RegionFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a1edc6768118cf02749b46774a0ca37f9).
-    pub fn new() -> RegionInRust<IN_RUST> {
-        unsafe { RegionInRust(ffi::wxRegion_new()) }
+    pub fn new() -> RegionFromCpp<FROM_CPP> {
+        unsafe { RegionFromCpp(ffi::wxRegion_new()) }
     }
     /// Constructs a rectangular region with the given position and size.
     ///
@@ -674,8 +678,8 @@ impl<const IN_RUST: bool> RegionInRust<IN_RUST> {
         y: c_int,
         width: c_int,
         height: c_int,
-    ) -> RegionInRust<IN_RUST> {
-        unsafe { RegionInRust(ffi::wxRegion_new1(x, y, width, height)) }
+    ) -> RegionFromCpp<FROM_CPP> {
+        unsafe { RegionFromCpp(ffi::wxRegion_new1(x, y, width, height)) }
     }
     /// Constructs a rectangular region from the top left point and the bottom right point.
     ///
@@ -683,39 +687,39 @@ impl<const IN_RUST: bool> RegionInRust<IN_RUST> {
     pub fn new_with_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
-    ) -> RegionInRust<IN_RUST> {
+    ) -> RegionFromCpp<FROM_CPP> {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
-            RegionInRust(ffi::wxRegion_new2(top_left, bottom_right))
+            RegionFromCpp(ffi::wxRegion_new2(top_left, bottom_right))
         }
     }
     /// Constructs a rectangular region a wxRect object.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a66708b42c8bce4a76ada65cb312b60f9).
-    pub fn new_with_rect<R: RectMethods>(rect: &R) -> RegionInRust<IN_RUST> {
+    pub fn new_with_rect<R: RectMethods>(rect: &R) -> RegionFromCpp<FROM_CPP> {
         unsafe {
             let rect = rect.as_ptr();
-            RegionInRust(ffi::wxRegion_new3(rect))
+            RegionFromCpp(ffi::wxRegion_new3(rect))
         }
     }
     /// Copy constructor, uses Reference Counting.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#ad88c11689e65f02bb99acea6d59a6d9f).
-    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionInRust<IN_RUST> {
+    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionFromCpp<FROM_CPP> {
         unsafe {
             let region = region.as_ptr();
-            RegionInRust(ffi::wxRegion_new4(region))
+            RegionFromCpp(ffi::wxRegion_new4(region))
         }
     }
     // NOT_SUPPORTED: fn wxRegion5()
     /// Constructs a region using a bitmap.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#ad7bfbeb79fe8dc281b91cfba43e8bd0a).
-    pub fn new_with_bitmap<B: BitmapMethods>(bmp: &B) -> RegionInRust<IN_RUST> {
+    pub fn new_with_bitmap<B: BitmapMethods>(bmp: &B) -> RegionFromCpp<FROM_CPP> {
         unsafe {
             let bmp = bmp.as_ptr();
-            RegionInRust(ffi::wxRegion_new6(bmp))
+            RegionFromCpp(ffi::wxRegion_new6(bmp))
         }
     }
     /// Constructs a region using the non-transparent pixels of a bitmap.
@@ -725,40 +729,40 @@ impl<const IN_RUST: bool> RegionInRust<IN_RUST> {
         bmp: &B,
         trans_colour: &C,
         tolerance: c_int,
-    ) -> RegionInRust<IN_RUST> {
+    ) -> RegionFromCpp<FROM_CPP> {
         unsafe {
             let bmp = bmp.as_ptr();
             let trans_colour = trans_colour.as_ptr();
-            RegionInRust(ffi::wxRegion_new7(bmp, trans_colour, tolerance))
+            RegionFromCpp(ffi::wxRegion_new7(bmp, trans_colour, tolerance))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RegionInRust<false> {
+impl Clone for RegionFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<RegionInRust<IN_RUST>> for GDIObjectInRust<IN_RUST> {
-    fn from(o: RegionInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RegionFromCpp<FROM_CPP>> for GDIObjectFromCpp<FROM_CPP> {
+    fn from(o: RegionFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<RegionInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: RegionInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RegionFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: RegionFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for RegionInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxRegion_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for RegionFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRegion_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for RegionInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for RegionFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -767,54 +771,54 @@ impl<const IN_RUST: bool> Drop for RegionInRust<IN_RUST> {
 // wxRegionIterator
 wxwidgets! {
     /// This class is used to iterate through the rectangles in a region, typically when examining the damaged regions of a window within an OnPaint call.
-    /// - [`RegionIterator`] represents a C++ `wxRegionIterator` class instance which your code has ownership, [`RegionIteratorInRust`]`<false>` represents one which don't own.
+    /// - [`RegionIterator`] represents a C++ `wxRegionIterator` class instance which your code has ownership, [`RegionIteratorFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RegionIterator`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRegionIterator` class's documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html) for more details.
     #[doc(alias = "wxRegionIterator")]
     #[doc(alias = "RegionIterator")]
     class RegionIterator
-        = RegionIteratorInRust<true>(wxRegionIterator) impl
+        = RegionIteratorFromCpp<true>(wxRegionIterator) impl
         RegionIteratorMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> RegionIteratorInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RegionIteratorFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxRegionIterator::wxRegionIterator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a1a2d17672c9585f86e26b8ee054e08e5).
-    pub fn new() -> RegionIteratorInRust<IN_RUST> {
-        unsafe { RegionIteratorInRust(ffi::wxRegionIterator_new()) }
+    pub fn new() -> RegionIteratorFromCpp<FROM_CPP> {
+        unsafe { RegionIteratorFromCpp(ffi::wxRegionIterator_new()) }
     }
     /// Creates an iterator object given a region.
     ///
     /// See [C++ `wxRegionIterator::wxRegionIterator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a01b1845c8ecb190d244dfcc97d358f99).
-    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIteratorInRust<IN_RUST> {
+    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIteratorFromCpp<FROM_CPP> {
         unsafe {
             let region = region.as_ptr();
-            RegionIteratorInRust(ffi::wxRegionIterator_new1(region))
+            RegionIteratorFromCpp(ffi::wxRegionIterator_new1(region))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RegionIteratorInRust<false> {
+impl Clone for RegionIteratorFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<RegionIteratorInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: RegionIteratorInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<RegionIteratorFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: RegionIteratorFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for RegionIteratorInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxRegionIterator_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for RegionIteratorFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRegionIterator_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for RegionIteratorInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for RegionIteratorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -823,28 +827,28 @@ impl<const IN_RUST: bool> Drop for RegionIteratorInRust<IN_RUST> {
 // wxRendererNative
 wxwidgets! {
     /// First, a brief introduction to wxRendererNative and why it is needed.
-    /// - [`RendererNative`] represents a C++ `wxRendererNative` class instance which your code has ownership, [`RendererNativeInRust`]`<false>` represents one which don't own.
+    /// - [`RendererNative`] represents a C++ `wxRendererNative` class instance which your code has ownership, [`RendererNativeFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RendererNative`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRendererNative` class's documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html) for more details.
     #[doc(alias = "wxRendererNative")]
     #[doc(alias = "RendererNative")]
     class RendererNative
-        = RendererNativeInRust<true>(wxRendererNative) impl
+        = RendererNativeFromCpp<true>(wxRendererNative) impl
         RendererNativeMethods
 }
-impl<const IN_RUST: bool> RendererNativeInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RendererNativeFromCpp<FROM_CPP> {
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RendererNativeInRust<false> {
+impl Clone for RendererNativeFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for RendererNativeInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for RendererNativeFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxRendererNative_delete(self.0) }
         }
     }
@@ -853,40 +857,40 @@ impl<const IN_RUST: bool> Drop for RendererNativeInRust<IN_RUST> {
 // wxRichToolTip
 wxwidgets! {
     /// Allows showing a tool tip with more customizations than wxToolTip.
-    /// - [`RichToolTip`] represents a C++ `wxRichToolTip` class instance which your code has ownership, [`RichToolTipInRust`]`<false>` represents one which don't own.
+    /// - [`RichToolTip`] represents a C++ `wxRichToolTip` class instance which your code has ownership, [`RichToolTipFromCpp`]`<false>` represents one which don't own.
     /// - Use [`RichToolTip`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRichToolTip` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html) for more details.
     #[doc(alias = "wxRichToolTip")]
     #[doc(alias = "RichToolTip")]
     class RichToolTip
-        = RichToolTipInRust<true>(wxRichToolTip) impl
+        = RichToolTipFromCpp<true>(wxRichToolTip) impl
         RichToolTipMethods
 }
-impl<const IN_RUST: bool> RichToolTipInRust<IN_RUST> {
+impl<const FROM_CPP: bool> RichToolTipFromCpp<FROM_CPP> {
     /// Constructor must specify the tooltip title and main message.
     ///
     /// See [C++ `wxRichToolTip::wxRichToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html#ada22072c75eaca6de3de2e89e66a352f).
-    pub fn new(title: &str, message: &str) -> RichToolTipInRust<IN_RUST> {
+    pub fn new(title: &str, message: &str) -> RichToolTipFromCpp<FROM_CPP> {
         unsafe {
             let title = WxString::from(title);
             let title = title.as_ptr();
             let message = WxString::from(message);
             let message = message.as_ptr();
-            RichToolTipInRust(ffi::wxRichToolTip_new(title, message))
+            RichToolTipFromCpp(ffi::wxRichToolTip_new(title, message))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RichToolTipInRust<false> {
+impl Clone for RichToolTipFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for RichToolTipInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for RichToolTipFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxRichToolTip_delete(self.0) }
         }
     }

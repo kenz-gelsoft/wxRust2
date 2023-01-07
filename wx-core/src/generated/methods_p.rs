@@ -3,37 +3,37 @@ use super::*;
 // wxPCXHandler
 /// This trait represents [C++ `wxPCXHandler` class](https://docs.wxwidgets.org/3.2/classwx_p_c_x_handler.html)'s methods and inheritance.
 ///
-/// See [`PCXHandlerInRust`] documentation for the class usage.
+/// See [`PCXHandlerFromCpp`] documentation for the class usage.
 pub trait PCXHandlerMethods: ImageHandlerMethods {}
 
 // wxPNGHandler
 /// This trait represents [C++ `wxPNGHandler` class](https://docs.wxwidgets.org/3.2/classwx_p_n_g_handler.html)'s methods and inheritance.
 ///
-/// See [`PNGHandlerInRust`] documentation for the class usage.
+/// See [`PNGHandlerFromCpp`] documentation for the class usage.
 pub trait PNGHandlerMethods: ImageHandlerMethods {}
 
 // wxPNMHandler
 /// This trait represents [C++ `wxPNMHandler` class](https://docs.wxwidgets.org/3.2/classwx_p_n_m_handler.html)'s methods and inheritance.
 ///
-/// See [`PNMHandlerInRust`] documentation for the class usage.
+/// See [`PNMHandlerFromCpp`] documentation for the class usage.
 pub trait PNMHandlerMethods: ImageHandlerMethods {}
 
 // wxPaintDC
 /// This trait represents [C++ `wxPaintDC` class](https://docs.wxwidgets.org/3.2/classwx_paint_d_c.html)'s methods and inheritance.
 ///
-/// See [`PaintDCInRust`] documentation for the class usage.
+/// See [`PaintDCFromCpp`] documentation for the class usage.
 pub trait PaintDCMethods: ClientDCMethods {}
 
 // wxPaintEvent
 /// This trait represents [C++ `wxPaintEvent` class](https://docs.wxwidgets.org/3.2/classwx_paint_event.html)'s methods and inheritance.
 ///
-/// See [`PaintEventInRust`] documentation for the class usage.
+/// See [`PaintEventFromCpp`] documentation for the class usage.
 pub trait PaintEventMethods: EventMethods {}
 
 // wxPalette
 /// This trait represents [C++ `wxPalette` class](https://docs.wxwidgets.org/3.2/classwx_palette.html)'s methods and inheritance.
 ///
-/// See [`PaletteInRust`] documentation for the class usage.
+/// See [`PaletteFromCpp`] documentation for the class usage.
 pub trait PaletteMethods: GDIObjectMethods {
     // DTOR: fn ~wxPalette()
     /// Creates a palette from arrays of size n, one for each red, blue or green component.
@@ -79,7 +79,7 @@ pub trait PaletteMethods: GDIObjectMethods {
 // wxPanel
 /// This trait represents [C++ `wxPanel` class](https://docs.wxwidgets.org/3.2/classwx_panel.html)'s methods and inheritance.
 ///
-/// See [`PanelInRust`] documentation for the class usage.
+/// See [`PanelFromCpp`] documentation for the class usage.
 pub trait PanelMethods: WindowMethods {
     // DTOR: fn ~wxPanel()
     /// The default handler for wxEVT_SYS_COLOUR_CHANGED.
@@ -102,13 +102,13 @@ pub trait PanelMethods: WindowMethods {
 // wxPasswordEntryDialog
 /// This trait represents [C++ `wxPasswordEntryDialog` class](https://docs.wxwidgets.org/3.2/classwx_password_entry_dialog.html)'s methods and inheritance.
 ///
-/// See [`PasswordEntryDialogInRust`] documentation for the class usage.
+/// See [`PasswordEntryDialogFromCpp`] documentation for the class usage.
 pub trait PasswordEntryDialogMethods: TextEntryDialogMethods {}
 
 // wxPen
 /// This trait represents [C++ `wxPen` class](https://docs.wxwidgets.org/3.2/classwx_pen.html)'s methods and inheritance.
 ///
-/// See [`PenInRust`] documentation for the class usage.
+/// See [`PenFromCpp`] documentation for the class usage.
 pub trait PenMethods: GDIObjectMethods {
     // DTOR: fn ~wxPen()
     // NOT_SUPPORTED: fn GetCap()
@@ -129,7 +129,7 @@ pub trait PenMethods: GDIObjectMethods {
     /// Gets a pointer to the stipple bitmap.
     ///
     /// See [C++ `wxPen::GetStipple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_pen.html#a7db669184e8e44c2db2d5c7d1549ca51).
-    fn get_stipple(&self) -> Option<BitmapInRust<false>> {
+    fn get_stipple(&self) -> Option<BitmapFromCpp<false>> {
         unsafe { Bitmap::option_from(ffi::wxPen_GetStipple(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetStyle()
@@ -200,7 +200,7 @@ pub trait PenMethods: GDIObjectMethods {
 // wxPenList
 /// This trait represents [C++ `wxPenList` class](https://docs.wxwidgets.org/3.2/classwx_pen_list.html)'s methods and inheritance.
 ///
-/// See [`PenListInRust`] documentation for the class usage.
+/// See [`PenListFromCpp`] documentation for the class usage.
 pub trait PenListMethods: WxRustMethods {
     // NOT_SUPPORTED: fn FindOrCreatePen()
 }
@@ -208,7 +208,7 @@ pub trait PenListMethods: WxRustMethods {
 // wxPersistenceManager
 /// This trait represents [C++ `wxPersistenceManager` class](https://docs.wxwidgets.org/3.2/classwx_persistence_manager.html)'s methods and inheritance.
 ///
-/// See [`PersistenceManagerInRust`] documentation for the class usage.
+/// See [`PersistenceManagerFromCpp`] documentation for the class usage.
 pub trait PersistenceManagerMethods: WxRustMethods {
     /// Set the global persistence manager to use.
     ///
@@ -222,8 +222,8 @@ pub trait PersistenceManagerMethods: WxRustMethods {
     /// Returns the unique persistence manager object.
     ///
     /// See [C++ `wxPersistenceManager::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_persistence_manager.html#a4a6a946bdd6dc862fb66db774a4b9de7).
-    fn get() -> PersistenceManagerInRust<false> {
-        unsafe { PersistenceManagerInRust::from_ptr(ffi::wxPersistenceManager_Get()) }
+    fn get() -> PersistenceManagerFromCpp<false> {
+        unsafe { PersistenceManagerFromCpp::from_ptr(ffi::wxPersistenceManager_Get()) }
     }
     /// Globally disable saving the persistence object properties.
     ///
@@ -285,7 +285,7 @@ pub trait PersistenceManagerMethods: WxRustMethods {
 // wxPickerBase
 /// This trait represents [C++ `wxPickerBase` class](https://docs.wxwidgets.org/3.2/classwx_picker_base.html)'s methods and inheritance.
 ///
-/// See [`PickerBaseInRust`] documentation for the class usage.
+/// See [`PickerBaseFromCpp`] documentation for the class usage.
 pub trait PickerBaseMethods: ControlMethods {
     // DTOR: fn ~wxPickerBase()
     ///
@@ -441,7 +441,7 @@ pub trait PickerBaseMethods: ControlMethods {
 // wxPoint
 /// This trait represents [C++ `wxPoint` class](https://docs.wxwidgets.org/3.2/classwx_point.html)'s methods and inheritance.
 ///
-/// See [`PointInRust`] documentation for the class usage.
+/// See [`PointFromCpp`] documentation for the class usage.
 pub trait PointMethods: WxRustMethods {
     /// Returns true if neither of the point components is equal to wxDefaultCoord.
     ///
@@ -481,7 +481,7 @@ pub trait PointMethods: WxRustMethods {
 // wxPopupTransientWindow
 /// This trait represents [C++ `wxPopupTransientWindow` class](https://docs.wxwidgets.org/3.2/classwx_popup_transient_window.html)'s methods and inheritance.
 ///
-/// See [`PopupTransientWindowInRust`] documentation for the class usage.
+/// See [`PopupTransientWindowFromCpp`] documentation for the class usage.
 pub trait PopupTransientWindowMethods: PopupWindowMethods {
     /// Popup the window (this will show it too).
     ///
@@ -515,7 +515,7 @@ pub trait PopupTransientWindowMethods: PopupWindowMethods {
 // wxPopupWindow
 /// This trait represents [C++ `wxPopupWindow` class](https://docs.wxwidgets.org/3.2/classwx_popup_window.html)'s methods and inheritance.
 ///
-/// See [`PopupWindowInRust`] documentation for the class usage.
+/// See [`PopupWindowFromCpp`] documentation for the class usage.
 pub trait PopupWindowMethods: NonOwnedWindowMethods {
     /// Create method for two-step creation.
     ///
@@ -544,7 +544,7 @@ pub trait PopupWindowMethods: NonOwnedWindowMethods {
 // wxPreferencesEditor
 /// This trait represents [C++ `wxPreferencesEditor` class](https://docs.wxwidgets.org/3.2/classwx_preferences_editor.html)'s methods and inheritance.
 ///
-/// See [`PreferencesEditorInRust`] documentation for the class usage.
+/// See [`PreferencesEditorFromCpp`] documentation for the class usage.
 pub trait PreferencesEditorMethods: WxRustMethods {
     // DTOR: fn ~wxPreferencesEditor()
     /// Add a new page to the editor.
@@ -594,7 +594,7 @@ pub trait PreferencesEditorMethods: WxRustMethods {
 // wxPreferencesPage
 /// This trait represents [C++ `wxPreferencesPage` class](https://docs.wxwidgets.org/3.2/classwx_preferences_page.html)'s methods and inheritance.
 ///
-/// See [`PreferencesPageInRust`] documentation for the class usage.
+/// See [`PreferencesPageFromCpp`] documentation for the class usage.
 pub trait PreferencesPageMethods: WxRustMethods {
     // DTOR: fn ~wxPreferencesPage()
     /// Return name of the page.
@@ -631,7 +631,7 @@ pub trait PreferencesPageMethods: WxRustMethods {
 // wxPropertySheetDialog
 /// This trait represents [C++ `wxPropertySheetDialog` class](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html)'s methods and inheritance.
 ///
-/// See [`PropertySheetDialogInRust`] documentation for the class usage.
+/// See [`PropertySheetDialogFromCpp`] documentation for the class usage.
 pub trait PropertySheetDialogMethods: DialogMethods {
     /// Override this if you wish to add the book control in a way different from the standard way (for example, using different spacing).
     ///
@@ -670,7 +670,7 @@ pub trait PropertySheetDialogMethods: DialogMethods {
     /// Returns the inner sizer that contains the book control and button sizer.
     ///
     /// See [C++ `wxPropertySheetDialog::GetInnerSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html#a4868b8dcd1786c5bc00ce26a47c19573).
-    fn get_inner_sizer(&self) -> Option<SizerInRust<false>> {
+    fn get_inner_sizer(&self) -> Option<SizerFromCpp<false>> {
         unsafe { Sizer::option_from(ffi::wxPropertySheetDialog_GetInnerSizer(self.as_ptr())) }
     }
     /// Set the inner sizer that contains the book control and button sizer.

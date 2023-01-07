@@ -3,7 +3,7 @@ use super::*;
 // wxDateTime
 /// This trait represents [C++ `wxDateTime` class](https://docs.wxwidgets.org/3.2/classwx_date_time.html)'s methods and inheritance.
 ///
-/// See [`DateTimeInRust`] documentation for the class usage.
+/// See [`DateTimeFromCpp`] documentation for the class usage.
 pub trait DateTimeMethods: WxRustMethods {
     /// Reset time to midnight (00:00:00) without changing the date.
     ///

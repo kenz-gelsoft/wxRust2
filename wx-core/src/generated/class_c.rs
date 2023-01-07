@@ -3,51 +3,51 @@ use super::*;
 // wxCalculateLayoutEvent
 wxwidgets! {
     /// This event is sent by wxLayoutAlgorithm to calculate the amount of the remaining client area that the window should occupy.
-    /// - [`CalculateLayoutEvent`] represents a C++ `wxCalculateLayoutEvent` class instance which your code has ownership, [`CalculateLayoutEventInRust`]`<false>` represents one which don't own.
+    /// - [`CalculateLayoutEvent`] represents a C++ `wxCalculateLayoutEvent` class instance which your code has ownership, [`CalculateLayoutEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CalculateLayoutEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCalculateLayoutEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html) for more details.
     #[doc(alias = "wxCalculateLayoutEvent")]
     #[doc(alias = "CalculateLayoutEvent")]
     class CalculateLayoutEvent
-        = CalculateLayoutEventInRust<true>(wxCalculateLayoutEvent) impl
+        = CalculateLayoutEventFromCpp<true>(wxCalculateLayoutEvent) impl
         CalculateLayoutEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CalculateLayoutEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CalculateLayoutEventFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxCalculateLayoutEvent::wxCalculateLayoutEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html#a132da85194408f1ee9e57929a63e4af0).
-    pub fn new(id: c_int) -> CalculateLayoutEventInRust<IN_RUST> {
-        unsafe { CalculateLayoutEventInRust(ffi::wxCalculateLayoutEvent_new(id)) }
+    pub fn new(id: c_int) -> CalculateLayoutEventFromCpp<FROM_CPP> {
+        unsafe { CalculateLayoutEventFromCpp(ffi::wxCalculateLayoutEvent_new(id)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CalculateLayoutEventInRust<false> {
+impl Clone for CalculateLayoutEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CalculateLayoutEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: CalculateLayoutEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalculateLayoutEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: CalculateLayoutEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CalculateLayoutEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CalculateLayoutEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalculateLayoutEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CalculateLayoutEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CalculateLayoutEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCalculateLayoutEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CalculateLayoutEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCalculateLayoutEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CalculateLayoutEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CalculateLayoutEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -56,25 +56,25 @@ impl<const IN_RUST: bool> Drop for CalculateLayoutEventInRust<IN_RUST> {
 // wxCalendarCtrl
 wxwidgets! {
     /// The calendar control allows the user to pick a date.
-    /// - [`CalendarCtrl`] represents a C++ `wxCalendarCtrl` class instance which your code has ownership, [`CalendarCtrlInRust`]`<false>` represents one which don't own.
+    /// - [`CalendarCtrl`] represents a C++ `wxCalendarCtrl` class instance which your code has ownership, [`CalendarCtrlFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CalendarCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCalendarCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html) for more details.
     #[doc(alias = "wxCalendarCtrl")]
     #[doc(alias = "CalendarCtrl")]
     class CalendarCtrl
-        = CalendarCtrlInRust<true>(wxCalendarCtrl) impl
+        = CalendarCtrlFromCpp<true>(wxCalendarCtrl) impl
         CalendarCtrlMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CalendarCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CalendarCtrlFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxCalendarCtrl::wxCalendarCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ab25f66cdb24c24f0e21ccb4761a5aff1).
-    pub fn new_2step() -> CalendarCtrlInRust<IN_RUST> {
-        unsafe { CalendarCtrlInRust(ffi::wxCalendarCtrl_new()) }
+    pub fn new_2step() -> CalendarCtrlFromCpp<FROM_CPP> {
+        unsafe { CalendarCtrlFromCpp(ffi::wxCalendarCtrl_new()) }
     }
     /// Does the same as Create() method.
     ///
@@ -87,7 +87,7 @@ impl<const IN_RUST: bool> CalendarCtrlInRust<IN_RUST> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> CalendarCtrlInRust<IN_RUST> {
+    ) -> CalendarCtrlFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -98,7 +98,7 @@ impl<const IN_RUST: bool> CalendarCtrlInRust<IN_RUST> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            CalendarCtrlInRust(ffi::wxCalendarCtrl_new1(
+            CalendarCtrlFromCpp(ffi::wxCalendarCtrl_new1(
                 parent, id, date, pos, size, style, name,
             ))
         }
@@ -107,64 +107,64 @@ impl<const IN_RUST: bool> CalendarCtrlInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for CalendarCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for CalendarCtrlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CalendarCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: CalendarCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalendarCtrlFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: CalendarCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CalendarCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: CalendarCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalendarCtrlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: CalendarCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CalendarCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: CalendarCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalendarCtrlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: CalendarCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CalendarCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CalendarCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalendarCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CalendarCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CalendarCtrlInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCalendarCtrl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CalendarCtrlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCalendarCtrl_CLASSINFO()) }
     }
 }
 
 // wxCalendarDateAttr
 wxwidgets! {
     /// wxCalendarDateAttr is a custom attributes for a calendar date.
-    /// - [`CalendarDateAttr`] represents a C++ `wxCalendarDateAttr` class instance which your code has ownership, [`CalendarDateAttrInRust`]`<false>` represents one which don't own.
+    /// - [`CalendarDateAttr`] represents a C++ `wxCalendarDateAttr` class instance which your code has ownership, [`CalendarDateAttrFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CalendarDateAttr`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCalendarDateAttr` class's documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html) for more details.
     #[doc(alias = "wxCalendarDateAttr")]
     #[doc(alias = "CalendarDateAttr")]
     class CalendarDateAttr
-        = CalendarDateAttrInRust<true>(wxCalendarDateAttr) impl
+        = CalendarDateAttrFromCpp<true>(wxCalendarDateAttr) impl
         CalendarDateAttrMethods
 }
-impl<const IN_RUST: bool> CalendarDateAttrInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CalendarDateAttrFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxCalendarDateAttr()
     // NOT_SUPPORTED: fn wxCalendarDateAttr1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CalendarDateAttrInRust<false> {
+impl Clone for CalendarDateAttrFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for CalendarDateAttrInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CalendarDateAttrFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxCalendarDateAttr_delete(self.0) }
         }
     }
@@ -173,63 +173,63 @@ impl<const IN_RUST: bool> Drop for CalendarDateAttrInRust<IN_RUST> {
 // wxCalendarEvent
 wxwidgets! {
     /// The wxCalendarEvent class is used together with wxCalendarCtrl.
-    /// - [`CalendarEvent`] represents a C++ `wxCalendarEvent` class instance which your code has ownership, [`CalendarEventInRust`]`<false>` represents one which don't own.
+    /// - [`CalendarEvent`] represents a C++ `wxCalendarEvent` class instance which your code has ownership, [`CalendarEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CalendarEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCalendarEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_event.html) for more details.
     #[doc(alias = "wxCalendarEvent")]
     #[doc(alias = "CalendarEvent")]
     class CalendarEvent
-        = CalendarEventInRust<true>(wxCalendarEvent) impl
+        = CalendarEventFromCpp<true>(wxCalendarEvent) impl
         CalendarEventMethods,
         DateEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CalendarEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CalendarEventFromCpp<FROM_CPP> {
     ///
     /// See [C++ `wxCalendarEvent::wxCalendarEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_event.html#af4042d0201f1f5a593ec298b908187f8).
-    pub fn new() -> CalendarEventInRust<IN_RUST> {
-        unsafe { CalendarEventInRust(ffi::wxCalendarEvent_new()) }
+    pub fn new() -> CalendarEventFromCpp<FROM_CPP> {
+        unsafe { CalendarEventFromCpp(ffi::wxCalendarEvent_new()) }
     }
     // NOT_SUPPORTED: fn wxCalendarEvent1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CalendarEventInRust<false> {
+impl Clone for CalendarEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CalendarEventInRust<IN_RUST>> for DateEventInRust<IN_RUST> {
-    fn from(o: CalendarEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalendarEventFromCpp<FROM_CPP>> for DateEventFromCpp<FROM_CPP> {
+    fn from(o: CalendarEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CalendarEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
-    fn from(o: CalendarEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalendarEventFromCpp<FROM_CPP>> for CommandEventFromCpp<FROM_CPP> {
+    fn from(o: CalendarEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CalendarEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: CalendarEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalendarEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: CalendarEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CalendarEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CalendarEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CalendarEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CalendarEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CalendarEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCalendarEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CalendarEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCalendarEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CalendarEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CalendarEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -238,21 +238,21 @@ impl<const IN_RUST: bool> Drop for CalendarEventInRust<IN_RUST> {
 // wxCaret
 wxwidgets! {
     /// A caret is a blinking cursor showing the position where the typed text will appear.
-    /// - [`Caret`] represents a C++ `wxCaret` class instance which your code has ownership, [`CaretInRust`]`<false>` represents one which don't own.
+    /// - [`Caret`] represents a C++ `wxCaret` class instance which your code has ownership, [`CaretFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Caret`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCaret` class's documentation](https://docs.wxwidgets.org/3.2/classwx_caret.html) for more details.
     #[doc(alias = "wxCaret")]
     #[doc(alias = "Caret")]
     class Caret
-        = CaretInRust<true>(wxCaret) impl
+        = CaretFromCpp<true>(wxCaret) impl
         CaretMethods
 }
-impl<const IN_RUST: bool> CaretInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CaretFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxCaret::wxCaret()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_caret.html#a07b320d7d5296d378fa8d6350e2ecf22).
-    pub fn new() -> CaretInRust<IN_RUST> {
-        unsafe { CaretInRust(ffi::wxCaret_new()) }
+    pub fn new() -> CaretFromCpp<FROM_CPP> {
+        unsafe { CaretFromCpp(ffi::wxCaret_new()) }
     }
     /// Creates a caret with the given size (in pixels) and associates it with the window.
     ///
@@ -261,13 +261,13 @@ impl<const IN_RUST: bool> CaretInRust<IN_RUST> {
         window: Option<&W>,
         width: c_int,
         height: c_int,
-    ) -> CaretInRust<IN_RUST> {
+    ) -> CaretFromCpp<FROM_CPP> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            CaretInRust(ffi::wxCaret_new1(window, width, height))
+            CaretFromCpp(ffi::wxCaret_new1(window, width, height))
         }
     }
     ///
@@ -275,28 +275,28 @@ impl<const IN_RUST: bool> CaretInRust<IN_RUST> {
     pub fn new_with_window_size<W: WindowMethods, S: SizeMethods>(
         window: Option<&W>,
         size: &S,
-    ) -> CaretInRust<IN_RUST> {
+    ) -> CaretFromCpp<FROM_CPP> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let size = size.as_ptr();
-            CaretInRust(ffi::wxCaret_new2(window, size))
+            CaretFromCpp(ffi::wxCaret_new2(window, size))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CaretInRust<false> {
+impl Clone for CaretFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for CaretInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CaretFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxCaret_delete(self.0) }
         }
     }
@@ -305,25 +305,25 @@ impl<const IN_RUST: bool> Drop for CaretInRust<IN_RUST> {
 // wxCheckBox
 wxwidgets! {
     /// A checkbox is a labelled box which by default is either on (checkmark is visible) or off (no checkmark).
-    /// - [`CheckBox`] represents a C++ `wxCheckBox` class instance which your code has ownership, [`CheckBoxInRust`]`<false>` represents one which don't own.
+    /// - [`CheckBox`] represents a C++ `wxCheckBox` class instance which your code has ownership, [`CheckBoxFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CheckBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCheckBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_check_box.html) for more details.
     #[doc(alias = "wxCheckBox")]
     #[doc(alias = "CheckBox")]
     class CheckBox
-        = CheckBoxInRust<true>(wxCheckBox) impl
+        = CheckBoxFromCpp<true>(wxCheckBox) impl
         CheckBoxMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CheckBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CheckBoxFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxCheckBox::wxCheckBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_check_box.html#a2b239bc0db88dcae8b1dfe2ac3e7f96f).
-    pub fn new_2step() -> CheckBoxInRust<IN_RUST> {
-        unsafe { CheckBoxInRust(ffi::wxCheckBox_new()) }
+    pub fn new_2step() -> CheckBoxFromCpp<FROM_CPP> {
+        unsafe { CheckBoxFromCpp(ffi::wxCheckBox_new()) }
     }
     /// Constructor, creating and showing a checkbox.
     ///
@@ -337,7 +337,7 @@ impl<const IN_RUST: bool> CheckBoxInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> CheckBoxInRust<IN_RUST> {
+    ) -> CheckBoxFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -350,7 +350,7 @@ impl<const IN_RUST: bool> CheckBoxInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            CheckBoxInRust(ffi::wxCheckBox_new1(
+            CheckBoxFromCpp(ffi::wxCheckBox_new1(
                 parent, id, label, pos, size, style, validator, name,
             ))
         }
@@ -359,47 +359,47 @@ impl<const IN_RUST: bool> CheckBoxInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for CheckBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for CheckBoxFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CheckBoxInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: CheckBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckBoxFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: CheckBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CheckBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: CheckBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckBoxFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: CheckBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CheckBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: CheckBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckBoxFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: CheckBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CheckBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CheckBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CheckBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CheckBoxInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCheckBox_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CheckBoxFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCheckBox_CLASSINFO()) }
     }
 }
 
 // wxCheckListBox
 wxwidgets! {
     /// A wxCheckListBox is like a wxListBox, but allows items to be checked or unchecked.
-    /// - [`CheckListBox`] represents a C++ `wxCheckListBox` class instance which your code has ownership, [`CheckListBoxInRust`]`<false>` represents one which don't own.
+    /// - [`CheckListBox`] represents a C++ `wxCheckListBox` class instance which your code has ownership, [`CheckListBoxFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CheckListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCheckListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html) for more details.
     #[doc(alias = "wxCheckListBox")]
     #[doc(alias = "CheckListBox")]
     class CheckListBox
-        = CheckListBoxInRust<true>(wxCheckListBox) impl
+        = CheckListBoxFromCpp<true>(wxCheckListBox) impl
         CheckListBoxMethods,
         // ListBoxMethods,
         ControlMethods,
@@ -407,12 +407,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CheckListBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CheckListBoxFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxCheckListBox::wxCheckListBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html#a7ef1af0cad44ed9b4ab99daa3469e10b).
-    pub fn new_2step() -> CheckListBoxInRust<IN_RUST> {
-        unsafe { CheckListBoxInRust(ffi::wxCheckListBox_new()) }
+    pub fn new_2step() -> CheckListBoxFromCpp<FROM_CPP> {
+        unsafe { CheckListBoxFromCpp(ffi::wxCheckListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxCheckListBox1()
     /// Constructor, creating and showing a list box.
@@ -433,7 +433,7 @@ impl<const IN_RUST: bool> CheckListBoxInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> CheckListBoxInRust<IN_RUST> {
+    ) -> CheckListBoxFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -445,7 +445,7 @@ impl<const IN_RUST: bool> CheckListBoxInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            CheckListBoxInRust(ffi::wxCheckListBox_new2(
+            CheckListBoxFromCpp(ffi::wxCheckListBox_new2(
                 parent, id, pos, size, choices, style, validator, name,
             ))
         }
@@ -454,53 +454,53 @@ impl<const IN_RUST: bool> CheckListBoxInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for CheckListBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for CheckListBoxFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CheckListBoxInRust<IN_RUST>> for ListBoxInRust<IN_RUST> {
-    fn from(o: CheckListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckListBoxFromCpp<FROM_CPP>> for ListBoxFromCpp<FROM_CPP> {
+    fn from(o: CheckListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CheckListBoxInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: CheckListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckListBoxFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: CheckListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CheckListBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: CheckListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckListBoxFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: CheckListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CheckListBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: CheckListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckListBoxFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: CheckListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CheckListBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CheckListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CheckListBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CheckListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CheckListBoxInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCheckListBox_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CheckListBoxFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCheckListBox_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxCheckListBox
-impl<const IN_RUST: bool> ItemContainerMethods for CheckListBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerMethods for CheckListBoxFromCpp<FROM_CPP> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> ItemContainerImmutableMethods for CheckListBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerImmutableMethods for CheckListBoxFromCpp<FROM_CPP> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxCheckListBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> ListBoxMethods for CheckListBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ListBoxMethods for CheckListBoxFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn Create()
     ///
     /// See [C++ `wxCheckListBox::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html#a1ff3c075762c1be1321c5d6e9a71bd1e).
@@ -550,63 +550,65 @@ impl<const IN_RUST: bool> ListBoxMethods for CheckListBoxInRust<IN_RUST> {
 // wxChildFocusEvent
 wxwidgets! {
     /// A child focus event is sent to a (parent-)window when one of its child windows gains focus, so that the window could restore the focus back to its corresponding child if it loses it now and regains later.
-    /// - [`ChildFocusEvent`] represents a C++ `wxChildFocusEvent` class instance which your code has ownership, [`ChildFocusEventInRust`]`<false>` represents one which don't own.
+    /// - [`ChildFocusEvent`] represents a C++ `wxChildFocusEvent` class instance which your code has ownership, [`ChildFocusEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ChildFocusEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxChildFocusEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html) for more details.
     #[doc(alias = "wxChildFocusEvent")]
     #[doc(alias = "ChildFocusEvent")]
     class ChildFocusEvent
-        = ChildFocusEventInRust<true>(wxChildFocusEvent) impl
+        = ChildFocusEventFromCpp<true>(wxChildFocusEvent) impl
         ChildFocusEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ChildFocusEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ChildFocusEventFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxChildFocusEvent::wxChildFocusEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html#ad630ddc1fb95a86a74efdbe04e6105b6).
-    pub fn new<W: WindowMethods>(win: Option<&W>) -> ChildFocusEventInRust<IN_RUST> {
+    pub fn new<W: WindowMethods>(win: Option<&W>) -> ChildFocusEventFromCpp<FROM_CPP> {
         unsafe {
             let win = match win {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ChildFocusEventInRust(ffi::wxChildFocusEvent_new(win))
+            ChildFocusEventFromCpp(ffi::wxChildFocusEvent_new(win))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ChildFocusEventInRust<false> {
+impl Clone for ChildFocusEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ChildFocusEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
-    fn from(o: ChildFocusEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChildFocusEventFromCpp<FROM_CPP>>
+    for CommandEventFromCpp<FROM_CPP>
+{
+    fn from(o: ChildFocusEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChildFocusEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: ChildFocusEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChildFocusEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: ChildFocusEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChildFocusEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ChildFocusEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChildFocusEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ChildFocusEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ChildFocusEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxChildFocusEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ChildFocusEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxChildFocusEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ChildFocusEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ChildFocusEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -615,25 +617,25 @@ impl<const IN_RUST: bool> Drop for ChildFocusEventInRust<IN_RUST> {
 // wxChoice
 wxwidgets! {
     /// A choice item is used to select one of a list of strings.
-    /// - [`Choice`] represents a C++ `wxChoice` class instance which your code has ownership, [`ChoiceInRust`]`<false>` represents one which don't own.
+    /// - [`Choice`] represents a C++ `wxChoice` class instance which your code has ownership, [`ChoiceFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Choice`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxChoice` class's documentation](https://docs.wxwidgets.org/3.2/classwx_choice.html) for more details.
     #[doc(alias = "wxChoice")]
     #[doc(alias = "Choice")]
     class Choice
-        = ChoiceInRust<true>(wxChoice) impl
+        = ChoiceFromCpp<true>(wxChoice) impl
         ChoiceMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ChoiceInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ChoiceFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxChoice::wxChoice()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_choice.html#abe4fa74cf09a21608e90cd55ca96fabd).
-    pub fn new_2step() -> ChoiceInRust<IN_RUST> {
-        unsafe { ChoiceInRust(ffi::wxChoice_new()) }
+    pub fn new_2step() -> ChoiceFromCpp<FROM_CPP> {
+        unsafe { ChoiceFromCpp(ffi::wxChoice_new()) }
     }
     // NOT_SUPPORTED: fn wxChoice1()
     /// Constructor, creating and showing a choice.
@@ -654,7 +656,7 @@ impl<const IN_RUST: bool> ChoiceInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ChoiceInRust<IN_RUST> {
+    ) -> ChoiceFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -666,7 +668,7 @@ impl<const IN_RUST: bool> ChoiceInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ChoiceInRust(ffi::wxChoice_new2(
+            ChoiceFromCpp(ffi::wxChoice_new2(
                 parent, id, pos, size, choices, style, validator, name,
             ))
         }
@@ -675,43 +677,43 @@ impl<const IN_RUST: bool> ChoiceInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for ChoiceInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for ChoiceFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ChoiceInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: ChoiceInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoiceFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: ChoiceFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChoiceInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: ChoiceInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoiceFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ChoiceFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChoiceInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: ChoiceInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoiceFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ChoiceFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChoiceInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ChoiceInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoiceFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ChoiceFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ChoiceInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxChoice_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ChoiceFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxChoice_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxChoice
-impl<const IN_RUST: bool> ItemContainerMethods for ChoiceInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerMethods for ChoiceFromCpp<FROM_CPP> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> ItemContainerImmutableMethods for ChoiceInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerImmutableMethods for ChoiceFromCpp<FROM_CPP> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxChoice_AsItemContainer(self.as_ptr()) }
     }
@@ -720,13 +722,13 @@ impl<const IN_RUST: bool> ItemContainerImmutableMethods for ChoiceInRust<IN_RUST
 // wxChoicebook
 wxwidgets! {
     /// wxChoicebook is a class similar to wxNotebook, but uses a wxChoice control to show the labels instead of the tabs.
-    /// - [`Choicebook`] represents a C++ `wxChoicebook` class instance which your code has ownership, [`ChoicebookInRust`]`<false>` represents one which don't own.
+    /// - [`Choicebook`] represents a C++ `wxChoicebook` class instance which your code has ownership, [`ChoicebookFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Choicebook`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxChoicebook` class's documentation](https://docs.wxwidgets.org/3.2/classwx_choicebook.html) for more details.
     #[doc(alias = "wxChoicebook")]
     #[doc(alias = "Choicebook")]
     class Choicebook
-        = ChoicebookInRust<true>(wxChoicebook) impl
+        = ChoicebookFromCpp<true>(wxChoicebook) impl
         ChoicebookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -734,12 +736,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ChoicebookInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ChoicebookFromCpp<FROM_CPP> {
     /// Constructs a choicebook control.
     ///
     /// See [C++ `wxChoicebook::wxChoicebook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_choicebook.html#aa06ad50928a63e7067e9e496e4fbcf08).
-    pub fn new_2step() -> ChoicebookInRust<IN_RUST> {
-        unsafe { ChoicebookInRust(ffi::wxChoicebook_new()) }
+    pub fn new_2step() -> ChoicebookFromCpp<FROM_CPP> {
+        unsafe { ChoicebookFromCpp(ffi::wxChoicebook_new()) }
     }
     ///
     /// See [C++ `wxChoicebook::wxChoicebook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_choicebook.html#ab4054d2f57aebdc7d6991798c4a3376f).
@@ -750,7 +752,7 @@ impl<const IN_RUST: bool> ChoicebookInRust<IN_RUST> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> ChoicebookInRust<IN_RUST> {
+    ) -> ChoicebookFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -760,49 +762,49 @@ impl<const IN_RUST: bool> ChoicebookInRust<IN_RUST> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ChoicebookInRust(ffi::wxChoicebook_new1(parent, id, pos, size, style, name))
+            ChoicebookFromCpp(ffi::wxChoicebook_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for ChoicebookInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for ChoicebookFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ChoicebookInRust<IN_RUST>> for BookCtrlBaseInRust<IN_RUST> {
-    fn from(o: ChoicebookInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoicebookFromCpp<FROM_CPP>> for BookCtrlBaseFromCpp<FROM_CPP> {
+    fn from(o: ChoicebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChoicebookInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: ChoicebookInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoicebookFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: ChoicebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChoicebookInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: ChoicebookInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoicebookFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ChoicebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChoicebookInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: ChoicebookInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoicebookFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ChoicebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ChoicebookInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ChoicebookInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ChoicebookFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ChoicebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ChoicebookInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxChoicebook_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ChoicebookFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxChoicebook_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> WindowMethods for ChoicebookInRust<IN_RUST> {
+impl<const FROM_CPP: bool> WindowMethods for ChoicebookFromCpp<FROM_CPP> {
     /// Create the choicebook control that has already been constructed with the default constructor.
     ///
     /// See [C++ `wxChoicebook::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_choicebook.html#a101f60164662715ef3a95a9ce3709037).
@@ -832,63 +834,63 @@ impl<const IN_RUST: bool> WindowMethods for ChoicebookInRust<IN_RUST> {
 // wxClientDC
 wxwidgets! {
     /// wxClientDC is primarily useful for obtaining information about the window from outside EVT_PAINT() handler.
-    /// - [`ClientDC`] represents a C++ `wxClientDC` class instance which your code has ownership, [`ClientDCInRust`]`<false>` represents one which don't own.
+    /// - [`ClientDC`] represents a C++ `wxClientDC` class instance which your code has ownership, [`ClientDCFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ClientDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxClientDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_client_d_c.html) for more details.
     #[doc(alias = "wxClientDC")]
     #[doc(alias = "ClientDC")]
     class ClientDC
-        = ClientDCInRust<true>(wxClientDC) impl
+        = ClientDCFromCpp<true>(wxClientDC) impl
         ClientDCMethods,
         WindowDCMethods,
         DCMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ClientDCInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ClientDCFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxClientDC::wxClientDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_client_d_c.html#ac2deeb91c3d7f8dd755e6f6166159501).
-    pub fn new<W: WindowMethods>(window: Option<&W>) -> ClientDCInRust<IN_RUST> {
+    pub fn new<W: WindowMethods>(window: Option<&W>) -> ClientDCFromCpp<FROM_CPP> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ClientDCInRust(ffi::wxClientDC_new(window))
+            ClientDCFromCpp(ffi::wxClientDC_new(window))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ClientDCInRust<false> {
+impl Clone for ClientDCFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ClientDCInRust<IN_RUST>> for WindowDCInRust<IN_RUST> {
-    fn from(o: ClientDCInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ClientDCFromCpp<FROM_CPP>> for WindowDCFromCpp<FROM_CPP> {
+    fn from(o: ClientDCFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ClientDCInRust<IN_RUST>> for DCInRust<IN_RUST> {
-    fn from(o: ClientDCInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ClientDCFromCpp<FROM_CPP>> for DCFromCpp<FROM_CPP> {
+    fn from(o: ClientDCFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ClientDCInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ClientDCInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ClientDCFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ClientDCFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ClientDCInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxClientDC_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ClientDCFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxClientDC_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ClientDCInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ClientDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -897,45 +899,45 @@ impl<const IN_RUST: bool> Drop for ClientDCInRust<IN_RUST> {
 // wxClipboard
 wxwidgets! {
     /// A class for manipulating the clipboard.
-    /// - [`Clipboard`] represents a C++ `wxClipboard` class instance which your code has ownership, [`ClipboardInRust`]`<false>` represents one which don't own.
+    /// - [`Clipboard`] represents a C++ `wxClipboard` class instance which your code has ownership, [`ClipboardFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Clipboard`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxClipboard` class's documentation](https://docs.wxwidgets.org/3.2/classwx_clipboard.html) for more details.
     #[doc(alias = "wxClipboard")]
     #[doc(alias = "Clipboard")]
     class Clipboard
-        = ClipboardInRust<true>(wxClipboard) impl
+        = ClipboardFromCpp<true>(wxClipboard) impl
         ClipboardMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ClipboardInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ClipboardFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxClipboard::wxClipboard()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a8d61a457ae71f52f718e0225ba3e8bb4).
-    pub fn new() -> ClipboardInRust<IN_RUST> {
-        unsafe { ClipboardInRust(ffi::wxClipboard_new()) }
+    pub fn new() -> ClipboardFromCpp<FROM_CPP> {
+        unsafe { ClipboardFromCpp(ffi::wxClipboard_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ClipboardInRust<false> {
+impl Clone for ClipboardFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ClipboardInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ClipboardInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ClipboardFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ClipboardFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ClipboardInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxClipboard_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ClipboardFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxClipboard_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ClipboardInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ClipboardFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -944,52 +946,54 @@ impl<const IN_RUST: bool> Drop for ClipboardInRust<IN_RUST> {
 // wxClipboardTextEvent
 wxwidgets! {
     /// This class represents the events generated by a control (typically a wxTextCtrl but other windows can generate these events as well) when its content gets copied or cut to, or pasted from the clipboard.
-    /// - [`ClipboardTextEvent`] represents a C++ `wxClipboardTextEvent` class instance which your code has ownership, [`ClipboardTextEventInRust`]`<false>` represents one which don't own.
+    /// - [`ClipboardTextEvent`] represents a C++ `wxClipboardTextEvent` class instance which your code has ownership, [`ClipboardTextEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ClipboardTextEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxClipboardTextEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_clipboard_text_event.html) for more details.
     #[doc(alias = "wxClipboardTextEvent")]
     #[doc(alias = "ClipboardTextEvent")]
     class ClipboardTextEvent
-        = ClipboardTextEventInRust<true>(wxClipboardTextEvent) impl
+        = ClipboardTextEventFromCpp<true>(wxClipboardTextEvent) impl
         ClipboardTextEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ClipboardTextEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ClipboardTextEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxClipboardTextEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ClipboardTextEventInRust<false> {
+impl Clone for ClipboardTextEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ClipboardTextEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
-    fn from(o: ClipboardTextEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ClipboardTextEventFromCpp<FROM_CPP>>
+    for CommandEventFromCpp<FROM_CPP>
+{
+    fn from(o: ClipboardTextEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ClipboardTextEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: ClipboardTextEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ClipboardTextEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: ClipboardTextEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ClipboardTextEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ClipboardTextEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ClipboardTextEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ClipboardTextEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ClipboardTextEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxClipboardTextEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ClipboardTextEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxClipboardTextEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ClipboardTextEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ClipboardTextEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -998,46 +1002,46 @@ impl<const IN_RUST: bool> Drop for ClipboardTextEventInRust<IN_RUST> {
 // wxCloseEvent
 wxwidgets! {
     /// This event class contains information about window and session close events.
-    /// - [`CloseEvent`] represents a C++ `wxCloseEvent` class instance which your code has ownership, [`CloseEventInRust`]`<false>` represents one which don't own.
+    /// - [`CloseEvent`] represents a C++ `wxCloseEvent` class instance which your code has ownership, [`CloseEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CloseEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCloseEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_close_event.html) for more details.
     #[doc(alias = "wxCloseEvent")]
     #[doc(alias = "CloseEvent")]
     class CloseEvent
-        = CloseEventInRust<true>(wxCloseEvent) impl
+        = CloseEventFromCpp<true>(wxCloseEvent) impl
         CloseEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CloseEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CloseEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxCloseEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CloseEventInRust<false> {
+impl Clone for CloseEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CloseEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: CloseEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CloseEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: CloseEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CloseEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CloseEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CloseEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CloseEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CloseEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCloseEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CloseEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCloseEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CloseEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CloseEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1046,25 +1050,25 @@ impl<const IN_RUST: bool> Drop for CloseEventInRust<IN_RUST> {
 // wxCollapsiblePane
 wxwidgets! {
     /// A collapsible pane is a container with an embedded button-like control which can be used by the user to collapse or expand the pane's contents.
-    /// - [`CollapsiblePane`] represents a C++ `wxCollapsiblePane` class instance which your code has ownership, [`CollapsiblePaneInRust`]`<false>` represents one which don't own.
+    /// - [`CollapsiblePane`] represents a C++ `wxCollapsiblePane` class instance which your code has ownership, [`CollapsiblePaneFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CollapsiblePane`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCollapsiblePane` class's documentation](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html) for more details.
     #[doc(alias = "wxCollapsiblePane")]
     #[doc(alias = "CollapsiblePane")]
     class CollapsiblePane
-        = CollapsiblePaneInRust<true>(wxCollapsiblePane) impl
+        = CollapsiblePaneFromCpp<true>(wxCollapsiblePane) impl
         CollapsiblePaneMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CollapsiblePaneInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CollapsiblePaneFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxCollapsiblePane::wxCollapsiblePane()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#afe29ca6c7b230a05d63022c3adb7348a).
-    pub fn new_2step() -> CollapsiblePaneInRust<IN_RUST> {
-        unsafe { CollapsiblePaneInRust(ffi::wxCollapsiblePane_new()) }
+    pub fn new_2step() -> CollapsiblePaneFromCpp<FROM_CPP> {
+        unsafe { CollapsiblePaneFromCpp(ffi::wxCollapsiblePane_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
     ///
@@ -1078,7 +1082,7 @@ impl<const IN_RUST: bool> CollapsiblePaneInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> CollapsiblePaneInRust<IN_RUST> {
+    ) -> CollapsiblePaneFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1091,7 +1095,7 @@ impl<const IN_RUST: bool> CollapsiblePaneInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            CollapsiblePaneInRust(ffi::wxCollapsiblePane_new1(
+            CollapsiblePaneFromCpp(ffi::wxCollapsiblePane_new1(
                 parent, id, label, pos, size, style, validator, name,
             ))
         }
@@ -1100,53 +1104,53 @@ impl<const IN_RUST: bool> CollapsiblePaneInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for CollapsiblePaneInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for CollapsiblePaneFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CollapsiblePaneInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: CollapsiblePaneInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CollapsiblePaneFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: CollapsiblePaneFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CollapsiblePaneInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: CollapsiblePaneInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CollapsiblePaneFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: CollapsiblePaneFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CollapsiblePaneInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: CollapsiblePaneInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CollapsiblePaneFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: CollapsiblePaneFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CollapsiblePaneInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CollapsiblePaneInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CollapsiblePaneFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CollapsiblePaneFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CollapsiblePaneInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCollapsiblePane_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CollapsiblePaneFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCollapsiblePane_CLASSINFO()) }
     }
 }
 
 // wxCollapsiblePaneEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxCollapsiblePane.
-    /// - [`CollapsiblePaneEvent`] represents a C++ `wxCollapsiblePaneEvent` class instance which your code has ownership, [`CollapsiblePaneEventInRust`]`<false>` represents one which don't own.
+    /// - [`CollapsiblePaneEvent`] represents a C++ `wxCollapsiblePaneEvent` class instance which your code has ownership, [`CollapsiblePaneEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CollapsiblePaneEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCollapsiblePaneEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html) for more details.
     #[doc(alias = "wxCollapsiblePaneEvent")]
     #[doc(alias = "CollapsiblePaneEvent")]
     class CollapsiblePaneEvent
-        = CollapsiblePaneEventInRust<true>(wxCollapsiblePaneEvent) impl
+        = CollapsiblePaneEventFromCpp<true>(wxCollapsiblePaneEvent) impl
         CollapsiblePaneEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CollapsiblePaneEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CollapsiblePaneEventFromCpp<FROM_CPP> {
     /// The constructor is not normally used by the user code.
     ///
     /// See [C++ `wxCollapsiblePaneEvent::wxCollapsiblePaneEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html#a4b2a4c27e9908f892be38971b0ddf555).
@@ -1154,49 +1158,49 @@ impl<const IN_RUST: bool> CollapsiblePaneEventInRust<IN_RUST> {
         generator: Option<&O>,
         id: c_int,
         collapsed: bool,
-    ) -> CollapsiblePaneEventInRust<IN_RUST> {
+    ) -> CollapsiblePaneEventFromCpp<FROM_CPP> {
         unsafe {
             let generator = match generator {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            CollapsiblePaneEventInRust(ffi::wxCollapsiblePaneEvent_new(generator, id, collapsed))
+            CollapsiblePaneEventFromCpp(ffi::wxCollapsiblePaneEvent_new(generator, id, collapsed))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CollapsiblePaneEventInRust<false> {
+impl Clone for CollapsiblePaneEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CollapsiblePaneEventInRust<IN_RUST>>
-    for CommandEventInRust<IN_RUST>
+impl<const FROM_CPP: bool> From<CollapsiblePaneEventFromCpp<FROM_CPP>>
+    for CommandEventFromCpp<FROM_CPP>
 {
-    fn from(o: CollapsiblePaneEventInRust<IN_RUST>) -> Self {
+    fn from(o: CollapsiblePaneEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CollapsiblePaneEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: CollapsiblePaneEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CollapsiblePaneEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: CollapsiblePaneEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CollapsiblePaneEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CollapsiblePaneEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CollapsiblePaneEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CollapsiblePaneEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CollapsiblePaneEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCollapsiblePaneEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CollapsiblePaneEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCollapsiblePaneEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CollapsiblePaneEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CollapsiblePaneEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1205,65 +1209,65 @@ impl<const IN_RUST: bool> Drop for CollapsiblePaneEventInRust<IN_RUST> {
 // wxColour
 wxwidgets! {
     /// A colour is an object representing a combination of Red, Green, and Blue (RGB) intensity values and an Alpha value, and is used to determine drawing colours.
-    /// - [`Colour`] represents a C++ `wxColour` class instance which your code has ownership, [`ColourInRust`]`<false>` represents one which don't own.
+    /// - [`Colour`] represents a C++ `wxColour` class instance which your code has ownership, [`ColourFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Colour`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColour` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour.html) for more details.
     #[doc(alias = "wxColour")]
     #[doc(alias = "Colour")]
     class Colour
-        = ColourInRust<true>(wxColour) impl
+        = ColourFromCpp<true>(wxColour) impl
         ColourMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ColourInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ColourFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxColour::wxColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour.html#aac96e7922132d672a1f83d59ecf07343).
-    pub fn new() -> ColourInRust<IN_RUST> {
-        unsafe { ColourInRust(ffi::wxColour_new()) }
+    pub fn new() -> ColourFromCpp<FROM_CPP> {
+        unsafe { ColourFromCpp(ffi::wxColour_new()) }
     }
     // NOT_SUPPORTED: fn wxColour1()
     ///
     /// See [C++ `wxColour::wxColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour.html#ae114ff88fe3a07477d111baa01c1b325).
-    pub fn new_with_str(colour_name: &str) -> ColourInRust<IN_RUST> {
+    pub fn new_with_str(colour_name: &str) -> ColourFromCpp<FROM_CPP> {
         unsafe {
             let colour_name = WxString::from(colour_name);
             let colour_name = colour_name.as_ptr();
-            ColourInRust(ffi::wxColour_new2(colour_name))
+            ColourFromCpp(ffi::wxColour_new2(colour_name))
         }
     }
     // NOT_SUPPORTED: fn wxColour3()
     /// Copy constructor.
     ///
     /// See [C++ `wxColour::wxColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour.html#a0fbc51432a57424a0538d0932af6bf78).
-    pub fn new_with_colour<C: ColourMethods>(colour: &C) -> ColourInRust<IN_RUST> {
+    pub fn new_with_colour<C: ColourMethods>(colour: &C) -> ColourFromCpp<FROM_CPP> {
         unsafe {
             let colour = colour.as_ptr();
-            ColourInRust(ffi::wxColour_new4(colour))
+            ColourFromCpp(ffi::wxColour_new4(colour))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ColourInRust<false> {
+impl Clone for ColourFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ColourInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ColourInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ColourFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ColourInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxColour_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ColourFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColour_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ColourInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ColourFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1272,48 +1276,48 @@ impl<const IN_RUST: bool> Drop for ColourInRust<IN_RUST> {
 // wxColourData
 wxwidgets! {
     /// This class holds a variety of information related to colour dialogs.
-    /// - [`ColourData`] represents a C++ `wxColourData` class instance which your code has ownership, [`ColourDataInRust`]`<false>` represents one which don't own.
+    /// - [`ColourData`] represents a C++ `wxColourData` class instance which your code has ownership, [`ColourDataFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ColourData`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourData` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_data.html) for more details.
     #[doc(alias = "wxColourData")]
     #[doc(alias = "ColourData")]
     class ColourData
-        = ColourDataInRust<true>(wxColourData) impl
+        = ColourDataFromCpp<true>(wxColourData) impl
         ColourDataMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ColourDataInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ColourDataFromCpp<FROM_CPP> {
     //  ENUM: @6
     pub const NUM_CUSTOM: c_int = 16;
 
     /// Constructor.
     ///
     /// See [C++ `wxColourData::wxColourData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a970e44b3f6ee89a4f4621bd76eb3738c).
-    pub fn new() -> ColourDataInRust<IN_RUST> {
-        unsafe { ColourDataInRust(ffi::wxColourData_new()) }
+    pub fn new() -> ColourDataFromCpp<FROM_CPP> {
+        unsafe { ColourDataFromCpp(ffi::wxColourData_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ColourDataInRust<false> {
+impl Clone for ColourDataFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ColourDataInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ColourDataInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourDataFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ColourDataFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ColourDataInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxColourData_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ColourDataFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColourData_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ColourDataInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ColourDataFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1322,34 +1326,34 @@ impl<const IN_RUST: bool> Drop for ColourDataInRust<IN_RUST> {
 // wxColourDatabase
 wxwidgets! {
     /// wxWidgets maintains a database of standard RGB colours for a predefined set of named colours.
-    /// - [`ColourDatabase`] represents a C++ `wxColourDatabase` class instance which your code has ownership, [`ColourDatabaseInRust`]`<false>` represents one which don't own.
+    /// - [`ColourDatabase`] represents a C++ `wxColourDatabase` class instance which your code has ownership, [`ColourDatabaseFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ColourDatabase`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourDatabase` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_database.html) for more details.
     #[doc(alias = "wxColourDatabase")]
     #[doc(alias = "ColourDatabase")]
     class ColourDatabase
-        = ColourDatabaseInRust<true>(wxColourDatabase) impl
+        = ColourDatabaseFromCpp<true>(wxColourDatabase) impl
         ColourDatabaseMethods
 }
-impl<const IN_RUST: bool> ColourDatabaseInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ColourDatabaseFromCpp<FROM_CPP> {
     /// Constructs the colour database.
     ///
     /// See [C++ `wxColourDatabase::wxColourDatabase()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_database.html#a66269122cb725da348b3a1c396002e41).
-    pub fn new() -> ColourDatabaseInRust<IN_RUST> {
-        unsafe { ColourDatabaseInRust(ffi::wxColourDatabase_new()) }
+    pub fn new() -> ColourDatabaseFromCpp<FROM_CPP> {
+        unsafe { ColourDatabaseFromCpp(ffi::wxColourDatabase_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ColourDatabaseInRust<false> {
+impl Clone for ColourDatabaseFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for ColourDatabaseInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ColourDatabaseFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxColourDatabase_delete(self.0) }
         }
     }
@@ -1358,13 +1362,13 @@ impl<const IN_RUST: bool> Drop for ColourDatabaseInRust<IN_RUST> {
 // wxColourDialog
 wxwidgets! {
     /// This class represents the colour chooser dialog.
-    /// - [`ColourDialog`] represents a C++ `wxColourDialog` class instance which your code has ownership, [`ColourDialogInRust`]`<false>` represents one which don't own.
+    /// - [`ColourDialog`] represents a C++ `wxColourDialog` class instance which your code has ownership, [`ColourDialogFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ColourDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html) for more details.
     #[doc(alias = "wxColourDialog")]
     #[doc(alias = "ColourDialog")]
     class ColourDialog
-        = ColourDialogInRust<true>(wxColourDialog) impl
+        = ColourDialogFromCpp<true>(wxColourDialog) impl
         ColourDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -1373,14 +1377,14 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ColourDialogInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ColourDialogFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxColourDialog::wxColourDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html#a357b4f19cd3757c6f74c44cd49a1d90e).
     pub fn new<W: WindowMethods, C: ColourDataMethods>(
         parent: Option<&W>,
         data: Option<&C>,
-    ) -> ColourDialogInRust<IN_RUST> {
+    ) -> ColourDialogFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1390,64 +1394,64 @@ impl<const IN_RUST: bool> ColourDialogInRust<IN_RUST> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            ColourDialogInRust(ffi::wxColourDialog_new(parent, data))
+            ColourDialogFromCpp(ffi::wxColourDialog_new(parent, data))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for ColourDialogInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for ColourDialogFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ColourDialogInRust<IN_RUST>> for DialogInRust<IN_RUST> {
-    fn from(o: ColourDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourDialogFromCpp<FROM_CPP>> for DialogFromCpp<FROM_CPP> {
+    fn from(o: ColourDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourDialogInRust<IN_RUST>> for TopLevelWindowInRust<IN_RUST> {
-    fn from(o: ColourDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourDialogFromCpp<FROM_CPP>> for TopLevelWindowFromCpp<FROM_CPP> {
+    fn from(o: ColourDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourDialogInRust<IN_RUST>> for NonOwnedWindowInRust<IN_RUST> {
-    fn from(o: ColourDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourDialogFromCpp<FROM_CPP>> for NonOwnedWindowFromCpp<FROM_CPP> {
+    fn from(o: ColourDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourDialogInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: ColourDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourDialogFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ColourDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourDialogInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: ColourDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourDialogFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ColourDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourDialogInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ColourDialogInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourDialogFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ColourDialogFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ColourDialogInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxColourDialog_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ColourDialogFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColourDialog_CLASSINFO()) }
     }
 }
 
 // wxColourPickerCtrl
 wxwidgets! {
     /// This control allows the user to select a colour.
-    /// - [`ColourPickerCtrl`] represents a C++ `wxColourPickerCtrl` class instance which your code has ownership, [`ColourPickerCtrlInRust`]`<false>` represents one which don't own.
+    /// - [`ColourPickerCtrl`] represents a C++ `wxColourPickerCtrl` class instance which your code has ownership, [`ColourPickerCtrlFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ColourPickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourPickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html) for more details.
     #[doc(alias = "wxColourPickerCtrl")]
     #[doc(alias = "ColourPickerCtrl")]
     class ColourPickerCtrl
-        = ColourPickerCtrlInRust<true>(wxColourPickerCtrl) impl
+        = ColourPickerCtrlFromCpp<true>(wxColourPickerCtrl) impl
         ColourPickerCtrlMethods,
         PickerBaseMethods,
         ControlMethods,
@@ -1455,11 +1459,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ColourPickerCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ColourPickerCtrlFromCpp<FROM_CPP> {
     ///
     /// See [C++ `wxColourPickerCtrl::wxColourPickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html#a610182eb11286c6df2fbd195b98868cd).
-    pub fn new_2step() -> ColourPickerCtrlInRust<IN_RUST> {
-        unsafe { ColourPickerCtrlInRust(ffi::wxColourPickerCtrl_new()) }
+    pub fn new_2step() -> ColourPickerCtrlFromCpp<FROM_CPP> {
+        unsafe { ColourPickerCtrlFromCpp(ffi::wxColourPickerCtrl_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
     ///
@@ -1479,7 +1483,7 @@ impl<const IN_RUST: bool> ColourPickerCtrlInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ColourPickerCtrlInRust<IN_RUST> {
+    ) -> ColourPickerCtrlFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1491,7 +1495,7 @@ impl<const IN_RUST: bool> ColourPickerCtrlInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ColourPickerCtrlInRust(ffi::wxColourPickerCtrl_new1(
+            ColourPickerCtrlFromCpp(ffi::wxColourPickerCtrl_new1(
                 parent, id, colour, pos, size, style, validator, name,
             ))
         }
@@ -1500,62 +1504,62 @@ impl<const IN_RUST: bool> ColourPickerCtrlInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for ColourPickerCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for ColourPickerCtrlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ColourPickerCtrlInRust<IN_RUST>> for PickerBaseInRust<IN_RUST> {
-    fn from(o: ColourPickerCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourPickerCtrlFromCpp<FROM_CPP>> for PickerBaseFromCpp<FROM_CPP> {
+    fn from(o: ColourPickerCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourPickerCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: ColourPickerCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourPickerCtrlFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: ColourPickerCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourPickerCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: ColourPickerCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourPickerCtrlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ColourPickerCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourPickerCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: ColourPickerCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourPickerCtrlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ColourPickerCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourPickerCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ColourPickerCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourPickerCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ColourPickerCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ColourPickerCtrlInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxColourPickerCtrl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ColourPickerCtrlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColourPickerCtrl_CLASSINFO()) }
     }
 }
 
 // wxColourPickerEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxColourPickerCtrl.
-    /// - [`ColourPickerEvent`] represents a C++ `wxColourPickerEvent` class instance which your code has ownership, [`ColourPickerEventInRust`]`<false>` represents one which don't own.
+    /// - [`ColourPickerEvent`] represents a C++ `wxColourPickerEvent` class instance which your code has ownership, [`ColourPickerEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ColourPickerEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourPickerEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html) for more details.
     #[doc(alias = "wxColourPickerEvent")]
     #[doc(alias = "ColourPickerEvent")]
     class ColourPickerEvent
-        = ColourPickerEventInRust<true>(wxColourPickerEvent) impl
+        = ColourPickerEventFromCpp<true>(wxColourPickerEvent) impl
         ColourPickerEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ColourPickerEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ColourPickerEventFromCpp<FROM_CPP> {
     ///
     /// See [C++ `wxColourPickerEvent::wxColourPickerEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html#afa8edf53f69e85cbaa6a1f2e91c22f2e).
-    pub fn new() -> ColourPickerEventInRust<IN_RUST> {
-        unsafe { ColourPickerEventInRust(ffi::wxColourPickerEvent_new()) }
+    pub fn new() -> ColourPickerEventFromCpp<FROM_CPP> {
+        unsafe { ColourPickerEventFromCpp(ffi::wxColourPickerEvent_new()) }
     }
     /// The constructor is not normally used by the user code.
     ///
@@ -1564,48 +1568,50 @@ impl<const IN_RUST: bool> ColourPickerEventInRust<IN_RUST> {
         generator: Option<&O>,
         id: c_int,
         colour: &C,
-    ) -> ColourPickerEventInRust<IN_RUST> {
+    ) -> ColourPickerEventFromCpp<FROM_CPP> {
         unsafe {
             let generator = match generator {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let colour = colour.as_ptr();
-            ColourPickerEventInRust(ffi::wxColourPickerEvent_new1(generator, id, colour))
+            ColourPickerEventFromCpp(ffi::wxColourPickerEvent_new1(generator, id, colour))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ColourPickerEventInRust<false> {
+impl Clone for ColourPickerEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ColourPickerEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
-    fn from(o: ColourPickerEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourPickerEventFromCpp<FROM_CPP>>
+    for CommandEventFromCpp<FROM_CPP>
+{
+    fn from(o: ColourPickerEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourPickerEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: ColourPickerEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourPickerEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: ColourPickerEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ColourPickerEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ColourPickerEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ColourPickerEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ColourPickerEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ColourPickerEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxColourPickerEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ColourPickerEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColourPickerEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ColourPickerEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ColourPickerEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1614,25 +1620,25 @@ impl<const IN_RUST: bool> Drop for ColourPickerEventInRust<IN_RUST> {
 // wxComboBox
 wxwidgets! {
     /// A combobox is like a combination of an edit control and a listbox.
-    /// - [`ComboBox`] represents a C++ `wxComboBox` class instance which your code has ownership, [`ComboBoxInRust`]`<false>` represents one which don't own.
+    /// - [`ComboBox`] represents a C++ `wxComboBox` class instance which your code has ownership, [`ComboBoxFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ComboBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxComboBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_combo_box.html) for more details.
     #[doc(alias = "wxComboBox")]
     #[doc(alias = "ComboBox")]
     class ComboBox
-        = ComboBoxInRust<true>(wxComboBox) impl
+        = ComboBoxFromCpp<true>(wxComboBox) impl
         ComboBoxMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ComboBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ComboBoxFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxComboBox::wxComboBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_combo_box.html#aac1f4d94c40a0a675dd5b2c72376057a).
-    pub fn new_2step() -> ComboBoxInRust<IN_RUST> {
-        unsafe { ComboBoxInRust(ffi::wxComboBox_new()) }
+    pub fn new_2step() -> ComboBoxFromCpp<FROM_CPP> {
+        unsafe { ComboBoxFromCpp(ffi::wxComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxComboBox1()
     /// Constructor, creating and showing a combobox.
@@ -1654,7 +1660,7 @@ impl<const IN_RUST: bool> ComboBoxInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ComboBoxInRust<IN_RUST> {
+    ) -> ComboBoxFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1668,7 +1674,7 @@ impl<const IN_RUST: bool> ComboBoxInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ComboBoxInRust(ffi::wxComboBox_new2(
+            ComboBoxFromCpp(ffi::wxComboBox_new2(
                 parent, id, value, pos, size, choices, style, validator, name,
             ))
         }
@@ -1677,48 +1683,48 @@ impl<const IN_RUST: bool> ComboBoxInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for ComboBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for ComboBoxFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ComboBoxInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: ComboBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ComboBoxFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: ComboBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ComboBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: ComboBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ComboBoxFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ComboBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ComboBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: ComboBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ComboBoxFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ComboBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ComboBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ComboBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ComboBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ComboBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ComboBoxInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxComboBox_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ComboBoxFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxComboBox_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxComboBox
-impl<const IN_RUST: bool> ItemContainerMethods for ComboBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerMethods for ComboBoxFromCpp<FROM_CPP> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> ItemContainerImmutableMethods for ComboBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerImmutableMethods for ComboBoxFromCpp<FROM_CPP> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> TextEntryMethods for ComboBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> TextEntryMethods for ComboBoxFromCpp<FROM_CPP> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxComboBox_AsTextEntry(self.as_ptr()) }
     }
@@ -1727,20 +1733,20 @@ impl<const IN_RUST: bool> TextEntryMethods for ComboBoxInRust<IN_RUST> {
 // wxComboCtrl
 wxwidgets! {
     /// A combo control is a generic combobox that allows totally custom popup.
-    /// - [`ComboCtrl`] represents a C++ `wxComboCtrl` class instance which your code has ownership, [`ComboCtrlInRust`]`<false>` represents one which don't own.
+    /// - [`ComboCtrl`] represents a C++ `wxComboCtrl` class instance which your code has ownership, [`ComboCtrlFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ComboCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxComboCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html) for more details.
     #[doc(alias = "wxComboCtrl")]
     #[doc(alias = "ComboCtrl")]
     class ComboCtrl
-        = ComboCtrlInRust<true>(wxComboCtrl) impl
+        = ComboCtrlFromCpp<true>(wxComboCtrl) impl
         ComboCtrlMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ComboCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ComboCtrlFromCpp<FROM_CPP> {
     //  ENUM: @9
     pub const ShowBelow: c_int = 0x0000;
     pub const ShowAbove: c_int = 0x0001;
@@ -1749,8 +1755,8 @@ impl<const IN_RUST: bool> ComboCtrlInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxComboCtrl::wxComboCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#af31b505e73047689dc4d2948eaa13a3d).
-    pub fn new_2step() -> ComboCtrlInRust<IN_RUST> {
-        unsafe { ComboCtrlInRust(ffi::wxComboCtrl_new()) }
+    pub fn new_2step() -> ComboCtrlFromCpp<FROM_CPP> {
+        unsafe { ComboCtrlFromCpp(ffi::wxComboCtrl_new()) }
     }
     /// Constructor, creating and showing a combo control.
     ///
@@ -1764,7 +1770,7 @@ impl<const IN_RUST: bool> ComboCtrlInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ComboCtrlInRust<IN_RUST> {
+    ) -> ComboCtrlFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1777,7 +1783,7 @@ impl<const IN_RUST: bool> ComboCtrlInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ComboCtrlInRust(ffi::wxComboCtrl_new1(
+            ComboCtrlFromCpp(ffi::wxComboCtrl_new1(
                 parent, id, value, pos, size, style, validator, name,
             ))
         }
@@ -1786,38 +1792,38 @@ impl<const IN_RUST: bool> ComboCtrlInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for ComboCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for ComboCtrlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ComboCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: ComboCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ComboCtrlFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: ComboCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ComboCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: ComboCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ComboCtrlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ComboCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ComboCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: ComboCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ComboCtrlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ComboCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ComboCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ComboCtrlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ComboCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ComboCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ComboCtrlInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxComboCtrl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ComboCtrlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxComboCtrl_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxComboCtrl
-impl<const IN_RUST: bool> TextEntryMethods for ComboCtrlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> TextEntryMethods for ComboCtrlFromCpp<FROM_CPP> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxComboCtrl_AsTextEntry(self.as_ptr()) }
     }
@@ -1826,29 +1832,29 @@ impl<const IN_RUST: bool> TextEntryMethods for ComboCtrlInRust<IN_RUST> {
 // wxComboPopup
 wxwidgets! {
     /// In order to use a custom popup with wxComboCtrl, an interface class must be derived from wxComboPopup.
-    /// - [`ComboPopup`] represents a C++ `wxComboPopup` class instance which your code has ownership, [`ComboPopupInRust`]`<false>` represents one which don't own.
+    /// - [`ComboPopup`] represents a C++ `wxComboPopup` class instance which your code has ownership, [`ComboPopupFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ComboPopup`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxComboPopup` class's documentation](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html) for more details.
     #[doc(alias = "wxComboPopup")]
     #[doc(alias = "ComboPopup")]
     class ComboPopup
-        = ComboPopupInRust<true>(wxComboPopup) impl
+        = ComboPopupFromCpp<true>(wxComboPopup) impl
         ComboPopupMethods
 }
-impl<const IN_RUST: bool> ComboPopupInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ComboPopupFromCpp<FROM_CPP> {
     // BLOCKED: fn wxComboPopup()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ComboPopupInRust<false> {
+impl Clone for ComboPopupFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> Drop for ComboPopupInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ComboPopupFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxComboPopup_delete(self.0) }
         }
     }
@@ -1857,40 +1863,40 @@ impl<const IN_RUST: bool> Drop for ComboPopupInRust<IN_RUST> {
 // wxCommand
 wxwidgets! {
     /// wxCommand is a base class for modelling an application command, which is an action usually performed by selecting a menu item, pressing a toolbar button or any other means provided by the application to change the data or view.
-    /// - [`Command`] represents a C++ `wxCommand` class instance which your code has ownership, [`CommandInRust`]`<false>` represents one which don't own.
+    /// - [`Command`] represents a C++ `wxCommand` class instance which your code has ownership, [`CommandFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Command`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCommand` class's documentation](https://docs.wxwidgets.org/3.2/classwx_command.html) for more details.
     #[doc(alias = "wxCommand")]
     #[doc(alias = "Command")]
     class Command
-        = CommandInRust<true>(wxCommand) impl
+        = CommandFromCpp<true>(wxCommand) impl
         CommandMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CommandInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CommandFromCpp<FROM_CPP> {
     // BLOCKED: fn wxCommand()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CommandInRust<false> {
+impl Clone for CommandFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CommandInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CommandInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CommandFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CommandInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCommand_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CommandFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCommand_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CommandInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CommandFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1899,46 +1905,46 @@ impl<const IN_RUST: bool> Drop for CommandInRust<IN_RUST> {
 // wxCommandEvent
 wxwidgets! {
     /// This event class contains information about command events, which originate from a variety of simple controls.
-    /// - [`CommandEvent`] represents a C++ `wxCommandEvent` class instance which your code has ownership, [`CommandEventInRust`]`<false>` represents one which don't own.
+    /// - [`CommandEvent`] represents a C++ `wxCommandEvent` class instance which your code has ownership, [`CommandEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CommandEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCommandEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_command_event.html) for more details.
     #[doc(alias = "wxCommandEvent")]
     #[doc(alias = "CommandEvent")]
     class CommandEvent
-        = CommandEventInRust<true>(wxCommandEvent) impl
+        = CommandEventFromCpp<true>(wxCommandEvent) impl
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CommandEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CommandEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxCommandEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CommandEventInRust<false> {
+impl Clone for CommandEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CommandEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: CommandEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: CommandEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CommandEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CommandEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CommandEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CommandEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCommandEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CommandEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCommandEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CommandEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CommandEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1947,13 +1953,13 @@ impl<const IN_RUST: bool> Drop for CommandEventInRust<IN_RUST> {
 // wxCommandLinkButton
 wxwidgets! {
     /// Objects of this class are similar in appearance to the normal wxButtons but are similar to the links in a web page in functionality.
-    /// - [`CommandLinkButton`] represents a C++ `wxCommandLinkButton` class instance which your code has ownership, [`CommandLinkButtonInRust`]`<false>` represents one which don't own.
+    /// - [`CommandLinkButton`] represents a C++ `wxCommandLinkButton` class instance which your code has ownership, [`CommandLinkButtonFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CommandLinkButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCommandLinkButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html) for more details.
     #[doc(alias = "wxCommandLinkButton")]
     #[doc(alias = "CommandLinkButton")]
     class CommandLinkButton
-        = CommandLinkButtonInRust<true>(wxCommandLinkButton) impl
+        = CommandLinkButtonFromCpp<true>(wxCommandLinkButton) impl
         CommandLinkButtonMethods,
         ButtonMethods,
         AnyButtonMethods,
@@ -1962,12 +1968,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CommandLinkButtonInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CommandLinkButtonFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxCommandLinkButton::wxCommandLinkButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html#a05be41a7e1fd702cee7662e1a6ae9293).
-    pub fn new_2step() -> CommandLinkButtonInRust<IN_RUST> {
-        unsafe { CommandLinkButtonInRust(ffi::wxCommandLinkButton_new()) }
+    pub fn new_2step() -> CommandLinkButtonFromCpp<FROM_CPP> {
+        unsafe { CommandLinkButtonFromCpp(ffi::wxCommandLinkButton_new()) }
     }
     /// Constructor really creating a command Link button.
     ///
@@ -1982,7 +1988,7 @@ impl<const IN_RUST: bool> CommandLinkButtonInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> CommandLinkButtonInRust<IN_RUST> {
+    ) -> CommandLinkButtonFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1997,7 +2003,7 @@ impl<const IN_RUST: bool> CommandLinkButtonInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            CommandLinkButtonInRust(ffi::wxCommandLinkButton_new1(
+            CommandLinkButtonFromCpp(ffi::wxCommandLinkButton_new1(
                 parent, id, main_label, note, pos, size, style, validator, name,
             ))
         }
@@ -2006,89 +2012,91 @@ impl<const IN_RUST: bool> CommandLinkButtonInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for CommandLinkButtonInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for CommandLinkButtonFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CommandLinkButtonInRust<IN_RUST>> for ButtonInRust<IN_RUST> {
-    fn from(o: CommandLinkButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandLinkButtonFromCpp<FROM_CPP>> for ButtonFromCpp<FROM_CPP> {
+    fn from(o: CommandLinkButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CommandLinkButtonInRust<IN_RUST>> for AnyButtonInRust<IN_RUST> {
-    fn from(o: CommandLinkButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandLinkButtonFromCpp<FROM_CPP>> for AnyButtonFromCpp<FROM_CPP> {
+    fn from(o: CommandLinkButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CommandLinkButtonInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: CommandLinkButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandLinkButtonFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: CommandLinkButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CommandLinkButtonInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: CommandLinkButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandLinkButtonFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: CommandLinkButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CommandLinkButtonInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: CommandLinkButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandLinkButtonFromCpp<FROM_CPP>>
+    for EvtHandlerFromCpp<FROM_CPP>
+{
+    fn from(o: CommandLinkButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CommandLinkButtonInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CommandLinkButtonInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandLinkButtonFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CommandLinkButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CommandLinkButtonInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCommandLinkButton_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CommandLinkButtonFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCommandLinkButton_CLASSINFO()) }
     }
 }
 
 // wxCommandProcessor
 wxwidgets! {
     /// wxCommandProcessor is a class that maintains a history of wxCommands, with undo/redo functionality built-in.
-    /// - [`CommandProcessor`] represents a C++ `wxCommandProcessor` class instance which your code has ownership, [`CommandProcessorInRust`]`<false>` represents one which don't own.
+    /// - [`CommandProcessor`] represents a C++ `wxCommandProcessor` class instance which your code has ownership, [`CommandProcessorFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CommandProcessor`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCommandProcessor` class's documentation](https://docs.wxwidgets.org/3.2/classwx_command_processor.html) for more details.
     #[doc(alias = "wxCommandProcessor")]
     #[doc(alias = "CommandProcessor")]
     class CommandProcessor
-        = CommandProcessorInRust<true>(wxCommandProcessor) impl
+        = CommandProcessorFromCpp<true>(wxCommandProcessor) impl
         CommandProcessorMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CommandProcessorInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CommandProcessorFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxCommandProcessor::wxCommandProcessor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a8f0b55885b6ea95037e81bbe76e28d74).
-    pub fn new(max_commands: c_int) -> CommandProcessorInRust<IN_RUST> {
-        unsafe { CommandProcessorInRust(ffi::wxCommandProcessor_new(max_commands)) }
+    pub fn new(max_commands: c_int) -> CommandProcessorFromCpp<FROM_CPP> {
+        unsafe { CommandProcessorFromCpp(ffi::wxCommandProcessor_new(max_commands)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CommandProcessorInRust<false> {
+impl Clone for CommandProcessorFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CommandProcessorInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CommandProcessorInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CommandProcessorFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CommandProcessorFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CommandProcessorInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCommandProcessor_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CommandProcessorFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCommandProcessor_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CommandProcessorInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CommandProcessorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2097,52 +2105,54 @@ impl<const IN_RUST: bool> Drop for CommandProcessorInRust<IN_RUST> {
 // wxContextMenuEvent
 wxwidgets! {
     /// This class is used for context menu events, sent to give the application a chance to show a context (popup) menu for a wxWindow.
-    /// - [`ContextMenuEvent`] represents a C++ `wxContextMenuEvent` class instance which your code has ownership, [`ContextMenuEventInRust`]`<false>` represents one which don't own.
+    /// - [`ContextMenuEvent`] represents a C++ `wxContextMenuEvent` class instance which your code has ownership, [`ContextMenuEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ContextMenuEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxContextMenuEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html) for more details.
     #[doc(alias = "wxContextMenuEvent")]
     #[doc(alias = "ContextMenuEvent")]
     class ContextMenuEvent
-        = ContextMenuEventInRust<true>(wxContextMenuEvent) impl
+        = ContextMenuEventFromCpp<true>(wxContextMenuEvent) impl
         ContextMenuEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ContextMenuEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ContextMenuEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxContextMenuEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ContextMenuEventInRust<false> {
+impl Clone for ContextMenuEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ContextMenuEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
-    fn from(o: ContextMenuEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ContextMenuEventFromCpp<FROM_CPP>>
+    for CommandEventFromCpp<FROM_CPP>
+{
+    fn from(o: ContextMenuEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ContextMenuEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: ContextMenuEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ContextMenuEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: ContextMenuEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ContextMenuEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ContextMenuEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ContextMenuEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ContextMenuEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ContextMenuEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxContextMenuEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ContextMenuEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxContextMenuEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ContextMenuEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ContextMenuEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2151,19 +2161,19 @@ impl<const IN_RUST: bool> Drop for ContextMenuEventInRust<IN_RUST> {
 // wxControl
 wxwidgets! {
     /// This is the base class for a control or "widget".
-    /// - [`Control`] represents a C++ `wxControl` class instance which your code has ownership, [`ControlInRust`]`<false>` represents one which don't own.
+    /// - [`Control`] represents a C++ `wxControl` class instance which your code has ownership, [`ControlFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Control`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxControl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_control.html) for more details.
     #[doc(alias = "wxControl")]
     #[doc(alias = "Control")]
     class Control
-        = ControlInRust<true>(wxControl) impl
+        = ControlFromCpp<true>(wxControl) impl
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ControlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ControlFromCpp<FROM_CPP> {
     /// Constructs a control.
     ///
     /// See [C++ `wxControl::wxControl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_control.html#adb8f3edf807efa9159de826bf92d6a44).
@@ -2175,7 +2185,7 @@ impl<const IN_RUST: bool> ControlInRust<IN_RUST> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ControlInRust<IN_RUST> {
+    ) -> ControlFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2186,7 +2196,7 @@ impl<const IN_RUST: bool> ControlInRust<IN_RUST> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ControlInRust(ffi::wxControl_new(
+            ControlFromCpp(ffi::wxControl_new(
                 parent, id, pos, size, style, validator, name,
             ))
         }
@@ -2194,97 +2204,97 @@ impl<const IN_RUST: bool> ControlInRust<IN_RUST> {
     /// Default constructor to allow 2-phase creation.
     ///
     /// See [C++ `wxControl::wxControl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_control.html#a08428de2ba5cc988a86fe17071d49522).
-    pub fn new_2step() -> ControlInRust<IN_RUST> {
-        unsafe { ControlInRust(ffi::wxControl_new1()) }
+    pub fn new_2step() -> ControlFromCpp<FROM_CPP> {
+        unsafe { ControlFromCpp(ffi::wxControl_new1()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for ControlInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for ControlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ControlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: ControlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ControlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ControlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ControlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: ControlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ControlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ControlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ControlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ControlInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ControlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ControlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ControlInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxControl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ControlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxControl_CLASSINFO()) }
     }
 }
 
 // wxControlWithItems
 wxwidgets! {
     /// This is convenience class that derives from both wxControl and wxItemContainer.
-    /// - [`ControlWithItems`] represents a C++ `wxControlWithItems` class instance which your code has ownership, [`ControlWithItemsInRust`]`<false>` represents one which don't own.
+    /// - [`ControlWithItems`] represents a C++ `wxControlWithItems` class instance which your code has ownership, [`ControlWithItemsFromCpp`]`<false>` represents one which don't own.
     /// - Use [`ControlWithItems`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxControlWithItems` class's documentation](https://docs.wxwidgets.org/3.2/classwx_control_with_items.html) for more details.
     #[doc(alias = "wxControlWithItems")]
     #[doc(alias = "ControlWithItems")]
     class ControlWithItems
-        = ControlWithItemsInRust<true>(wxControlWithItems) impl
+        = ControlWithItemsFromCpp<true>(wxControlWithItems) impl
         ControlWithItemsMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> ControlWithItemsInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ControlWithItemsFromCpp<FROM_CPP> {
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for ControlWithItemsInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for ControlWithItemsFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<ControlWithItemsInRust<IN_RUST>> for ControlInRust<IN_RUST> {
-    fn from(o: ControlWithItemsInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ControlWithItemsFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: ControlWithItemsFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ControlWithItemsInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: ControlWithItemsInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ControlWithItemsFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ControlWithItemsFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ControlWithItemsInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: ControlWithItemsInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ControlWithItemsFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ControlWithItemsFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<ControlWithItemsInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: ControlWithItemsInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<ControlWithItemsFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ControlWithItemsFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for ControlWithItemsInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxControlWithItems_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ControlWithItemsFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxControlWithItems_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxControlWithItems
-impl<const IN_RUST: bool> ItemContainerMethods for ControlWithItemsInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerMethods for ControlWithItemsFromCpp<FROM_CPP> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxControlWithItems_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> ItemContainerImmutableMethods for ControlWithItemsInRust<IN_RUST> {
+impl<const FROM_CPP: bool> ItemContainerImmutableMethods for ControlWithItemsFromCpp<FROM_CPP> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxControlWithItems_AsItemContainer(self.as_ptr()) }
     }
@@ -2293,23 +2303,23 @@ impl<const IN_RUST: bool> ItemContainerImmutableMethods for ControlWithItemsInRu
 // wxCursor
 wxwidgets! {
     /// A cursor is a small bitmap usually used for denoting where the mouse pointer is, with a picture that might indicate the interpretation of a mouse click.
-    /// - [`Cursor`] represents a C++ `wxCursor` class instance which your code has ownership, [`CursorInRust`]`<false>` represents one which don't own.
+    /// - [`Cursor`] represents a C++ `wxCursor` class instance which your code has ownership, [`CursorFromCpp`]`<false>` represents one which don't own.
     /// - Use [`Cursor`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCursor` class's documentation](https://docs.wxwidgets.org/3.2/classwx_cursor.html) for more details.
     #[doc(alias = "wxCursor")]
     #[doc(alias = "Cursor")]
     class Cursor
-        = CursorInRust<true>(wxCursor) impl
+        = CursorFromCpp<true>(wxCursor) impl
         CursorMethods,
         GDIObjectMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> CursorInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CursorFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxCursor::wxCursor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_cursor.html#a21735e923430faf941c440c67f13859d).
-    pub fn new() -> CursorInRust<IN_RUST> {
-        unsafe { CursorInRust(ffi::wxCursor_new()) }
+    pub fn new() -> CursorFromCpp<FROM_CPP> {
+        unsafe { CursorFromCpp(ffi::wxCursor_new()) }
     }
     // NOT_SUPPORTED: fn wxCursor1()
     // NOT_SUPPORTED: fn wxCursor2()
@@ -2317,54 +2327,54 @@ impl<const IN_RUST: bool> CursorInRust<IN_RUST> {
     /// Constructs a cursor from a wxImage.
     ///
     /// See [C++ `wxCursor::wxCursor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_cursor.html#adaf6e394c7306a3999bdc314d7b307a7).
-    pub fn new_with_image<I: ImageMethods>(image: &I) -> CursorInRust<IN_RUST> {
+    pub fn new_with_image<I: ImageMethods>(image: &I) -> CursorFromCpp<FROM_CPP> {
         unsafe {
             let image = image.as_ptr();
-            CursorInRust(ffi::wxCursor_new4(image))
+            CursorFromCpp(ffi::wxCursor_new4(image))
         }
     }
     /// Constructs a cursor from XPM data.
     ///
     /// See [C++ `wxCursor::wxCursor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_cursor.html#abb43549ff688898c79f48112ff85f7d7).
-    pub fn new_with_char(xpm_data: *const c_void) -> CursorInRust<IN_RUST> {
-        unsafe { CursorInRust(ffi::wxCursor_new5(xpm_data)) }
+    pub fn new_with_char(xpm_data: *const c_void) -> CursorFromCpp<FROM_CPP> {
+        unsafe { CursorFromCpp(ffi::wxCursor_new5(xpm_data)) }
     }
     /// Copy constructor, uses reference counting.
     ///
     /// See [C++ `wxCursor::wxCursor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_cursor.html#a20f3123d9d012427ae1f614e10b9cfb9).
-    pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> CursorInRust<IN_RUST> {
+    pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> CursorFromCpp<FROM_CPP> {
         unsafe {
             let cursor = cursor.as_ptr();
-            CursorInRust(ffi::wxCursor_new6(cursor))
+            CursorFromCpp(ffi::wxCursor_new6(cursor))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CursorInRust<false> {
+impl Clone for CursorFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CursorInRust<IN_RUST>> for GDIObjectInRust<IN_RUST> {
-    fn from(o: CursorInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CursorFromCpp<FROM_CPP>> for GDIObjectFromCpp<FROM_CPP> {
+    fn from(o: CursorFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CursorInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: CursorInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CursorFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: CursorFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for CursorInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxCursor_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for CursorFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCursor_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CursorInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CursorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2373,51 +2383,51 @@ impl<const IN_RUST: bool> Drop for CursorInRust<IN_RUST> {
 // wxCustomDataObject
 wxwidgets! {
     /// wxCustomDataObject is a specialization of wxDataObjectSimple for some application-specific data in arbitrary (either custom or one of the standard ones).
-    /// - [`CustomDataObject`] represents a C++ `wxCustomDataObject` class instance which your code has ownership, [`CustomDataObjectInRust`]`<false>` represents one which don't own.
+    /// - [`CustomDataObject`] represents a C++ `wxCustomDataObject` class instance which your code has ownership, [`CustomDataObjectFromCpp`]`<false>` represents one which don't own.
     /// - Use [`CustomDataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCustomDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html) for more details.
     #[doc(alias = "wxCustomDataObject")]
     #[doc(alias = "CustomDataObject")]
     class CustomDataObject
-        = CustomDataObjectInRust<true>(wxCustomDataObject) impl
+        = CustomDataObjectFromCpp<true>(wxCustomDataObject) impl
         CustomDataObjectMethods,
         DataObjectSimpleMethods,
         DataObjectMethods
 }
-impl<const IN_RUST: bool> CustomDataObjectInRust<IN_RUST> {
+impl<const FROM_CPP: bool> CustomDataObjectFromCpp<FROM_CPP> {
     /// The constructor accepts a format argument which specifies the (single) format supported by this object.
     ///
     /// See [C++ `wxCustomDataObject::wxCustomDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html#a667ea5eae3e91095d79cb6fe9e548695).
-    pub fn new<D: DataFormatMethods>(format: &D) -> CustomDataObjectInRust<IN_RUST> {
+    pub fn new<D: DataFormatMethods>(format: &D) -> CustomDataObjectFromCpp<FROM_CPP> {
         unsafe {
             let format = format.as_ptr();
-            CustomDataObjectInRust(ffi::wxCustomDataObject_new(format))
+            CustomDataObjectFromCpp(ffi::wxCustomDataObject_new(format))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for CustomDataObjectInRust<false> {
+impl Clone for CustomDataObjectFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<CustomDataObjectInRust<IN_RUST>>
-    for DataObjectSimpleInRust<IN_RUST>
+impl<const FROM_CPP: bool> From<CustomDataObjectFromCpp<FROM_CPP>>
+    for DataObjectSimpleFromCpp<FROM_CPP>
 {
-    fn from(o: CustomDataObjectInRust<IN_RUST>) -> Self {
+    fn from(o: CustomDataObjectFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<CustomDataObjectInRust<IN_RUST>> for DataObjectInRust<IN_RUST> {
-    fn from(o: CustomDataObjectInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<CustomDataObjectFromCpp<FROM_CPP>> for DataObjectFromCpp<FROM_CPP> {
+    fn from(o: CustomDataObjectFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> Drop for CustomDataObjectInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for CustomDataObjectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxCustomDataObject_delete(self.0) }
         }
     }

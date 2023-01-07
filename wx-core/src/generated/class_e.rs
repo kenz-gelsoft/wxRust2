@@ -3,25 +3,25 @@ use super::*;
 // wxEditableListBox
 wxwidgets! {
     /// An editable listbox is composite control that lets the user easily enter, delete and reorder a list of strings.
-    /// - [`EditableListBox`] represents a C++ `wxEditableListBox` class instance which your code has ownership, [`EditableListBoxInRust`]`<false>` represents one which don't own.
+    /// - [`EditableListBox`] represents a C++ `wxEditableListBox` class instance which your code has ownership, [`EditableListBoxFromCpp`]`<false>` represents one which don't own.
     /// - Use [`EditableListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxEditableListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html) for more details.
     #[doc(alias = "wxEditableListBox")]
     #[doc(alias = "EditableListBox")]
     class EditableListBox
-        = EditableListBoxInRust<true>(wxEditableListBox) impl
+        = EditableListBoxFromCpp<true>(wxEditableListBox) impl
         EditableListBoxMethods,
         PanelMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> EditableListBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> EditableListBoxFromCpp<FROM_CPP> {
     /// Default ctor.
     ///
     /// See [C++ `wxEditableListBox::wxEditableListBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#ab42098c0b81e1f027e307fad8a9ecc8a).
-    pub fn new_2step() -> EditableListBoxInRust<IN_RUST> {
-        unsafe { EditableListBoxInRust(ffi::wxEditableListBox_new()) }
+    pub fn new_2step() -> EditableListBoxFromCpp<FROM_CPP> {
+        unsafe { EditableListBoxFromCpp(ffi::wxEditableListBox_new()) }
     }
     /// Constructor, creating and showing a list box.
     ///
@@ -34,7 +34,7 @@ impl<const IN_RUST: bool> EditableListBoxInRust<IN_RUST> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> EditableListBoxInRust<IN_RUST> {
+    ) -> EditableListBoxFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -46,7 +46,7 @@ impl<const IN_RUST: bool> EditableListBoxInRust<IN_RUST> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            EditableListBoxInRust(ffi::wxEditableListBox_new1(
+            EditableListBoxFromCpp(ffi::wxEditableListBox_new1(
                 parent, id, label, pos, size, style, name,
             ))
         }
@@ -55,91 +55,91 @@ impl<const IN_RUST: bool> EditableListBoxInRust<IN_RUST> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for EditableListBoxInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for EditableListBoxFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<EditableListBoxInRust<IN_RUST>> for PanelInRust<IN_RUST> {
-    fn from(o: EditableListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EditableListBoxFromCpp<FROM_CPP>> for PanelFromCpp<FROM_CPP> {
+    fn from(o: EditableListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<EditableListBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
-    fn from(o: EditableListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EditableListBoxFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: EditableListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<EditableListBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: EditableListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EditableListBoxFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: EditableListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<EditableListBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: EditableListBoxInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EditableListBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: EditableListBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for EditableListBoxInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxEditableListBox_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for EditableListBoxFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxEditableListBox_CLASSINFO()) }
     }
 }
 
 // wxEraseEvent
 wxwidgets! {
     /// An erase event is sent when a window's background needs to be repainted.
-    /// - [`EraseEvent`] represents a C++ `wxEraseEvent` class instance which your code has ownership, [`EraseEventInRust`]`<false>` represents one which don't own.
+    /// - [`EraseEvent`] represents a C++ `wxEraseEvent` class instance which your code has ownership, [`EraseEventFromCpp`]`<false>` represents one which don't own.
     /// - Use [`EraseEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxEraseEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html) for more details.
     #[doc(alias = "wxEraseEvent")]
     #[doc(alias = "EraseEvent")]
     class EraseEvent
-        = EraseEventInRust<true>(wxEraseEvent) impl
+        = EraseEventFromCpp<true>(wxEraseEvent) impl
         EraseEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> EraseEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> EraseEventFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxEraseEvent::wxEraseEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#ae6d16ac169480be125ea4e4138fc29ef).
-    pub fn new<D: DCMethods>(id: c_int, dc: Option<&D>) -> EraseEventInRust<IN_RUST> {
+    pub fn new<D: DCMethods>(id: c_int, dc: Option<&D>) -> EraseEventFromCpp<FROM_CPP> {
         unsafe {
             let dc = match dc {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            EraseEventInRust(ffi::wxEraseEvent_new(id, dc))
+            EraseEventFromCpp(ffi::wxEraseEvent_new(id, dc))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for EraseEventInRust<false> {
+impl Clone for EraseEventFromCpp<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<EraseEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
-    fn from(o: EraseEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EraseEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: EraseEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<EraseEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: EraseEventInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EraseEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: EraseEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for EraseEventInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxEraseEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for EraseEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxEraseEvent_CLASSINFO()) }
     }
 }
-impl<const IN_RUST: bool> Drop for EraseEventInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for EraseEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -148,40 +148,40 @@ impl<const IN_RUST: bool> Drop for EraseEventInRust<IN_RUST> {
 // wxEventBlocker
 wxwidgets! {
     /// This class is a special event handler which allows discarding any event (or a set of event types) directed to a specific window.
-    /// - [`EventBlocker`] represents a C++ `wxEventBlocker` class instance which your code has ownership, [`EventBlockerInRust`]`<false>` represents one which don't own.
+    /// - [`EventBlocker`] represents a C++ `wxEventBlocker` class instance which your code has ownership, [`EventBlockerFromCpp`]`<false>` represents one which don't own.
     /// - Use [`EventBlocker`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxEventBlocker` class's documentation](https://docs.wxwidgets.org/3.2/classwx_event_blocker.html) for more details.
     #[doc(alias = "wxEventBlocker")]
     #[doc(alias = "EventBlocker")]
     class EventBlocker
-        = EventBlockerInRust<true>(wxEventBlocker) impl
+        = EventBlockerFromCpp<true>(wxEventBlocker) impl
         EventBlockerMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const IN_RUST: bool> EventBlockerInRust<IN_RUST> {
+impl<const FROM_CPP: bool> EventBlockerFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxEventBlocker()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const IN_RUST: bool> Clone for EventBlockerInRust<IN_RUST> {
+impl<const FROM_CPP: bool> Clone for EventBlockerFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const IN_RUST: bool> From<EventBlockerInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
-    fn from(o: EventBlockerInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EventBlockerFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: EventBlockerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> From<EventBlockerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
-    fn from(o: EventBlockerInRust<IN_RUST>) -> Self {
+impl<const FROM_CPP: bool> From<EventBlockerFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: EventBlockerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const IN_RUST: bool> DynamicCast for EventBlockerInRust<IN_RUST> {
-    fn class_info() -> ClassInfoInRust<false> {
-        unsafe { ClassInfoInRust::from_ptr(ffi::wxEventBlocker_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for EventBlockerFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<false> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxEventBlocker_CLASSINFO()) }
     }
 }

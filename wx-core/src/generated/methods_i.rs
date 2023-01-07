@@ -3,7 +3,7 @@ use super::*;
 // wxIcon
 /// This trait represents [C++ `wxIcon` class](https://docs.wxwidgets.org/3.2/classwx_icon.html)'s methods and inheritance.
 ///
-/// See [`IconInRust`] documentation for the class usage.
+/// See [`IconFromCpp`] documentation for the class usage.
 pub trait IconMethods: GDIObjectMethods {
     // DTOR: fn ~wxIcon()
     // NOT_SUPPORTED: fn CreateFromHICON()
@@ -81,7 +81,7 @@ pub trait IconMethods: GDIObjectMethods {
 // wxIconBundle
 /// This trait represents [C++ `wxIconBundle` class](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html)'s methods and inheritance.
 ///
-/// See [`IconBundleInRust`] documentation for the class usage.
+/// See [`IconBundleFromCpp`] documentation for the class usage.
 pub trait IconBundleMethods: GDIObjectMethods {
     // DTOR: fn ~wxIconBundle()
     // NOT_SUPPORTED: fn AddIcon()
@@ -144,7 +144,7 @@ pub trait IconBundleMethods: GDIObjectMethods {
 // wxIconizeEvent
 /// This trait represents [C++ `wxIconizeEvent` class](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html)'s methods and inheritance.
 ///
-/// See [`IconizeEventInRust`] documentation for the class usage.
+/// See [`IconizeEventFromCpp`] documentation for the class usage.
 pub trait IconizeEventMethods: EventMethods {
     /// Returns true if the frame has been iconized, false if it has been restored.
     ///
@@ -158,7 +158,7 @@ pub trait IconizeEventMethods: EventMethods {
 // wxIdManager
 /// This trait represents [C++ `wxIdManager` class](https://docs.wxwidgets.org/3.2/classwx_id_manager.html)'s methods and inheritance.
 ///
-/// See [`IdManagerInRust`] documentation for the class usage.
+/// See [`IdManagerFromCpp`] documentation for the class usage.
 pub trait IdManagerMethods: WxRustMethods {
     /// Called directly by wxWindow::NewControlId(), this function will create a new ID or range of IDs.
     ///
@@ -177,7 +177,7 @@ pub trait IdManagerMethods: WxRustMethods {
 // wxImage
 /// This trait represents [C++ `wxImage` class](https://docs.wxwidgets.org/3.2/classwx_image.html)'s methods and inheritance.
 ///
-/// See [`ImageInRust`] documentation for the class usage.
+/// See [`ImageFromCpp`] documentation for the class usage.
 pub trait ImageMethods: ObjectMethods {
     /// Returns an identical copy of this image.
     ///
@@ -708,7 +708,7 @@ pub trait ImageMethods: ObjectMethods {
     /// Finds the handler with the given name.
     ///
     /// See [C++ `wxImage::FindHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a474c80c4f2a344d131fc9b26778f8440).
-    fn find_handler(name: &str) -> Option<ImageHandlerInRust<false>> {
+    fn find_handler(name: &str) -> Option<ImageHandlerFromCpp<false>> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
@@ -720,7 +720,7 @@ pub trait ImageMethods: ObjectMethods {
     /// Finds the handler associated with the given MIME type.
     ///
     /// See [C++ `wxImage::FindHandlerMime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a464676dac510648439549482e4ed07bd).
-    fn find_handler_mime(mimetype: &str) -> Option<ImageHandlerInRust<false>> {
+    fn find_handler_mime(mimetype: &str) -> Option<ImageHandlerFromCpp<false>> {
         unsafe {
             let mimetype = WxString::from(mimetype);
             let mimetype = mimetype.as_ptr();
@@ -794,7 +794,7 @@ pub trait ImageMethods: ObjectMethods {
 // wxImageHandler
 /// This trait represents [C++ `wxImageHandler` class](https://docs.wxwidgets.org/3.2/classwx_image_handler.html)'s methods and inheritance.
 ///
-/// See [`ImageHandlerInRust`] documentation for the class usage.
+/// See [`ImageHandlerFromCpp`] documentation for the class usage.
 pub trait ImageHandlerMethods: ObjectMethods {
     // DTOR: fn ~wxImageHandler()
     /// Returns true if this handler supports the image format contained in the given stream.
@@ -822,8 +822,8 @@ pub trait ImageHandlerMethods: ObjectMethods {
     /// Returns the other file extensions associated with this handler.
     ///
     /// See [C++ `wxImageHandler::GetAltExtensions()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#ad7507ccdf4d120820bd7be84826e86dd).
-    fn get_alt_extensions(&self) -> ArrayStringInRust<false> {
-        unsafe { ArrayStringInRust::from_ptr(ffi::wxImageHandler_GetAltExtensions(self.as_ptr())) }
+    fn get_alt_extensions(&self) -> ArrayStringFromCpp<false> {
+        unsafe { ArrayStringFromCpp::from_ptr(ffi::wxImageHandler_GetAltExtensions(self.as_ptr())) }
     }
     /// If the image file contains more than one image and the image handler is capable of retrieving these individually, this function will return the number of available images.
     ///
@@ -925,7 +925,7 @@ pub trait ImageHandlerMethods: ObjectMethods {
 // wxImageList
 /// This trait represents [C++ `wxImageList` class](https://docs.wxwidgets.org/3.2/classwx_image_list.html)'s methods and inheritance.
 ///
-/// See [`ImageListInRust`] documentation for the class usage.
+/// See [`ImageListFromCpp`] documentation for the class usage.
 pub trait ImageListMethods: ObjectMethods {
     /// Adds a new image or images using a bitmap and optional mask bitmap.
     ///
@@ -1064,7 +1064,7 @@ pub trait ImageListMethods: ObjectMethods {
 // wxInfoBar
 /// This trait represents [C++ `wxInfoBar` class](https://docs.wxwidgets.org/3.2/classwx_info_bar.html)'s methods and inheritance.
 ///
-/// See [`InfoBarInRust`] documentation for the class usage.
+/// See [`InfoBarFromCpp`] documentation for the class usage.
 pub trait InfoBarMethods: ControlMethods {
     // NOT_SUPPORTED: fn SetShowHideEffects()
     // NOT_SUPPORTED: fn GetShowEffect()
@@ -1148,13 +1148,13 @@ pub trait InfoBarMethods: ControlMethods {
 // wxInitDialogEvent
 /// This trait represents [C++ `wxInitDialogEvent` class](https://docs.wxwidgets.org/3.2/classwx_init_dialog_event.html)'s methods and inheritance.
 ///
-/// See [`InitDialogEventInRust`] documentation for the class usage.
+/// See [`InitDialogEventFromCpp`] documentation for the class usage.
 pub trait InitDialogEventMethods: EventMethods {}
 
 // wxItemContainer
 /// This trait represents [C++ `wxItemContainer` class](https://docs.wxwidgets.org/3.2/classwx_item_container.html)'s methods and inheritance.
 ///
-/// See [`ItemContainerInRust`] documentation for the class usage.
+/// See [`ItemContainerFromCpp`] documentation for the class usage.
 pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { self.as_ptr() }
@@ -1281,7 +1281,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     /// Returns the client object associated with the given item and transfers its ownership to the caller.
     ///
     /// See [C++ `wxItemContainer::DetachClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a9b4c80ee2cc91ccfe534fb56fc4e8bdf).
-    fn detach_client_object(&self, n: c_uint) -> Option<ClientDataInRust<false>> {
+    fn detach_client_object(&self, n: c_uint) -> Option<ClientDataFromCpp<false>> {
         unsafe {
             ClientData::option_from(ffi::wxItemContainer_DetachClientObject(
                 self.as_item_container(),
@@ -1316,7 +1316,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     /// Returns a pointer to the client data associated with the given item (if any).
     ///
     /// See [C++ `wxItemContainer::GetClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a95f1b730f3ddcf8eb2d8d8ec4e09dadd).
-    fn get_client_object_uint(&self, n: c_uint) -> Option<ClientDataInRust<false>> {
+    fn get_client_object_uint(&self, n: c_uint) -> Option<ClientDataFromCpp<false>> {
         unsafe {
             ClientData::option_from(ffi::wxItemContainer_GetClientObject(
                 self.as_item_container(),
@@ -1531,7 +1531,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
 // wxItemContainerImmutable
 /// This trait represents [C++ `wxItemContainerImmutable` class](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html)'s methods and inheritance.
 ///
-/// See [`ItemContainerImmutableInRust`] documentation for the class usage.
+/// See [`ItemContainerImmutableFromCpp`] documentation for the class usage.
 pub trait ItemContainerImmutableMethods: WxRustMethods {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { self.as_ptr() }

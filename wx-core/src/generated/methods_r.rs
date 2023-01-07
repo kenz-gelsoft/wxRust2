@@ -3,7 +3,7 @@ use super::*;
 // wxRadioBox
 /// This trait represents [C++ `wxRadioBox` class](https://docs.wxwidgets.org/3.2/classwx_radio_box.html)'s methods and inheritance.
 ///
-/// See [`RadioBoxInRust`] documentation for the class usage.
+/// See [`RadioBoxFromCpp`] documentation for the class usage.
 pub trait RadioBoxMethods: ControlMethods {
     // DTOR: fn ~wxRadioBox()
     // NOT_SUPPORTED: fn Create()
@@ -82,7 +82,7 @@ pub trait RadioBoxMethods: ControlMethods {
     /// Returns the tooltip associated with the specified item if any or NULL.
     ///
     /// See [C++ `wxRadioBox::GetItemToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#aae17bd6b2707de2d93ab1fba78850a41).
-    fn get_item_tool_tip(&self, item: c_uint) -> Option<ToolTipInRust<false>> {
+    fn get_item_tool_tip(&self, item: c_uint) -> Option<ToolTipFromCpp<false>> {
         unsafe { ToolTip::option_from(ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item)) }
     }
     /// Returns the number of rows in the radiobox.
@@ -134,7 +134,7 @@ pub trait RadioBoxMethods: ControlMethods {
 // wxRadioButton
 /// This trait represents [C++ `wxRadioButton` class](https://docs.wxwidgets.org/3.2/classwx_radio_button.html)'s methods and inheritance.
 ///
-/// See [`RadioButtonInRust`] documentation for the class usage.
+/// See [`RadioButtonFromCpp`] documentation for the class usage.
 pub trait RadioButtonMethods: ControlMethods {
     // DTOR: fn ~wxRadioButton()
     /// Creates the choice for two-step construction.
@@ -219,7 +219,7 @@ pub trait RadioButtonMethods: ControlMethods {
 // wxRealPoint
 /// This trait represents [C++ `wxRealPoint` class](https://docs.wxwidgets.org/3.2/classwx_real_point.html)'s methods and inheritance.
 ///
-/// See [`RealPointInRust`] documentation for the class usage.
+/// See [`RealPointFromCpp`] documentation for the class usage.
 pub trait RealPointMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
@@ -244,7 +244,7 @@ pub trait RealPointMethods: WxRustMethods {
 // wxRearrangeCtrl
 /// This trait represents [C++ `wxRearrangeCtrl` class](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html)'s methods and inheritance.
 ///
-/// See [`RearrangeCtrlInRust`] documentation for the class usage.
+/// See [`RearrangeCtrlFromCpp`] documentation for the class usage.
 pub trait RearrangeCtrlMethods: PanelMethods {
     /// Effectively creates the window for an object created using the default constructor.
     ///
@@ -305,7 +305,7 @@ pub trait RearrangeCtrlMethods: PanelMethods {
 // wxRearrangeDialog
 /// This trait represents [C++ `wxRearrangeDialog` class](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html)'s methods and inheritance.
 ///
-/// See [`RearrangeDialogInRust`] documentation for the class usage.
+/// See [`RearrangeDialogFromCpp`] documentation for the class usage.
 pub trait RearrangeDialogMethods: DialogMethods {
     /// Effectively creates the dialog for an object created using the default constructor.
     ///
@@ -375,7 +375,7 @@ pub trait RearrangeDialogMethods: DialogMethods {
 // wxRearrangeList
 /// This trait represents [C++ `wxRearrangeList` class](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html)'s methods and inheritance.
 ///
-/// See [`RearrangeListInRust`] documentation for the class usage.
+/// See [`RearrangeListFromCpp`] documentation for the class usage.
 pub trait RearrangeListMethods: CheckListBoxMethods {
     /// Effectively creates the window for an object created using the default constructor.
     ///
@@ -428,8 +428,8 @@ pub trait RearrangeListMethods: CheckListBoxMethods {
     /// Return the current order of the items.
     ///
     /// See [C++ `wxRearrangeList::GetCurrentOrder()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#a7d9953adf768501bf27bdaf2c3b6e20d).
-    fn get_current_order(&self) -> ArrayIntInRust<false> {
-        unsafe { ArrayIntInRust::from_ptr(ffi::wxRearrangeList_GetCurrentOrder(self.as_ptr())) }
+    fn get_current_order(&self) -> ArrayIntFromCpp<false> {
+        unsafe { ArrayIntFromCpp::from_ptr(ffi::wxRearrangeList_GetCurrentOrder(self.as_ptr())) }
     }
     /// Return true if the currently selected item can be moved up.
     ///
@@ -460,7 +460,7 @@ pub trait RearrangeListMethods: CheckListBoxMethods {
 // wxRect
 /// This trait represents [C++ `wxRect` class](https://docs.wxwidgets.org/3.2/classwx_rect.html)'s methods and inheritance.
 ///
-/// See [`RectInRust`] documentation for the class usage.
+/// See [`RectFromCpp`] documentation for the class usage.
 pub trait RectMethods: WxRustMethods {
     /// Returns the rectangle having the same size as this one but centered relatively to the given rectangle r.
     ///
@@ -766,7 +766,7 @@ pub trait RectMethods: WxRustMethods {
 // wxRegion
 /// This trait represents [C++ `wxRegion` class](https://docs.wxwidgets.org/3.2/classwx_region.html)'s methods and inheritance.
 ///
-/// See [`RegionInRust`] documentation for the class usage.
+/// See [`RegionFromCpp`] documentation for the class usage.
 pub trait RegionMethods: GDIObjectMethods {
     // DTOR: fn ~wxRegion()
     /// Clears the current region.
@@ -940,7 +940,7 @@ pub trait RegionMethods: GDIObjectMethods {
 // wxRegionIterator
 /// This trait represents [C++ `wxRegionIterator` class](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html)'s methods and inheritance.
 ///
-/// See [`RegionIteratorInRust`] documentation for the class usage.
+/// See [`RegionIteratorFromCpp`] documentation for the class usage.
 pub trait RegionIteratorMethods: ObjectMethods {
     /// An alias for GetHeight().
     ///
@@ -1012,7 +1012,7 @@ pub trait RegionIteratorMethods: ObjectMethods {
 // wxRendererNative
 /// This trait represents [C++ `wxRendererNative` class](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html)'s methods and inheritance.
 ///
-/// See [`RendererNativeInRust`] documentation for the class usage.
+/// See [`RendererNativeFromCpp`] documentation for the class usage.
 pub trait RendererNativeMethods: WxRustMethods {
     // DTOR: fn ~wxRendererNative()
     /// Draw a check box.
@@ -1445,25 +1445,25 @@ pub trait RendererNativeMethods: WxRustMethods {
     /// Return the currently used renderer.
     ///
     /// See [C++ `wxRendererNative::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#a9526c5b65e880112597ce89f82f7c79a).
-    fn get() -> RendererNativeInRust<false> {
-        unsafe { RendererNativeInRust::from_ptr(ffi::wxRendererNative_Get()) }
+    fn get() -> RendererNativeFromCpp<false> {
+        unsafe { RendererNativeFromCpp::from_ptr(ffi::wxRendererNative_Get()) }
     }
     /// Return the default (native) implementation for this platform  this is also the one used by default but this may be changed by calling Set() in which case the return value of this method may be different from the return value of Get().
     ///
     /// See [C++ `wxRendererNative::GetDefault()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#ab0da0d81fc83357893336e9c6789f2e9).
-    fn get_default() -> RendererNativeInRust<false> {
-        unsafe { RendererNativeInRust::from_ptr(ffi::wxRendererNative_GetDefault()) }
+    fn get_default() -> RendererNativeFromCpp<false> {
+        unsafe { RendererNativeFromCpp::from_ptr(ffi::wxRendererNative_GetDefault()) }
     }
     /// Return the generic implementation of the renderer.
     ///
     /// See [C++ `wxRendererNative::GetGeneric()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#a30c27eccbf079dbab0b5c51c909d423b).
-    fn get_generic() -> RendererNativeInRust<false> {
-        unsafe { RendererNativeInRust::from_ptr(ffi::wxRendererNative_GetGeneric()) }
+    fn get_generic() -> RendererNativeFromCpp<false> {
+        unsafe { RendererNativeFromCpp::from_ptr(ffi::wxRendererNative_GetGeneric()) }
     }
     /// Load the renderer from the specified DLL, the returned pointer must be deleted by caller if not NULL when it is not used any more.
     ///
     /// See [C++ `wxRendererNative::Load()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#a3370fada68174ae45bbf1ce52757bf0b).
-    fn load(name: &str) -> Option<RendererNativeInRust<false>> {
+    fn load(name: &str) -> Option<RendererNativeFromCpp<false>> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
@@ -1473,7 +1473,7 @@ pub trait RendererNativeMethods: WxRustMethods {
     /// Set the renderer to use, passing NULL reverts to using the default renderer (the global renderer must always exist).
     ///
     /// See [C++ `wxRendererNative::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#afc00cb4f831444446a275bf990448efe).
-    fn set<R: RendererNativeMethods>(renderer: Option<&R>) -> Option<RendererNativeInRust<false>> {
+    fn set<R: RendererNativeMethods>(renderer: Option<&R>) -> Option<RendererNativeFromCpp<false>> {
         unsafe {
             let renderer = match renderer {
                 Some(r) => r.as_ptr(),
@@ -1487,7 +1487,7 @@ pub trait RendererNativeMethods: WxRustMethods {
 // wxRichToolTip
 /// This trait represents [C++ `wxRichToolTip` class](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html)'s methods and inheritance.
 ///
-/// See [`RichToolTipInRust`] documentation for the class usage.
+/// See [`RichToolTipFromCpp`] documentation for the class usage.
 pub trait RichToolTipMethods: WxRustMethods {
     /// Set the background colour.
     ///

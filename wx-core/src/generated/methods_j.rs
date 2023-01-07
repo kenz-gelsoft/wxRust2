@@ -3,13 +3,13 @@ use super::*;
 // wxJPEGHandler
 /// This trait represents [C++ `wxJPEGHandler` class](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html)'s methods and inheritance.
 ///
-/// See [`JPEGHandlerInRust`] documentation for the class usage.
+/// See [`JPEGHandlerFromCpp`] documentation for the class usage.
 pub trait JPEGHandlerMethods: ImageHandlerMethods {}
 
 // wxJoystickEvent
 /// This trait represents [C++ `wxJoystickEvent` class](https://docs.wxwidgets.org/3.2/classwx_joystick_event.html)'s methods and inheritance.
 ///
-/// See [`JoystickEventInRust`] documentation for the class usage.
+/// See [`JoystickEventFromCpp`] documentation for the class usage.
 pub trait JoystickEventMethods: EventMethods {
     /// Returns true if the event was a down event from the specified button (or any button).
     ///

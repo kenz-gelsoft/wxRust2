@@ -3,7 +3,7 @@ use super::*;
 // wxGBPosition
 /// This trait represents [C++ `wxGBPosition` class](https://docs.wxwidgets.org/3.2/classwx_g_b_position.html)'s methods and inheritance.
 ///
-/// See [`GBPositionInRust`] documentation for the class usage.
+/// See [`GBPositionFromCpp`] documentation for the class usage.
 pub trait GBPositionMethods: WxRustMethods {
     /// Get the current column value.
     ///
@@ -36,7 +36,7 @@ pub trait GBPositionMethods: WxRustMethods {
 // wxGBSizerItem
 /// This trait represents [C++ `wxGBSizerItem` class](https://docs.wxwidgets.org/3.2/classwx_g_b_sizer_item.html)'s methods and inheritance.
 ///
-/// See [`GBSizerItemInRust`] documentation for the class usage.
+/// See [`GBSizerItemFromCpp`] documentation for the class usage.
 pub trait GBSizerItemMethods: SizerItemMethods {
     /// Get the row and column of the endpoint of this item.
     ///
@@ -109,7 +109,7 @@ pub trait GBSizerItemMethods: SizerItemMethods {
     }
     ///
     /// See [C++ `wxGBSizerItem::GetGBSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_g_b_sizer_item.html#a50efa3c582e175880242aa00c87ec1d4).
-    fn get_gb_sizer(&self) -> Option<GridBagSizerInRust<false>> {
+    fn get_gb_sizer(&self) -> Option<GridBagSizerFromCpp<false>> {
         unsafe { GridBagSizer::option_from(ffi::wxGBSizerItem_GetGBSizer(self.as_ptr())) }
     }
     ///
@@ -128,7 +128,7 @@ pub trait GBSizerItemMethods: SizerItemMethods {
 // wxGBSpan
 /// This trait represents [C++ `wxGBSpan` class](https://docs.wxwidgets.org/3.2/classwx_g_b_span.html)'s methods and inheritance.
 ///
-/// See [`GBSpanInRust`] documentation for the class usage.
+/// See [`GBSpanFromCpp`] documentation for the class usage.
 pub trait GBSpanMethods: WxRustMethods {
     /// Get the current colspan value.
     ///
@@ -161,7 +161,7 @@ pub trait GBSpanMethods: WxRustMethods {
 // wxGCDC
 /// This trait represents [C++ `wxGCDC` class](https://docs.wxwidgets.org/3.2/classwx_g_c_d_c.html)'s methods and inheritance.
 ///
-/// See [`GCDCInRust`] documentation for the class usage.
+/// See [`GCDCFromCpp`] documentation for the class usage.
 pub trait GCDCMethods: DCMethods {
     // DTOR: fn ~wxGCDC()
 }
@@ -169,13 +169,13 @@ pub trait GCDCMethods: DCMethods {
 // wxGDIObject
 /// This trait represents [C++ `wxGDIObject` class](https://docs.wxwidgets.org/3.2/classwx_g_d_i_object.html)'s methods and inheritance.
 ///
-/// See [`GDIObjectInRust`] documentation for the class usage.
+/// See [`GDIObjectFromCpp`] documentation for the class usage.
 pub trait GDIObjectMethods: ObjectMethods {}
 
 // wxGIFHandler
 /// This trait represents [C++ `wxGIFHandler` class](https://docs.wxwidgets.org/3.2/classwx_g_i_f_handler.html)'s methods and inheritance.
 ///
-/// See [`GIFHandlerInRust`] documentation for the class usage.
+/// See [`GIFHandlerFromCpp`] documentation for the class usage.
 pub trait GIFHandlerMethods: ImageHandlerMethods {
     /// Save the animated gif.
     ///
@@ -202,7 +202,7 @@ pub trait GIFHandlerMethods: ImageHandlerMethods {
 // wxGauge
 /// This trait represents [C++ `wxGauge` class](https://docs.wxwidgets.org/3.2/classwx_gauge.html)'s methods and inheritance.
 ///
-/// See [`GaugeInRust`] documentation for the class usage.
+/// See [`GaugeFromCpp`] documentation for the class usage.
 pub trait GaugeMethods: ControlMethods {
     // DTOR: fn ~wxGauge()
     /// Creates the gauge for two-step construction.
@@ -283,7 +283,7 @@ pub trait GaugeMethods: ControlMethods {
 // wxGenericAboutDialog
 /// This trait represents [C++ `wxGenericAboutDialog` class](https://docs.wxwidgets.org/3.2/classwx_generic_about_dialog.html)'s methods and inheritance.
 ///
-/// See [`GenericAboutDialogInRust`] documentation for the class usage.
+/// See [`GenericAboutDialogFromCpp`] documentation for the class usage.
 pub trait GenericAboutDialogMethods: WxRustMethods {
     /// Initializes the dialog created using the default constructor.
     ///
@@ -307,7 +307,7 @@ pub trait GenericAboutDialogMethods: WxRustMethods {
 // wxGenericDirCtrl
 /// This trait represents [C++ `wxGenericDirCtrl` class](https://docs.wxwidgets.org/3.2/classwx_generic_dir_ctrl.html)'s methods and inheritance.
 ///
-/// See [`GenericDirCtrlInRust`] documentation for the class usage.
+/// See [`GenericDirCtrlFromCpp`] documentation for the class usage.
 pub trait GenericDirCtrlMethods: ControlMethods {
     // DTOR: fn ~wxGenericDirCtrl()
     /// Collapse the given path.
@@ -528,7 +528,7 @@ pub trait GenericDirCtrlMethods: ControlMethods {
 // wxGenericProgressDialog
 /// This trait represents [C++ `wxGenericProgressDialog` class](https://docs.wxwidgets.org/3.2/classwx_generic_progress_dialog.html)'s methods and inheritance.
 ///
-/// See [`GenericProgressDialogInRust`] documentation for the class usage.
+/// See [`GenericProgressDialogFromCpp`] documentation for the class usage.
 pub trait GenericProgressDialogMethods: DialogMethods {
     // DTOR: fn ~wxGenericProgressDialog()
     /// Returns the last value passed to the Update() function or wxNOT_FOUND if the dialog has no progress bar.
@@ -598,7 +598,7 @@ pub trait GenericProgressDialogMethods: DialogMethods {
 // wxGenericValidator
 /// This trait represents [C++ `wxGenericValidator` class](https://docs.wxwidgets.org/3.2/classwx_generic_validator.html)'s methods and inheritance.
 ///
-/// See [`GenericValidatorInRust`] documentation for the class usage.
+/// See [`GenericValidatorFromCpp`] documentation for the class usage.
 pub trait GenericValidatorMethods: ValidatorMethods {
     // DTOR: fn ~wxGenericValidator()
 }
@@ -606,18 +606,20 @@ pub trait GenericValidatorMethods: ValidatorMethods {
 // wxGraphicsBrush
 /// This trait represents [C++ `wxGraphicsBrush` class](https://docs.wxwidgets.org/3.2/classwx_graphics_brush.html)'s methods and inheritance.
 ///
-/// See [`GraphicsBrushInRust`] documentation for the class usage.
+/// See [`GraphicsBrushFromCpp`] documentation for the class usage.
 pub trait GraphicsBrushMethods: GraphicsObjectMethods {}
 
 // wxGraphicsContext
 /// This trait represents [C++ `wxGraphicsContext` class](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html)'s methods and inheritance.
 ///
-/// See [`GraphicsContextInRust`] documentation for the class usage.
+/// See [`GraphicsContextFromCpp`] documentation for the class usage.
 pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxWindow.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#ae8720ba0ce3401fe236449858b7cf950).
-    fn create_window<W: WindowMethods>(window: Option<&W>) -> Option<GraphicsContextInRust<false>> {
+    fn create_window<W: WindowMethods>(
+        window: Option<&W>,
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -629,7 +631,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxWindowDC.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a25dca87b498a8fe9fa23a702fa3a384e).
-    fn create_windowdc<W: WindowDCMethods>(window_dc: &W) -> Option<GraphicsContextInRust<false>> {
+    fn create_windowdc<W: WindowDCMethods>(window_dc: &W) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let window_dc = window_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsContext_Create1(window_dc))
@@ -638,7 +640,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxMemoryDC.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#af544047a78a2cb0f1bb216e27ace1d0c).
-    fn create_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> Option<GraphicsContextInRust<false>> {
+    fn create_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let memory_dc = memory_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsContext_Create2(memory_dc))
@@ -648,13 +650,13 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxEnhMetaFileDC.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a9a5091dadfe615f0b26825d3389ec734).
-    fn create_enhmetafiledc(meta_file_dc: *const c_void) -> Option<GraphicsContextInRust<false>> {
+    fn create_enhmetafiledc(meta_file_dc: *const c_void) -> Option<GraphicsContextFromCpp<false>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create4(meta_file_dc)) }
     }
     /// Creates a wxGraphicsContext from a DC of unknown specific type.
     ///
     /// See [C++ `wxGraphicsContext::CreateFromUnknownDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#aa8000f79cb2123da46b31c15246c7383).
-    fn create_from_unknown_dc<D: DCMethods>(dc: &D) -> Option<GraphicsContextInRust<false>> {
+    fn create_from_unknown_dc<D: DCMethods>(dc: &D) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let dc = dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromUnknownDC(dc))
@@ -663,7 +665,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext associated with a wxImage.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a91dbb89974c189fa4b743ee7dc9ae7cf).
-    fn create_image<I: ImageMethods>(image: &I) -> Option<GraphicsContextInRust<false>> {
+    fn create_image<I: ImageMethods>(image: &I) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let image = image.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsContext_Create5(image))
@@ -672,13 +674,13 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a native context.
     ///
     /// See [C++ `wxGraphicsContext::CreateFromNative()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#ad74196005aaf6c1e346a52eb042a623f).
-    fn create_from_native(context: *mut c_void) -> Option<GraphicsContextInRust<false>> {
+    fn create_from_native(context: *mut c_void) -> Option<GraphicsContextFromCpp<false>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromNative(context)) }
     }
     /// Creates a wxGraphicsContext from a native window.
     ///
     /// See [C++ `wxGraphicsContext::CreateFromNativeWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a538b8d96804b12f6f32d159eef03d919).
-    fn create_from_native_window(window: *mut c_void) -> Option<GraphicsContextInRust<false>> {
+    fn create_from_native_window(window: *mut c_void) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromNativeWindow(window))
         }
@@ -687,7 +689,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Create a lightweight context that can be used only for measuring text.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a5be9099dbe7c3ca825aa55bdcc541cf5).
-    fn create() -> Option<GraphicsContextInRust<false>> {
+    fn create() -> Option<GraphicsContextFromCpp<false>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create6()) }
     }
     /// Resets the clipping to original shape.
@@ -1107,19 +1109,19 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
 // wxGraphicsFont
 /// This trait represents [C++ `wxGraphicsFont` class](https://docs.wxwidgets.org/3.2/classwx_graphics_font.html)'s methods and inheritance.
 ///
-/// See [`GraphicsFontInRust`] documentation for the class usage.
+/// See [`GraphicsFontFromCpp`] documentation for the class usage.
 pub trait GraphicsFontMethods: GraphicsObjectMethods {}
 
 // wxGraphicsGradientStop
 /// This trait represents [C++ `wxGraphicsGradientStop` class](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stop.html)'s methods and inheritance.
 ///
-/// See [`GraphicsGradientStopInRust`] documentation for the class usage.
+/// See [`GraphicsGradientStopFromCpp`] documentation for the class usage.
 pub trait GraphicsGradientStopMethods: WxRustMethods {
     /// Return the stop colour.
     ///
     /// See [C++ `wxGraphicsGradientStop::GetColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stop.html#a3d18a62d5d55701d3b9df7bfad7d72d4).
-    fn get_colour(&self) -> ColourInRust<false> {
-        unsafe { ColourInRust::from_ptr(ffi::wxGraphicsGradientStop_GetColour(self.as_ptr())) }
+    fn get_colour(&self) -> ColourFromCpp<false> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxGraphicsGradientStop_GetColour(self.as_ptr())) }
     }
     /// Change the stop colour.
     ///
@@ -1137,7 +1139,7 @@ pub trait GraphicsGradientStopMethods: WxRustMethods {
 // wxGraphicsGradientStops
 /// This trait represents [C++ `wxGraphicsGradientStops` class](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stops.html)'s methods and inheritance.
 ///
-/// See [`GraphicsGradientStopsInRust`] documentation for the class usage.
+/// See [`GraphicsGradientStopsFromCpp`] documentation for the class usage.
 pub trait GraphicsGradientStopsMethods: WxRustMethods {
     /// Add a new stop.
     ///
@@ -1175,7 +1177,7 @@ pub trait GraphicsGradientStopsMethods: WxRustMethods {
 // wxGraphicsMatrix
 /// This trait represents [C++ `wxGraphicsMatrix` class](https://docs.wxwidgets.org/3.2/classwx_graphics_matrix.html)'s methods and inheritance.
 ///
-/// See [`GraphicsMatrixInRust`] documentation for the class usage.
+/// See [`GraphicsMatrixFromCpp`] documentation for the class usage.
 pub trait GraphicsMatrixMethods: GraphicsObjectMethods {
     /// Concatenates the matrix passed with the current matrix.
     ///
@@ -1253,12 +1255,12 @@ pub trait GraphicsMatrixMethods: GraphicsObjectMethods {
 // wxGraphicsObject
 /// This trait represents [C++ `wxGraphicsObject` class](https://docs.wxwidgets.org/3.2/classwx_graphics_object.html)'s methods and inheritance.
 ///
-/// See [`GraphicsObjectInRust`] documentation for the class usage.
+/// See [`GraphicsObjectFromCpp`] documentation for the class usage.
 pub trait GraphicsObjectMethods: ObjectMethods {
     /// Returns the renderer that was used to create this instance, or NULL if it has not been initialized yet.
     ///
     /// See [C++ `wxGraphicsObject::GetRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_object.html#a0c39cbf592f20ac90b3718d399210e1e).
-    fn get_renderer(&self) -> Option<GraphicsRendererInRust<false>> {
+    fn get_renderer(&self) -> Option<GraphicsRendererFromCpp<false>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsObject_GetRenderer(self.as_ptr())) }
     }
     ///
@@ -1271,7 +1273,7 @@ pub trait GraphicsObjectMethods: ObjectMethods {
 // wxGraphicsPath
 /// This trait represents [C++ `wxGraphicsPath` class](https://docs.wxwidgets.org/3.2/classwx_graphics_path.html)'s methods and inheritance.
 ///
-/// See [`GraphicsPathInRust`] documentation for the class usage.
+/// See [`GraphicsPathFromCpp`] documentation for the class usage.
 pub trait GraphicsPathMethods: GraphicsObjectMethods {
     // NOT_SUPPORTED: fn AddArc()
     // NOT_SUPPORTED: fn AddArc1()
@@ -1359,13 +1361,13 @@ pub trait GraphicsPathMethods: GraphicsObjectMethods {
 // wxGraphicsPen
 /// This trait represents [C++ `wxGraphicsPen` class](https://docs.wxwidgets.org/3.2/classwx_graphics_pen.html)'s methods and inheritance.
 ///
-/// See [`GraphicsPenInRust`] documentation for the class usage.
+/// See [`GraphicsPenFromCpp`] documentation for the class usage.
 pub trait GraphicsPenMethods: GraphicsObjectMethods {}
 
 // wxGraphicsRenderer
 /// This trait represents [C++ `wxGraphicsRenderer` class](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html)'s methods and inheritance.
 ///
-/// See [`GraphicsRendererInRust`] documentation for the class usage.
+/// See [`GraphicsRendererFromCpp`] documentation for the class usage.
 pub trait GraphicsRendererMethods: ObjectMethods {
     // NOT_SUPPORTED: fn CreateBitmap()
     // NOT_SUPPORTED: fn CreateBitmapFromImage()
@@ -1387,7 +1389,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_window<W: WindowMethods>(
         &self,
         window: Option<&W>,
-    ) -> Option<GraphicsContextInRust<false>> {
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1405,7 +1407,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_windowdc<W: WindowDCMethods>(
         &self,
         window_dc: &W,
-    ) -> Option<GraphicsContextInRust<false>> {
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let window_dc = window_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext1(
@@ -1420,7 +1422,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_memorydc<M: MemoryDCMethods>(
         &self,
         memory_dc: &M,
-    ) -> Option<GraphicsContextInRust<false>> {
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let memory_dc = memory_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext2(
@@ -1436,7 +1438,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_enhmetafiledc(
         &self,
         meta_file_dc: *const c_void,
-    ) -> Option<GraphicsContextInRust<false>> {
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext4(
                 self.as_ptr(),
@@ -1450,7 +1452,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_from_unknown_dc<D: DCMethods>(
         &self,
         dc: &D,
-    ) -> Option<GraphicsContextInRust<false>> {
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let dc = dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromUnknownDC(
@@ -1465,7 +1467,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_from_image<I: ImageMethods>(
         &self,
         image: &I,
-    ) -> Option<GraphicsContextInRust<false>> {
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             let image = image.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromImage(
@@ -1489,7 +1491,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_from_native_context(
         &self,
         context: *mut c_void,
-    ) -> Option<GraphicsContextInRust<false>> {
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromNativeContext(
                 self.as_ptr(),
@@ -1503,7 +1505,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_from_native_window(
         &self,
         window: *mut c_void,
-    ) -> Option<GraphicsContextInRust<false>> {
+    ) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromNativeWindow(
                 self.as_ptr(),
@@ -1514,7 +1516,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     /// Creates a wxGraphicsContext that can be used for measuring texts only.
     ///
     /// See [C++ `wxGraphicsRenderer::CreateMeasuringContext()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#a5b0e0b419191ca672f3a043ac20f4228).
-    fn create_measuring_context(&self) -> Option<GraphicsContextInRust<false>> {
+    fn create_measuring_context(&self) -> Option<GraphicsContextFromCpp<false>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateMeasuringContext(
                 self.as_ptr(),
@@ -1611,19 +1613,19 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     /// Returns the default renderer on this platform.
     ///
     /// See [C++ `wxGraphicsRenderer::GetDefaultRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#a45ad50c976863fa5bba7a63d69599b40).
-    fn get_default_renderer() -> Option<GraphicsRendererInRust<false>> {
+    fn get_default_renderer() -> Option<GraphicsRendererFromCpp<false>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetDefaultRenderer()) }
     }
     /// Returns Cairo renderer.
     ///
     /// See [C++ `wxGraphicsRenderer::GetCairoRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#a82933112c5ee82ca5bdee0b8cac4a1e2).
-    fn get_cairo_renderer() -> Option<GraphicsRendererInRust<false>> {
+    fn get_cairo_renderer() -> Option<GraphicsRendererFromCpp<false>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetCairoRenderer()) }
     }
     /// Returns GDI+ renderer (MSW only).
     ///
     /// See [C++ `wxGraphicsRenderer::GetGDIPlusRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#a29c172723b5354c64ac0d80b0dfb0037).
-    fn get_gdi_plus_renderer() -> Option<GraphicsRendererInRust<false>> {
+    fn get_gdi_plus_renderer() -> Option<GraphicsRendererFromCpp<false>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetGDIPlusRenderer()) }
     }
     // BLOCKED: fn GetDirect2DRenderer()
@@ -1632,7 +1634,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
 // wxGridBagSizer
 /// This trait represents [C++ `wxGridBagSizer` class](https://docs.wxwidgets.org/3.2/classwx_grid_bag_sizer.html)'s methods and inheritance.
 ///
-/// See [`GridBagSizerInRust`] documentation for the class usage.
+/// See [`GridBagSizerFromCpp`] documentation for the class usage.
 pub trait GridBagSizerMethods: FlexGridSizerMethods {
     /// Adds the given item to the given position.
     ///
@@ -1650,7 +1652,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemInRust<false>> {
+    ) -> Option<SizerItemFromCpp<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1688,7 +1690,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemInRust<false>> {
+    ) -> Option<SizerItemFromCpp<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1716,7 +1718,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn add_gbsizeritem<G: GBSizerItemMethods>(
         &self,
         item: Option<&G>,
-    ) -> Option<SizerItemInRust<false>> {
+    ) -> Option<SizerItemFromCpp<false>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -1737,7 +1739,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemInRust<false>> {
+    ) -> Option<SizerItemFromCpp<false>> {
         unsafe {
             let pos = pos.as_ptr();
             let span = span.as_ptr();
@@ -1805,7 +1807,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn find_item_window<W: WindowMethods>(
         &self,
         window: Option<&W>,
-    ) -> Option<GBSizerItemInRust<false>> {
+    ) -> Option<GBSizerItemFromCpp<false>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1819,7 +1821,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn find_item_sizer<S: SizerMethods>(
         &self,
         sizer: Option<&S>,
-    ) -> Option<GBSizerItemInRust<false>> {
+    ) -> Option<GBSizerItemFromCpp<false>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1831,7 +1833,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     /// Return the sizer item located at the point given in pt, or NULL if there is no item at that point.
     ///
     /// See [C++ `wxGridBagSizer::FindItemAtPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_grid_bag_sizer.html#acc8d171752ad3953802fbd7f586587f3).
-    fn find_item_at_point<P: PointMethods>(&self, pt: &P) -> Option<GBSizerItemInRust<false>> {
+    fn find_item_at_point<P: PointMethods>(&self, pt: &P) -> Option<GBSizerItemFromCpp<false>> {
         unsafe {
             let pt = pt.as_ptr();
             GBSizerItem::option_from(ffi::wxGridBagSizer_FindItemAtPoint(self.as_ptr(), pt))
@@ -1843,7 +1845,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn find_item_at_position<G: GBPositionMethods>(
         &self,
         pos: &G,
-    ) -> Option<GBSizerItemInRust<false>> {
+    ) -> Option<GBSizerItemFromCpp<false>> {
         unsafe {
             let pos = pos.as_ptr();
             GBSizerItem::option_from(ffi::wxGridBagSizer_FindItemAtPosition(self.as_ptr(), pos))
@@ -1855,7 +1857,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn find_item_with_data<O: ObjectMethods>(
         &self,
         user_data: Option<&O>,
-    ) -> Option<GBSizerItemInRust<false>> {
+    ) -> Option<GBSizerItemFromCpp<false>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
@@ -2031,7 +2033,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
 // wxGridEditorCreatedEvent
 /// This trait represents [C++ `wxGridEditorCreatedEvent` class](https://docs.wxwidgets.org/3.2/classwx_grid_editor_created_event.html)'s methods and inheritance.
 ///
-/// See [`GridEditorCreatedEventInRust`] documentation for the class usage.
+/// See [`GridEditorCreatedEventFromCpp`] documentation for the class usage.
 pub trait GridEditorCreatedEventMethods: CommandEventMethods {
     /// Returns the column at which the event occurred.
     ///
@@ -2098,7 +2100,7 @@ pub trait GridEditorCreatedEventMethods: CommandEventMethods {
 // wxGridEvent
 /// This trait represents [C++ `wxGridEvent` class](https://docs.wxwidgets.org/3.2/classwx_grid_event.html)'s methods and inheritance.
 ///
-/// See [`GridEventInRust`] documentation for the class usage.
+/// See [`GridEventFromCpp`] documentation for the class usage.
 pub trait GridEventMethods: NotifyEventMethods {
     /// Returns true if the Alt key was down at the time of the event.
     ///
@@ -2153,7 +2155,7 @@ pub trait GridEventMethods: NotifyEventMethods {
 // wxGridRangeSelectEvent
 /// This trait represents [C++ `wxGridRangeSelectEvent` class](https://docs.wxwidgets.org/3.2/classwx_grid_range_select_event.html)'s methods and inheritance.
 ///
-/// See [`GridRangeSelectEventInRust`] documentation for the class usage.
+/// See [`GridRangeSelectEventFromCpp`] documentation for the class usage.
 pub trait GridRangeSelectEventMethods: NotifyEventMethods {
     /// Returns true if the Alt key was down at the time of the event.
     ///
@@ -2216,7 +2218,7 @@ pub trait GridRangeSelectEventMethods: NotifyEventMethods {
 // wxGridSizeEvent
 /// This trait represents [C++ `wxGridSizeEvent` class](https://docs.wxwidgets.org/3.2/classwx_grid_size_event.html)'s methods and inheritance.
 ///
-/// See [`GridSizeEventInRust`] documentation for the class usage.
+/// See [`GridSizeEventFromCpp`] documentation for the class usage.
 pub trait GridSizeEventMethods: NotifyEventMethods {
     /// Returns true if the Alt key was down at the time of the event.
     ///
@@ -2259,7 +2261,7 @@ pub trait GridSizeEventMethods: NotifyEventMethods {
 // wxGridSizer
 /// This trait represents [C++ `wxGridSizer` class](https://docs.wxwidgets.org/3.2/classwx_grid_sizer.html)'s methods and inheritance.
 ///
-/// See [`GridSizerInRust`] documentation for the class usage.
+/// See [`GridSizerFromCpp`] documentation for the class usage.
 pub trait GridSizerMethods: SizerMethods {
     /// Returns the number of columns that has been specified for the sizer.
     ///
@@ -2326,7 +2328,7 @@ pub trait GridSizerMethods: SizerMethods {
 // wxGridTableBase
 /// This trait represents [C++ `wxGridTableBase` class](https://docs.wxwidgets.org/3.2/classwx_grid_table_base.html)'s methods and inheritance.
 ///
-/// See [`GridTableBaseInRust`] documentation for the class usage.
+/// See [`GridTableBaseFromCpp`] documentation for the class usage.
 pub trait GridTableBaseMethods: ObjectMethods {
     /// May be overridden to implement testing for empty cells.
     ///
@@ -2613,7 +2615,7 @@ pub trait GridTableBaseMethods: ObjectMethods {
 // wxGridUpdateLocker
 /// This trait represents [C++ `wxGridUpdateLocker` class](https://docs.wxwidgets.org/3.2/classwx_grid_update_locker.html)'s methods and inheritance.
 ///
-/// See [`GridUpdateLockerInRust`] documentation for the class usage.
+/// See [`GridUpdateLockerFromCpp`] documentation for the class usage.
 pub trait GridUpdateLockerMethods: WxRustMethods {
     // DTOR: fn ~wxGridUpdateLocker()
     /// This method can be called if the object had been constructed using the default constructor.
