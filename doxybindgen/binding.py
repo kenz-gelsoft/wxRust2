@@ -124,7 +124,7 @@ class RustClassBinding:
 
     def _impl_with_ctors(self):
         unprefixed = self.__model.unprefixed()
-        yield 'impl<const IN_RUST: bool> %sFromCpp<IN_RUST> {' % (unprefixed,)
+        yield 'impl<const FROM_CPP: bool> %sFromCpp<FROM_CPP> {' % (unprefixed,)
         for enum in self.__model.enums:
             for line in enum.generate():
                 yield '    %s' % (line,)
@@ -148,7 +148,7 @@ class RustClassBinding:
         if self._has_drop():
             yield 'impl Clone for %s<false> {' % (in_rust,)
         else:
-            yield 'impl<const IN_RUST: bool> Clone for %s<IN_RUST> {' % (in_rust,)
+            yield 'impl<const FROM_CPP: bool> Clone for %s<FROM_CPP> {' % (in_rust,)
         yield '    fn clone(&self) -> Self {'
         yield '        Self(self.0)'
         yield '    }'
@@ -160,11 +160,11 @@ class RustClassBinding:
             unprefixed_ancestor = ancestor.name[2:]
             if unprefixed == unprefixed_ancestor:
                 continue
-            yield 'impl<const IN_RUST: bool> From<%sFromCpp<IN_RUST>> for %sFromCpp<IN_RUST> {' % (
+            yield 'impl<const FROM_CPP: bool> From<%sFromCpp<FROM_CPP>> for %sFromCpp<FROM_CPP> {' % (
                 unprefixed,
                 unprefixed_ancestor,
             )
-            yield '    fn from(o: %sFromCpp<IN_RUST>) -> Self {' % (unprefixed,)
+            yield '    fn from(o: %sFromCpp<FROM_CPP>) -> Self {' % (unprefixed,)
             yield '        unsafe { Self::from_ptr(o.as_ptr()) }'
             yield '    }'
             yield '}'
@@ -172,7 +172,7 @@ class RustClassBinding:
     def _impl_dynamic_cast_if_needed(self):
         if not self.is_a('wxObject'):
             return
-        yield 'impl<const IN_RUST: bool> DynamicCast for %sFromCpp<IN_RUST> {' % (self.__model.unprefixed(),)
+        yield 'impl<const FROM_CPP: bool> DynamicCast for %sFromCpp<FROM_CPP> {' % (self.__model.unprefixed(),)
         yield '    fn class_info() -> ClassInfoFromCpp<false> {'
         yield '        unsafe { ClassInfoFromCpp::from_ptr(ffi::%s_CLASSINFO()) }' % (self.__model.name)
         yield '    }'
@@ -185,9 +185,9 @@ class RustClassBinding:
         deleter_class = self.__model.name
         if self.is_a('wxObject'):
             deleter_class = 'wxObject'
-        yield 'impl<const IN_RUST: bool> Drop for %sFromCpp<IN_RUST> {' % (self.__model.unprefixed(),)
+        yield 'impl<const FROM_CPP: bool> Drop for %sFromCpp<FROM_CPP> {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
-        yield '        if IN_RUST {'
+        yield '        if FROM_CPP {'
         yield '            unsafe { ffi::%s_delete(self.0) }' % (deleter_class,)
         yield '        }'
         yield '    }'
@@ -213,7 +213,7 @@ class RustClassBinding:
         for mixin in mixins:
             for ancestor in self._ancestors_names_of(mixin):
                 ancestor_unprefixed = ancestor[2:]
-                yield 'impl<const IN_RUST: bool> %sMethods for %sFromCpp<IN_RUST> {' % (
+                yield 'impl<const FROM_CPP: bool> %sMethods for %sFromCpp<FROM_CPP> {' % (
                     ancestor_unprefixed,
                     self.__model.unprefixed(),
                 )
@@ -235,7 +235,7 @@ class RustClassBinding:
         for ancestor, overloads in non_virtual_overrides:
             if not overloads:
                 continue
-            yield 'impl<const IN_RUST: bool> %sMethods for %sFromCpp<IN_RUST> {' % (
+            yield 'impl<const FROM_CPP: bool> %sMethods for %sFromCpp<FROM_CPP> {' % (
                 ancestor.unprefixed(),
                 self.__model.unprefixed(),
             )

@@ -275,14 +275,14 @@ wxwidgets! {
         = ArrayIntFromCpp<true>(wxArrayInt) impl
         ArrayIntMethods
 }
-impl<const IN_RUST: bool> ArrayIntFromCpp<IN_RUST> {
+impl<const FROM_CPP: bool> ArrayIntFromCpp<FROM_CPP> {
     pub fn new() -> Self {
         unsafe { ArrayIntFromCpp(ffi::wxArrayInt_new()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ArrayIntFromCpp<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ArrayIntFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxArrayInt_delete(self.0) }
         }
     }
@@ -293,14 +293,14 @@ wxwidgets! {
         = ArrayStringFromCpp<true>(wxArrayString) impl
         ArrayStringMethods
 }
-impl<const IN_RUST: bool> ArrayStringFromCpp<IN_RUST> {
+impl<const FROM_CPP: bool> ArrayStringFromCpp<FROM_CPP> {
     pub fn new() -> Self {
         unsafe { ArrayStringFromCpp(ffi::wxArrayString_new()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ArrayStringFromCpp<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for ArrayStringFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxArrayString_delete(self.0) }
         }
     }
@@ -326,14 +326,14 @@ wxwidgets! {
         = StringConstIteratorFromCpp<true>(wxStringConstIterator) impl
         StringConstIteratorMethods
 }
-impl<const IN_RUST: bool> StringConstIteratorFromCpp<IN_RUST> {
+impl<const FROM_CPP: bool> StringConstIteratorFromCpp<FROM_CPP> {
     pub fn new() -> Self {
         unsafe { StringConstIteratorFromCpp(ffi::wxStringConstIterator_new()) }
     }
 }
-impl<const IN_RUST: bool> Drop for StringConstIteratorFromCpp<IN_RUST> {
+impl<const FROM_CPP: bool> Drop for StringConstIteratorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if IN_RUST {
+        if FROM_CPP {
             unsafe { ffi::wxStringConstIterator_delete(self.0) }
         }
     }
@@ -410,4 +410,4 @@ impl<T> Drop for WeakRef<T> {
     }
 }
 
-impl<const IN_RUST: bool> DateTimeMethodsManual for DateTimeFromCpp<IN_RUST> {}
+impl<const FROM_CPP: bool> DateTimeMethodsManual for DateTimeFromCpp<FROM_CPP> {}

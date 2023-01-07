@@ -284,7 +284,7 @@ class ReturnTypeWrapper:
             return ['String',
                     'WxString::from_ptr(%s).into()' % (call,)]
         if self.is_ctor:
-            return ['%sFromCpp<IN_RUST>' % (returns,),
+            return ['%sFromCpp<FROM_CPP>' % (returns,),
                     '%sFromCpp(%s)' % (returns, call)]
         if self.__returns.is_ref_to_binding():
             return ['%sFromCpp<false>' % (returns,),
