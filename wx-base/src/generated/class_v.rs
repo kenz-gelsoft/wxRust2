@@ -13,7 +13,7 @@ wxwidgets! {
         VariantDataMethods,
         ObjectRefDataMethods
 }
-impl<const OWNED: bool> VariantDataInRust<OWNED> {
+impl<const IN_RUST: bool> VariantDataInRust<IN_RUST> {
     // BLOCKED: fn wxVariantData()
     pub fn none() -> Option<&'static Self> {
         None
@@ -24,14 +24,14 @@ impl Clone for VariantDataInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<VariantDataInRust<OWNED>> for ObjectRefDataInRust<OWNED> {
-    fn from(o: VariantDataInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VariantDataInRust<IN_RUST>> for ObjectRefDataInRust<IN_RUST> {
+    fn from(o: VariantDataInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for VariantDataInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for VariantDataInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxVariantData_delete(self.0) }
         }
     }

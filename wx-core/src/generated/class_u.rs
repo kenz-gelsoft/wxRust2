@@ -12,11 +12,11 @@ wxwidgets! {
         = UIActionSimulatorInRust<true>(wxUIActionSimulator) impl
         UIActionSimulatorMethods
 }
-impl<const OWNED: bool> UIActionSimulatorInRust<OWNED> {
+impl<const IN_RUST: bool> UIActionSimulatorInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxUIActionSimulator::wxUIActionSimulator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html#aa0f66cea40a642075482e06ccf2b75cb).
-    pub fn new() -> UIActionSimulatorInRust<OWNED> {
+    pub fn new() -> UIActionSimulatorInRust<IN_RUST> {
         unsafe { UIActionSimulatorInRust(ffi::wxUIActionSimulator_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -28,9 +28,9 @@ impl Clone for UIActionSimulatorInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for UIActionSimulatorInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for UIActionSimulatorInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxUIActionSimulator_delete(self.0) }
         }
     }
@@ -49,11 +49,11 @@ wxwidgets! {
         URLDataObjectMethods,
         DataObjectMethods
 }
-impl<const OWNED: bool> URLDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> URLDataObjectInRust<IN_RUST> {
     /// Constructor, may be used to initialize the URL.
     ///
     /// See [C++ `wxURLDataObject::wxURLDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html#a57104fc32eb66f8fa666b1f2799631d5).
-    pub fn new(url: &str) -> URLDataObjectInRust<OWNED> {
+    pub fn new(url: &str) -> URLDataObjectInRust<IN_RUST> {
         unsafe {
             let url = WxString::from(url);
             let url = url.as_ptr();
@@ -69,14 +69,14 @@ impl Clone for URLDataObjectInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<URLDataObjectInRust<OWNED>> for DataObjectInRust<OWNED> {
-    fn from(o: URLDataObjectInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<URLDataObjectInRust<IN_RUST>> for DataObjectInRust<IN_RUST> {
+    fn from(o: URLDataObjectInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for URLDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for URLDataObjectInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxURLDataObject_delete(self.0) }
         }
     }
@@ -97,11 +97,11 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> UpdateUIEventInRust<OWNED> {
+impl<const IN_RUST: bool> UpdateUIEventInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxUpdateUIEvent::wxUpdateUIEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html#aa25df58e7047f819f5dd0520eb2cc8ea).
-    pub fn new(command_id: c_int) -> UpdateUIEventInRust<OWNED> {
+    pub fn new(command_id: c_int) -> UpdateUIEventInRust<IN_RUST> {
         unsafe { UpdateUIEventInRust(ffi::wxUpdateUIEvent_new(command_id)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -113,29 +113,29 @@ impl Clone for UpdateUIEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<UpdateUIEventInRust<OWNED>> for CommandEventInRust<OWNED> {
-    fn from(o: UpdateUIEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<UpdateUIEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
+    fn from(o: UpdateUIEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<UpdateUIEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: UpdateUIEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<UpdateUIEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: UpdateUIEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<UpdateUIEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: UpdateUIEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<UpdateUIEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: UpdateUIEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for UpdateUIEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for UpdateUIEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxUpdateUIEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for UpdateUIEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for UpdateUIEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

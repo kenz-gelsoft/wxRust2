@@ -14,11 +14,11 @@ wxwidgets! {
         ImageHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> XPMHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> XPMHandlerInRust<IN_RUST> {
     /// Default constructor for wxXPMHandler.
     ///
     /// See [C++ `wxXPMHandler::wxXPMHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_x_p_m_handler.html#a4b2e1b268d849c5abcbb83c120638d15).
-    pub fn new() -> XPMHandlerInRust<OWNED> {
+    pub fn new() -> XPMHandlerInRust<IN_RUST> {
         unsafe { XPMHandlerInRust(ffi::wxXPMHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -30,24 +30,24 @@ impl Clone for XPMHandlerInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<XPMHandlerInRust<OWNED>> for ImageHandlerInRust<OWNED> {
-    fn from(o: XPMHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<XPMHandlerInRust<IN_RUST>> for ImageHandlerInRust<IN_RUST> {
+    fn from(o: XPMHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<XPMHandlerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: XPMHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<XPMHandlerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: XPMHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for XPMHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for XPMHandlerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxXPMHandler_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for XPMHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for XPMHandlerInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

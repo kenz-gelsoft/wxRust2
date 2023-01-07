@@ -14,17 +14,17 @@ wxwidgets! {
         GDIObjectMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> IconInRust<OWNED> {
+impl<const IN_RUST: bool> IconInRust<IN_RUST> {
     /// Default ctor.
     ///
     /// See [C++ `wxIcon::wxIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a1b832f41fcde273eaa4384d2e567aa90).
-    pub fn new() -> IconInRust<OWNED> {
+    pub fn new() -> IconInRust<IN_RUST> {
         unsafe { IconInRust(ffi::wxIcon_new()) }
     }
     /// Copy ctor.
     ///
     /// See [C++ `wxIcon::wxIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a0379f12c09a41e1e18a25f845d1cdafc).
-    pub fn new_with_icon<I: IconMethods>(icon: &I) -> IconInRust<OWNED> {
+    pub fn new_with_icon<I: IconMethods>(icon: &I) -> IconInRust<IN_RUST> {
         unsafe {
             let icon = icon.as_ptr();
             IconInRust(ffi::wxIcon_new1(icon))
@@ -34,14 +34,14 @@ impl<const OWNED: bool> IconInRust<OWNED> {
     /// Creates a bitmap from XPM data.
     ///
     /// See [C++ `wxIcon::wxIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a8923d0c1f69ca83671e57bb439228fe2).
-    pub fn new_with_char(bits: *const c_void) -> IconInRust<OWNED> {
+    pub fn new_with_char(bits: *const c_void) -> IconInRust<IN_RUST> {
         unsafe { IconInRust(ffi::wxIcon_new3(bits)) }
     }
     // NOT_SUPPORTED: fn wxIcon4()
     /// Loads an icon from the specified location.
     ///
     /// See [C++ `wxIcon::wxIcon()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html#a42ebe9eef5b1bc44393af62430ca75b6).
-    pub fn new_with_iconlocation(loc: *const c_void) -> IconInRust<OWNED> {
+    pub fn new_with_iconlocation(loc: *const c_void) -> IconInRust<IN_RUST> {
         unsafe { IconInRust(ffi::wxIcon_new5(loc)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -53,24 +53,24 @@ impl Clone for IconInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<IconInRust<OWNED>> for GDIObjectInRust<OWNED> {
-    fn from(o: IconInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<IconInRust<IN_RUST>> for GDIObjectInRust<IN_RUST> {
+    fn from(o: IconInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<IconInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: IconInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<IconInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: IconInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for IconInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for IconInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxIcon_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for IconInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for IconInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -90,7 +90,7 @@ wxwidgets! {
         GDIObjectMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> IconBundleInRust<OWNED> {
+impl<const IN_RUST: bool> IconBundleInRust<IN_RUST> {
     //  ENUM: @29
     pub const FALLBACK_NONE: c_int = 0;
     pub const FALLBACK_SYSTEM: c_int = 1;
@@ -99,7 +99,7 @@ impl<const OWNED: bool> IconBundleInRust<OWNED> {
     /// Default ctor.
     ///
     /// See [C++ `wxIconBundle::wxIconBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a2f65bb12c79fa372019d380ede4cfbb4).
-    pub fn new() -> IconBundleInRust<OWNED> {
+    pub fn new() -> IconBundleInRust<IN_RUST> {
         unsafe { IconBundleInRust(ffi::wxIconBundle_new()) }
     }
     // NOT_SUPPORTED: fn wxIconBundle1()
@@ -107,7 +107,7 @@ impl<const OWNED: bool> IconBundleInRust<OWNED> {
     /// Initializes the bundle with a single icon.
     ///
     /// See [C++ `wxIconBundle::wxIconBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a4ab2055fb57aa5ed44990958e2de2b6d).
-    pub fn new_with_icon<I: IconMethods>(icon: &I) -> IconBundleInRust<OWNED> {
+    pub fn new_with_icon<I: IconMethods>(icon: &I) -> IconBundleInRust<IN_RUST> {
         unsafe {
             let icon = icon.as_ptr();
             IconBundleInRust(ffi::wxIconBundle_new3(icon))
@@ -117,7 +117,7 @@ impl<const OWNED: bool> IconBundleInRust<OWNED> {
     /// Copy constructor.
     ///
     /// See [C++ `wxIconBundle::wxIconBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html#a41281e6108842ebfbab4acedfaaaa6de).
-    pub fn new_with_iconbundle<I: IconBundleMethods>(ic: &I) -> IconBundleInRust<OWNED> {
+    pub fn new_with_iconbundle<I: IconBundleMethods>(ic: &I) -> IconBundleInRust<IN_RUST> {
         unsafe {
             let ic = ic.as_ptr();
             IconBundleInRust(ffi::wxIconBundle_new5(ic))
@@ -132,24 +132,24 @@ impl Clone for IconBundleInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<IconBundleInRust<OWNED>> for GDIObjectInRust<OWNED> {
-    fn from(o: IconBundleInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<IconBundleInRust<IN_RUST>> for GDIObjectInRust<IN_RUST> {
+    fn from(o: IconBundleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<IconBundleInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: IconBundleInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<IconBundleInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: IconBundleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for IconBundleInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for IconBundleInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxIconBundle_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for IconBundleInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for IconBundleInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -169,11 +169,11 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> IconizeEventInRust<OWNED> {
+impl<const IN_RUST: bool> IconizeEventInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxIconizeEvent::wxIconizeEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html#a16570936576a28a6ae3f979bfe31b128).
-    pub fn new(id: c_int, iconized: bool) -> IconizeEventInRust<OWNED> {
+    pub fn new(id: c_int, iconized: bool) -> IconizeEventInRust<IN_RUST> {
         unsafe { IconizeEventInRust(ffi::wxIconizeEvent_new(id, iconized)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -185,24 +185,24 @@ impl Clone for IconizeEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<IconizeEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: IconizeEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<IconizeEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: IconizeEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<IconizeEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: IconizeEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<IconizeEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: IconizeEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for IconizeEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for IconizeEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxIconizeEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for IconizeEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for IconizeEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -220,7 +220,7 @@ wxwidgets! {
         = IdManagerInRust<true>(wxIdManager) impl
         IdManagerMethods
 }
-impl<const OWNED: bool> IdManagerInRust<OWNED> {
+impl<const IN_RUST: bool> IdManagerInRust<IN_RUST> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -230,9 +230,9 @@ impl Clone for IdManagerInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for IdManagerInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for IdManagerInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxIdManager_delete(self.0) }
         }
     }
@@ -251,23 +251,23 @@ wxwidgets! {
         ImageMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ImageInRust<OWNED> {
+impl<const IN_RUST: bool> ImageInRust<IN_RUST> {
     /// Creates an empty wxImage object without an alpha channel.
     ///
     /// See [C++ `wxImage::wxImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a0a2febdc997f1d09c98f76fdaf85113d).
-    pub fn new() -> ImageInRust<OWNED> {
+    pub fn new() -> ImageInRust<IN_RUST> {
         unsafe { ImageInRust(ffi::wxImage_new()) }
     }
     /// Creates an image with the given size and clears it if requested.
     ///
     /// See [C++ `wxImage::wxImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a21652c36c8e51bc696756afeaefe2d01).
-    pub fn new_with_int_bool(width: c_int, height: c_int, clear: bool) -> ImageInRust<OWNED> {
+    pub fn new_with_int_bool(width: c_int, height: c_int, clear: bool) -> ImageInRust<IN_RUST> {
         unsafe { ImageInRust(ffi::wxImage_new1(width, height, clear)) }
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     ///
     /// See [C++ `wxImage::wxImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#ae071c8cdd85a48655ba59a70aeced3d4).
-    pub fn new_with_size_bool<S: SizeMethods>(sz: &S, clear: bool) -> ImageInRust<OWNED> {
+    pub fn new_with_size_bool<S: SizeMethods>(sz: &S, clear: bool) -> ImageInRust<IN_RUST> {
         unsafe {
             let sz = sz.as_ptr();
             ImageInRust(ffi::wxImage_new2(sz, clear))
@@ -281,7 +281,7 @@ impl<const OWNED: bool> ImageInRust<OWNED> {
         height: c_int,
         data: *mut c_void,
         static_data: bool,
-    ) -> ImageInRust<OWNED> {
+    ) -> ImageInRust<IN_RUST> {
         unsafe { ImageInRust(ffi::wxImage_new3(width, height, data, static_data)) }
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
@@ -291,7 +291,7 @@ impl<const OWNED: bool> ImageInRust<OWNED> {
         sz: &S,
         data: *mut c_void,
         static_data: bool,
-    ) -> ImageInRust<OWNED> {
+    ) -> ImageInRust<IN_RUST> {
         unsafe {
             let sz = sz.as_ptr();
             ImageInRust(ffi::wxImage_new4(sz, data, static_data))
@@ -306,7 +306,7 @@ impl<const OWNED: bool> ImageInRust<OWNED> {
         data: *mut c_void,
         alpha: *mut c_void,
         static_data: bool,
-    ) -> ImageInRust<OWNED> {
+    ) -> ImageInRust<IN_RUST> {
         unsafe { ImageInRust(ffi::wxImage_new5(width, height, data, alpha, static_data)) }
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
@@ -317,7 +317,7 @@ impl<const OWNED: bool> ImageInRust<OWNED> {
         data: *mut c_void,
         alpha: *mut c_void,
         static_data: bool,
-    ) -> ImageInRust<OWNED> {
+    ) -> ImageInRust<IN_RUST> {
         unsafe {
             let sz = sz.as_ptr();
             ImageInRust(ffi::wxImage_new6(sz, data, alpha, static_data))
@@ -326,14 +326,14 @@ impl<const OWNED: bool> ImageInRust<OWNED> {
     /// Creates an image from XPM data.
     ///
     /// See [C++ `wxImage::wxImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a5ab9262fabb41525bc669c245654579b).
-    pub fn new_with_char(xpm_data: *const c_void) -> ImageInRust<OWNED> {
+    pub fn new_with_char(xpm_data: *const c_void) -> ImageInRust<IN_RUST> {
         unsafe { ImageInRust(ffi::wxImage_new7(xpm_data)) }
     }
     // NOT_SUPPORTED: fn wxImage8()
     /// Creates an image from a file using MIME-types to specify the type.
     ///
     /// See [C++ `wxImage::wxImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a6ef7dc2eb9aaa9bf34437f7c12aad5f2).
-    pub fn new_with_str(name: &str, mimetype: &str, index: c_int) -> ImageInRust<OWNED> {
+    pub fn new_with_str(name: &str, mimetype: &str, index: c_int) -> ImageInRust<IN_RUST> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
@@ -350,7 +350,7 @@ impl<const OWNED: bool> ImageInRust<OWNED> {
         stream: *mut c_void,
         mimetype: &str,
         index: c_int,
-    ) -> ImageInRust<OWNED> {
+    ) -> ImageInRust<IN_RUST> {
         unsafe {
             let mimetype = WxString::from(mimetype);
             let mimetype = mimetype.as_ptr();
@@ -366,19 +366,19 @@ impl Clone for ImageInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ImageInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ImageInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ImageInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ImageInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ImageInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ImageInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxImage_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ImageInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ImageInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -397,7 +397,7 @@ wxwidgets! {
         ImageHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ImageHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> ImageHandlerInRust<IN_RUST> {
     // BLOCKED: fn wxImageHandler()
     pub fn none() -> Option<&'static Self> {
         None
@@ -408,19 +408,19 @@ impl Clone for ImageHandlerInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ImageHandlerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ImageHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ImageHandlerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ImageHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ImageHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ImageHandlerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxImageHandler_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ImageHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ImageHandlerInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -439,11 +439,11 @@ wxwidgets! {
         ImageListMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ImageListInRust<OWNED> {
+impl<const IN_RUST: bool> ImageListInRust<IN_RUST> {
     /// Default ctor.
     ///
     /// See [C++ `wxImageList::wxImageList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html#a91cdd6895654c2043d51bf31bc370d90).
-    pub fn new() -> ImageListInRust<OWNED> {
+    pub fn new() -> ImageListInRust<IN_RUST> {
         unsafe { ImageListInRust(ffi::wxImageList_new()) }
     }
     /// Constructor specifying the image size, whether image masks should be created, and the initial size of the list.
@@ -454,7 +454,7 @@ impl<const OWNED: bool> ImageListInRust<OWNED> {
         height: c_int,
         mask: bool,
         initial_count: c_int,
-    ) -> ImageListInRust<OWNED> {
+    ) -> ImageListInRust<IN_RUST> {
         unsafe { ImageListInRust(ffi::wxImageList_new1(width, height, mask, initial_count)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -466,19 +466,19 @@ impl Clone for ImageListInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ImageListInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ImageListInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ImageListInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ImageListInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ImageListInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ImageListInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxImageList_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ImageListInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ImageListInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -500,17 +500,17 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> InfoBarInRust<OWNED> {
+impl<const IN_RUST: bool> InfoBarInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxInfoBar::wxInfoBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a802021e4b71dc8286c7fc56a45c73967).
-    pub fn new_2step() -> InfoBarInRust<OWNED> {
+    pub fn new_2step() -> InfoBarInRust<IN_RUST> {
         unsafe { InfoBarInRust(ffi::wxInfoBar_new()) }
     }
     /// Constructor creating the info bar window.
     ///
     /// See [C++ `wxInfoBar::wxInfoBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html#a4055bcabf87e581864ee9c957989cd5c).
-    pub fn new<W: WindowMethods>(parent: Option<&W>, winid: c_int) -> InfoBarInRust<OWNED> {
+    pub fn new<W: WindowMethods>(parent: Option<&W>, winid: c_int) -> InfoBarInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -523,32 +523,32 @@ impl<const OWNED: bool> InfoBarInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for InfoBarInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for InfoBarInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<InfoBarInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: InfoBarInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<InfoBarInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: InfoBarInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<InfoBarInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: InfoBarInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<InfoBarInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: InfoBarInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<InfoBarInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: InfoBarInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<InfoBarInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: InfoBarInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<InfoBarInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: InfoBarInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<InfoBarInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: InfoBarInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for InfoBarInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for InfoBarInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxInfoBar_CLASSINFO()) }
     }
@@ -568,11 +568,11 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> InitDialogEventInRust<OWNED> {
+impl<const IN_RUST: bool> InitDialogEventInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxInitDialogEvent::wxInitDialogEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_init_dialog_event.html#a756b195fd7841a718882e999e92aa7fc).
-    pub fn new(id: c_int) -> InitDialogEventInRust<OWNED> {
+    pub fn new(id: c_int) -> InitDialogEventInRust<IN_RUST> {
         unsafe { InitDialogEventInRust(ffi::wxInitDialogEvent_new(id)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -584,24 +584,24 @@ impl Clone for InitDialogEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<InitDialogEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: InitDialogEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<InitDialogEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: InitDialogEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<InitDialogEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: InitDialogEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<InitDialogEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: InitDialogEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for InitDialogEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for InitDialogEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxInitDialogEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for InitDialogEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for InitDialogEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -620,7 +620,7 @@ wxwidgets! {
         ItemContainerMethods,
         ItemContainerImmutableMethods
 }
-impl<const OWNED: bool> ItemContainerInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerInRust<IN_RUST> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -630,14 +630,16 @@ impl Clone for ItemContainerInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ItemContainerInRust<OWNED>> for ItemContainerImmutableInRust<OWNED> {
-    fn from(o: ItemContainerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ItemContainerInRust<IN_RUST>>
+    for ItemContainerImmutableInRust<IN_RUST>
+{
+    fn from(o: ItemContainerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for ItemContainerInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ItemContainerInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxItemContainer_delete(self.0) }
         }
     }
@@ -655,7 +657,7 @@ wxwidgets! {
         = ItemContainerImmutableInRust<true>(wxItemContainerImmutable) impl
         ItemContainerImmutableMethods
 }
-impl<const OWNED: bool> ItemContainerImmutableInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerImmutableInRust<IN_RUST> {
     // BLOCKED: fn wxItemContainerImmutable()
     pub fn none() -> Option<&'static Self> {
         None
@@ -666,9 +668,9 @@ impl Clone for ItemContainerImmutableInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for ItemContainerImmutableInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ItemContainerImmutableInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxItemContainerImmutable_delete(self.0) }
         }
     }

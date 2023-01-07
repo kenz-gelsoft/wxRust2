@@ -12,7 +12,7 @@ wxwidgets! {
         = MessageOutputInRust<true>(wxMessageOutput) impl
         MessageOutputMethods
 }
-impl<const OWNED: bool> MessageOutputInRust<OWNED> {
+impl<const IN_RUST: bool> MessageOutputInRust<IN_RUST> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -22,9 +22,9 @@ impl Clone for MessageOutputInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for MessageOutputInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for MessageOutputInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxMessageOutput_delete(self.0) }
         }
     }

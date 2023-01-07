@@ -16,44 +16,44 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> HScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> HScrolledWindowInRust<IN_RUST> {
     // BLOCKED: fn wxHScrolledWindow()
     // BLOCKED: fn wxHScrolledWindow1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for HScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for HScrolledWindowInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HScrolledWindowInRust<OWNED>> for PanelInRust<OWNED> {
-    fn from(o: HScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HScrolledWindowInRust<IN_RUST>> for PanelInRust<IN_RUST> {
+    fn from(o: HScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HScrolledWindowInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: HScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HScrolledWindowInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: HScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HScrolledWindowInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: HScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HScrolledWindowInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: HScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HScrolledWindowInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: HScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HScrolledWindowInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: HScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for HScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for HScrolledWindowInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxHScrolledWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for HScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for HScrolledWindowInRust<IN_RUST> {
     /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
     ///
     /// See [C++ `wxHScrolledWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_h_scrolled_window.html#a5982d08464fabd3b47543d298b710224).
@@ -94,11 +94,11 @@ wxwidgets! {
         DataObjectSimpleMethods,
         DataObjectMethods
 }
-impl<const OWNED: bool> HTMLDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> HTMLDataObjectInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxHTMLDataObject::wxHTMLDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_h_t_m_l_data_object.html#a3e09f114be84aef40c05809ddfe83333).
-    pub fn new(html: &str) -> HTMLDataObjectInRust<OWNED> {
+    pub fn new(html: &str) -> HTMLDataObjectInRust<IN_RUST> {
         unsafe {
             let html = WxString::from(html);
             let html = html.as_ptr();
@@ -114,19 +114,19 @@ impl Clone for HTMLDataObjectInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HTMLDataObjectInRust<OWNED>> for DataObjectSimpleInRust<OWNED> {
-    fn from(o: HTMLDataObjectInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HTMLDataObjectInRust<IN_RUST>> for DataObjectSimpleInRust<IN_RUST> {
+    fn from(o: HTMLDataObjectInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HTMLDataObjectInRust<OWNED>> for DataObjectInRust<OWNED> {
-    fn from(o: HTMLDataObjectInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HTMLDataObjectInRust<IN_RUST>> for DataObjectInRust<IN_RUST> {
+    fn from(o: HTMLDataObjectInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for HTMLDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for HTMLDataObjectInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxHTMLDataObject_delete(self.0) }
         }
     }
@@ -148,44 +148,44 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> HVScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> HVScrolledWindowInRust<IN_RUST> {
     // BLOCKED: fn wxHVScrolledWindow()
     // BLOCKED: fn wxHVScrolledWindow1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for HVScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for HVScrolledWindowInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HVScrolledWindowInRust<OWNED>> for PanelInRust<OWNED> {
-    fn from(o: HVScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HVScrolledWindowInRust<IN_RUST>> for PanelInRust<IN_RUST> {
+    fn from(o: HVScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HVScrolledWindowInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: HVScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HVScrolledWindowInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: HVScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HVScrolledWindowInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: HVScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HVScrolledWindowInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: HVScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HVScrolledWindowInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: HVScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HVScrolledWindowInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: HVScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for HVScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for HVScrolledWindowInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxHVScrolledWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for HVScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for HVScrolledWindowInRust<IN_RUST> {
     /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
     ///
     /// See [C++ `wxHVScrolledWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_h_v_scrolled_window.html#ae14453b61a87766376e8c64653c90ed6).
@@ -224,7 +224,7 @@ wxwidgets! {
         = HeaderColumnInRust<true>(wxHeaderColumn) impl
         HeaderColumnMethods
 }
-impl<const OWNED: bool> HeaderColumnInRust<OWNED> {
+impl<const IN_RUST: bool> HeaderColumnInRust<IN_RUST> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -234,9 +234,9 @@ impl Clone for HeaderColumnInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for HeaderColumnInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for HeaderColumnInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxHeaderColumn_delete(self.0) }
         }
     }
@@ -256,7 +256,7 @@ wxwidgets! {
         SettableHeaderColumnMethods,
         HeaderColumnMethods
 }
-impl<const OWNED: bool> HeaderColumnSimpleInRust<OWNED> {
+impl<const IN_RUST: bool> HeaderColumnSimpleInRust<IN_RUST> {
     /// Constructor for a column header.
     ///
     /// See [C++ `wxHeaderColumnSimple::wxHeaderColumnSimple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_header_column_simple.html#a219431d463c61334f8de7ac45ebb16f0).
@@ -265,7 +265,7 @@ impl<const OWNED: bool> HeaderColumnSimpleInRust<OWNED> {
         width: c_int,
         align: c_int,
         flags: c_int,
-    ) -> HeaderColumnSimpleInRust<OWNED> {
+    ) -> HeaderColumnSimpleInRust<IN_RUST> {
         unsafe {
             let title = WxString::from(title);
             let title = title.as_ptr();
@@ -279,7 +279,7 @@ impl<const OWNED: bool> HeaderColumnSimpleInRust<OWNED> {
         width: c_int,
         align: c_int,
         flags: c_int,
-    ) -> HeaderColumnSimpleInRust<OWNED> {
+    ) -> HeaderColumnSimpleInRust<IN_RUST> {
         unsafe {
             let bitmap = bitmap.as_ptr();
             HeaderColumnSimpleInRust(ffi::wxHeaderColumnSimple_new1(bitmap, width, align, flags))
@@ -294,21 +294,21 @@ impl Clone for HeaderColumnSimpleInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HeaderColumnSimpleInRust<OWNED>>
-    for SettableHeaderColumnInRust<OWNED>
+impl<const IN_RUST: bool> From<HeaderColumnSimpleInRust<IN_RUST>>
+    for SettableHeaderColumnInRust<IN_RUST>
 {
-    fn from(o: HeaderColumnSimpleInRust<OWNED>) -> Self {
+    fn from(o: HeaderColumnSimpleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderColumnSimpleInRust<OWNED>> for HeaderColumnInRust<OWNED> {
-    fn from(o: HeaderColumnSimpleInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderColumnSimpleInRust<IN_RUST>> for HeaderColumnInRust<IN_RUST> {
+    fn from(o: HeaderColumnSimpleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for HeaderColumnSimpleInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for HeaderColumnSimpleInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxHeaderColumnSimple_delete(self.0) }
         }
     }
@@ -330,44 +330,44 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> HeaderCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> HeaderCtrlInRust<IN_RUST> {
     // BLOCKED: fn wxHeaderCtrl()
     // BLOCKED: fn wxHeaderCtrl1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for HeaderCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for HeaderCtrlInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: HeaderCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: HeaderCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: HeaderCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: HeaderCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: HeaderCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: HeaderCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: HeaderCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: HeaderCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for HeaderCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for HeaderCtrlInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxHeaderCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for HeaderCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for HeaderCtrlInRust<IN_RUST> {
     /// Create the header control window.
     ///
     /// See [C++ `wxHeaderCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl.html#a1f8ff3be92e0fb2bd59e25642447c2d5).
@@ -410,11 +410,11 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> HeaderCtrlEventInRust<OWNED> {
+impl<const IN_RUST: bool> HeaderCtrlEventInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxHeaderCtrlEvent()
     ///
     /// See [C++ `wxHeaderCtrlEvent::wxHeaderCtrlEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_event.html#aa9c9fdd75b48ea8dfcb976ed16dbfcd1).
-    pub fn new<H: HeaderCtrlEventMethods>(event: &H) -> HeaderCtrlEventInRust<OWNED> {
+    pub fn new<H: HeaderCtrlEventMethods>(event: &H) -> HeaderCtrlEventInRust<IN_RUST> {
         unsafe {
             let event = event.as_ptr();
             HeaderCtrlEventInRust(ffi::wxHeaderCtrlEvent_new1(event))
@@ -429,34 +429,34 @@ impl Clone for HeaderCtrlEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlEventInRust<OWNED>> for NotifyEventInRust<OWNED> {
-    fn from(o: HeaderCtrlEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlEventInRust<IN_RUST>> for NotifyEventInRust<IN_RUST> {
+    fn from(o: HeaderCtrlEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlEventInRust<OWNED>> for CommandEventInRust<OWNED> {
-    fn from(o: HeaderCtrlEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
+    fn from(o: HeaderCtrlEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: HeaderCtrlEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: HeaderCtrlEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: HeaderCtrlEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: HeaderCtrlEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for HeaderCtrlEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for HeaderCtrlEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxHeaderCtrlEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for HeaderCtrlEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for HeaderCtrlEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -479,11 +479,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> HeaderCtrlSimpleInRust<OWNED> {
+impl<const IN_RUST: bool> HeaderCtrlSimpleInRust<IN_RUST> {
     /// Default constructor not creating the underlying window.
     ///
     /// See [C++ `wxHeaderCtrlSimple::wxHeaderCtrlSimple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_simple.html#a9a0288a46b35b0ebc7e8704a082dbd58).
-    pub fn new_2step() -> HeaderCtrlSimpleInRust<OWNED> {
+    pub fn new_2step() -> HeaderCtrlSimpleInRust<IN_RUST> {
         unsafe { HeaderCtrlSimpleInRust(ffi::wxHeaderCtrlSimple_new()) }
     }
     /// Constructor creating the window.
@@ -496,7 +496,7 @@ impl<const OWNED: bool> HeaderCtrlSimpleInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> HeaderCtrlSimpleInRust<OWNED> {
+    ) -> HeaderCtrlSimpleInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -515,37 +515,37 @@ impl<const OWNED: bool> HeaderCtrlSimpleInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for HeaderCtrlSimpleInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for HeaderCtrlSimpleInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlSimpleInRust<OWNED>> for HeaderCtrlInRust<OWNED> {
-    fn from(o: HeaderCtrlSimpleInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for HeaderCtrlInRust<IN_RUST> {
+    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlSimpleInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: HeaderCtrlSimpleInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlSimpleInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: HeaderCtrlSimpleInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlSimpleInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: HeaderCtrlSimpleInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HeaderCtrlSimpleInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: HeaderCtrlSimpleInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HeaderCtrlSimpleInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: HeaderCtrlSimpleInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for HeaderCtrlSimpleInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for HeaderCtrlSimpleInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxHeaderCtrlSimple_CLASSINFO()) }
     }
@@ -566,7 +566,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> HelpEventInRust<OWNED> {
+impl<const IN_RUST: bool> HelpEventInRust<IN_RUST> {
     //  ENUM: Origin
     pub const Origin_Unknown: c_int = 0;
     pub const Origin_Keyboard: c_int = 0 + 1;
@@ -582,29 +582,29 @@ impl Clone for HelpEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HelpEventInRust<OWNED>> for CommandEventInRust<OWNED> {
-    fn from(o: HelpEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HelpEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
+    fn from(o: HelpEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HelpEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: HelpEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HelpEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: HelpEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HelpEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: HelpEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HelpEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: HelpEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for HelpEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for HelpEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxHelpEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for HelpEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for HelpEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -626,10 +626,10 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> HyperlinkCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> HyperlinkCtrlInRust<IN_RUST> {
     ///
     /// See [C++ `wxHyperlinkCtrl::wxHyperlinkCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_hyperlink_ctrl.html#a9b0d333830376d2d437f35f31656405f).
-    pub fn new_2step() -> HyperlinkCtrlInRust<OWNED> {
+    pub fn new_2step() -> HyperlinkCtrlInRust<IN_RUST> {
         unsafe { HyperlinkCtrlInRust(ffi::wxHyperlinkCtrl_new()) }
     }
     /// Constructor.
@@ -644,7 +644,7 @@ impl<const OWNED: bool> HyperlinkCtrlInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> HyperlinkCtrlInRust<OWNED> {
+    ) -> HyperlinkCtrlInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -667,32 +667,32 @@ impl<const OWNED: bool> HyperlinkCtrlInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for HyperlinkCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for HyperlinkCtrlInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HyperlinkCtrlInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: HyperlinkCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HyperlinkCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: HyperlinkCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HyperlinkCtrlInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: HyperlinkCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HyperlinkCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: HyperlinkCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HyperlinkCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: HyperlinkCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HyperlinkCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: HyperlinkCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HyperlinkCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: HyperlinkCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HyperlinkCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: HyperlinkCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for HyperlinkCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for HyperlinkCtrlInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxHyperlinkCtrl_CLASSINFO()) }
     }
@@ -713,7 +713,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> HyperlinkEventInRust<OWNED> {
+impl<const IN_RUST: bool> HyperlinkEventInRust<IN_RUST> {
     /// The constructor is not normally used by the user code.
     ///
     /// See [C++ `wxHyperlinkEvent::wxHyperlinkEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_hyperlink_event.html#aa80a85f87e14160f23feca68f8819740).
@@ -721,7 +721,7 @@ impl<const OWNED: bool> HyperlinkEventInRust<OWNED> {
         generator: Option<&O>,
         id: c_int,
         url: &str,
-    ) -> HyperlinkEventInRust<OWNED> {
+    ) -> HyperlinkEventInRust<IN_RUST> {
         unsafe {
             let generator = match generator {
                 Some(r) => r.as_ptr(),
@@ -741,29 +741,29 @@ impl Clone for HyperlinkEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<HyperlinkEventInRust<OWNED>> for CommandEventInRust<OWNED> {
-    fn from(o: HyperlinkEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HyperlinkEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
+    fn from(o: HyperlinkEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HyperlinkEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: HyperlinkEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HyperlinkEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: HyperlinkEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<HyperlinkEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: HyperlinkEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<HyperlinkEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: HyperlinkEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for HyperlinkEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for HyperlinkEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxHyperlinkEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for HyperlinkEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for HyperlinkEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

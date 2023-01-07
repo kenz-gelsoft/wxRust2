@@ -14,11 +14,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TimerInRust<OWNED> {
+impl<const IN_RUST: bool> TimerInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxTimer::wxTimer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_timer.html#a0560894a1ab57792f52992ffbc58e735).
-    pub fn new() -> TimerInRust<OWNED> {
+    pub fn new() -> TimerInRust<IN_RUST> {
         unsafe { TimerInRust(ffi::wxTimer_new()) }
     }
     /// Creates a timer and associates it with owner.
@@ -27,7 +27,7 @@ impl<const OWNED: bool> TimerInRust<OWNED> {
     pub fn new_with_evthandler<E: EvtHandlerMethods>(
         owner: Option<&E>,
         id: c_int,
-    ) -> TimerInRust<OWNED> {
+    ) -> TimerInRust<IN_RUST> {
         unsafe {
             let owner = match owner {
                 Some(r) => r.as_ptr(),
@@ -40,22 +40,22 @@ impl<const OWNED: bool> TimerInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TimerInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TimerInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TimerInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TimerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TimerInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TimerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TimerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TimerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TimerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TimerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TimerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TimerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTimer_CLASSINFO()) }
     }
@@ -75,10 +75,10 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TimerEventInRust<OWNED> {
+impl<const IN_RUST: bool> TimerEventInRust<IN_RUST> {
     ///
     /// See [C++ `wxTimerEvent::wxTimerEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_timer_event.html#aedca4f26719c256c2f8d9ef8486d2f86).
-    pub fn new<T: TimerMethods>(timer: &T) -> TimerEventInRust<OWNED> {
+    pub fn new<T: TimerMethods>(timer: &T) -> TimerEventInRust<IN_RUST> {
         unsafe {
             let timer = timer.as_ptr();
             TimerEventInRust(ffi::wxTimerEvent_new(timer))
@@ -93,24 +93,24 @@ impl Clone for TimerEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TimerEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: TimerEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TimerEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: TimerEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TimerEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TimerEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TimerEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TimerEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TimerEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TimerEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTimerEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for TimerEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TimerEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

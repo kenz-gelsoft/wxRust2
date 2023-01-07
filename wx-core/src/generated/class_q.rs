@@ -13,11 +13,11 @@ wxwidgets! {
         QuantizeMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> QuantizeInRust<OWNED> {
+impl<const IN_RUST: bool> QuantizeInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxQuantize::wxQuantize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_quantize.html#a547099d33907c05795eaba1526e14a73).
-    pub fn new() -> QuantizeInRust<OWNED> {
+    pub fn new() -> QuantizeInRust<IN_RUST> {
         unsafe { QuantizeInRust(ffi::wxQuantize_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -29,19 +29,19 @@ impl Clone for QuantizeInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<QuantizeInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: QuantizeInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<QuantizeInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: QuantizeInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for QuantizeInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for QuantizeInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxQuantize_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for QuantizeInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for QuantizeInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -61,11 +61,11 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> QueryLayoutInfoEventInRust<OWNED> {
+impl<const IN_RUST: bool> QueryLayoutInfoEventInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxQueryLayoutInfoEvent::wxQueryLayoutInfoEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_query_layout_info_event.html#ae49fe2e9f1e59fa1bcb24380b76c5f09).
-    pub fn new(id: c_int) -> QueryLayoutInfoEventInRust<OWNED> {
+    pub fn new(id: c_int) -> QueryLayoutInfoEventInRust<IN_RUST> {
         unsafe { QueryLayoutInfoEventInRust(ffi::wxQueryLayoutInfoEvent_new(id)) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -77,24 +77,24 @@ impl Clone for QueryLayoutInfoEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<QueryLayoutInfoEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: QueryLayoutInfoEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<QueryLayoutInfoEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: QueryLayoutInfoEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<QueryLayoutInfoEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: QueryLayoutInfoEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<QueryLayoutInfoEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: QueryLayoutInfoEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for QueryLayoutInfoEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for QueryLayoutInfoEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxQueryLayoutInfoEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for QueryLayoutInfoEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for QueryLayoutInfoEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

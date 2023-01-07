@@ -16,11 +16,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> EditableListBoxInRust<OWNED> {
+impl<const IN_RUST: bool> EditableListBoxInRust<IN_RUST> {
     /// Default ctor.
     ///
     /// See [C++ `wxEditableListBox::wxEditableListBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html#ab42098c0b81e1f027e307fad8a9ecc8a).
-    pub fn new_2step() -> EditableListBoxInRust<OWNED> {
+    pub fn new_2step() -> EditableListBoxInRust<IN_RUST> {
         unsafe { EditableListBoxInRust(ffi::wxEditableListBox_new()) }
     }
     /// Constructor, creating and showing a list box.
@@ -34,7 +34,7 @@ impl<const OWNED: bool> EditableListBoxInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> EditableListBoxInRust<OWNED> {
+    ) -> EditableListBoxInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -55,32 +55,32 @@ impl<const OWNED: bool> EditableListBoxInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for EditableListBoxInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for EditableListBoxInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<EditableListBoxInRust<OWNED>> for PanelInRust<OWNED> {
-    fn from(o: EditableListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EditableListBoxInRust<IN_RUST>> for PanelInRust<IN_RUST> {
+    fn from(o: EditableListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<EditableListBoxInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: EditableListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EditableListBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: EditableListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<EditableListBoxInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: EditableListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EditableListBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: EditableListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<EditableListBoxInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: EditableListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EditableListBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: EditableListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for EditableListBoxInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for EditableListBoxInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxEditableListBox_CLASSINFO()) }
     }
@@ -100,11 +100,11 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> EraseEventInRust<OWNED> {
+impl<const IN_RUST: bool> EraseEventInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxEraseEvent::wxEraseEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#ae6d16ac169480be125ea4e4138fc29ef).
-    pub fn new<D: DCMethods>(id: c_int, dc: Option<&D>) -> EraseEventInRust<OWNED> {
+    pub fn new<D: DCMethods>(id: c_int, dc: Option<&D>) -> EraseEventInRust<IN_RUST> {
         unsafe {
             let dc = match dc {
                 Some(r) => r.as_ptr(),
@@ -122,24 +122,24 @@ impl Clone for EraseEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<EraseEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: EraseEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EraseEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: EraseEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<EraseEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: EraseEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EraseEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: EraseEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for EraseEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for EraseEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxEraseEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for EraseEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for EraseEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -159,28 +159,28 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> EventBlockerInRust<OWNED> {
+impl<const IN_RUST: bool> EventBlockerInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxEventBlocker()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for EventBlockerInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for EventBlockerInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<EventBlockerInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: EventBlockerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EventBlockerInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: EventBlockerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<EventBlockerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: EventBlockerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EventBlockerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: EventBlockerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for EventBlockerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for EventBlockerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxEventBlocker_CLASSINFO()) }
     }

@@ -12,17 +12,17 @@ wxwidgets! {
         = ObjectInRust<true>(wxObject) impl
         ObjectMethods
 }
-impl<const OWNED: bool> ObjectInRust<OWNED> {
+impl<const IN_RUST: bool> ObjectInRust<IN_RUST> {
     /// Default ctor; initializes to NULL the internal reference data.
     ///
     /// See [C++ `wxObject::wxObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_object.html#acaa378363a28af421ab56ad7b46eadf0).
-    pub fn new() -> ObjectInRust<OWNED> {
+    pub fn new() -> ObjectInRust<IN_RUST> {
         unsafe { ObjectInRust(ffi::wxObject_new()) }
     }
     /// Copy ctor.
     ///
     /// See [C++ `wxObject::wxObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_object.html#a4721b4dc9b7aff0f30904ba2ea3954cf).
-    pub fn new_with_object<O: ObjectMethods>(other: &O) -> ObjectInRust<OWNED> {
+    pub fn new_with_object<O: ObjectMethods>(other: &O) -> ObjectInRust<IN_RUST> {
         unsafe {
             let other = other.as_ptr();
             ObjectInRust(ffi::wxObject_new1(other))
@@ -37,14 +37,14 @@ impl Clone for ObjectInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> DynamicCast for ObjectInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ObjectInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxObject_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ObjectInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ObjectInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -62,7 +62,7 @@ wxwidgets! {
         = ObjectRefDataInRust<true>(wxObjectRefData) impl
         ObjectRefDataMethods
 }
-impl<const OWNED: bool> ObjectRefDataInRust<OWNED> {
+impl<const IN_RUST: bool> ObjectRefDataInRust<IN_RUST> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -72,9 +72,9 @@ impl Clone for ObjectRefDataInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for ObjectRefDataInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ObjectRefDataInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObjectRefData_delete(self.0) }
         }
     }

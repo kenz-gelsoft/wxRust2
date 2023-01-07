@@ -14,11 +14,11 @@ wxwidgets! {
         // ImageHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> JPEGHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> JPEGHandlerInRust<IN_RUST> {
     /// Default constructor for wxJPEGHandler.
     ///
     /// See [C++ `wxJPEGHandler::wxJPEGHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html#a2935d0b968967a673b0b6cef75dcbc04).
-    pub fn new() -> JPEGHandlerInRust<OWNED> {
+    pub fn new() -> JPEGHandlerInRust<IN_RUST> {
         unsafe { JPEGHandlerInRust(ffi::wxJPEGHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -30,29 +30,29 @@ impl Clone for JPEGHandlerInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<JPEGHandlerInRust<OWNED>> for ImageHandlerInRust<OWNED> {
-    fn from(o: JPEGHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<JPEGHandlerInRust<IN_RUST>> for ImageHandlerInRust<IN_RUST> {
+    fn from(o: JPEGHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<JPEGHandlerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: JPEGHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<JPEGHandlerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: JPEGHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for JPEGHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for JPEGHandlerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxJPEGHandler_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for JPEGHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for JPEGHandlerInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }
-impl<const OWNED: bool> ImageHandlerMethods for JPEGHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> ImageHandlerMethods for JPEGHandlerInRust<IN_RUST> {
     // NOT_SUPPORTED: fn GetLibraryVersionInfo()
 }
 
@@ -70,7 +70,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> JoystickEventInRust<OWNED> {
+impl<const IN_RUST: bool> JoystickEventInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxJoystickEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -81,24 +81,24 @@ impl Clone for JoystickEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<JoystickEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: JoystickEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<JoystickEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: JoystickEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<JoystickEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: JoystickEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<JoystickEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: JoystickEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for JoystickEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for JoystickEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxJoystickEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for JoystickEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for JoystickEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

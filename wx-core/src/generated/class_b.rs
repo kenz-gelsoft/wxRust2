@@ -15,11 +15,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BannerWindowInRust<OWNED> {
+impl<const IN_RUST: bool> BannerWindowInRust<IN_RUST> {
     /// Default constructor, use Create() later.
     ///
     /// See [C++ `wxBannerWindow::wxBannerWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_banner_window.html#a29260797c824b361163f18519994c2f7).
-    pub fn new_2step() -> BannerWindowInRust<OWNED> {
+    pub fn new_2step() -> BannerWindowInRust<IN_RUST> {
         unsafe { BannerWindowInRust(ffi::wxBannerWindow_new()) }
     }
     // BLOCKED: fn wxBannerWindow1()
@@ -34,7 +34,7 @@ impl<const OWNED: bool> BannerWindowInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> BannerWindowInRust<OWNED> {
+    ) -> BannerWindowInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -53,27 +53,27 @@ impl<const OWNED: bool> BannerWindowInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for BannerWindowInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for BannerWindowInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BannerWindowInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: BannerWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BannerWindowInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: BannerWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BannerWindowInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: BannerWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BannerWindowInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: BannerWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BannerWindowInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BannerWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BannerWindowInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BannerWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BannerWindowInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BannerWindowInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBannerWindow_CLASSINFO()) }
     }
@@ -93,17 +93,17 @@ wxwidgets! {
         GDIObjectMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BitmapInRust<OWNED> {
+impl<const IN_RUST: bool> BitmapInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxBitmap::wxBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a5b4b1b408108b78cdbfd325b03c903b7).
-    pub fn new() -> BitmapInRust<OWNED> {
+    pub fn new() -> BitmapInRust<IN_RUST> {
         unsafe { BitmapInRust(ffi::wxBitmap_new()) }
     }
     /// Copy constructor, uses reference counting.
     ///
     /// See [C++ `wxBitmap::wxBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#abfaa21ec563a64ea913af918150db900).
-    pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapInRust<OWNED> {
+    pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapInRust<IN_RUST> {
         unsafe {
             let bitmap = bitmap.as_ptr();
             BitmapInRust(ffi::wxBitmap_new1(bitmap))
@@ -113,13 +113,13 @@ impl<const OWNED: bool> BitmapInRust<OWNED> {
     /// Creates a new bitmap.
     ///
     /// See [C++ `wxBitmap::wxBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a3bb19e8d368d6565f52a9c1294d80d7a).
-    pub fn new_with_int_int(width: c_int, height: c_int, depth: c_int) -> BitmapInRust<OWNED> {
+    pub fn new_with_int_int(width: c_int, height: c_int, depth: c_int) -> BitmapInRust<IN_RUST> {
         unsafe { BitmapInRust(ffi::wxBitmap_new3(width, height, depth)) }
     }
     /// This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
     ///
     /// See [C++ `wxBitmap::wxBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a2a73d89860df03b474086a7db694527d).
-    pub fn new_with_size<S: SizeMethods>(sz: &S, depth: c_int) -> BitmapInRust<OWNED> {
+    pub fn new_with_size<S: SizeMethods>(sz: &S, depth: c_int) -> BitmapInRust<IN_RUST> {
         unsafe {
             let sz = sz.as_ptr();
             BitmapInRust(ffi::wxBitmap_new4(sz, depth))
@@ -132,7 +132,7 @@ impl<const OWNED: bool> BitmapInRust<OWNED> {
         width: c_int,
         height: c_int,
         dc: &D,
-    ) -> BitmapInRust<OWNED> {
+    ) -> BitmapInRust<IN_RUST> {
         unsafe {
             let dc = dc.as_ptr();
             BitmapInRust(ffi::wxBitmap_new5(width, height, dc))
@@ -141,14 +141,14 @@ impl<const OWNED: bool> BitmapInRust<OWNED> {
     /// Creates a bitmap from XPM data.
     ///
     /// See [C++ `wxBitmap::wxBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a0b750963aa91e021dfa222138d1678ed).
-    pub fn new_with_char(bits: *const c_void) -> BitmapInRust<OWNED> {
+    pub fn new_with_char(bits: *const c_void) -> BitmapInRust<IN_RUST> {
         unsafe { BitmapInRust(ffi::wxBitmap_new6(bits)) }
     }
     // NOT_SUPPORTED: fn wxBitmap7()
     /// Creates this bitmap object from the given image.
     ///
     /// See [C++ `wxBitmap::wxBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a9855ffc55043187e4cff075aeefbaaf8).
-    pub fn new_with_image_int<I: ImageMethods>(img: &I, depth: c_int) -> BitmapInRust<OWNED> {
+    pub fn new_with_image_int<I: ImageMethods>(img: &I, depth: c_int) -> BitmapInRust<IN_RUST> {
         unsafe {
             let img = img.as_ptr();
             BitmapInRust(ffi::wxBitmap_new8(img, depth))
@@ -160,7 +160,7 @@ impl<const OWNED: bool> BitmapInRust<OWNED> {
     pub fn new_with_image_dc<I: ImageMethods, D: DCMethods>(
         img: &I,
         dc: &D,
-    ) -> BitmapInRust<OWNED> {
+    ) -> BitmapInRust<IN_RUST> {
         unsafe {
             let img = img.as_ptr();
             let dc = dc.as_ptr();
@@ -170,7 +170,7 @@ impl<const OWNED: bool> BitmapInRust<OWNED> {
     /// Creates bitmap corresponding to the given cursor.
     ///
     /// See [C++ `wxBitmap::wxBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a6cecda7f133bce6c6fe42394bcfd0f4a).
-    pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> BitmapInRust<OWNED> {
+    pub fn new_with_cursor<C: CursorMethods>(cursor: &C) -> BitmapInRust<IN_RUST> {
         unsafe {
             let cursor = cursor.as_ptr();
             BitmapInRust(ffi::wxBitmap_new10(cursor))
@@ -185,24 +185,24 @@ impl Clone for BitmapInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BitmapInRust<OWNED>> for GDIObjectInRust<OWNED> {
-    fn from(o: BitmapInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapInRust<IN_RUST>> for GDIObjectInRust<IN_RUST> {
+    fn from(o: BitmapInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BitmapInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BitmapInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BitmapInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BitmapInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBitmap_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for BitmapInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BitmapInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -220,17 +220,17 @@ wxwidgets! {
         = BitmapBundleInRust<true>(wxBitmapBundle) impl
         BitmapBundleMethods
 }
-impl<const OWNED: bool> BitmapBundleInRust<OWNED> {
+impl<const IN_RUST: bool> BitmapBundleInRust<IN_RUST> {
     /// Default constructor constructs an empty bundle.
     ///
     /// See [C++ `wxBitmapBundle::wxBitmapBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a147abda71276821e3957be38e9b9baa4).
-    pub fn new() -> BitmapBundleInRust<OWNED> {
+    pub fn new() -> BitmapBundleInRust<IN_RUST> {
         unsafe { BitmapBundleInRust(ffi::wxBitmapBundle_new()) }
     }
     /// Conversion constructor from a single bitmap.
     ///
     /// See [C++ `wxBitmapBundle::wxBitmapBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a922b10aa1d1127d38a169fc2281a2e03).
-    pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapBundleInRust<OWNED> {
+    pub fn new_with_bitmap<B: BitmapMethods>(bitmap: &B) -> BitmapBundleInRust<IN_RUST> {
         unsafe {
             let bitmap = bitmap.as_ptr();
             BitmapBundleInRust(ffi::wxBitmapBundle_new1(bitmap))
@@ -239,7 +239,7 @@ impl<const OWNED: bool> BitmapBundleInRust<OWNED> {
     /// Conversion constructor from a single icon.
     ///
     /// See [C++ `wxBitmapBundle::wxBitmapBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a26700eb799253754c332308ee469ad11).
-    pub fn new_with_icon<I: IconMethods>(icon: &I) -> BitmapBundleInRust<OWNED> {
+    pub fn new_with_icon<I: IconMethods>(icon: &I) -> BitmapBundleInRust<IN_RUST> {
         unsafe {
             let icon = icon.as_ptr();
             BitmapBundleInRust(ffi::wxBitmapBundle_new2(icon))
@@ -248,7 +248,7 @@ impl<const OWNED: bool> BitmapBundleInRust<OWNED> {
     /// Conversion constructor from a single image.
     ///
     /// See [C++ `wxBitmapBundle::wxBitmapBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a5e5fa07df8d5e5d60b107f5949f5d12d).
-    pub fn new_with_image<I: ImageMethods>(image: &I) -> BitmapBundleInRust<OWNED> {
+    pub fn new_with_image<I: ImageMethods>(image: &I) -> BitmapBundleInRust<IN_RUST> {
         unsafe {
             let image = image.as_ptr();
             BitmapBundleInRust(ffi::wxBitmapBundle_new3(image))
@@ -257,13 +257,13 @@ impl<const OWNED: bool> BitmapBundleInRust<OWNED> {
     /// Conversion constructor from XPM data.
     ///
     /// See [C++ `wxBitmapBundle::wxBitmapBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#aeb9d813e1163b586497c2a86ee7eb2b0).
-    pub fn new_with_char(xpm: *const c_void) -> BitmapBundleInRust<OWNED> {
+    pub fn new_with_char(xpm: *const c_void) -> BitmapBundleInRust<IN_RUST> {
         unsafe { BitmapBundleInRust(ffi::wxBitmapBundle_new4(xpm)) }
     }
     /// Copy constructor creates a copy of another bundle.
     ///
     /// See [C++ `wxBitmapBundle::wxBitmapBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html#a11d8e7869e602087cc5552b34e4b6230).
-    pub fn new_with_bitmapbundle<B: BitmapBundleMethods>(other: &B) -> BitmapBundleInRust<OWNED> {
+    pub fn new_with_bitmapbundle<B: BitmapBundleMethods>(other: &B) -> BitmapBundleInRust<IN_RUST> {
         unsafe {
             let other = other.as_ptr();
             BitmapBundleInRust(ffi::wxBitmapBundle_new5(other))
@@ -278,9 +278,9 @@ impl Clone for BitmapBundleInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for BitmapBundleInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BitmapBundleInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxBitmapBundle_delete(self.0) }
         }
     }
@@ -304,11 +304,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BitmapButtonInRust<OWNED> {
+impl<const IN_RUST: bool> BitmapButtonInRust<IN_RUST> {
     /// Default ctor.
     ///
     /// See [C++ `wxBitmapButton::wxBitmapButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_button.html#af262b3d84985b3724a4e80c46a2b9f5e).
-    pub fn new_2step() -> BitmapButtonInRust<OWNED> {
+    pub fn new_2step() -> BitmapButtonInRust<IN_RUST> {
         unsafe { BitmapButtonInRust(ffi::wxBitmapButton_new()) }
     }
     /// Constructor, creating and showing a button.
@@ -329,7 +329,7 @@ impl<const OWNED: bool> BitmapButtonInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> BitmapButtonInRust<OWNED> {
+    ) -> BitmapButtonInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -350,42 +350,42 @@ impl<const OWNED: bool> BitmapButtonInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for BitmapButtonInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for BitmapButtonInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BitmapButtonInRust<OWNED>> for ButtonInRust<OWNED> {
-    fn from(o: BitmapButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapButtonInRust<IN_RUST>> for ButtonInRust<IN_RUST> {
+    fn from(o: BitmapButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapButtonInRust<OWNED>> for AnyButtonInRust<OWNED> {
-    fn from(o: BitmapButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapButtonInRust<IN_RUST>> for AnyButtonInRust<IN_RUST> {
+    fn from(o: BitmapButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapButtonInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: BitmapButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapButtonInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: BitmapButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapButtonInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: BitmapButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapButtonInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: BitmapButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapButtonInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: BitmapButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapButtonInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: BitmapButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapButtonInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BitmapButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapButtonInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BitmapButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BitmapButtonInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BitmapButtonInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBitmapButton_CLASSINFO()) }
     }
@@ -408,11 +408,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BitmapComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> BitmapComboBoxInRust<IN_RUST> {
     /// Default ctor.
     ///
     /// See [C++ `wxBitmapComboBox::wxBitmapComboBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_combo_box.html#ad1c50828cc279364613f2726a57b524b).
-    pub fn new_2step() -> BitmapComboBoxInRust<OWNED> {
+    pub fn new_2step() -> BitmapComboBoxInRust<IN_RUST> {
         unsafe { BitmapComboBoxInRust(ffi::wxBitmapComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxBitmapComboBox1()
@@ -435,7 +435,7 @@ impl<const OWNED: bool> BitmapComboBoxInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> BitmapComboBoxInRust<OWNED> {
+    ) -> BitmapComboBoxInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -458,58 +458,58 @@ impl<const OWNED: bool> BitmapComboBoxInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for BitmapComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for BitmapComboBoxInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BitmapComboBoxInRust<OWNED>> for ComboBoxInRust<OWNED> {
-    fn from(o: BitmapComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapComboBoxInRust<IN_RUST>> for ComboBoxInRust<IN_RUST> {
+    fn from(o: BitmapComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapComboBoxInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: BitmapComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapComboBoxInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: BitmapComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapComboBoxInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: BitmapComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapComboBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: BitmapComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapComboBoxInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: BitmapComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapComboBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: BitmapComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapComboBoxInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BitmapComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapComboBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BitmapComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BitmapComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BitmapComboBoxInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBitmapComboBox_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxBitmapComboBox
-impl<const OWNED: bool> ItemContainerMethods for BitmapComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerMethods for BitmapComboBoxInRust<IN_RUST> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxBitmapComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> ItemContainerImmutableMethods for BitmapComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerImmutableMethods for BitmapComboBoxInRust<IN_RUST> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxBitmapComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TextEntryMethods for BitmapComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> TextEntryMethods for BitmapComboBoxInRust<IN_RUST> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxBitmapComboBox_AsTextEntry(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> ComboBoxMethods for BitmapComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> ComboBoxMethods for BitmapComboBoxInRust<IN_RUST> {
     // NOT_SUPPORTED: fn Create()
     /// Creates the combobox for two-step construction.
     ///
@@ -575,11 +575,11 @@ wxwidgets! {
         DataObjectSimpleMethods,
         DataObjectMethods
 }
-impl<const OWNED: bool> BitmapDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> BitmapDataObjectInRust<IN_RUST> {
     /// Constructor, optionally passing a bitmap (otherwise use SetBitmap() later).
     ///
     /// See [C++ `wxBitmapDataObject::wxBitmapDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_data_object.html#a6b4f3a28654382a6ea75d5db261e524b).
-    pub fn new<B: BitmapMethods>(bitmap: &B) -> BitmapDataObjectInRust<OWNED> {
+    pub fn new<B: BitmapMethods>(bitmap: &B) -> BitmapDataObjectInRust<IN_RUST> {
         unsafe {
             let bitmap = bitmap.as_ptr();
             BitmapDataObjectInRust(ffi::wxBitmapDataObject_new(bitmap))
@@ -594,19 +594,21 @@ impl Clone for BitmapDataObjectInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BitmapDataObjectInRust<OWNED>> for DataObjectSimpleInRust<OWNED> {
-    fn from(o: BitmapDataObjectInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapDataObjectInRust<IN_RUST>>
+    for DataObjectSimpleInRust<IN_RUST>
+{
+    fn from(o: BitmapDataObjectInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapDataObjectInRust<OWNED>> for DataObjectInRust<OWNED> {
-    fn from(o: BitmapDataObjectInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapDataObjectInRust<IN_RUST>> for DataObjectInRust<IN_RUST> {
+    fn from(o: BitmapDataObjectInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for BitmapDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BitmapDataObjectInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxBitmapDataObject_delete(self.0) }
         }
     }
@@ -625,11 +627,11 @@ wxwidgets! {
         BitmapHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BitmapHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> BitmapHandlerInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxBitmapHandler::wxBitmapHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_handler.html#ad8a16baff5f93057f4a96fc5fa26dfab).
-    pub fn new() -> BitmapHandlerInRust<OWNED> {
+    pub fn new() -> BitmapHandlerInRust<IN_RUST> {
         unsafe { BitmapHandlerInRust(ffi::wxBitmapHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -641,19 +643,19 @@ impl Clone for BitmapHandlerInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BitmapHandlerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BitmapHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapHandlerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BitmapHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BitmapHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BitmapHandlerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBitmapHandler_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for BitmapHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BitmapHandlerInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -677,11 +679,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BitmapToggleButtonInRust<OWNED> {
+impl<const IN_RUST: bool> BitmapToggleButtonInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxBitmapToggleButton::wxBitmapToggleButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_toggle_button.html#aa5c5981a61bd3458a55266bd39bf5d7a).
-    pub fn new_2step() -> BitmapToggleButtonInRust<OWNED> {
+    pub fn new_2step() -> BitmapToggleButtonInRust<IN_RUST> {
         unsafe { BitmapToggleButtonInRust(ffi::wxBitmapToggleButton_new()) }
     }
     /// Constructor, creating and showing a toggle button with the bitmap label.
@@ -702,7 +704,7 @@ impl<const OWNED: bool> BitmapToggleButtonInRust<OWNED> {
         style: c_long,
         val: &V,
         name: &str,
-    ) -> BitmapToggleButtonInRust<OWNED> {
+    ) -> BitmapToggleButtonInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -723,42 +725,42 @@ impl<const OWNED: bool> BitmapToggleButtonInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for BitmapToggleButtonInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for BitmapToggleButtonInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BitmapToggleButtonInRust<OWNED>> for ToggleButtonInRust<OWNED> {
-    fn from(o: BitmapToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapToggleButtonInRust<IN_RUST>> for ToggleButtonInRust<IN_RUST> {
+    fn from(o: BitmapToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapToggleButtonInRust<OWNED>> for AnyButtonInRust<OWNED> {
-    fn from(o: BitmapToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapToggleButtonInRust<IN_RUST>> for AnyButtonInRust<IN_RUST> {
+    fn from(o: BitmapToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapToggleButtonInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: BitmapToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapToggleButtonInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: BitmapToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapToggleButtonInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: BitmapToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapToggleButtonInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: BitmapToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapToggleButtonInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: BitmapToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapToggleButtonInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: BitmapToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BitmapToggleButtonInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BitmapToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BitmapToggleButtonInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BitmapToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BitmapToggleButtonInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BitmapToggleButtonInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBitmapToggleButton_CLASSINFO()) }
     }
@@ -780,7 +782,7 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BookCtrlBaseInRust<OWNED> {
+impl<const IN_RUST: bool> BookCtrlBaseInRust<IN_RUST> {
     //  ENUM: @3
     pub const NO_IMAGE: c_int = -1;
 
@@ -790,37 +792,37 @@ impl<const OWNED: bool> BookCtrlBaseInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for BookCtrlBaseInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for BookCtrlBaseInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BookCtrlBaseInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: BookCtrlBaseInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BookCtrlBaseInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: BookCtrlBaseInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BookCtrlBaseInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: BookCtrlBaseInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BookCtrlBaseInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: BookCtrlBaseInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BookCtrlBaseInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: BookCtrlBaseInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BookCtrlBaseInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: BookCtrlBaseInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BookCtrlBaseInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BookCtrlBaseInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BookCtrlBaseInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BookCtrlBaseInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BookCtrlBaseInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BookCtrlBaseInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBookCtrlBase_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for BookCtrlBaseInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for BookCtrlBaseInRust<IN_RUST> {
     /// Constructs the book control with the given parameters.
     ///
     /// See [C++ `wxBookCtrlBase::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_base.html#ad61f7fc3c1fbccbcb119e1dea3fdc4a6).
@@ -863,7 +865,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BookCtrlEventInRust<OWNED> {
+impl<const IN_RUST: bool> BookCtrlEventInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxBookCtrlEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -874,39 +876,39 @@ impl Clone for BookCtrlEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BookCtrlEventInRust<OWNED>> for NotifyEventInRust<OWNED> {
-    fn from(o: BookCtrlEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BookCtrlEventInRust<IN_RUST>> for NotifyEventInRust<IN_RUST> {
+    fn from(o: BookCtrlEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BookCtrlEventInRust<OWNED>> for CommandEventInRust<OWNED> {
-    fn from(o: BookCtrlEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BookCtrlEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
+    fn from(o: BookCtrlEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BookCtrlEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: BookCtrlEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BookCtrlEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: BookCtrlEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BookCtrlEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BookCtrlEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BookCtrlEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BookCtrlEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BookCtrlEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BookCtrlEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBookCtrlEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for BookCtrlEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BookCtrlEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }
-impl<const OWNED: bool> CommandEventMethods for BookCtrlEventInRust<OWNED> {
+impl<const IN_RUST: bool> CommandEventMethods for BookCtrlEventInRust<IN_RUST> {
     /// Returns the currently selected page, or wxNOT_FOUND if none was selected.
     ///
     /// See [C++ `wxBookCtrlEvent::GetSelection()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_event.html#acfc78f1292a2e229650cd1a2e2aaf937).
@@ -929,33 +931,33 @@ wxwidgets! {
         SizerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BoxSizerInRust<OWNED> {
+impl<const IN_RUST: bool> BoxSizerInRust<IN_RUST> {
     /// Constructor for a wxBoxSizer.
     ///
     /// See [C++ `wxBoxSizer::wxBoxSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_box_sizer.html#a1d8b1a1bed1af566c1f95e54dbf1d18e).
-    pub fn new(orient: c_int) -> BoxSizerInRust<OWNED> {
+    pub fn new(orient: c_int) -> BoxSizerInRust<IN_RUST> {
         unsafe { BoxSizerInRust(ffi::wxBoxSizer_new(orient)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for BoxSizerInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for BoxSizerInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BoxSizerInRust<OWNED>> for SizerInRust<OWNED> {
-    fn from(o: BoxSizerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BoxSizerInRust<IN_RUST>> for SizerInRust<IN_RUST> {
+    fn from(o: BoxSizerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BoxSizerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BoxSizerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BoxSizerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BoxSizerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BoxSizerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BoxSizerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBoxSizer_CLASSINFO()) }
     }
@@ -975,18 +977,18 @@ wxwidgets! {
         GDIObjectMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BrushInRust<OWNED> {
+impl<const IN_RUST: bool> BrushInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxBrush::wxBrush()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_brush.html#a36d9d097cd95d038427907d2aa0fd2ad).
-    pub fn new() -> BrushInRust<OWNED> {
+    pub fn new() -> BrushInRust<IN_RUST> {
         unsafe { BrushInRust(ffi::wxBrush_new()) }
     }
     // NOT_SUPPORTED: fn wxBrush1()
     /// Constructs a stippled brush using a bitmap.
     ///
     /// See [C++ `wxBrush::wxBrush()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_brush.html#a0a5c0e09b4637f7749435fbe1acd6412).
-    pub fn new_with_bitmap<B: BitmapMethods>(stipple_bitmap: &B) -> BrushInRust<OWNED> {
+    pub fn new_with_bitmap<B: BitmapMethods>(stipple_bitmap: &B) -> BrushInRust<IN_RUST> {
         unsafe {
             let stipple_bitmap = stipple_bitmap.as_ptr();
             BrushInRust(ffi::wxBrush_new2(stipple_bitmap))
@@ -995,7 +997,7 @@ impl<const OWNED: bool> BrushInRust<OWNED> {
     /// Copy constructor, uses reference counting.
     ///
     /// See [C++ `wxBrush::wxBrush()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_brush.html#a6df3fbfc890e8af31fd6bbf2ca38c5e7).
-    pub fn new_with_brush<B: BrushMethods>(brush: &B) -> BrushInRust<OWNED> {
+    pub fn new_with_brush<B: BrushMethods>(brush: &B) -> BrushInRust<IN_RUST> {
         unsafe {
             let brush = brush.as_ptr();
             BrushInRust(ffi::wxBrush_new3(brush))
@@ -1010,24 +1012,24 @@ impl Clone for BrushInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BrushInRust<OWNED>> for GDIObjectInRust<OWNED> {
-    fn from(o: BrushInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BrushInRust<IN_RUST>> for GDIObjectInRust<IN_RUST> {
+    fn from(o: BrushInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BrushInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BrushInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BrushInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BrushInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BrushInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BrushInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBrush_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for BrushInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BrushInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1045,7 +1047,7 @@ wxwidgets! {
         = BrushListInRust<true>(wxBrushList) impl
         BrushListMethods
 }
-impl<const OWNED: bool> BrushListInRust<OWNED> {
+impl<const IN_RUST: bool> BrushListInRust<IN_RUST> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -1055,9 +1057,9 @@ impl Clone for BrushListInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for BrushListInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BrushListInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxBrushList_delete(self.0) }
         }
     }
@@ -1078,11 +1080,11 @@ wxwidgets! {
         DCMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BufferedDCInRust<OWNED> {
+impl<const IN_RUST: bool> BufferedDCInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxBufferedDC::wxBufferedDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_buffered_d_c.html#adf8f81fe169fb1d3f0e5c9bdbdb1cb2a).
-    pub fn new() -> BufferedDCInRust<OWNED> {
+    pub fn new() -> BufferedDCInRust<IN_RUST> {
         unsafe { BufferedDCInRust(ffi::wxBufferedDC_new()) }
     }
     /// Creates a buffer for the provided dc.
@@ -1092,7 +1094,7 @@ impl<const OWNED: bool> BufferedDCInRust<OWNED> {
         dc: Option<&D>,
         area: &S,
         style: c_int,
-    ) -> BufferedDCInRust<OWNED> {
+    ) -> BufferedDCInRust<IN_RUST> {
         unsafe {
             let dc = match dc {
                 Some(r) => r.as_ptr(),
@@ -1109,7 +1111,7 @@ impl<const OWNED: bool> BufferedDCInRust<OWNED> {
         dc: Option<&D>,
         buffer: &B,
         style: c_int,
-    ) -> BufferedDCInRust<OWNED> {
+    ) -> BufferedDCInRust<IN_RUST> {
         unsafe {
             let dc = match dc {
                 Some(r) => r.as_ptr(),
@@ -1128,29 +1130,29 @@ impl Clone for BufferedDCInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BufferedDCInRust<OWNED>> for MemoryDCInRust<OWNED> {
-    fn from(o: BufferedDCInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BufferedDCInRust<IN_RUST>> for MemoryDCInRust<IN_RUST> {
+    fn from(o: BufferedDCInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BufferedDCInRust<OWNED>> for DCInRust<OWNED> {
-    fn from(o: BufferedDCInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BufferedDCInRust<IN_RUST>> for DCInRust<IN_RUST> {
+    fn from(o: BufferedDCInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BufferedDCInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BufferedDCInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BufferedDCInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BufferedDCInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BufferedDCInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BufferedDCInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBufferedDC_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for BufferedDCInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BufferedDCInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1172,7 +1174,7 @@ wxwidgets! {
         DCMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> BufferedPaintDCInRust<OWNED> {
+impl<const IN_RUST: bool> BufferedPaintDCInRust<IN_RUST> {
     /// As with wxBufferedDC, you may either provide the bitmap to be used for buffering or let this object create one internally (in the latter case, the size of the client part of the window is used).
     ///
     /// See [C++ `wxBufferedPaintDC::wxBufferedPaintDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_buffered_paint_d_c.html#a176c15663752a760498faec72c370943).
@@ -1180,7 +1182,7 @@ impl<const OWNED: bool> BufferedPaintDCInRust<OWNED> {
         window: Option<&W>,
         buffer: &B,
         style: c_int,
-    ) -> BufferedPaintDCInRust<OWNED> {
+    ) -> BufferedPaintDCInRust<IN_RUST> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1195,7 +1197,7 @@ impl<const OWNED: bool> BufferedPaintDCInRust<OWNED> {
     pub fn new_with_int<W: WindowMethods>(
         window: Option<&W>,
         style: c_int,
-    ) -> BufferedPaintDCInRust<OWNED> {
+    ) -> BufferedPaintDCInRust<IN_RUST> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1213,34 +1215,34 @@ impl Clone for BufferedPaintDCInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<BufferedPaintDCInRust<OWNED>> for BufferedDCInRust<OWNED> {
-    fn from(o: BufferedPaintDCInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BufferedPaintDCInRust<IN_RUST>> for BufferedDCInRust<IN_RUST> {
+    fn from(o: BufferedPaintDCInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BufferedPaintDCInRust<OWNED>> for MemoryDCInRust<OWNED> {
-    fn from(o: BufferedPaintDCInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BufferedPaintDCInRust<IN_RUST>> for MemoryDCInRust<IN_RUST> {
+    fn from(o: BufferedPaintDCInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BufferedPaintDCInRust<OWNED>> for DCInRust<OWNED> {
-    fn from(o: BufferedPaintDCInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BufferedPaintDCInRust<IN_RUST>> for DCInRust<IN_RUST> {
+    fn from(o: BufferedPaintDCInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<BufferedPaintDCInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: BufferedPaintDCInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<BufferedPaintDCInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: BufferedPaintDCInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for BufferedPaintDCInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for BufferedPaintDCInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxBufferedPaintDC_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for BufferedPaintDCInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BufferedPaintDCInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1258,11 +1260,11 @@ wxwidgets! {
         = BusyCursorInRust<true>(wxBusyCursor) impl
         BusyCursorMethods
 }
-impl<const OWNED: bool> BusyCursorInRust<OWNED> {
+impl<const IN_RUST: bool> BusyCursorInRust<IN_RUST> {
     /// Constructs a busy cursor object, calling wxBeginBusyCursor().
     ///
     /// See [C++ `wxBusyCursor::wxBusyCursor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_busy_cursor.html#aeaa61938f7322311eb43bfa1ef4ea205).
-    pub fn new<C: CursorMethods>(cursor: Option<&C>) -> BusyCursorInRust<OWNED> {
+    pub fn new<C: CursorMethods>(cursor: Option<&C>) -> BusyCursorInRust<IN_RUST> {
         unsafe {
             let cursor = match cursor {
                 Some(r) => r.as_ptr(),
@@ -1280,9 +1282,9 @@ impl Clone for BusyCursorInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for BusyCursorInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BusyCursorInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxBusyCursor_delete(self.0) }
         }
     }
@@ -1300,17 +1302,20 @@ wxwidgets! {
         = BusyInfoInRust<true>(wxBusyInfo) impl
         BusyInfoMethods
 }
-impl<const OWNED: bool> BusyInfoInRust<OWNED> {
+impl<const IN_RUST: bool> BusyInfoInRust<IN_RUST> {
     /// General constructor.
     ///
     /// See [C++ `wxBusyInfo::wxBusyInfo()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_busy_info.html#ab5e29cf81518600a855de4ad4619a2a0).
-    pub fn new_with_busyinfoflags(flags: *const c_void) -> BusyInfoInRust<OWNED> {
+    pub fn new_with_busyinfoflags(flags: *const c_void) -> BusyInfoInRust<IN_RUST> {
         unsafe { BusyInfoInRust(ffi::wxBusyInfo_new(flags)) }
     }
     /// Simple constructor specifying only the message and the parent.
     ///
     /// See [C++ `wxBusyInfo::wxBusyInfo()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_busy_info.html#aa53bff52ae401bab878169e7d04b86d3).
-    pub fn new_with_str<W: WindowMethods>(msg: &str, parent: Option<&W>) -> BusyInfoInRust<OWNED> {
+    pub fn new_with_str<W: WindowMethods>(
+        msg: &str,
+        parent: Option<&W>,
+    ) -> BusyInfoInRust<IN_RUST> {
         unsafe {
             let msg = WxString::from(msg);
             let msg = msg.as_ptr();
@@ -1330,9 +1335,9 @@ impl Clone for BusyInfoInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for BusyInfoInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for BusyInfoInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxBusyInfo_delete(self.0) }
         }
     }
@@ -1355,11 +1360,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ButtonInRust<OWNED> {
+impl<const IN_RUST: bool> ButtonInRust<IN_RUST> {
     /// Default ctor.
     ///
     /// See [C++ `wxButton::wxButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_button.html#a61d2be397a8a673ebaf006003eb17b9e).
-    pub fn new_2step() -> ButtonInRust<OWNED> {
+    pub fn new_2step() -> ButtonInRust<IN_RUST> {
         unsafe { ButtonInRust(ffi::wxButton_new()) }
     }
     /// Constructor, creating and showing a button.
@@ -1374,7 +1379,7 @@ impl<const OWNED: bool> ButtonInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ButtonInRust<OWNED> {
+    ) -> ButtonInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1396,37 +1401,37 @@ impl<const OWNED: bool> ButtonInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ButtonInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for ButtonInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ButtonInRust<OWNED>> for AnyButtonInRust<OWNED> {
-    fn from(o: ButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ButtonInRust<IN_RUST>> for AnyButtonInRust<IN_RUST> {
+    fn from(o: ButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ButtonInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: ButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ButtonInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: ButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ButtonInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: ButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ButtonInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: ButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ButtonInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: ButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ButtonInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: ButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ButtonInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ButtonInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ButtonInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ButtonInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxButton_CLASSINFO()) }
     }

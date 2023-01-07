@@ -12,7 +12,7 @@ wxwidgets! {
         = DateTimeInRust<true>(wxDateTime) impl
         DateTimeMethods
 }
-impl<const OWNED: bool> DateTimeInRust<OWNED> {
+impl<const IN_RUST: bool> DateTimeInRust<IN_RUST> {
     //  ENUM: TZ
     pub const Local: c_int = 0;
     pub const GMT_12: c_int = 0 + 1;
@@ -126,13 +126,13 @@ impl<const OWNED: bool> DateTimeInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#a4cc372429453a21632d64f34f635d853).
-    pub fn new() -> DateTimeInRust<OWNED> {
+    pub fn new() -> DateTimeInRust<IN_RUST> {
         unsafe { DateTimeInRust(ffi::wxDateTime_new()) }
     }
     /// Copy constructor.
     ///
     /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#aca2bc3b942d920e01e496841bd759001).
-    pub fn new_with_datetime<D: DateTimeMethods>(date: &D) -> DateTimeInRust<OWNED> {
+    pub fn new_with_datetime<D: DateTimeMethods>(date: &D) -> DateTimeInRust<IN_RUST> {
         unsafe {
             let date = date.as_ptr();
             DateTimeInRust(ffi::wxDateTime_new1(date))
@@ -143,7 +143,7 @@ impl<const OWNED: bool> DateTimeInRust<OWNED> {
     /// Same as Set().
     ///
     /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#aa2c38922eafec2a94fb5ee9221c0f6b9).
-    pub fn new_with_double(jdn: c_double) -> DateTimeInRust<OWNED> {
+    pub fn new_with_double(jdn: c_double) -> DateTimeInRust<IN_RUST> {
         unsafe { DateTimeInRust(ffi::wxDateTime_new4(jdn)) }
     }
     // NOT_SUPPORTED: fn wxDateTime5()
@@ -158,9 +158,9 @@ impl Clone for DateTimeInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DateTimeInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for DateTimeInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxDateTime_delete(self.0) }
         }
     }

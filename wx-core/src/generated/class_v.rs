@@ -17,49 +17,49 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> VListBoxInRust<OWNED> {
+impl<const IN_RUST: bool> VListBoxInRust<IN_RUST> {
     // BLOCKED: fn wxVListBox()
     // BLOCKED: fn wxVListBox1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for VListBoxInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for VListBoxInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<VListBoxInRust<OWNED>> for VScrolledWindowInRust<OWNED> {
-    fn from(o: VListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VListBoxInRust<IN_RUST>> for VScrolledWindowInRust<IN_RUST> {
+    fn from(o: VListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<VListBoxInRust<OWNED>> for PanelInRust<OWNED> {
-    fn from(o: VListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VListBoxInRust<IN_RUST>> for PanelInRust<IN_RUST> {
+    fn from(o: VListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<VListBoxInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: VListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VListBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: VListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<VListBoxInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: VListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VListBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: VListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<VListBoxInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: VListBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VListBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: VListBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for VListBoxInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for VListBoxInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxVListBox_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for VListBoxInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for VListBoxInRust<IN_RUST> {
     /// Creates the control.
     ///
     /// See [C++ `wxVListBox::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html#ab04914d5db45af7c3c032e19fa2b2615).
@@ -102,44 +102,44 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> VScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> VScrolledWindowInRust<IN_RUST> {
     // BLOCKED: fn wxVScrolledWindow()
     // BLOCKED: fn wxVScrolledWindow1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for VScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for VScrolledWindowInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<VScrolledWindowInRust<OWNED>> for PanelInRust<OWNED> {
-    fn from(o: VScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VScrolledWindowInRust<IN_RUST>> for PanelInRust<IN_RUST> {
+    fn from(o: VScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<VScrolledWindowInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: VScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VScrolledWindowInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: VScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<VScrolledWindowInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: VScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VScrolledWindowInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: VScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<VScrolledWindowInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: VScrolledWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<VScrolledWindowInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: VScrolledWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for VScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for VScrolledWindowInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxVScrolledWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for VScrolledWindowInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for VScrolledWindowInRust<IN_RUST> {
     /// Same as the non-default constructor, but returns a status code: true if ok, false if the window couldn't be created.
     ///
     /// See [C++ `wxVScrolledWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_v_scrolled_window.html#ac6e7a6ace37133efb091b1bf69d09a90).
@@ -180,33 +180,33 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ValidatorInRust<OWNED> {
+impl<const IN_RUST: bool> ValidatorInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxValidator::wxValidator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_validator.html#aac102bc64513a0f8bd38e9db81a3d833).
-    pub fn new() -> ValidatorInRust<OWNED> {
+    pub fn new() -> ValidatorInRust<IN_RUST> {
         unsafe { ValidatorInRust(ffi::wxValidator_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ValidatorInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for ValidatorInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ValidatorInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: ValidatorInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ValidatorInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: ValidatorInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ValidatorInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ValidatorInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ValidatorInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ValidatorInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ValidatorInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ValidatorInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxValidator_CLASSINFO()) }
     }

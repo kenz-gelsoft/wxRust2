@@ -13,7 +13,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> EventInRust<OWNED> {
+impl<const IN_RUST: bool> EventInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -24,19 +24,19 @@ impl Clone for EventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<EventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: EventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: EventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for EventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for EventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for EventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for EventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -55,28 +55,28 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> EvtHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> EvtHandlerInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxEvtHandler::wxEvtHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html#a3f0166c4154227d05575b01eb2c8d4be).
-    pub fn new() -> EvtHandlerInRust<OWNED> {
+    pub fn new() -> EvtHandlerInRust<IN_RUST> {
         unsafe { EvtHandlerInRust(ffi::wxEvtHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for EvtHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for EvtHandlerInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<EvtHandlerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: EvtHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<EvtHandlerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: EvtHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for EvtHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for EvtHandlerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxEvtHandler_CLASSINFO()) }
     }

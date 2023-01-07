@@ -12,10 +12,10 @@ wxwidgets! {
         = OverlayInRust<true>(wxOverlay) impl
         OverlayMethods
 }
-impl<const OWNED: bool> OverlayInRust<OWNED> {
+impl<const IN_RUST: bool> OverlayInRust<IN_RUST> {
     ///
     /// See [C++ `wxOverlay::wxOverlay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_overlay.html#aa99ff227f54e8eaa85d2d7966e317a35).
-    pub fn new() -> OverlayInRust<OWNED> {
+    pub fn new() -> OverlayInRust<IN_RUST> {
         unsafe { OverlayInRust(ffi::wxOverlay_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -27,9 +27,9 @@ impl Clone for OverlayInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for OverlayInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for OverlayInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxOverlay_delete(self.0) }
         }
     }
@@ -52,11 +52,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> OwnerDrawnComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> OwnerDrawnComboBoxInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxOwnerDrawnComboBox::wxOwnerDrawnComboBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html#af949423a0a5e212ee125ad82ecb5941e).
-    pub fn new_2step() -> OwnerDrawnComboBoxInRust<OWNED> {
+    pub fn new_2step() -> OwnerDrawnComboBoxInRust<IN_RUST> {
         unsafe { OwnerDrawnComboBoxInRust(ffi::wxOwnerDrawnComboBox_new()) }
     }
     // NOT_SUPPORTED: fn wxOwnerDrawnComboBox1()
@@ -79,7 +79,7 @@ impl<const OWNED: bool> OwnerDrawnComboBoxInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> OwnerDrawnComboBoxInRust<OWNED> {
+    ) -> OwnerDrawnComboBoxInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -102,58 +102,58 @@ impl<const OWNED: bool> OwnerDrawnComboBoxInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for OwnerDrawnComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for OwnerDrawnComboBoxInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<OwnerDrawnComboBoxInRust<OWNED>> for ComboCtrlInRust<OWNED> {
-    fn from(o: OwnerDrawnComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<OwnerDrawnComboBoxInRust<IN_RUST>> for ComboCtrlInRust<IN_RUST> {
+    fn from(o: OwnerDrawnComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<OwnerDrawnComboBoxInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: OwnerDrawnComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<OwnerDrawnComboBoxInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: OwnerDrawnComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<OwnerDrawnComboBoxInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: OwnerDrawnComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<OwnerDrawnComboBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: OwnerDrawnComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<OwnerDrawnComboBoxInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: OwnerDrawnComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<OwnerDrawnComboBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: OwnerDrawnComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<OwnerDrawnComboBoxInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: OwnerDrawnComboBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<OwnerDrawnComboBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: OwnerDrawnComboBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for OwnerDrawnComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for OwnerDrawnComboBoxInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxOwnerDrawnComboBox_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxOwnerDrawnComboBox
-impl<const OWNED: bool> ItemContainerMethods for OwnerDrawnComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerMethods for OwnerDrawnComboBoxInRust<IN_RUST> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxOwnerDrawnComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> ItemContainerImmutableMethods for OwnerDrawnComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerImmutableMethods for OwnerDrawnComboBoxInRust<IN_RUST> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxOwnerDrawnComboBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TextEntryMethods for OwnerDrawnComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> TextEntryMethods for OwnerDrawnComboBoxInRust<IN_RUST> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxOwnerDrawnComboBox_AsTextEntry(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> ComboCtrlMethods for OwnerDrawnComboBoxInRust<OWNED> {
+impl<const IN_RUST: bool> ComboCtrlMethods for OwnerDrawnComboBoxInRust<IN_RUST> {
     /// Creates the combobox for two-step construction.
     ///
     /// See [C++ `wxOwnerDrawnComboBox::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html#a92bdeed6e785aecb9ee37181b2eb3a3e).

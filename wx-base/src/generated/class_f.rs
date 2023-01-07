@@ -12,17 +12,17 @@ wxwidgets! {
         = FileNameInRust<true>(wxFileName) impl
         FileNameMethods
 }
-impl<const OWNED: bool> FileNameInRust<OWNED> {
+impl<const IN_RUST: bool> FileNameInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxFileName::wxFileName()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_name.html#a2e54bc95c94eb773841c7cb1d7732e35).
-    pub fn new() -> FileNameInRust<OWNED> {
+    pub fn new() -> FileNameInRust<IN_RUST> {
         unsafe { FileNameInRust(ffi::wxFileName_new()) }
     }
     /// Copy constructor.
     ///
     /// See [C++ `wxFileName::wxFileName()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_name.html#abc232361df39f16a802da8391692e2f5).
-    pub fn new_with_filename<F: FileNameMethods>(filename: &F) -> FileNameInRust<OWNED> {
+    pub fn new_with_filename<F: FileNameMethods>(filename: &F) -> FileNameInRust<IN_RUST> {
         unsafe {
             let filename = filename.as_ptr();
             FileNameInRust(ffi::wxFileName_new1(filename))
@@ -41,9 +41,9 @@ impl Clone for FileNameInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for FileNameInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for FileNameInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxFileName_delete(self.0) }
         }
     }

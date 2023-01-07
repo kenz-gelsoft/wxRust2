@@ -14,7 +14,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> KeyEventInRust<OWNED> {
+impl<const IN_RUST: bool> KeyEventInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxKeyEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -25,24 +25,24 @@ impl Clone for KeyEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<KeyEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: KeyEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<KeyEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: KeyEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<KeyEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: KeyEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<KeyEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: KeyEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for KeyEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for KeyEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxKeyEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for KeyEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for KeyEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

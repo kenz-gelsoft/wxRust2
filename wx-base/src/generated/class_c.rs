@@ -12,7 +12,7 @@ wxwidgets! {
         = ClassInfoInRust<true>(wxClassInfo) impl
         ClassInfoMethods
 }
-impl<const OWNED: bool> ClassInfoInRust<OWNED> {
+impl<const IN_RUST: bool> ClassInfoInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxClassInfo()
     pub fn none() -> Option<&'static Self> {
         None
@@ -23,9 +23,9 @@ impl Clone for ClassInfoInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for ClassInfoInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ClassInfoInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxClassInfo_delete(self.0) }
         }
     }
@@ -43,11 +43,11 @@ wxwidgets! {
         = ClientDataInRust<true>(wxClientData) impl
         ClientDataMethods
 }
-impl<const OWNED: bool> ClientDataInRust<OWNED> {
+impl<const IN_RUST: bool> ClientDataInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxClientData::wxClientData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_client_data.html#acf0e79134d5fb8abd8a4a343c616e8d7).
-    pub fn new() -> ClientDataInRust<OWNED> {
+    pub fn new() -> ClientDataInRust<IN_RUST> {
         unsafe { ClientDataInRust(ffi::wxClientData_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -59,9 +59,9 @@ impl Clone for ClientDataInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for ClientDataInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ClientDataInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxClientData_delete(self.0) }
         }
     }

@@ -14,11 +14,11 @@ wxwidgets! {
         ImageHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TGAHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> TGAHandlerInRust<IN_RUST> {
     /// Default constructor for wxTGAHandler.
     ///
     /// See [C++ `wxTGAHandler::wxTGAHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_t_g_a_handler.html#a5258c1de737fd77d505c06a7f822000a).
-    pub fn new() -> TGAHandlerInRust<OWNED> {
+    pub fn new() -> TGAHandlerInRust<IN_RUST> {
         unsafe { TGAHandlerInRust(ffi::wxTGAHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -30,24 +30,24 @@ impl Clone for TGAHandlerInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TGAHandlerInRust<OWNED>> for ImageHandlerInRust<OWNED> {
-    fn from(o: TGAHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TGAHandlerInRust<IN_RUST>> for ImageHandlerInRust<IN_RUST> {
+    fn from(o: TGAHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TGAHandlerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TGAHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TGAHandlerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TGAHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TGAHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TGAHandlerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTGAHandler_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for TGAHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TGAHandlerInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -67,11 +67,11 @@ wxwidgets! {
         // ImageHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TIFFHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> TIFFHandlerInRust<IN_RUST> {
     /// Default constructor for wxTIFFHandler.
     ///
     /// See [C++ `wxTIFFHandler::wxTIFFHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_t_i_f_f_handler.html#a8ff101a3e846cdfaf3170d54805d05c8).
-    pub fn new() -> TIFFHandlerInRust<OWNED> {
+    pub fn new() -> TIFFHandlerInRust<IN_RUST> {
         unsafe { TIFFHandlerInRust(ffi::wxTIFFHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -83,29 +83,29 @@ impl Clone for TIFFHandlerInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TIFFHandlerInRust<OWNED>> for ImageHandlerInRust<OWNED> {
-    fn from(o: TIFFHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TIFFHandlerInRust<IN_RUST>> for ImageHandlerInRust<IN_RUST> {
+    fn from(o: TIFFHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TIFFHandlerInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TIFFHandlerInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TIFFHandlerInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TIFFHandlerInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TIFFHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TIFFHandlerInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTIFFHandler_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for TIFFHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TIFFHandlerInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }
-impl<const OWNED: bool> ImageHandlerMethods for TIFFHandlerInRust<OWNED> {
+impl<const IN_RUST: bool> ImageHandlerMethods for TIFFHandlerInRust<IN_RUST> {
     // NOT_SUPPORTED: fn GetLibraryVersionInfo()
 }
 
@@ -123,28 +123,28 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TaskBarIconInRust<OWNED> {
+impl<const IN_RUST: bool> TaskBarIconInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxTaskBarIcon()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TaskBarIconInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TaskBarIconInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TaskBarIconInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TaskBarIconInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TaskBarIconInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TaskBarIconInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TaskBarIconInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TaskBarIconInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TaskBarIconInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TaskBarIconInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TaskBarIconInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TaskBarIconInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTaskBarIcon_CLASSINFO()) }
     }
@@ -164,7 +164,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TaskBarIconEventInRust<OWNED> {
+impl<const IN_RUST: bool> TaskBarIconEventInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxTaskBarIconEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -175,24 +175,24 @@ impl Clone for TaskBarIconEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TaskBarIconEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: TaskBarIconEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TaskBarIconEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: TaskBarIconEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TaskBarIconEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TaskBarIconEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TaskBarIconEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TaskBarIconEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TaskBarIconEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TaskBarIconEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTaskBarIconEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for TaskBarIconEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TaskBarIconEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -210,17 +210,17 @@ wxwidgets! {
         = TextAttrInRust<true>(wxTextAttr) impl
         TextAttrMethods
 }
-impl<const OWNED: bool> TextAttrInRust<OWNED> {
+impl<const IN_RUST: bool> TextAttrInRust<IN_RUST> {
     /// Constructors.
     ///
     /// See [C++ `wxTextAttr::wxTextAttr()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#a7870ad57a4430b83a9478adeda20c6ec).
-    pub fn new() -> TextAttrInRust<OWNED> {
+    pub fn new() -> TextAttrInRust<IN_RUST> {
         unsafe { TextAttrInRust(ffi::wxTextAttr_new()) }
     }
     // NOT_SUPPORTED: fn wxTextAttr1()
     ///
     /// See [C++ `wxTextAttr::wxTextAttr()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#a56e913249eb032aa4184f26ebdbca454).
-    pub fn new_with_textattr<T: TextAttrMethods>(attr: &T) -> TextAttrInRust<OWNED> {
+    pub fn new_with_textattr<T: TextAttrMethods>(attr: &T) -> TextAttrInRust<IN_RUST> {
         unsafe {
             let attr = attr.as_ptr();
             TextAttrInRust(ffi::wxTextAttr_new2(attr))
@@ -235,9 +235,9 @@ impl Clone for TextAttrInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for TextAttrInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TextAttrInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTextAttr_delete(self.0) }
         }
     }
@@ -259,11 +259,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TextCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> TextCtrlInRust<IN_RUST> {
     /// Default ctor.
     ///
     /// See [C++ `wxTextCtrl::wxTextCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_ctrl.html#a4d01be66f9a9e95501aa55d54f94d54f).
-    pub fn new_2step() -> TextCtrlInRust<OWNED> {
+    pub fn new_2step() -> TextCtrlInRust<IN_RUST> {
         unsafe { TextCtrlInRust(ffi::wxTextCtrl_new()) }
     }
     /// Constructor, creating and showing a text control.
@@ -278,7 +278,7 @@ impl<const OWNED: bool> TextCtrlInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> TextCtrlInRust<OWNED> {
+    ) -> TextCtrlInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -300,38 +300,38 @@ impl<const OWNED: bool> TextCtrlInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TextCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TextCtrlInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TextCtrlInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: TextCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: TextCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextCtrlInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: TextCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: TextCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TextCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TextCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TextCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TextCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TextCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TextCtrlInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTextCtrl_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxTextCtrl
-impl<const OWNED: bool> TextEntryMethods for TextCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> TextEntryMethods for TextCtrlInRust<IN_RUST> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxTextCtrl_AsTextEntry(self.as_ptr()) }
     }
@@ -351,11 +351,11 @@ wxwidgets! {
         // DataObjectSimpleMethods,
         DataObjectMethods
 }
-impl<const OWNED: bool> TextDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> TextDataObjectInRust<IN_RUST> {
     /// Constructor, may be used to initialise the text (otherwise SetText() should be used later).
     ///
     /// See [C++ `wxTextDataObject::wxTextDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_data_object.html#a1d1c7457cb2b89f2df0a11129344c078).
-    pub fn new(text: &str) -> TextDataObjectInRust<OWNED> {
+    pub fn new(text: &str) -> TextDataObjectInRust<IN_RUST> {
         unsafe {
             let text = WxString::from(text);
             let text = text.as_ptr();
@@ -371,24 +371,24 @@ impl Clone for TextDataObjectInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TextDataObjectInRust<OWNED>> for DataObjectSimpleInRust<OWNED> {
-    fn from(o: TextDataObjectInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextDataObjectInRust<IN_RUST>> for DataObjectSimpleInRust<IN_RUST> {
+    fn from(o: TextDataObjectInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextDataObjectInRust<OWNED>> for DataObjectInRust<OWNED> {
-    fn from(o: TextDataObjectInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextDataObjectInRust<IN_RUST>> for DataObjectInRust<IN_RUST> {
+    fn from(o: TextDataObjectInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for TextDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TextDataObjectInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTextDataObject_delete(self.0) }
         }
     }
 }
-impl<const OWNED: bool> DataObjectSimpleMethods for TextDataObjectInRust<OWNED> {
+impl<const IN_RUST: bool> DataObjectSimpleMethods for TextDataObjectInRust<IN_RUST> {
     // BLOCKED: fn GetFormat()
 }
 
@@ -405,7 +405,7 @@ wxwidgets! {
         TextDropTargetMethods,
         DropTargetMethods
 }
-impl<const OWNED: bool> TextDropTargetInRust<OWNED> {
+impl<const IN_RUST: bool> TextDropTargetInRust<IN_RUST> {
     // BLOCKED: fn wxTextDropTarget()
     pub fn none() -> Option<&'static Self> {
         None
@@ -416,14 +416,14 @@ impl Clone for TextDropTargetInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TextDropTargetInRust<OWNED>> for DropTargetInRust<OWNED> {
-    fn from(o: TextDropTargetInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextDropTargetInRust<IN_RUST>> for DropTargetInRust<IN_RUST> {
+    fn from(o: TextDropTargetInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for TextDropTargetInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TextDropTargetInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTextDropTarget_delete(self.0) }
         }
     }
@@ -441,7 +441,7 @@ wxwidgets! {
         = TextEntryInRust<true>(wxTextEntry) impl
         TextEntryMethods
 }
-impl<const OWNED: bool> TextEntryInRust<OWNED> {
+impl<const IN_RUST: bool> TextEntryInRust<IN_RUST> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -451,9 +451,9 @@ impl Clone for TextEntryInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for TextEntryInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TextEntryInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTextEntry_delete(self.0) }
         }
     }
@@ -477,11 +477,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TextEntryDialogInRust<OWNED> {
+impl<const IN_RUST: bool> TextEntryDialogInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxTextEntryDialog::wxTextEntryDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_entry_dialog.html#ac6f3a153bafcc98078217e0201e6b834).
-    pub fn new_2step() -> TextEntryDialogInRust<OWNED> {
+    pub fn new_2step() -> TextEntryDialogInRust<IN_RUST> {
         unsafe { TextEntryDialogInRust(ffi::wxTextEntryDialog_new()) }
     }
     /// Constructor.
@@ -494,7 +494,7 @@ impl<const OWNED: bool> TextEntryDialogInRust<OWNED> {
         value: &str,
         style: c_long,
         pos: &P,
-    ) -> TextEntryDialogInRust<OWNED> {
+    ) -> TextEntryDialogInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -516,42 +516,42 @@ impl<const OWNED: bool> TextEntryDialogInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TextEntryDialogInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TextEntryDialogInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TextEntryDialogInRust<OWNED>> for DialogInRust<OWNED> {
-    fn from(o: TextEntryDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextEntryDialogInRust<IN_RUST>> for DialogInRust<IN_RUST> {
+    fn from(o: TextEntryDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextEntryDialogInRust<OWNED>> for TopLevelWindowInRust<OWNED> {
-    fn from(o: TextEntryDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextEntryDialogInRust<IN_RUST>> for TopLevelWindowInRust<IN_RUST> {
+    fn from(o: TextEntryDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextEntryDialogInRust<OWNED>> for NonOwnedWindowInRust<OWNED> {
-    fn from(o: TextEntryDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextEntryDialogInRust<IN_RUST>> for NonOwnedWindowInRust<IN_RUST> {
+    fn from(o: TextEntryDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextEntryDialogInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: TextEntryDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextEntryDialogInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: TextEntryDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextEntryDialogInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TextEntryDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextEntryDialogInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TextEntryDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextEntryDialogInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TextEntryDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextEntryDialogInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TextEntryDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TextEntryDialogInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TextEntryDialogInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTextEntryDialog_CLASSINFO()) }
     }
@@ -572,13 +572,13 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TextValidatorInRust<OWNED> {
+impl<const IN_RUST: bool> TextValidatorInRust<IN_RUST> {
     /// Copy constructor.
     ///
     /// See [C++ `wxTextValidator::wxTextValidator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_validator.html#a383375eef8f5897386b0cbc8d5eccfe5).
     pub fn new_with_textvalidator<T: TextValidatorMethods>(
         validator: &T,
-    ) -> TextValidatorInRust<OWNED> {
+    ) -> TextValidatorInRust<IN_RUST> {
         unsafe {
             let validator = validator.as_ptr();
             TextValidatorInRust(ffi::wxTextValidator_new(validator))
@@ -587,34 +587,34 @@ impl<const OWNED: bool> TextValidatorInRust<OWNED> {
     /// Constructor taking a style and optional pointer to a wxString variable.
     ///
     /// See [C++ `wxTextValidator::wxTextValidator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_validator.html#aae2135bd984152d4f5d006b012b83992).
-    pub fn new_with_long(style: c_long, val_ptr: *mut c_void) -> TextValidatorInRust<OWNED> {
+    pub fn new_with_long(style: c_long, val_ptr: *mut c_void) -> TextValidatorInRust<IN_RUST> {
         unsafe { TextValidatorInRust(ffi::wxTextValidator_new1(style, val_ptr)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TextValidatorInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TextValidatorInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TextValidatorInRust<OWNED>> for ValidatorInRust<OWNED> {
-    fn from(o: TextValidatorInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextValidatorInRust<IN_RUST>> for ValidatorInRust<IN_RUST> {
+    fn from(o: TextValidatorInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextValidatorInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TextValidatorInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextValidatorInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TextValidatorInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TextValidatorInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TextValidatorInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TextValidatorInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TextValidatorInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TextValidatorInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TextValidatorInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTextValidator_CLASSINFO()) }
     }
@@ -634,7 +634,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ThreadEventInRust<OWNED> {
+impl<const IN_RUST: bool> ThreadEventInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxThreadEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -645,24 +645,24 @@ impl Clone for ThreadEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ThreadEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: ThreadEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ThreadEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: ThreadEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ThreadEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ThreadEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ThreadEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ThreadEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ThreadEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ThreadEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxThreadEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ThreadEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ThreadEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -684,11 +684,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TimePickerCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> TimePickerCtrlInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxTimePickerCtrl::wxTimePickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_time_picker_ctrl.html#a500865526b4290d8ffb1c588b146712a).
-    pub fn new_2step() -> TimePickerCtrlInRust<OWNED> {
+    pub fn new_2step() -> TimePickerCtrlInRust<IN_RUST> {
         unsafe { TimePickerCtrlInRust(ffi::wxTimePickerCtrl_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
@@ -709,7 +709,7 @@ impl<const OWNED: bool> TimePickerCtrlInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> TimePickerCtrlInRust<OWNED> {
+    ) -> TimePickerCtrlInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -730,32 +730,32 @@ impl<const OWNED: bool> TimePickerCtrlInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TimePickerCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TimePickerCtrlInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TimePickerCtrlInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: TimePickerCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TimePickerCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: TimePickerCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TimePickerCtrlInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: TimePickerCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TimePickerCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: TimePickerCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TimePickerCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TimePickerCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TimePickerCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TimePickerCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TimePickerCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TimePickerCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TimePickerCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TimePickerCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TimePickerCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TimePickerCtrlInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTimePickerCtrl_CLASSINFO()) }
     }
@@ -773,7 +773,7 @@ wxwidgets! {
         = TipProviderInRust<true>(wxTipProvider) impl
         TipProviderMethods
 }
-impl<const OWNED: bool> TipProviderInRust<OWNED> {
+impl<const IN_RUST: bool> TipProviderInRust<IN_RUST> {
     // BLOCKED: fn wxTipProvider()
     pub fn none() -> Option<&'static Self> {
         None
@@ -784,9 +784,9 @@ impl Clone for TipProviderInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for TipProviderInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TipProviderInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTipProvider_delete(self.0) }
         }
     }
@@ -807,7 +807,7 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TipWindowInRust<OWNED> {
+impl<const IN_RUST: bool> TipWindowInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxTipWindow::wxTipWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tip_window.html#a080acf702dedf627f278050b90a9e292).
@@ -817,7 +817,7 @@ impl<const OWNED: bool> TipWindowInRust<OWNED> {
         max_length: c_int,
         window_ptr: Option<&T>,
         rect_bounds: Option<&R>,
-    ) -> TipWindowInRust<OWNED> {
+    ) -> TipWindowInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -846,27 +846,27 @@ impl<const OWNED: bool> TipWindowInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TipWindowInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TipWindowInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TipWindowInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: TipWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TipWindowInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: TipWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TipWindowInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TipWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TipWindowInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TipWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TipWindowInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TipWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TipWindowInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TipWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TipWindowInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TipWindowInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTipWindow_CLASSINFO()) }
     }
@@ -889,11 +889,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ToggleButtonInRust<OWNED> {
+impl<const IN_RUST: bool> ToggleButtonInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxToggleButton::wxToggleButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_toggle_button.html#ae80157529dec7b6db6d02641f34512ab).
-    pub fn new_2step() -> ToggleButtonInRust<OWNED> {
+    pub fn new_2step() -> ToggleButtonInRust<IN_RUST> {
         unsafe { ToggleButtonInRust(ffi::wxToggleButton_new()) }
     }
     /// Constructor, creating and showing a toggle button.
@@ -908,7 +908,7 @@ impl<const OWNED: bool> ToggleButtonInRust<OWNED> {
         style: c_long,
         val: &V,
         name: &str,
-    ) -> ToggleButtonInRust<OWNED> {
+    ) -> ToggleButtonInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -930,37 +930,37 @@ impl<const OWNED: bool> ToggleButtonInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ToggleButtonInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for ToggleButtonInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ToggleButtonInRust<OWNED>> for AnyButtonInRust<OWNED> {
-    fn from(o: ToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToggleButtonInRust<IN_RUST>> for AnyButtonInRust<IN_RUST> {
+    fn from(o: ToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToggleButtonInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: ToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToggleButtonInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: ToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToggleButtonInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: ToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToggleButtonInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: ToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToggleButtonInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: ToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToggleButtonInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: ToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToggleButtonInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ToggleButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToggleButtonInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ToggleButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ToggleButtonInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ToggleButtonInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxToggleButton_CLASSINFO()) }
     }
@@ -982,11 +982,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ToolBarInRust<OWNED> {
+impl<const IN_RUST: bool> ToolBarInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxToolBar::wxToolBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tool_bar.html#a1d03fd30dfb9c0af2e65164008eca1a3).
-    pub fn new_2step() -> ToolBarInRust<OWNED> {
+    pub fn new_2step() -> ToolBarInRust<IN_RUST> {
         unsafe { ToolBarInRust(ffi::wxToolBar_new()) }
     }
     /// Constructs a toolbar.
@@ -999,7 +999,7 @@ impl<const OWNED: bool> ToolBarInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> ToolBarInRust<OWNED> {
+    ) -> ToolBarInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1016,32 +1016,32 @@ impl<const OWNED: bool> ToolBarInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ToolBarInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for ToolBarInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ToolBarInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: ToolBarInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolBarInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: ToolBarInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToolBarInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: ToolBarInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolBarInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: ToolBarInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToolBarInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: ToolBarInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolBarInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: ToolBarInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToolBarInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ToolBarInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolBarInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ToolBarInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ToolBarInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ToolBarInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxToolBar_CLASSINFO()) }
     }
@@ -1060,11 +1060,11 @@ wxwidgets! {
         ToolTipMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ToolTipInRust<OWNED> {
+impl<const IN_RUST: bool> ToolTipInRust<IN_RUST> {
     /// Constructor.
     ///
     /// See [C++ `wxToolTip::wxToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tool_tip.html#a64d0a8d8439571dfae42b2558559c8fb).
-    pub fn new(tip: &str) -> ToolTipInRust<OWNED> {
+    pub fn new(tip: &str) -> ToolTipInRust<IN_RUST> {
         unsafe {
             let tip = WxString::from(tip);
             let tip = tip.as_ptr();
@@ -1080,19 +1080,19 @@ impl Clone for ToolTipInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ToolTipInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ToolTipInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolTipInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ToolTipInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ToolTipInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ToolTipInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxToolTip_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ToolTipInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ToolTipInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1115,11 +1115,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ToolbookInRust<OWNED> {
+impl<const IN_RUST: bool> ToolbookInRust<IN_RUST> {
     /// Constructs a choicebook control.
     ///
     /// See [C++ `wxToolbook::wxToolbook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_toolbook.html#a8d988e8cdd0a495d737603418af5da34).
-    pub fn new_2step() -> ToolbookInRust<OWNED> {
+    pub fn new_2step() -> ToolbookInRust<IN_RUST> {
         unsafe { ToolbookInRust(ffi::wxToolbook_new()) }
     }
     ///
@@ -1131,7 +1131,7 @@ impl<const OWNED: bool> ToolbookInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> ToolbookInRust<OWNED> {
+    ) -> ToolbookInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1148,42 +1148,42 @@ impl<const OWNED: bool> ToolbookInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ToolbookInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for ToolbookInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ToolbookInRust<OWNED>> for BookCtrlBaseInRust<OWNED> {
-    fn from(o: ToolbookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolbookInRust<IN_RUST>> for BookCtrlBaseInRust<IN_RUST> {
+    fn from(o: ToolbookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToolbookInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: ToolbookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolbookInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: ToolbookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToolbookInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: ToolbookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolbookInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: ToolbookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToolbookInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: ToolbookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolbookInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: ToolbookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ToolbookInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: ToolbookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<ToolbookInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: ToolbookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ToolbookInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for ToolbookInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxToolbook_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for ToolbookInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for ToolbookInRust<IN_RUST> {
     /// Create the tool book control that has already been constructed with the default constructor.
     ///
     /// See [C++ `wxToolbook::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_toolbook.html#a2138b2b4a597fc51dd28f1b9e9710b1c).
@@ -1226,11 +1226,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TopLevelWindowInRust<OWNED> {
+impl<const IN_RUST: bool> TopLevelWindowInRust<IN_RUST> {
     /// Default ctor.
     ///
     /// See [C++ `wxTopLevelWindow::wxTopLevelWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_top_level_window.html#abb919ad585057de6fce94bb7d5497256).
-    pub fn new_2step() -> TopLevelWindowInRust<OWNED> {
+    pub fn new_2step() -> TopLevelWindowInRust<IN_RUST> {
         unsafe { TopLevelWindowInRust(ffi::wxTopLevelWindow_new()) }
     }
     /// Constructor creating the top level window.
@@ -1244,7 +1244,7 @@ impl<const OWNED: bool> TopLevelWindowInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> TopLevelWindowInRust<OWNED> {
+    ) -> TopLevelWindowInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1265,32 +1265,32 @@ impl<const OWNED: bool> TopLevelWindowInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TopLevelWindowInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TopLevelWindowInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TopLevelWindowInRust<OWNED>> for NonOwnedWindowInRust<OWNED> {
-    fn from(o: TopLevelWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TopLevelWindowInRust<IN_RUST>> for NonOwnedWindowInRust<IN_RUST> {
+    fn from(o: TopLevelWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TopLevelWindowInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: TopLevelWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TopLevelWindowInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: TopLevelWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TopLevelWindowInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TopLevelWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TopLevelWindowInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TopLevelWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TopLevelWindowInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TopLevelWindowInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TopLevelWindowInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TopLevelWindowInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TopLevelWindowInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TopLevelWindowInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTopLevelWindow_CLASSINFO()) }
     }
@@ -1312,11 +1312,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TreeCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> TreeCtrlInRust<IN_RUST> {
     /// Default Constructor.
     ///
     /// See [C++ `wxTreeCtrl::wxTreeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#ac4a07aa9c3ef92d6663ace3c20aa1576).
-    pub fn new_2step() -> TreeCtrlInRust<OWNED> {
+    pub fn new_2step() -> TreeCtrlInRust<IN_RUST> {
         unsafe { TreeCtrlInRust(ffi::wxTreeCtrl_new()) }
     }
     /// Constructor, creating and showing a tree control.
@@ -1330,7 +1330,7 @@ impl<const OWNED: bool> TreeCtrlInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> TreeCtrlInRust<OWNED> {
+    ) -> TreeCtrlInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1350,37 +1350,37 @@ impl<const OWNED: bool> TreeCtrlInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TreeCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TreeCtrlInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TreeCtrlInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: TreeCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeCtrlInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: TreeCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreeCtrlInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: TreeCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: TreeCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreeCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TreeCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TreeCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreeCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TreeCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TreeCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TreeCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TreeCtrlInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTreeCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> ControlMethods for TreeCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> ControlMethods for TreeCtrlInRust<IN_RUST> {
     /// Creates the tree control.
     ///
     /// See [C++ `wxTreeCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#adf40716643252f78e72fcb95dbd347ae).
@@ -1408,7 +1408,7 @@ impl<const OWNED: bool> ControlMethods for TreeCtrlInRust<OWNED> {
         }
     }
 }
-impl<const OWNED: bool> WindowMethods for TreeCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for TreeCtrlInRust<IN_RUST> {
     /// Sets the mode flags associated with the display of the tree control.
     ///
     /// See [C++ `wxTreeCtrl::SetWindowStyle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#a00974d17198e3883bfe4cca9d7ab52ba).
@@ -1433,7 +1433,7 @@ wxwidgets! {
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TreeEventInRust<OWNED> {
+impl<const IN_RUST: bool> TreeEventInRust<IN_RUST> {
     // NOT_SUPPORTED: fn wxTreeEvent()
     pub fn none() -> Option<&'static Self> {
         None
@@ -1444,34 +1444,34 @@ impl Clone for TreeEventInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TreeEventInRust<OWNED>> for NotifyEventInRust<OWNED> {
-    fn from(o: TreeEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeEventInRust<IN_RUST>> for NotifyEventInRust<IN_RUST> {
+    fn from(o: TreeEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreeEventInRust<OWNED>> for CommandEventInRust<OWNED> {
-    fn from(o: TreeEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeEventInRust<IN_RUST>> for CommandEventInRust<IN_RUST> {
+    fn from(o: TreeEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreeEventInRust<OWNED>> for EventInRust<OWNED> {
-    fn from(o: TreeEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeEventInRust<IN_RUST>> for EventInRust<IN_RUST> {
+    fn from(o: TreeEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreeEventInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TreeEventInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeEventInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TreeEventInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TreeEventInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TreeEventInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTreeEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for TreeEventInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TreeEventInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1490,11 +1490,11 @@ wxwidgets! {
         TreeItemDataMethods,
         ClientDataMethods
 }
-impl<const OWNED: bool> TreeItemDataInRust<OWNED> {
+impl<const IN_RUST: bool> TreeItemDataInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxTreeItemData::wxTreeItemData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_item_data.html#a8ebdd1027310183289833bcbb18dba6a).
-    pub fn new() -> TreeItemDataInRust<OWNED> {
+    pub fn new() -> TreeItemDataInRust<IN_RUST> {
         unsafe { TreeItemDataInRust(ffi::wxTreeItemData_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1506,14 +1506,14 @@ impl Clone for TreeItemDataInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TreeItemDataInRust<OWNED>> for ClientDataInRust<OWNED> {
-    fn from(o: TreeItemDataInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeItemDataInRust<IN_RUST>> for ClientDataInRust<IN_RUST> {
+    fn from(o: TreeItemDataInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for TreeItemDataInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TreeItemDataInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTreeItemData_delete(self.0) }
         }
     }
@@ -1531,11 +1531,11 @@ wxwidgets! {
         = TreeItemIdInRust<true>(wxTreeItemId) impl
         TreeItemIdMethods
 }
-impl<const OWNED: bool> TreeItemIdInRust<OWNED> {
+impl<const IN_RUST: bool> TreeItemIdInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxTreeItemId::wxTreeItemId()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_item_id.html#ac1c310e544edbfd2428d1ff91d0e3fb6).
-    pub fn new() -> TreeItemIdInRust<OWNED> {
+    pub fn new() -> TreeItemIdInRust<IN_RUST> {
         unsafe { TreeItemIdInRust(ffi::wxTreeItemId_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1547,9 +1547,9 @@ impl Clone for TreeItemIdInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for TreeItemIdInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TreeItemIdInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTreeItemId_delete(self.0) }
         }
     }
@@ -1570,11 +1570,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TreeListCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> TreeListCtrlInRust<IN_RUST> {
     /// Default constructor, call Create() later.
     ///
     /// See [C++ `wxTreeListCtrl::wxTreeListCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_list_ctrl.html#a844c05440a63f6cf04b36aab91e9449e).
-    pub fn new_2step() -> TreeListCtrlInRust<OWNED> {
+    pub fn new_2step() -> TreeListCtrlInRust<IN_RUST> {
         unsafe { TreeListCtrlInRust(ffi::wxTreeListCtrl_new()) }
     }
     /// Full constructing, creating the object and its window.
@@ -1587,7 +1587,7 @@ impl<const OWNED: bool> TreeListCtrlInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> TreeListCtrlInRust<OWNED> {
+    ) -> TreeListCtrlInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1604,32 +1604,32 @@ impl<const OWNED: bool> TreeListCtrlInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TreeListCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TreeListCtrlInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TreeListCtrlInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: TreeListCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeListCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: TreeListCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreeListCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TreeListCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeListCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TreeListCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreeListCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TreeListCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreeListCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TreeListCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TreeListCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TreeListCtrlInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTreeListCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for TreeListCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for TreeListCtrlInRust<IN_RUST> {
     /// Create the control window.
     ///
     /// See [C++ `wxTreeListCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_list_ctrl.html#aca79c6e9b0f49eac98450d8104de8c95).
@@ -1668,11 +1668,11 @@ wxwidgets! {
         = TreeListItemInRust<true>(wxTreeListItem) impl
         TreeListItemMethods
 }
-impl<const OWNED: bool> TreeListItemInRust<OWNED> {
+impl<const IN_RUST: bool> TreeListItemInRust<IN_RUST> {
     /// Only the default constructor is publicly accessible.
     ///
     /// See [C++ `wxTreeListItem::wxTreeListItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_list_item.html#ae2de6943754cad1454ab8d797bc3ada0).
-    pub fn new() -> TreeListItemInRust<OWNED> {
+    pub fn new() -> TreeListItemInRust<IN_RUST> {
         unsafe { TreeListItemInRust(ffi::wxTreeListItem_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -1684,9 +1684,9 @@ impl Clone for TreeListItemInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for TreeListItemInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TreeListItemInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTreeListItem_delete(self.0) }
         }
     }
@@ -1704,7 +1704,7 @@ wxwidgets! {
         = TreeListItemComparatorInRust<true>(wxTreeListItemComparator) impl
         TreeListItemComparatorMethods
 }
-impl<const OWNED: bool> TreeListItemComparatorInRust<OWNED> {
+impl<const IN_RUST: bool> TreeListItemComparatorInRust<IN_RUST> {
     // BLOCKED: fn wxTreeListItemComparator()
     pub fn none() -> Option<&'static Self> {
         None
@@ -1715,9 +1715,9 @@ impl Clone for TreeListItemComparatorInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for TreeListItemComparatorInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for TreeListItemComparatorInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxTreeListItemComparator_delete(self.0) }
         }
     }
@@ -1740,11 +1740,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> TreebookInRust<OWNED> {
+impl<const IN_RUST: bool> TreebookInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxTreebook::wxTreebook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_treebook.html#acf521d7cb242cd792756ff6959fec797).
-    pub fn new_2step() -> TreebookInRust<OWNED> {
+    pub fn new_2step() -> TreebookInRust<IN_RUST> {
         unsafe { TreebookInRust(ffi::wxTreebook_new()) }
     }
     /// Creates an empty wxTreebook.
@@ -1757,7 +1757,7 @@ impl<const OWNED: bool> TreebookInRust<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> TreebookInRust<OWNED> {
+    ) -> TreebookInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1774,42 +1774,42 @@ impl<const OWNED: bool> TreebookInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for TreebookInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for TreebookInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<TreebookInRust<OWNED>> for BookCtrlBaseInRust<OWNED> {
-    fn from(o: TreebookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreebookInRust<IN_RUST>> for BookCtrlBaseInRust<IN_RUST> {
+    fn from(o: TreebookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreebookInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: TreebookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreebookInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: TreebookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreebookInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: TreebookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreebookInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: TreebookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreebookInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: TreebookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreebookInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: TreebookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<TreebookInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: TreebookInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<TreebookInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: TreebookInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for TreebookInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for TreebookInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxTreebook_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for TreebookInRust<OWNED> {
+impl<const IN_RUST: bool> WindowMethods for TreebookInRust<IN_RUST> {
     /// Creates a treebook control.
     ///
     /// See [C++ `wxTreebook::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_treebook.html#ac6ff8c68c20d71c2c7d4b96bbe7714ce).

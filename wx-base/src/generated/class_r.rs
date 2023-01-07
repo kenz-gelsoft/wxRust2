@@ -12,11 +12,11 @@ wxwidgets! {
         = RefCounterInRust<true>(wxRefCounter) impl
         RefCounterMethods
 }
-impl<const OWNED: bool> RefCounterInRust<OWNED> {
+impl<const IN_RUST: bool> RefCounterInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRefCounter::wxRefCounter()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_ref_counter.html#aebcddb8241dfea7f60f8e4df6776a0e3).
-    pub fn new() -> RefCounterInRust<OWNED> {
+    pub fn new() -> RefCounterInRust<IN_RUST> {
         unsafe { RefCounterInRust(ffi::wxRefCounter_new()) }
     }
     pub fn none() -> Option<&'static Self> {
@@ -28,9 +28,9 @@ impl Clone for RefCounterInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RefCounterInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for RefCounterInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxRefCounter_delete(self.0) }
         }
     }

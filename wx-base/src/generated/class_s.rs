@@ -12,7 +12,7 @@ wxwidgets! {
         = StandardPathsInRust<true>(wxStandardPaths) impl
         StandardPathsMethods
 }
-impl<const OWNED: bool> StandardPathsInRust<OWNED> {
+impl<const IN_RUST: bool> StandardPathsInRust<IN_RUST> {
     //  ENUM: ResourceCat
     pub const ResourceCat_None: c_int = 0;
     pub const ResourceCat_Messages: c_int = 0 + 1;
@@ -43,9 +43,9 @@ impl Clone for StandardPathsInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for StandardPathsInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for StandardPathsInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxStandardPaths_delete(self.0) }
         }
     }

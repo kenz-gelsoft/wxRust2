@@ -16,11 +16,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RadioBoxInRust<OWNED> {
+impl<const IN_RUST: bool> RadioBoxInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRadioBox::wxRadioBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#a2821fb98e7a2b2f52b0966c784bf4864).
-    pub fn new_2step() -> RadioBoxInRust<OWNED> {
+    pub fn new_2step() -> RadioBoxInRust<IN_RUST> {
         unsafe { RadioBoxInRust(ffi::wxRadioBox_new()) }
     }
     // NOT_SUPPORTED: fn wxRadioBox1()
@@ -44,7 +44,7 @@ impl<const OWNED: bool> RadioBoxInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RadioBoxInRust<OWNED> {
+    ) -> RadioBoxInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -76,38 +76,38 @@ impl<const OWNED: bool> RadioBoxInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RadioBoxInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for RadioBoxInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RadioBoxInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: RadioBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RadioBoxInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: RadioBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioBoxInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: RadioBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RadioBoxInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: RadioBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioBoxInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: RadioBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RadioBoxInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: RadioBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioBoxInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: RadioBoxInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RadioBoxInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: RadioBoxInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RadioBoxInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for RadioBoxInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxRadioBox
-impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerImmutableMethods for RadioBoxInRust<IN_RUST> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxRadioBox_AsItemContainerImmutable(self.as_ptr()) }
     }
@@ -129,11 +129,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RadioButtonInRust<OWNED> {
+impl<const IN_RUST: bool> RadioButtonInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRadioButton::wxRadioButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html#a295e680547c57d9ad5bfbc835770ed2b).
-    pub fn new_2step() -> RadioButtonInRust<OWNED> {
+    pub fn new_2step() -> RadioButtonInRust<IN_RUST> {
         unsafe { RadioButtonInRust(ffi::wxRadioButton_new()) }
     }
     /// Constructor, creating and showing a radio button.
@@ -148,7 +148,7 @@ impl<const OWNED: bool> RadioButtonInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RadioButtonInRust<OWNED> {
+    ) -> RadioButtonInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -170,32 +170,32 @@ impl<const OWNED: bool> RadioButtonInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RadioButtonInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for RadioButtonInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RadioButtonInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: RadioButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RadioButtonInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: RadioButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioButtonInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: RadioButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RadioButtonInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: RadioButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioButtonInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: RadioButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RadioButtonInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: RadioButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioButtonInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: RadioButtonInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RadioButtonInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: RadioButtonInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RadioButtonInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for RadioButtonInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxRadioButton_CLASSINFO()) }
     }
@@ -213,23 +213,23 @@ wxwidgets! {
         = RealPointInRust<true>(wxRealPoint) impl
         RealPointMethods
 }
-impl<const OWNED: bool> RealPointInRust<OWNED> {
+impl<const IN_RUST: bool> RealPointInRust<IN_RUST> {
     /// Initializes to zero the x and y members.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a9c4d38e144bb23d0e5ce94f7653e7887).
-    pub fn new() -> RealPointInRust<OWNED> {
+    pub fn new() -> RealPointInRust<IN_RUST> {
         unsafe { RealPointInRust(ffi::wxRealPoint_new()) }
     }
     /// Initializes the point with the given coordinates.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a672ffa73a517579bfee8c32198c5d948).
-    pub fn new_with_double(x: c_double, y: c_double) -> RealPointInRust<OWNED> {
+    pub fn new_with_double(x: c_double, y: c_double) -> RealPointInRust<IN_RUST> {
         unsafe { RealPointInRust(ffi::wxRealPoint_new1(x, y)) }
     }
     /// Converts the given wxPoint (with integer coordinates) to a wxRealPoint.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#ae09522b031b035db4472500e48a0e2d3).
-    pub fn new_with_point<P: PointMethods>(pt: &P) -> RealPointInRust<OWNED> {
+    pub fn new_with_point<P: PointMethods>(pt: &P) -> RealPointInRust<IN_RUST> {
         unsafe {
             let pt = pt.as_ptr();
             RealPointInRust(ffi::wxRealPoint_new2(pt))
@@ -244,9 +244,9 @@ impl Clone for RealPointInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RealPointInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for RealPointInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxRealPoint_delete(self.0) }
         }
     }
@@ -268,11 +268,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RearrangeCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> RearrangeCtrlInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeCtrl::wxRearrangeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html#ad47b3bbeddb36e799feb7d463376c929).
-    pub fn new_2step() -> RearrangeCtrlInRust<OWNED> {
+    pub fn new_2step() -> RearrangeCtrlInRust<IN_RUST> {
         unsafe { RearrangeCtrlInRust(ffi::wxRearrangeCtrl_new()) }
     }
     /// Constructor really creating the control.
@@ -295,7 +295,7 @@ impl<const OWNED: bool> RearrangeCtrlInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RearrangeCtrlInRust<OWNED> {
+    ) -> RearrangeCtrlInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -317,32 +317,32 @@ impl<const OWNED: bool> RearrangeCtrlInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RearrangeCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for RearrangeCtrlInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RearrangeCtrlInRust<OWNED>> for PanelInRust<OWNED> {
-    fn from(o: RearrangeCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeCtrlInRust<IN_RUST>> for PanelInRust<IN_RUST> {
+    fn from(o: RearrangeCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeCtrlInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: RearrangeCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeCtrlInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: RearrangeCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: RearrangeCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeCtrlInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: RearrangeCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: RearrangeCtrlInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeCtrlInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: RearrangeCtrlInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RearrangeCtrlInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for RearrangeCtrlInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeCtrl_CLASSINFO()) }
     }
@@ -366,11 +366,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RearrangeDialogInRust<OWNED> {
+impl<const IN_RUST: bool> RearrangeDialogInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeDialog::wxRearrangeDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html#ad230c6d3baf27e7d3f516a37e62e0d58).
-    pub fn new_2step() -> RearrangeDialogInRust<OWNED> {
+    pub fn new_2step() -> RearrangeDialogInRust<IN_RUST> {
         unsafe { RearrangeDialogInRust(ffi::wxRearrangeDialog_new()) }
     }
     /// Constructor creating the dialog.
@@ -384,7 +384,7 @@ impl<const OWNED: bool> RearrangeDialogInRust<OWNED> {
         items: &A2,
         pos: &P,
         name: &str,
-    ) -> RearrangeDialogInRust<OWNED> {
+    ) -> RearrangeDialogInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -408,42 +408,42 @@ impl<const OWNED: bool> RearrangeDialogInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RearrangeDialogInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for RearrangeDialogInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for DialogInRust<OWNED> {
-    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for DialogInRust<IN_RUST> {
+    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for TopLevelWindowInRust<OWNED> {
-    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for TopLevelWindowInRust<IN_RUST> {
+    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for NonOwnedWindowInRust<OWNED> {
-    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for NonOwnedWindowInRust<IN_RUST> {
+    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeDialogInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: RearrangeDialogInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RearrangeDialogInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for RearrangeDialogInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeDialog_CLASSINFO()) }
     }
@@ -467,11 +467,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RearrangeListInRust<OWNED> {
+impl<const IN_RUST: bool> RearrangeListInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeList::wxRearrangeList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#ab211f32339f81867de12d14dc962d76c).
-    pub fn new_2step() -> RearrangeListInRust<OWNED> {
+    pub fn new_2step() -> RearrangeListInRust<IN_RUST> {
         unsafe { RearrangeListInRust(ffi::wxRearrangeList_new()) }
     }
     /// Constructor really creating the control.
@@ -494,7 +494,7 @@ impl<const OWNED: bool> RearrangeListInRust<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RearrangeListInRust<OWNED> {
+    ) -> RearrangeListInRust<IN_RUST> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -516,53 +516,53 @@ impl<const OWNED: bool> RearrangeListInRust<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RearrangeListInRust<OWNED> {
+impl<const IN_RUST: bool> Clone for RearrangeListInRust<IN_RUST> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for CheckListBoxInRust<OWNED> {
-    fn from(o: RearrangeListInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for CheckListBoxInRust<IN_RUST> {
+    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for ListBoxInRust<OWNED> {
-    fn from(o: RearrangeListInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for ListBoxInRust<IN_RUST> {
+    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for ControlInRust<OWNED> {
-    fn from(o: RearrangeListInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for ControlInRust<IN_RUST> {
+    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for WindowInRust<OWNED> {
-    fn from(o: RearrangeListInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for WindowInRust<IN_RUST> {
+    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for EvtHandlerInRust<OWNED> {
-    fn from(o: RearrangeListInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for EvtHandlerInRust<IN_RUST> {
+    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: RearrangeListInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RearrangeListInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: RearrangeListInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RearrangeListInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for RearrangeListInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeList_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxRearrangeList
-impl<const OWNED: bool> ItemContainerMethods for RearrangeListInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerMethods for RearrangeListInRust<IN_RUST> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxRearrangeList_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListInRust<OWNED> {
+impl<const IN_RUST: bool> ItemContainerImmutableMethods for RearrangeListInRust<IN_RUST> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxRearrangeList_AsItemContainer(self.as_ptr()) }
     }
@@ -580,17 +580,17 @@ wxwidgets! {
         = RectInRust<true>(wxRect) impl
         RectMethods
 }
-impl<const OWNED: bool> RectInRust<OWNED> {
+impl<const IN_RUST: bool> RectInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a19b68679edc9030cba102a8602febded).
-    pub fn new() -> RectInRust<OWNED> {
+    pub fn new() -> RectInRust<IN_RUST> {
         unsafe { RectInRust(ffi::wxRect_new()) }
     }
     /// Creates a wxRect object from x, y, width and height values.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#aefb674bdc6d9d66a5c3746e5acc845d4).
-    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectInRust<OWNED> {
+    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectInRust<IN_RUST> {
         unsafe { RectInRust(ffi::wxRect_new1(x, y, width, height)) }
     }
     /// Creates a wxRect object from top-left and bottom-right points.
@@ -599,7 +599,7 @@ impl<const OWNED: bool> RectInRust<OWNED> {
     pub fn new_with_point_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
-    ) -> RectInRust<OWNED> {
+    ) -> RectInRust<IN_RUST> {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
@@ -612,7 +612,7 @@ impl<const OWNED: bool> RectInRust<OWNED> {
     pub fn new_with_point_size<P: PointMethods, S: SizeMethods>(
         pos: &P,
         size: &S,
-    ) -> RectInRust<OWNED> {
+    ) -> RectInRust<IN_RUST> {
         unsafe {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
@@ -622,7 +622,7 @@ impl<const OWNED: bool> RectInRust<OWNED> {
     /// Creates a wxRect object from size values at the origin.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a806ffe715a971157753890bab59d7d16).
-    pub fn new_with_size<S: SizeMethods>(size: &S) -> RectInRust<OWNED> {
+    pub fn new_with_size<S: SizeMethods>(size: &S) -> RectInRust<IN_RUST> {
         unsafe {
             let size = size.as_ptr();
             RectInRust(ffi::wxRect_new4(size))
@@ -637,9 +637,9 @@ impl Clone for RectInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RectInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for RectInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxRect_delete(self.0) }
         }
     }
@@ -659,17 +659,22 @@ wxwidgets! {
         GDIObjectMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RegionInRust<OWNED> {
+impl<const IN_RUST: bool> RegionInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a1edc6768118cf02749b46774a0ca37f9).
-    pub fn new() -> RegionInRust<OWNED> {
+    pub fn new() -> RegionInRust<IN_RUST> {
         unsafe { RegionInRust(ffi::wxRegion_new()) }
     }
     /// Constructs a rectangular region with the given position and size.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#af2b51dd977107b0dd162db6e4e9e9c5c).
-    pub fn new_with_coord(x: c_int, y: c_int, width: c_int, height: c_int) -> RegionInRust<OWNED> {
+    pub fn new_with_coord(
+        x: c_int,
+        y: c_int,
+        width: c_int,
+        height: c_int,
+    ) -> RegionInRust<IN_RUST> {
         unsafe { RegionInRust(ffi::wxRegion_new1(x, y, width, height)) }
     }
     /// Constructs a rectangular region from the top left point and the bottom right point.
@@ -678,7 +683,7 @@ impl<const OWNED: bool> RegionInRust<OWNED> {
     pub fn new_with_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
-    ) -> RegionInRust<OWNED> {
+    ) -> RegionInRust<IN_RUST> {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
@@ -688,7 +693,7 @@ impl<const OWNED: bool> RegionInRust<OWNED> {
     /// Constructs a rectangular region a wxRect object.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a66708b42c8bce4a76ada65cb312b60f9).
-    pub fn new_with_rect<R: RectMethods>(rect: &R) -> RegionInRust<OWNED> {
+    pub fn new_with_rect<R: RectMethods>(rect: &R) -> RegionInRust<IN_RUST> {
         unsafe {
             let rect = rect.as_ptr();
             RegionInRust(ffi::wxRegion_new3(rect))
@@ -697,7 +702,7 @@ impl<const OWNED: bool> RegionInRust<OWNED> {
     /// Copy constructor, uses Reference Counting.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#ad88c11689e65f02bb99acea6d59a6d9f).
-    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionInRust<OWNED> {
+    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionInRust<IN_RUST> {
         unsafe {
             let region = region.as_ptr();
             RegionInRust(ffi::wxRegion_new4(region))
@@ -707,7 +712,7 @@ impl<const OWNED: bool> RegionInRust<OWNED> {
     /// Constructs a region using a bitmap.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#ad7bfbeb79fe8dc281b91cfba43e8bd0a).
-    pub fn new_with_bitmap<B: BitmapMethods>(bmp: &B) -> RegionInRust<OWNED> {
+    pub fn new_with_bitmap<B: BitmapMethods>(bmp: &B) -> RegionInRust<IN_RUST> {
         unsafe {
             let bmp = bmp.as_ptr();
             RegionInRust(ffi::wxRegion_new6(bmp))
@@ -720,7 +725,7 @@ impl<const OWNED: bool> RegionInRust<OWNED> {
         bmp: &B,
         trans_colour: &C,
         tolerance: c_int,
-    ) -> RegionInRust<OWNED> {
+    ) -> RegionInRust<IN_RUST> {
         unsafe {
             let bmp = bmp.as_ptr();
             let trans_colour = trans_colour.as_ptr();
@@ -736,24 +741,24 @@ impl Clone for RegionInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RegionInRust<OWNED>> for GDIObjectInRust<OWNED> {
-    fn from(o: RegionInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RegionInRust<IN_RUST>> for GDIObjectInRust<IN_RUST> {
+    fn from(o: RegionInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RegionInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: RegionInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RegionInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: RegionInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RegionInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for RegionInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxRegion_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for RegionInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for RegionInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -772,17 +777,17 @@ wxwidgets! {
         RegionIteratorMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RegionIteratorInRust<OWNED> {
+impl<const IN_RUST: bool> RegionIteratorInRust<IN_RUST> {
     /// Default constructor.
     ///
     /// See [C++ `wxRegionIterator::wxRegionIterator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a1a2d17672c9585f86e26b8ee054e08e5).
-    pub fn new() -> RegionIteratorInRust<OWNED> {
+    pub fn new() -> RegionIteratorInRust<IN_RUST> {
         unsafe { RegionIteratorInRust(ffi::wxRegionIterator_new()) }
     }
     /// Creates an iterator object given a region.
     ///
     /// See [C++ `wxRegionIterator::wxRegionIterator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a01b1845c8ecb190d244dfcc97d358f99).
-    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIteratorInRust<OWNED> {
+    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIteratorInRust<IN_RUST> {
         unsafe {
             let region = region.as_ptr();
             RegionIteratorInRust(ffi::wxRegionIterator_new1(region))
@@ -797,19 +802,19 @@ impl Clone for RegionIteratorInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RegionIteratorInRust<OWNED>> for ObjectInRust<OWNED> {
-    fn from(o: RegionIteratorInRust<OWNED>) -> Self {
+impl<const IN_RUST: bool> From<RegionIteratorInRust<IN_RUST>> for ObjectInRust<IN_RUST> {
+    fn from(o: RegionIteratorInRust<IN_RUST>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RegionIteratorInRust<OWNED> {
+impl<const IN_RUST: bool> DynamicCast for RegionIteratorInRust<IN_RUST> {
     fn class_info() -> ClassInfoInRust<false> {
         unsafe { ClassInfoInRust::from_ptr(ffi::wxRegionIterator_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for RegionIteratorInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for RegionIteratorInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -827,7 +832,7 @@ wxwidgets! {
         = RendererNativeInRust<true>(wxRendererNative) impl
         RendererNativeMethods
 }
-impl<const OWNED: bool> RendererNativeInRust<OWNED> {
+impl<const IN_RUST: bool> RendererNativeInRust<IN_RUST> {
     pub fn none() -> Option<&'static Self> {
         None
     }
@@ -837,9 +842,9 @@ impl Clone for RendererNativeInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RendererNativeInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for RendererNativeInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxRendererNative_delete(self.0) }
         }
     }
@@ -857,11 +862,11 @@ wxwidgets! {
         = RichToolTipInRust<true>(wxRichToolTip) impl
         RichToolTipMethods
 }
-impl<const OWNED: bool> RichToolTipInRust<OWNED> {
+impl<const IN_RUST: bool> RichToolTipInRust<IN_RUST> {
     /// Constructor must specify the tooltip title and main message.
     ///
     /// See [C++ `wxRichToolTip::wxRichToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html#ada22072c75eaca6de3de2e89e66a352f).
-    pub fn new(title: &str, message: &str) -> RichToolTipInRust<OWNED> {
+    pub fn new(title: &str, message: &str) -> RichToolTipInRust<IN_RUST> {
         unsafe {
             let title = WxString::from(title);
             let title = title.as_ptr();
@@ -879,9 +884,9 @@ impl Clone for RichToolTipInRust<false> {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RichToolTipInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for RichToolTipInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxRichToolTip_delete(self.0) }
         }
     }
