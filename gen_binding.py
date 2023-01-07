@@ -184,12 +184,12 @@ def methods_rs(initials, libname):
 use std::os::raw::c_void;
 
 pub trait WxRustMethods {
-    type Unowned;
+    type CppManaged;
     unsafe fn as_ptr(&self) -> *mut c_void;
     unsafe fn from_ptr(ptr: *mut c_void) -> Self;
-    unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned;
+    unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::CppManaged;
     unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F);
-    unsafe fn option_from(ptr: *mut c_void) -> Option<Self::Unowned>
+    unsafe fn option_from(ptr: *mut c_void) -> Option<Self::CppManaged>
     where
         Self: Sized,
     {

@@ -144,7 +144,7 @@ pub mod methods {
 
     pub trait DynamicCast: ObjectMethods {
         fn class_info() -> ClassInfoIsOwned<false>;
-        fn as_unowned<T: DynamicCast>(&self) -> Option<T::Unowned> {
+        fn as_unowned<T: DynamicCast>(&self) -> Option<T::CppManaged> {
             if self.is_kind_of(Some(&T::class_info())) {
                 unsafe { Some(T::from_unowned_ptr(self.as_ptr())) }
             } else {
@@ -380,7 +380,7 @@ impl<T: WxRustMethods> WeakRef<T> {
         };
         WeakRef(ptr, PhantomData)
     }
-    pub fn get(&self) -> Option<T::Unowned> {
+    pub fn get(&self) -> Option<T::CppManaged> {
         unsafe {
             let ptr = self.0;
             let ptr = if ptr.is_null() {
