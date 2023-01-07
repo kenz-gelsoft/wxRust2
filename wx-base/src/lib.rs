@@ -144,7 +144,7 @@ pub mod methods {
 
     pub trait DynamicCast: ObjectMethods {
         fn class_info() -> ClassInfoInRust<false>;
-        fn as_unowned<T: DynamicCast>(&self) -> Option<T::CppManaged> {
+        fn dynanic_cast<T: DynamicCast>(&self) -> Option<T::CppManaged> {
             if self.is_kind_of(Some(&T::class_info())) {
                 unsafe { Some(T::from_cpp_managed_ptr(self.as_ptr())) }
             } else {
