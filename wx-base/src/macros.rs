@@ -9,13 +9,13 @@ macro_rules! wxwidgets {
     ) => {
         $(#[doc = $docComment])*
         $(#[doc($docAttrKey = $docAttrValue)])*
-        pub struct $typeInRust<const OWNED: bool>(*mut c_void);
+        pub struct $typeInRust<const IN_RUST: bool>(*mut c_void);
         $(#[doc = $docComment])*
         pub type $type = $typeInRust<true>;
         $(
-            impl<const OWNED: bool> $methods for $typeInRust<OWNED> {}
+            impl<const IN_RUST: bool> $methods for $typeInRust<IN_RUST> {}
         )*
-        impl<const OWNED: bool> WxRustMethods for $typeInRust<OWNED> {
+        impl<const IN_RUST: bool> WxRustMethods for $typeInRust<IN_RUST> {
             type CppManaged = $typeInRust<false>;
             unsafe fn as_ptr(&self) -> *mut c_void { self.0 }
             unsafe fn from_ptr(ptr: *mut c_void) -> Self {

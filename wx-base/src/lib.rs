@@ -275,14 +275,14 @@ wxwidgets! {
         = ArrayIntInRust<true>(wxArrayInt) impl
         ArrayIntMethods
 }
-impl<const OWNED: bool> ArrayIntInRust<OWNED> {
+impl<const IN_RUST: bool> ArrayIntInRust<IN_RUST> {
     pub fn new() -> Self {
         unsafe { ArrayIntInRust(ffi::wxArrayInt_new()) }
     }
 }
-impl<const OWNED: bool> Drop for ArrayIntInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ArrayIntInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxArrayInt_delete(self.0) }
         }
     }
@@ -293,14 +293,14 @@ wxwidgets! {
         = ArrayStringInRust<true>(wxArrayString) impl
         ArrayStringMethods
 }
-impl<const OWNED: bool> ArrayStringInRust<OWNED> {
+impl<const IN_RUST: bool> ArrayStringInRust<IN_RUST> {
     pub fn new() -> Self {
         unsafe { ArrayStringInRust(ffi::wxArrayString_new()) }
     }
 }
-impl<const OWNED: bool> Drop for ArrayStringInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for ArrayStringInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxArrayString_delete(self.0) }
         }
     }
@@ -326,14 +326,14 @@ wxwidgets! {
         = StringConstIteratorInRust<true>(wxStringConstIterator) impl
         StringConstIteratorMethods
 }
-impl<const OWNED: bool> StringConstIteratorInRust<OWNED> {
+impl<const IN_RUST: bool> StringConstIteratorInRust<IN_RUST> {
     pub fn new() -> Self {
         unsafe { StringConstIteratorInRust(ffi::wxStringConstIterator_new()) }
     }
 }
-impl<const OWNED: bool> Drop for StringConstIteratorInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for StringConstIteratorInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxStringConstIterator_delete(self.0) }
         }
     }
@@ -410,4 +410,4 @@ impl<T> Drop for WeakRef<T> {
     }
 }
 
-impl<const OWNED: bool> DateTimeMethodsManual for DateTimeInRust<OWNED> {}
+impl<const IN_RUST: bool> DateTimeMethodsManual for DateTimeInRust<IN_RUST> {}

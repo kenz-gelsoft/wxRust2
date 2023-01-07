@@ -2415,19 +2415,19 @@ impl MenuItemBuilder for Menu {
 }
 
 // wxDefaultPosition
-impl<const OWNED: bool> Default for PointInRust<OWNED> {
+impl<const IN_RUST: bool> Default for PointInRust<IN_RUST> {
     fn default() -> Self {
         PointInRust::new_with_int(-1, -1)
     }
 }
 // wxDefaultSize
-impl<const OWNED: bool> Default for SizeInRust<OWNED> {
+impl<const IN_RUST: bool> Default for SizeInRust<IN_RUST> {
     fn default() -> Self {
         SizeInRust::new_with_int(-1, -1)
     }
 }
 // wxDefaultValidator
-impl<const OWNED: bool> Default for ValidatorInRust<OWNED> {
+impl<const IN_RUST: bool> Default for ValidatorInRust<IN_RUST> {
     fn default() -> Self {
         ValidatorInRust::new()
     }
@@ -2438,14 +2438,14 @@ wxwidgets! {
         = SizerItemListInRust<true>(wxSizerItemList) impl
         SizerItemListMethods
 }
-impl<const OWNED: bool> SizerItemListInRust<OWNED> {
+impl<const IN_RUST: bool> SizerItemListInRust<IN_RUST> {
     pub fn new() -> Self {
         unsafe { SizerItemListInRust(ffi::wxSizerItemList_new()) }
     }
 }
-impl<const OWNED: bool> Drop for SizerItemListInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for SizerItemListInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxSizerItemList_delete(self.0) }
         }
     }
@@ -2456,14 +2456,14 @@ wxwidgets! {
         = WindowListInRust<true>(wxWindowList) impl
         WindowListMethods
 }
-impl<const OWNED: bool> WindowListInRust<OWNED> {
+impl<const IN_RUST: bool> WindowListInRust<IN_RUST> {
     pub fn new() -> Self {
         unsafe { WindowListInRust(ffi::wxWindowList_new()) }
     }
 }
-impl<const OWNED: bool> Drop for WindowListInRust<OWNED> {
+impl<const IN_RUST: bool> Drop for WindowListInRust<IN_RUST> {
     fn drop(&mut self) {
-        if OWNED {
+        if IN_RUST {
             unsafe { ffi::wxWindowList_delete(self.0) }
         }
     }
