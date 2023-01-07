@@ -284,18 +284,18 @@ class ReturnTypeWrapper:
             return ['String',
                     'WxString::from_ptr(%s).into()' % (call,)]
         if self.is_ctor:
-            return ['%sInRust<IN_RUST>' % (returns,),
-                    '%sInRust(%s)' % (returns, call)]
+            return ['%sFromCpp<IN_RUST>' % (returns,),
+                    '%sFromCpp(%s)' % (returns, call)]
         if self.__returns.is_ref_to_binding():
-            return ['%sInRust<false>' % (returns,),
-                    '%sInRust::from_ptr(%s)' % (returns, call)]
+            return ['%sFromCpp<false>' % (returns,),
+                    '%sFromCpp::from_ptr(%s)' % (returns, call)]
         if self.__returns.is_ptr_to_binding():
             if not self.is_owned:
                 if self.is_trackable:
                     return ['WeakRef<%s>' % (returns,),
                             'WeakRef::<%s>::from(%s)' % (returns, call)]
                 else:
-                    return ['Option<%sInRust<false>>' % (returns,),
+                    return ['Option<%sFromCpp<false>>' % (returns,),
                             '%s::option_from(%s)' % (returns, call)]
         return [returns,
                 '%s::from_ptr(%s)' % (returns, call)]

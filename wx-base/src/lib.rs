@@ -143,7 +143,7 @@ pub mod methods {
     }
 
     pub trait DynamicCast: ObjectMethods {
-        fn class_info() -> ClassInfoInRust<false>;
+        fn class_info() -> ClassInfoFromCpp<false>;
         fn dynanic_cast<T: DynamicCast>(&self) -> Option<T::CppManaged> {
             if self.is_kind_of(Some(&T::class_info())) {
                 unsafe { Some(T::from_cpp_managed_ptr(self.as_ptr())) }
@@ -272,15 +272,15 @@ impl App {
 
 wxwidgets! {
     class ArrayInt
-        = ArrayIntInRust<true>(wxArrayInt) impl
+        = ArrayIntFromCpp<true>(wxArrayInt) impl
         ArrayIntMethods
 }
-impl<const IN_RUST: bool> ArrayIntInRust<IN_RUST> {
+impl<const IN_RUST: bool> ArrayIntFromCpp<IN_RUST> {
     pub fn new() -> Self {
-        unsafe { ArrayIntInRust(ffi::wxArrayInt_new()) }
+        unsafe { ArrayIntFromCpp(ffi::wxArrayInt_new()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ArrayIntInRust<IN_RUST> {
+impl<const IN_RUST: bool> Drop for ArrayIntFromCpp<IN_RUST> {
     fn drop(&mut self) {
         if IN_RUST {
             unsafe { ffi::wxArrayInt_delete(self.0) }
@@ -290,15 +290,15 @@ impl<const IN_RUST: bool> Drop for ArrayIntInRust<IN_RUST> {
 
 wxwidgets! {
     class ArrayString
-        = ArrayStringInRust<true>(wxArrayString) impl
+        = ArrayStringFromCpp<true>(wxArrayString) impl
         ArrayStringMethods
 }
-impl<const IN_RUST: bool> ArrayStringInRust<IN_RUST> {
+impl<const IN_RUST: bool> ArrayStringFromCpp<IN_RUST> {
     pub fn new() -> Self {
-        unsafe { ArrayStringInRust(ffi::wxArrayString_new()) }
+        unsafe { ArrayStringFromCpp(ffi::wxArrayString_new()) }
     }
 }
-impl<const IN_RUST: bool> Drop for ArrayStringInRust<IN_RUST> {
+impl<const IN_RUST: bool> Drop for ArrayStringFromCpp<IN_RUST> {
     fn drop(&mut self) {
         if IN_RUST {
             unsafe { ffi::wxArrayString_delete(self.0) }
@@ -323,15 +323,15 @@ where
 // (wx)String::const_iterator
 wxwidgets! {
     class StringConstIterator
-        = StringConstIteratorInRust<true>(wxStringConstIterator) impl
+        = StringConstIteratorFromCpp<true>(wxStringConstIterator) impl
         StringConstIteratorMethods
 }
-impl<const IN_RUST: bool> StringConstIteratorInRust<IN_RUST> {
+impl<const IN_RUST: bool> StringConstIteratorFromCpp<IN_RUST> {
     pub fn new() -> Self {
-        unsafe { StringConstIteratorInRust(ffi::wxStringConstIterator_new()) }
+        unsafe { StringConstIteratorFromCpp(ffi::wxStringConstIterator_new()) }
     }
 }
-impl<const IN_RUST: bool> Drop for StringConstIteratorInRust<IN_RUST> {
+impl<const IN_RUST: bool> Drop for StringConstIteratorFromCpp<IN_RUST> {
     fn drop(&mut self) {
         if IN_RUST {
             unsafe { ffi::wxStringConstIterator_delete(self.0) }
@@ -410,4 +410,4 @@ impl<T> Drop for WeakRef<T> {
     }
 }
 
-impl<const IN_RUST: bool> DateTimeMethodsManual for DateTimeInRust<IN_RUST> {}
+impl<const IN_RUST: bool> DateTimeMethodsManual for DateTimeFromCpp<IN_RUST> {}

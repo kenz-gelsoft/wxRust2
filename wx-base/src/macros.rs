@@ -4,25 +4,25 @@ macro_rules! wxwidgets {
         $(#[doc = $docComment:tt])*
         $(#[doc($docAttrKey:ident = $docAttrValue:tt)])*
         class $type:ident
-            = $typeInRust:ident<true>($wxType:ident) impl
+            = $typeFromCpp:ident<true>($wxType:ident) impl
             $($methods:ident),*
     ) => {
         $(#[doc = $docComment])*
         $(#[doc($docAttrKey = $docAttrValue)])*
-        pub struct $typeInRust<const IN_RUST: bool>(*mut c_void);
+        pub struct $typeFromCpp<const IN_RUST: bool>(*mut c_void);
         $(#[doc = $docComment])*
-        pub type $type = $typeInRust<true>;
+        pub type $type = $typeFromCpp<true>;
         $(
-            impl<const IN_RUST: bool> $methods for $typeInRust<IN_RUST> {}
+            impl<const IN_RUST: bool> $methods for $typeFromCpp<IN_RUST> {}
         )*
-        impl<const IN_RUST: bool> WxRustMethods for $typeInRust<IN_RUST> {
-            type CppManaged = $typeInRust<false>;
+        impl<const IN_RUST: bool> WxRustMethods for $typeFromCpp<IN_RUST> {
+            type CppManaged = $typeFromCpp<false>;
             unsafe fn as_ptr(&self) -> *mut c_void { self.0 }
             unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-                $typeInRust(ptr)
+                $typeFromCpp(ptr)
             }
             unsafe fn from_cpp_managed_ptr(ptr: *mut c_void) -> Self::CppManaged {
-                $typeInRust::<false>(ptr)
+                $typeFromCpp::<false>(ptr)
             }
             unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F) {
                 let tmp = Self(ptr);
