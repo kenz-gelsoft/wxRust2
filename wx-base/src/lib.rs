@@ -143,7 +143,7 @@ pub mod methods {
     }
 
     pub trait DynamicCast: ObjectMethods {
-        fn class_info() -> ClassInfoIsOwned<false>;
+        fn class_info() -> ClassInfoInRust<false>;
         fn as_unowned<T: DynamicCast>(&self) -> Option<T::CppManaged> {
             if self.is_kind_of(Some(&T::class_info())) {
                 unsafe { Some(T::from_unowned_ptr(self.as_ptr())) }
@@ -272,15 +272,15 @@ impl App {
 
 wxwidgets! {
     class ArrayInt
-        = ArrayIntIsOwned<true>(wxArrayInt) impl
+        = ArrayIntInRust<true>(wxArrayInt) impl
         ArrayIntMethods
 }
-impl<const OWNED: bool> ArrayIntIsOwned<OWNED> {
+impl<const OWNED: bool> ArrayIntInRust<OWNED> {
     pub fn new() -> Self {
-        unsafe { ArrayIntIsOwned(ffi::wxArrayInt_new()) }
+        unsafe { ArrayIntInRust(ffi::wxArrayInt_new()) }
     }
 }
-impl<const OWNED: bool> Drop for ArrayIntIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for ArrayIntInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxArrayInt_delete(self.0) }
@@ -290,15 +290,15 @@ impl<const OWNED: bool> Drop for ArrayIntIsOwned<OWNED> {
 
 wxwidgets! {
     class ArrayString
-        = ArrayStringIsOwned<true>(wxArrayString) impl
+        = ArrayStringInRust<true>(wxArrayString) impl
         ArrayStringMethods
 }
-impl<const OWNED: bool> ArrayStringIsOwned<OWNED> {
+impl<const OWNED: bool> ArrayStringInRust<OWNED> {
     pub fn new() -> Self {
-        unsafe { ArrayStringIsOwned(ffi::wxArrayString_new()) }
+        unsafe { ArrayStringInRust(ffi::wxArrayString_new()) }
     }
 }
-impl<const OWNED: bool> Drop for ArrayStringIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for ArrayStringInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxArrayString_delete(self.0) }
@@ -323,15 +323,15 @@ where
 // (wx)String::const_iterator
 wxwidgets! {
     class StringConstIterator
-        = StringConstIteratorIsOwned<true>(wxStringConstIterator) impl
+        = StringConstIteratorInRust<true>(wxStringConstIterator) impl
         StringConstIteratorMethods
 }
-impl<const OWNED: bool> StringConstIteratorIsOwned<OWNED> {
+impl<const OWNED: bool> StringConstIteratorInRust<OWNED> {
     pub fn new() -> Self {
-        unsafe { StringConstIteratorIsOwned(ffi::wxStringConstIterator_new()) }
+        unsafe { StringConstIteratorInRust(ffi::wxStringConstIterator_new()) }
     }
 }
-impl<const OWNED: bool> Drop for StringConstIteratorIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for StringConstIteratorInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxStringConstIterator_delete(self.0) }
@@ -410,4 +410,4 @@ impl<T> Drop for WeakRef<T> {
     }
 }
 
-impl<const OWNED: bool> DateTimeMethodsManual for DateTimeIsOwned<OWNED> {}
+impl<const OWNED: bool> DateTimeMethodsManual for DateTimeInRust<OWNED> {}

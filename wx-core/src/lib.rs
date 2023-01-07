@@ -2415,35 +2415,35 @@ impl MenuItemBuilder for Menu {
 }
 
 // wxDefaultPosition
-impl<const OWNED: bool> Default for PointIsOwned<OWNED> {
+impl<const OWNED: bool> Default for PointInRust<OWNED> {
     fn default() -> Self {
-        PointIsOwned::new_with_int(-1, -1)
+        PointInRust::new_with_int(-1, -1)
     }
 }
 // wxDefaultSize
-impl<const OWNED: bool> Default for SizeIsOwned<OWNED> {
+impl<const OWNED: bool> Default for SizeInRust<OWNED> {
     fn default() -> Self {
-        SizeIsOwned::new_with_int(-1, -1)
+        SizeInRust::new_with_int(-1, -1)
     }
 }
 // wxDefaultValidator
-impl<const OWNED: bool> Default for ValidatorIsOwned<OWNED> {
+impl<const OWNED: bool> Default for ValidatorInRust<OWNED> {
     fn default() -> Self {
-        ValidatorIsOwned::new()
+        ValidatorInRust::new()
     }
 }
 
 wxwidgets! {
     class SizerItemList
-        = SizerItemListIsOwned<true>(wxSizerItemList) impl
+        = SizerItemListInRust<true>(wxSizerItemList) impl
         SizerItemListMethods
 }
-impl<const OWNED: bool> SizerItemListIsOwned<OWNED> {
+impl<const OWNED: bool> SizerItemListInRust<OWNED> {
     pub fn new() -> Self {
-        unsafe { SizerItemListIsOwned(ffi::wxSizerItemList_new()) }
+        unsafe { SizerItemListInRust(ffi::wxSizerItemList_new()) }
     }
 }
-impl<const OWNED: bool> Drop for SizerItemListIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for SizerItemListInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxSizerItemList_delete(self.0) }
@@ -2453,15 +2453,15 @@ impl<const OWNED: bool> Drop for SizerItemListIsOwned<OWNED> {
 
 wxwidgets! {
     class WindowList
-        = WindowListIsOwned<true>(wxWindowList) impl
+        = WindowListInRust<true>(wxWindowList) impl
         WindowListMethods
 }
-impl<const OWNED: bool> WindowListIsOwned<OWNED> {
+impl<const OWNED: bool> WindowListInRust<OWNED> {
     pub fn new() -> Self {
-        unsafe { WindowListIsOwned(ffi::wxWindowList_new()) }
+        unsafe { WindowListInRust(ffi::wxWindowList_new()) }
     }
 }
-impl<const OWNED: bool> Drop for WindowListIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for WindowListInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxWindowList_delete(self.0) }
