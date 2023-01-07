@@ -144,11 +144,11 @@ class RustClassBinding:
         return True
 
     def _impl_clone(self):
-        is_owned = '%sInRust' % (self.__model.unprefixed(),)
+        in_rust = '%sInRust' % (self.__model.unprefixed(),)
         if self._has_drop():
-            yield 'impl Clone for %s<false> {' % (is_owned,)
+            yield 'impl Clone for %s<false> {' % (in_rust,)
         else:
-            yield 'impl<const IN_RUST: bool> Clone for %s<IN_RUST> {' % (is_owned,)
+            yield 'impl<const IN_RUST: bool> Clone for %s<IN_RUST> {' % (in_rust,)
         yield '    fn clone(&self) -> Self {'
         yield '        Self(self.0)'
         yield '    }'
