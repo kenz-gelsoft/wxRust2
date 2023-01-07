@@ -3,7 +3,7 @@ use super::*;
 // wxEditableListBox
 /// This trait represents [C++ `wxEditableListBox` class](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html)'s methods and inheritance.
 ///
-/// See [`EditableListBoxIsOwned`] documentation for the class usage.
+/// See [`EditableListBoxInRust`] documentation for the class usage.
 pub trait EditableListBoxMethods: PanelMethods {
     // DTOR: fn ~wxEditableListBox()
     /// Creates the editable listbox for two-step construction.
@@ -56,12 +56,12 @@ pub trait EditableListBoxMethods: PanelMethods {
 // wxEraseEvent
 /// This trait represents [C++ `wxEraseEvent` class](https://docs.wxwidgets.org/3.2/classwx_erase_event.html)'s methods and inheritance.
 ///
-/// See [`EraseEventIsOwned`] documentation for the class usage.
+/// See [`EraseEventInRust`] documentation for the class usage.
 pub trait EraseEventMethods: EventMethods {
     /// Returns the device context associated with the erase event to draw on.
     ///
     /// See [C++ `wxEraseEvent::GetDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#a44679163c23de75ecdbb2594add850cc).
-    fn get_dc(&self) -> Option<DCIsOwned<false>> {
+    fn get_dc(&self) -> Option<DCInRust<false>> {
         unsafe { DC::option_from(ffi::wxEraseEvent_GetDC(self.as_ptr())) }
     }
 }
@@ -69,7 +69,7 @@ pub trait EraseEventMethods: EventMethods {
 // wxEventBlocker
 /// This trait represents [C++ `wxEventBlocker` class](https://docs.wxwidgets.org/3.2/classwx_event_blocker.html)'s methods and inheritance.
 ///
-/// See [`EventBlockerIsOwned`] documentation for the class usage.
+/// See [`EventBlockerInRust`] documentation for the class usage.
 pub trait EventBlockerMethods: EvtHandlerMethods {
     // DTOR: fn ~wxEventBlocker()
     // NOT_SUPPORTED: fn Block()

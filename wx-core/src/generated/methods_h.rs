@@ -3,13 +3,13 @@ use super::*;
 // wxHScrolledWindow
 /// This trait represents [C++ `wxHScrolledWindow` class](https://docs.wxwidgets.org/3.2/classwx_h_scrolled_window.html)'s methods and inheritance.
 ///
-/// See [`HScrolledWindowIsOwned`] documentation for the class usage.
+/// See [`HScrolledWindowInRust`] documentation for the class usage.
 pub trait HScrolledWindowMethods: PanelMethods {}
 
 // wxHTMLDataObject
 /// This trait represents [C++ `wxHTMLDataObject` class](https://docs.wxwidgets.org/3.2/classwx_h_t_m_l_data_object.html)'s methods and inheritance.
 ///
-/// See [`HTMLDataObjectIsOwned`] documentation for the class usage.
+/// See [`HTMLDataObjectInRust`] documentation for the class usage.
 pub trait HTMLDataObjectMethods: DataObjectSimpleMethods {
     /// Returns the HTML string.
     ///
@@ -32,13 +32,13 @@ pub trait HTMLDataObjectMethods: DataObjectSimpleMethods {
 // wxHVScrolledWindow
 /// This trait represents [C++ `wxHVScrolledWindow` class](https://docs.wxwidgets.org/3.2/classwx_h_v_scrolled_window.html)'s methods and inheritance.
 ///
-/// See [`HVScrolledWindowIsOwned`] documentation for the class usage.
+/// See [`HVScrolledWindowInRust`] documentation for the class usage.
 pub trait HVScrolledWindowMethods: PanelMethods {}
 
 // wxHeaderColumn
 /// This trait represents [C++ `wxHeaderColumn` class](https://docs.wxwidgets.org/3.2/classwx_header_column.html)'s methods and inheritance.
 ///
-/// See [`HeaderColumnIsOwned`] documentation for the class usage.
+/// See [`HeaderColumnInRust`] documentation for the class usage.
 pub trait HeaderColumnMethods: WxRustMethods {
     /// Get the text shown in the column header.
     ///
@@ -135,13 +135,13 @@ pub trait HeaderColumnMethods: WxRustMethods {
 // wxHeaderColumnSimple
 /// This trait represents [C++ `wxHeaderColumnSimple` class](https://docs.wxwidgets.org/3.2/classwx_header_column_simple.html)'s methods and inheritance.
 ///
-/// See [`HeaderColumnSimpleIsOwned`] documentation for the class usage.
+/// See [`HeaderColumnSimpleInRust`] documentation for the class usage.
 pub trait HeaderColumnSimpleMethods: SettableHeaderColumnMethods {}
 
 // wxHeaderCtrl
 /// This trait represents [C++ `wxHeaderCtrl` class](https://docs.wxwidgets.org/3.2/classwx_header_ctrl.html)'s methods and inheritance.
 ///
-/// See [`HeaderCtrlIsOwned`] documentation for the class usage.
+/// See [`HeaderCtrlInRust`] documentation for the class usage.
 pub trait HeaderCtrlMethods: ControlMethods {
     /// Set the number of columns in the control.
     ///
@@ -255,7 +255,7 @@ pub trait HeaderCtrlMethods: ControlMethods {
 // wxHeaderCtrlEvent
 /// This trait represents [C++ `wxHeaderCtrlEvent` class](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_event.html)'s methods and inheritance.
 ///
-/// See [`HeaderCtrlEventIsOwned`] documentation for the class usage.
+/// See [`HeaderCtrlEventInRust`] documentation for the class usage.
 pub trait HeaderCtrlEventMethods: NotifyEventMethods {
     /// Return the index of the column affected by this event.
     ///
@@ -295,7 +295,7 @@ pub trait HeaderCtrlEventMethods: NotifyEventMethods {
 // wxHeaderCtrlSimple
 /// This trait represents [C++ `wxHeaderCtrlSimple` class](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_simple.html)'s methods and inheritance.
 ///
-/// See [`HeaderCtrlSimpleIsOwned`] documentation for the class usage.
+/// See [`HeaderCtrlSimpleInRust`] documentation for the class usage.
 pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
     /// Insert the column at the given position.
     ///
@@ -350,14 +350,14 @@ pub trait HeaderCtrlSimpleMethods: HeaderCtrlMethods {
 // wxHelpEvent
 /// This trait represents [C++ `wxHelpEvent` class](https://docs.wxwidgets.org/3.2/classwx_help_event.html)'s methods and inheritance.
 ///
-/// See [`HelpEventIsOwned`] documentation for the class usage.
+/// See [`HelpEventInRust`] documentation for the class usage.
 pub trait HelpEventMethods: CommandEventMethods {
     // NOT_SUPPORTED: fn GetOrigin()
     /// Returns the left-click position of the mouse, in screen coordinates.
     ///
     /// See [C++ `wxHelpEvent::GetPosition()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_help_event.html#a28bd5a0701bb9d0537dced60743a2292).
-    fn get_position(&self) -> PointIsOwned<false> {
-        unsafe { PointIsOwned::from_ptr(ffi::wxHelpEvent_GetPosition(self.as_ptr())) }
+    fn get_position(&self) -> PointInRust<false> {
+        unsafe { PointInRust::from_ptr(ffi::wxHelpEvent_GetPosition(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn SetOrigin()
     /// Sets the left-click position of the mouse, in screen coordinates.
@@ -374,7 +374,7 @@ pub trait HelpEventMethods: CommandEventMethods {
 // wxHyperlinkCtrl
 /// This trait represents [C++ `wxHyperlinkCtrl` class](https://docs.wxwidgets.org/3.2/classwx_hyperlink_ctrl.html)'s methods and inheritance.
 ///
-/// See [`HyperlinkCtrlIsOwned`] documentation for the class usage.
+/// See [`HyperlinkCtrlInRust`] documentation for the class usage.
 pub trait HyperlinkCtrlMethods: ControlMethods {
     /// Creates the hyperlink control.
     ///
@@ -494,7 +494,7 @@ pub trait HyperlinkCtrlMethods: ControlMethods {
 // wxHyperlinkEvent
 /// This trait represents [C++ `wxHyperlinkEvent` class](https://docs.wxwidgets.org/3.2/classwx_hyperlink_event.html)'s methods and inheritance.
 ///
-/// See [`HyperlinkEventIsOwned`] documentation for the class usage.
+/// See [`HyperlinkEventInRust`] documentation for the class usage.
 pub trait HyperlinkEventMethods: CommandEventMethods {
     /// Returns the URL of the hyperlink where the user has just clicked.
     ///

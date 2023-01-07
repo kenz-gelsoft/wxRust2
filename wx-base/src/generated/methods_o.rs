@@ -3,19 +3,19 @@ use super::*;
 // wxObject
 /// This trait represents [C++ `wxObject` class](https://docs.wxwidgets.org/3.2/classwx_object.html)'s methods and inheritance.
 ///
-/// See [`ObjectIsOwned`] documentation for the class usage.
+/// See [`ObjectInRust`] documentation for the class usage.
 pub trait ObjectMethods: WxRustMethods {
     // DTOR: fn ~wxObject()
     /// This virtual function is redefined for every class that requires run-time type information, when using the wxDECLARE_CLASS macro (or similar).
     ///
     /// See [C++ `wxObject::GetClassInfo()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_object.html#a9fd1bc8bc3a47c6e14e679a80e3cb8f4).
-    fn get_class_info(&self) -> Option<ClassInfoIsOwned<false>> {
+    fn get_class_info(&self) -> Option<ClassInfoInRust<false>> {
         unsafe { ClassInfo::option_from(ffi::wxObject_GetClassInfo(self.as_ptr())) }
     }
     /// Returns the wxObject::m_refData pointer, i.e. the data referenced by this object.
     ///
     /// See [C++ `wxObject::GetRefData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_object.html#a0e06d77b52ee4c44a31c7cb62c9a4b68).
-    fn get_ref_data(&self) -> Option<ObjectRefDataIsOwned<false>> {
+    fn get_ref_data(&self) -> Option<ObjectRefDataInRust<false>> {
         unsafe { ObjectRefData::option_from(ffi::wxObject_GetRefData(self.as_ptr())) }
     }
     /// Determines whether this class is a subclass of (or the same class as) the given class.
@@ -79,5 +79,5 @@ pub trait ObjectMethods: WxRustMethods {
 // wxObjectRefData
 /// This trait represents [C++ `wxObjectRefData` class](https://docs.wxwidgets.org/3.2/classwx_object_ref_data.html)'s methods and inheritance.
 ///
-/// See [`ObjectRefDataIsOwned`] documentation for the class usage.
+/// See [`ObjectRefDataInRust`] documentation for the class usage.
 pub trait ObjectRefDataMethods: WxRustMethods {}

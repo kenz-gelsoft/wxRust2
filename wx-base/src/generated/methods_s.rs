@@ -3,7 +3,7 @@ use super::*;
 // wxStandardPaths
 /// This trait represents [C++ `wxStandardPaths` class](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html)'s methods and inheritance.
 ///
-/// See [`StandardPathsIsOwned`] documentation for the class usage.
+/// See [`StandardPathsInRust`] documentation for the class usage.
 pub trait StandardPathsMethods: WxRustMethods {
     /// MSW-specific function undoing the effect of IgnoreAppSubDir() calls.
     ///
@@ -131,8 +131,8 @@ pub trait StandardPathsMethods: WxRustMethods {
     /// Returns reference to the unique global standard paths object.
     ///
     /// See [C++ `wxStandardPaths::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html#adcc47d33eccc3d432e40f6952d405c23).
-    fn get() -> StandardPathsIsOwned<false> {
-        unsafe { StandardPathsIsOwned::from_ptr(ffi::wxStandardPaths_Get()) }
+    fn get() -> StandardPathsInRust<false> {
+        unsafe { StandardPathsInRust::from_ptr(ffi::wxStandardPaths_Get()) }
     }
     /// Returns location of Windows shell special folder.
     ///

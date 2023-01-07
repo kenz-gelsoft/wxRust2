@@ -3,37 +3,37 @@ use super::*;
 // wxDC
 wxwidgets! {
     /// A wxDC is a "device context" onto which graphics and text can be drawn.
-    /// - [`DC`] represents a C++ `wxDC` class instance which your code has ownership, [`DCIsOwned`]`<false>` represents one which don't own.
+    /// - [`DC`] represents a C++ `wxDC` class instance which your code has ownership, [`DCInRust`]`<false>` represents one which don't own.
     /// - Use [`DC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html) for more details.
     #[doc(alias = "wxDC")]
     #[doc(alias = "DC")]
     class DC
-        = DCIsOwned<true>(wxDC) impl
+        = DCInRust<true>(wxDC) impl
         DCMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DCIsOwned<OWNED> {
+impl<const OWNED: bool> DCInRust<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DCIsOwned<false> {
+impl Clone for DCInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DCIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DCInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DCInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DCIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDC_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DCInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDC_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DCIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DCInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -44,36 +44,36 @@ impl<const OWNED: bool> Drop for DCIsOwned<OWNED> {
 // wxDCBrushChanger
 wxwidgets! {
     /// wxDCBrushChanger is a small helper class for setting a brush on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    /// - [`DCBrushChanger`] represents a C++ `wxDCBrushChanger` class instance which your code has ownership, [`DCBrushChangerIsOwned`]`<false>` represents one which don't own.
+    /// - [`DCBrushChanger`] represents a C++ `wxDCBrushChanger` class instance which your code has ownership, [`DCBrushChangerInRust`]`<false>` represents one which don't own.
     /// - Use [`DCBrushChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCBrushChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html) for more details.
     #[doc(alias = "wxDCBrushChanger")]
     #[doc(alias = "DCBrushChanger")]
     class DCBrushChanger
-        = DCBrushChangerIsOwned<true>(wxDCBrushChanger) impl
+        = DCBrushChangerInRust<true>(wxDCBrushChanger) impl
         DCBrushChangerMethods
 }
-impl<const OWNED: bool> DCBrushChangerIsOwned<OWNED> {
+impl<const OWNED: bool> DCBrushChangerInRust<OWNED> {
     /// Sets brush on the given dc, storing the old one.
     ///
     /// See [C++ `wxDCBrushChanger::wxDCBrushChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html#a047d2af137cb4e6860b3911ab46e4909).
-    pub fn new<D: DCMethods, B: BrushMethods>(dc: &D, brush: &B) -> DCBrushChangerIsOwned<OWNED> {
+    pub fn new<D: DCMethods, B: BrushMethods>(dc: &D, brush: &B) -> DCBrushChangerInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
             let brush = brush.as_ptr();
-            DCBrushChangerIsOwned(ffi::wxDCBrushChanger_new(dc, brush))
+            DCBrushChangerInRust(ffi::wxDCBrushChanger_new(dc, brush))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DCBrushChangerIsOwned<false> {
+impl Clone for DCBrushChangerInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DCBrushChangerIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DCBrushChangerInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDCBrushChanger_delete(self.0) }
@@ -84,39 +84,36 @@ impl<const OWNED: bool> Drop for DCBrushChangerIsOwned<OWNED> {
 // wxDCClipper
 wxwidgets! {
     /// wxDCClipper is a helper class for setting a clipping region on a wxDC during its lifetime.
-    /// - [`DCClipper`] represents a C++ `wxDCClipper` class instance which your code has ownership, [`DCClipperIsOwned`]`<false>` represents one which don't own.
+    /// - [`DCClipper`] represents a C++ `wxDCClipper` class instance which your code has ownership, [`DCClipperInRust`]`<false>` represents one which don't own.
     /// - Use [`DCClipper`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCClipper` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html) for more details.
     #[doc(alias = "wxDCClipper")]
     #[doc(alias = "DCClipper")]
     class DCClipper
-        = DCClipperIsOwned<true>(wxDCClipper) impl
+        = DCClipperInRust<true>(wxDCClipper) impl
         DCClipperMethods
 }
-impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
+impl<const OWNED: bool> DCClipperInRust<OWNED> {
     /// Sets the clipping region to the specified region/coordinates.
     ///
     /// See [C++ `wxDCClipper::wxDCClipper()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html#aa6548fa7be5cff3a74f6a6f539b00adf).
     pub fn new_with_region<D: DCMethods, R: RegionMethods>(
         dc: &D,
         region: &R,
-    ) -> DCClipperIsOwned<OWNED> {
+    ) -> DCClipperInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
             let region = region.as_ptr();
-            DCClipperIsOwned(ffi::wxDCClipper_new(dc, region))
+            DCClipperInRust(ffi::wxDCClipper_new(dc, region))
         }
     }
     ///
     /// See [C++ `wxDCClipper::wxDCClipper()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html#a995a8e0147459e1ba92cbb965fd963a4).
-    pub fn new_with_rect<D: DCMethods, R: RectMethods>(
-        dc: &D,
-        rect: &R,
-    ) -> DCClipperIsOwned<OWNED> {
+    pub fn new_with_rect<D: DCMethods, R: RectMethods>(dc: &D, rect: &R) -> DCClipperInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
             let rect = rect.as_ptr();
-            DCClipperIsOwned(ffi::wxDCClipper_new1(dc, rect))
+            DCClipperInRust(ffi::wxDCClipper_new1(dc, rect))
         }
     }
     ///
@@ -127,22 +124,22 @@ impl<const OWNED: bool> DCClipperIsOwned<OWNED> {
         y: c_int,
         w: c_int,
         h: c_int,
-    ) -> DCClipperIsOwned<OWNED> {
+    ) -> DCClipperInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
-            DCClipperIsOwned(ffi::wxDCClipper_new2(dc, x, y, w, h))
+            DCClipperInRust(ffi::wxDCClipper_new2(dc, x, y, w, h))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DCClipperIsOwned<false> {
+impl Clone for DCClipperInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DCClipperIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DCClipperInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDCClipper_delete(self.0) }
@@ -153,23 +150,23 @@ impl<const OWNED: bool> Drop for DCClipperIsOwned<OWNED> {
 // wxDCFontChanger
 wxwidgets! {
     /// wxDCFontChanger is a small helper class for setting a font on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    /// - [`DCFontChanger`] represents a C++ `wxDCFontChanger` class instance which your code has ownership, [`DCFontChangerIsOwned`]`<false>` represents one which don't own.
+    /// - [`DCFontChanger`] represents a C++ `wxDCFontChanger` class instance which your code has ownership, [`DCFontChangerInRust`]`<false>` represents one which don't own.
     /// - Use [`DCFontChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCFontChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html) for more details.
     #[doc(alias = "wxDCFontChanger")]
     #[doc(alias = "DCFontChanger")]
     class DCFontChanger
-        = DCFontChangerIsOwned<true>(wxDCFontChanger) impl
+        = DCFontChangerInRust<true>(wxDCFontChanger) impl
         DCFontChangerMethods
 }
-impl<const OWNED: bool> DCFontChangerIsOwned<OWNED> {
+impl<const OWNED: bool> DCFontChangerInRust<OWNED> {
     /// Trivial constructor not changing anything.
     ///
     /// See [C++ `wxDCFontChanger::wxDCFontChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html#aa4bd96e01e9099f10f9394ef9b69b069).
-    pub fn new<D: DCMethods>(dc: &D) -> DCFontChangerIsOwned<OWNED> {
+    pub fn new<D: DCMethods>(dc: &D) -> DCFontChangerInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
-            DCFontChangerIsOwned(ffi::wxDCFontChanger_new(dc))
+            DCFontChangerInRust(ffi::wxDCFontChanger_new(dc))
         }
     }
     /// Sets font on the given dc, storing the old one.
@@ -178,23 +175,23 @@ impl<const OWNED: bool> DCFontChangerIsOwned<OWNED> {
     pub fn new_with_font<D: DCMethods, F: FontMethods>(
         dc: &D,
         font: &F,
-    ) -> DCFontChangerIsOwned<OWNED> {
+    ) -> DCFontChangerInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
             let font = font.as_ptr();
-            DCFontChangerIsOwned(ffi::wxDCFontChanger_new1(dc, font))
+            DCFontChangerInRust(ffi::wxDCFontChanger_new1(dc, font))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DCFontChangerIsOwned<false> {
+impl Clone for DCFontChangerInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DCFontChangerIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DCFontChangerInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDCFontChanger_delete(self.0) }
@@ -205,16 +202,16 @@ impl<const OWNED: bool> Drop for DCFontChangerIsOwned<OWNED> {
 // wxDCOverlay
 wxwidgets! {
     /// Connects an overlay with a drawing DC.
-    /// - [`DCOverlay`] represents a C++ `wxDCOverlay` class instance which your code has ownership, [`DCOverlayIsOwned`]`<false>` represents one which don't own.
+    /// - [`DCOverlay`] represents a C++ `wxDCOverlay` class instance which your code has ownership, [`DCOverlayInRust`]`<false>` represents one which don't own.
     /// - Use [`DCOverlay`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCOverlay` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html) for more details.
     #[doc(alias = "wxDCOverlay")]
     #[doc(alias = "DCOverlay")]
     class DCOverlay
-        = DCOverlayIsOwned<true>(wxDCOverlay) impl
+        = DCOverlayInRust<true>(wxDCOverlay) impl
         DCOverlayMethods
 }
-impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
+impl<const OWNED: bool> DCOverlayInRust<OWNED> {
     /// Connects this overlay to the corresponding drawing dc, if the overlay is not initialized yet this call will do so.
     ///
     /// See [C++ `wxDCOverlay::wxDCOverlay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html#aeffcb68537d705a07c00adeb008aa64e).
@@ -225,14 +222,14 @@ impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
         y: c_int,
         width: c_int,
         height: c_int,
-    ) -> DCOverlayIsOwned<OWNED> {
+    ) -> DCOverlayInRust<OWNED> {
         unsafe {
             let overlay = overlay.as_ptr();
             let dc = match dc {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            DCOverlayIsOwned(ffi::wxDCOverlay_new(overlay, dc, x, y, width, height))
+            DCOverlayInRust(ffi::wxDCOverlay_new(overlay, dc, x, y, width, height))
         }
     }
     /// Convenience wrapper that behaves the same using the entire area of the dc.
@@ -241,26 +238,26 @@ impl<const OWNED: bool> DCOverlayIsOwned<OWNED> {
     pub fn new<O: OverlayMethods, D: DCMethods>(
         overlay: &O,
         dc: Option<&D>,
-    ) -> DCOverlayIsOwned<OWNED> {
+    ) -> DCOverlayInRust<OWNED> {
         unsafe {
             let overlay = overlay.as_ptr();
             let dc = match dc {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            DCOverlayIsOwned(ffi::wxDCOverlay_new1(overlay, dc))
+            DCOverlayInRust(ffi::wxDCOverlay_new1(overlay, dc))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DCOverlayIsOwned<false> {
+impl Clone for DCOverlayInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DCOverlayIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DCOverlayInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDCOverlay_delete(self.0) }
@@ -271,36 +268,36 @@ impl<const OWNED: bool> Drop for DCOverlayIsOwned<OWNED> {
 // wxDCPenChanger
 wxwidgets! {
     /// wxDCPenChanger is a small helper class for setting a pen on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    /// - [`DCPenChanger`] represents a C++ `wxDCPenChanger` class instance which your code has ownership, [`DCPenChangerIsOwned`]`<false>` represents one which don't own.
+    /// - [`DCPenChanger`] represents a C++ `wxDCPenChanger` class instance which your code has ownership, [`DCPenChangerInRust`]`<false>` represents one which don't own.
     /// - Use [`DCPenChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCPenChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html) for more details.
     #[doc(alias = "wxDCPenChanger")]
     #[doc(alias = "DCPenChanger")]
     class DCPenChanger
-        = DCPenChangerIsOwned<true>(wxDCPenChanger) impl
+        = DCPenChangerInRust<true>(wxDCPenChanger) impl
         DCPenChangerMethods
 }
-impl<const OWNED: bool> DCPenChangerIsOwned<OWNED> {
+impl<const OWNED: bool> DCPenChangerInRust<OWNED> {
     /// Sets pen on the given dc, storing the old one.
     ///
     /// See [C++ `wxDCPenChanger::wxDCPenChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html#abefe06367f53d64e35aeb203537e50e3).
-    pub fn new<D: DCMethods, P: PenMethods>(dc: &D, pen: &P) -> DCPenChangerIsOwned<OWNED> {
+    pub fn new<D: DCMethods, P: PenMethods>(dc: &D, pen: &P) -> DCPenChangerInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
             let pen = pen.as_ptr();
-            DCPenChangerIsOwned(ffi::wxDCPenChanger_new(dc, pen))
+            DCPenChangerInRust(ffi::wxDCPenChanger_new(dc, pen))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DCPenChangerIsOwned<false> {
+impl Clone for DCPenChangerInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DCPenChangerIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DCPenChangerInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDCPenChanger_delete(self.0) }
@@ -311,23 +308,23 @@ impl<const OWNED: bool> Drop for DCPenChangerIsOwned<OWNED> {
 // wxDCTextColourChanger
 wxwidgets! {
     /// wxDCTextColourChanger is a small helper class for setting a foreground text colour on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    /// - [`DCTextColourChanger`] represents a C++ `wxDCTextColourChanger` class instance which your code has ownership, [`DCTextColourChangerIsOwned`]`<false>` represents one which don't own.
+    /// - [`DCTextColourChanger`] represents a C++ `wxDCTextColourChanger` class instance which your code has ownership, [`DCTextColourChangerInRust`]`<false>` represents one which don't own.
     /// - Use [`DCTextColourChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCTextColourChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html) for more details.
     #[doc(alias = "wxDCTextColourChanger")]
     #[doc(alias = "DCTextColourChanger")]
     class DCTextColourChanger
-        = DCTextColourChangerIsOwned<true>(wxDCTextColourChanger) impl
+        = DCTextColourChangerInRust<true>(wxDCTextColourChanger) impl
         DCTextColourChangerMethods
 }
-impl<const OWNED: bool> DCTextColourChangerIsOwned<OWNED> {
+impl<const OWNED: bool> DCTextColourChangerInRust<OWNED> {
     /// Trivial constructor not changing anything.
     ///
     /// See [C++ `wxDCTextColourChanger::wxDCTextColourChanger()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html#ae9c21638cef0ad69be36a7359811965d).
-    pub fn new<D: DCMethods>(dc: &D) -> DCTextColourChangerIsOwned<OWNED> {
+    pub fn new<D: DCMethods>(dc: &D) -> DCTextColourChangerInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
-            DCTextColourChangerIsOwned(ffi::wxDCTextColourChanger_new(dc))
+            DCTextColourChangerInRust(ffi::wxDCTextColourChanger_new(dc))
         }
     }
     /// Sets col on the given dc, storing the old one.
@@ -336,23 +333,23 @@ impl<const OWNED: bool> DCTextColourChangerIsOwned<OWNED> {
     pub fn new_with_colour<D: DCMethods, C: ColourMethods>(
         dc: &D,
         col: &C,
-    ) -> DCTextColourChangerIsOwned<OWNED> {
+    ) -> DCTextColourChangerInRust<OWNED> {
         unsafe {
             let dc = dc.as_ptr();
             let col = col.as_ptr();
-            DCTextColourChangerIsOwned(ffi::wxDCTextColourChanger_new1(dc, col))
+            DCTextColourChangerInRust(ffi::wxDCTextColourChanger_new1(dc, col))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DCTextColourChangerIsOwned<false> {
+impl Clone for DCTextColourChangerInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DCTextColourChangerIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DCTextColourChangerInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDCTextColourChanger_delete(self.0) }
@@ -363,37 +360,37 @@ impl<const OWNED: bool> Drop for DCTextColourChangerIsOwned<OWNED> {
 // wxDataFormat
 wxwidgets! {
     /// A wxDataFormat is an encapsulation of a platform-specific format handle which is used by the system for the clipboard and drag and drop operations.
-    /// - [`DataFormat`] represents a C++ `wxDataFormat` class instance which your code has ownership, [`DataFormatIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataFormat`] represents a C++ `wxDataFormat` class instance which your code has ownership, [`DataFormatInRust`]`<false>` represents one which don't own.
     /// - Use [`DataFormat`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataFormat` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_format.html) for more details.
     #[doc(alias = "wxDataFormat")]
     #[doc(alias = "DataFormat")]
     class DataFormat
-        = DataFormatIsOwned<true>(wxDataFormat) impl
+        = DataFormatInRust<true>(wxDataFormat) impl
         DataFormatMethods
 }
-impl<const OWNED: bool> DataFormatIsOwned<OWNED> {
+impl<const OWNED: bool> DataFormatInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataFormat()
     /// Constructs a data format object for a custom format identified by its name format.
     ///
     /// See [C++ `wxDataFormat::wxDataFormat()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_format.html#a6c08911611be5e3a5dd35528b4d091db).
-    pub fn new(format: &str) -> DataFormatIsOwned<OWNED> {
+    pub fn new(format: &str) -> DataFormatInRust<OWNED> {
         unsafe {
             let format = WxString::from(format);
             let format = format.as_ptr();
-            DataFormatIsOwned(ffi::wxDataFormat_new1(format))
+            DataFormatInRust(ffi::wxDataFormat_new1(format))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataFormatIsOwned<false> {
+impl Clone for DataFormatInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DataFormatIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataFormatInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataFormat_delete(self.0) }
@@ -404,16 +401,16 @@ impl<const OWNED: bool> Drop for DataFormatIsOwned<OWNED> {
 // wxDataObject
 wxwidgets! {
     /// A wxDataObject represents data that can be copied to or from the clipboard, or dragged and dropped.
-    /// - [`DataObject`] represents a C++ `wxDataObject` class instance which your code has ownership, [`DataObjectIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataObject`] represents a C++ `wxDataObject` class instance which your code has ownership, [`DataObjectInRust`]`<false>` represents one which don't own.
     /// - Use [`DataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object.html) for more details.
     #[doc(alias = "wxDataObject")]
     #[doc(alias = "DataObject")]
     class DataObject
-        = DataObjectIsOwned<true>(wxDataObject) impl
+        = DataObjectInRust<true>(wxDataObject) impl
         DataObjectMethods
 }
-impl<const OWNED: bool> DataObjectIsOwned<OWNED> {
+impl<const OWNED: bool> DataObjectInRust<OWNED> {
     //  ENUM: Direction
     pub const Get: c_int = 0x01;
     pub const Set: c_int = 0x02;
@@ -424,12 +421,12 @@ impl<const OWNED: bool> DataObjectIsOwned<OWNED> {
         None
     }
 }
-impl Clone for DataObjectIsOwned<false> {
+impl Clone for DataObjectInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DataObjectIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataObjectInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataObject_delete(self.0) }
@@ -440,38 +437,38 @@ impl<const OWNED: bool> Drop for DataObjectIsOwned<OWNED> {
 // wxDataObjectComposite
 wxwidgets! {
     /// wxDataObjectComposite is the simplest wxDataObject derivation which may be used to support multiple formats.
-    /// - [`DataObjectComposite`] represents a C++ `wxDataObjectComposite` class instance which your code has ownership, [`DataObjectCompositeIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataObjectComposite`] represents a C++ `wxDataObjectComposite` class instance which your code has ownership, [`DataObjectCompositeInRust`]`<false>` represents one which don't own.
     /// - Use [`DataObjectComposite`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataObjectComposite` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html) for more details.
     #[doc(alias = "wxDataObjectComposite")]
     #[doc(alias = "DataObjectComposite")]
     class DataObjectComposite
-        = DataObjectCompositeIsOwned<true>(wxDataObjectComposite) impl
+        = DataObjectCompositeInRust<true>(wxDataObjectComposite) impl
         DataObjectCompositeMethods,
         DataObjectMethods
 }
-impl<const OWNED: bool> DataObjectCompositeIsOwned<OWNED> {
+impl<const OWNED: bool> DataObjectCompositeInRust<OWNED> {
     /// The default constructor.
     ///
     /// See [C++ `wxDataObjectComposite::wxDataObjectComposite()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html#a711cfefddb7e091d56f87be3b2d0bcb8).
-    pub fn new() -> DataObjectCompositeIsOwned<OWNED> {
-        unsafe { DataObjectCompositeIsOwned(ffi::wxDataObjectComposite_new()) }
+    pub fn new() -> DataObjectCompositeInRust<OWNED> {
+        unsafe { DataObjectCompositeInRust(ffi::wxDataObjectComposite_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataObjectCompositeIsOwned<false> {
+impl Clone for DataObjectCompositeInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataObjectCompositeIsOwned<OWNED>> for DataObjectIsOwned<OWNED> {
-    fn from(o: DataObjectCompositeIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataObjectCompositeInRust<OWNED>> for DataObjectInRust<OWNED> {
+    fn from(o: DataObjectCompositeInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataObjectCompositeIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataObjectCompositeInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataObjectComposite_delete(self.0) }
@@ -482,41 +479,41 @@ impl<const OWNED: bool> Drop for DataObjectCompositeIsOwned<OWNED> {
 // wxDataObjectSimple
 wxwidgets! {
     /// This is the simplest possible implementation of the wxDataObject class.
-    /// - [`DataObjectSimple`] represents a C++ `wxDataObjectSimple` class instance which your code has ownership, [`DataObjectSimpleIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataObjectSimple`] represents a C++ `wxDataObjectSimple` class instance which your code has ownership, [`DataObjectSimpleInRust`]`<false>` represents one which don't own.
     /// - Use [`DataObjectSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataObjectSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html) for more details.
     #[doc(alias = "wxDataObjectSimple")]
     #[doc(alias = "DataObjectSimple")]
     class DataObjectSimple
-        = DataObjectSimpleIsOwned<true>(wxDataObjectSimple) impl
+        = DataObjectSimpleInRust<true>(wxDataObjectSimple) impl
         DataObjectSimpleMethods,
         DataObjectMethods
 }
-impl<const OWNED: bool> DataObjectSimpleIsOwned<OWNED> {
+impl<const OWNED: bool> DataObjectSimpleInRust<OWNED> {
     /// Constructor accepts the supported format (none by default) which may also be set later with SetFormat().
     ///
     /// See [C++ `wxDataObjectSimple::wxDataObjectSimple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html#ad246b285dd2f414f4b13a4d794bf602d).
-    pub fn new<D: DataFormatMethods>(format: &D) -> DataObjectSimpleIsOwned<OWNED> {
+    pub fn new<D: DataFormatMethods>(format: &D) -> DataObjectSimpleInRust<OWNED> {
         unsafe {
             let format = format.as_ptr();
-            DataObjectSimpleIsOwned(ffi::wxDataObjectSimple_new(format))
+            DataObjectSimpleInRust(ffi::wxDataObjectSimple_new(format))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataObjectSimpleIsOwned<false> {
+impl Clone for DataObjectSimpleInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataObjectSimpleIsOwned<OWNED>> for DataObjectIsOwned<OWNED> {
-    fn from(o: DataObjectSimpleIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataObjectSimpleInRust<OWNED>> for DataObjectInRust<OWNED> {
+    fn from(o: DataObjectSimpleInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataObjectSimpleIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataObjectSimpleInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataObjectSimple_delete(self.0) }
@@ -527,46 +524,46 @@ impl<const OWNED: bool> Drop for DataObjectSimpleIsOwned<OWNED> {
 // wxDataViewBitmapRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render bitmaps.
-    /// - [`DataViewBitmapRenderer`] represents a C++ `wxDataViewBitmapRenderer` class instance which your code has ownership, [`DataViewBitmapRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewBitmapRenderer`] represents a C++ `wxDataViewBitmapRenderer` class instance which your code has ownership, [`DataViewBitmapRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewBitmapRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewBitmapRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_bitmap_renderer.html) for more details.
     #[doc(alias = "wxDataViewBitmapRenderer")]
     #[doc(alias = "DataViewBitmapRenderer")]
     class DataViewBitmapRenderer
-        = DataViewBitmapRendererIsOwned<true>(wxDataViewBitmapRenderer) impl
+        = DataViewBitmapRendererInRust<true>(wxDataViewBitmapRenderer) impl
         DataViewBitmapRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewBitmapRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewBitmapRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewBitmapRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewBitmapRendererIsOwned<false> {
+impl Clone for DataViewBitmapRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewBitmapRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewBitmapRendererInRust<OWNED>>
+    for DataViewRendererInRust<OWNED>
 {
-    fn from(o: DataViewBitmapRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewBitmapRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewBitmapRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewBitmapRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewBitmapRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewBitmapRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewBitmapRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewBitmapRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewBitmapRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewBitmapRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewBitmapRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewBitmapRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -577,54 +574,54 @@ impl<const OWNED: bool> Drop for DataViewBitmapRendererIsOwned<OWNED> {
 // wxDataViewChoiceByIndexRenderer
 wxwidgets! {
     /// A wxDataViewCtrl renderer using wxChoice control and indexes into it.
-    /// - [`DataViewChoiceByIndexRenderer`] represents a C++ `wxDataViewChoiceByIndexRenderer` class instance which your code has ownership, [`DataViewChoiceByIndexRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewChoiceByIndexRenderer`] represents a C++ `wxDataViewChoiceByIndexRenderer` class instance which your code has ownership, [`DataViewChoiceByIndexRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewChoiceByIndexRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewChoiceByIndexRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_by_index_renderer.html) for more details.
     #[doc(alias = "wxDataViewChoiceByIndexRenderer")]
     #[doc(alias = "DataViewChoiceByIndexRenderer")]
     class DataViewChoiceByIndexRenderer
-        = DataViewChoiceByIndexRendererIsOwned<true>(wxDataViewChoiceByIndexRenderer) impl
+        = DataViewChoiceByIndexRendererInRust<true>(wxDataViewChoiceByIndexRenderer) impl
         DataViewChoiceByIndexRendererMethods,
         DataViewChoiceRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewChoiceByIndexRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewChoiceByIndexRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewChoiceByIndexRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewChoiceByIndexRendererIsOwned<false> {
+impl Clone for DataViewChoiceByIndexRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewChoiceByIndexRendererIsOwned<OWNED>>
-    for DataViewChoiceRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewChoiceByIndexRendererInRust<OWNED>>
+    for DataViewChoiceRendererInRust<OWNED>
 {
-    fn from(o: DataViewChoiceByIndexRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewChoiceByIndexRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewChoiceByIndexRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewChoiceByIndexRendererInRust<OWNED>>
+    for DataViewRendererInRust<OWNED>
 {
-    fn from(o: DataViewChoiceByIndexRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewChoiceByIndexRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewChoiceByIndexRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewChoiceByIndexRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewChoiceByIndexRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewChoiceByIndexRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewChoiceByIndexRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewChoiceByIndexRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewChoiceByIndexRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewChoiceByIndexRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewChoiceByIndexRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewChoiceByIndexRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -635,46 +632,46 @@ impl<const OWNED: bool> Drop for DataViewChoiceByIndexRendererIsOwned<OWNED> {
 // wxDataViewChoiceRenderer
 wxwidgets! {
     /// A wxDataViewCtrl renderer using wxChoice control and values of strings in it.
-    /// - [`DataViewChoiceRenderer`] represents a C++ `wxDataViewChoiceRenderer` class instance which your code has ownership, [`DataViewChoiceRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewChoiceRenderer`] represents a C++ `wxDataViewChoiceRenderer` class instance which your code has ownership, [`DataViewChoiceRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewChoiceRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewChoiceRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_renderer.html) for more details.
     #[doc(alias = "wxDataViewChoiceRenderer")]
     #[doc(alias = "DataViewChoiceRenderer")]
     class DataViewChoiceRenderer
-        = DataViewChoiceRendererIsOwned<true>(wxDataViewChoiceRenderer) impl
+        = DataViewChoiceRendererInRust<true>(wxDataViewChoiceRenderer) impl
         DataViewChoiceRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewChoiceRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewChoiceRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewChoiceRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewChoiceRendererIsOwned<false> {
+impl Clone for DataViewChoiceRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewChoiceRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewChoiceRendererInRust<OWNED>>
+    for DataViewRendererInRust<OWNED>
 {
-    fn from(o: DataViewChoiceRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewChoiceRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewChoiceRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewChoiceRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewChoiceRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewChoiceRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewChoiceRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewChoiceRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewChoiceRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewChoiceRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewChoiceRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewChoiceRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -685,18 +682,18 @@ impl<const OWNED: bool> Drop for DataViewChoiceRendererIsOwned<OWNED> {
 // wxDataViewColumn
 wxwidgets! {
     /// This class represents a column in a wxDataViewCtrl.
-    /// - [`DataViewColumn`] represents a C++ `wxDataViewColumn` class instance which your code has ownership, [`DataViewColumnIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewColumn`] represents a C++ `wxDataViewColumn` class instance which your code has ownership, [`DataViewColumnInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewColumn`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewColumn` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html) for more details.
     #[doc(alias = "wxDataViewColumn")]
     #[doc(alias = "DataViewColumn")]
     class DataViewColumn
-        = DataViewColumnIsOwned<true>(wxDataViewColumn) impl
+        = DataViewColumnInRust<true>(wxDataViewColumn) impl
         DataViewColumnMethods,
         SettableHeaderColumnMethods,
         HeaderColumnMethods
 }
-impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewColumnInRust<OWNED> {
     /// Constructs a text column.
     ///
     /// See [C++ `wxDataViewColumn::wxDataViewColumn()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html#aa56f4df8543bf14713a2852af471c768).
@@ -707,7 +704,7 @@ impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
         width: c_int,
         align: c_int,
         flags: c_int,
-    ) -> DataViewColumnIsOwned<OWNED> {
+    ) -> DataViewColumnInRust<OWNED> {
         unsafe {
             let title = WxString::from(title);
             let title = title.as_ptr();
@@ -715,7 +712,7 @@ impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            DataViewColumnIsOwned(ffi::wxDataViewColumn_new(
+            DataViewColumnInRust(ffi::wxDataViewColumn_new(
                 title,
                 renderer,
                 model_column,
@@ -735,14 +732,14 @@ impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
         width: c_int,
         align: c_int,
         flags: c_int,
-    ) -> DataViewColumnIsOwned<OWNED> {
+    ) -> DataViewColumnInRust<OWNED> {
         unsafe {
             let bitmap = bitmap.as_ptr();
             let renderer = match renderer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            DataViewColumnIsOwned(ffi::wxDataViewColumn_new1(
+            DataViewColumnInRust(ffi::wxDataViewColumn_new1(
                 bitmap,
                 renderer,
                 model_column,
@@ -756,22 +753,22 @@ impl<const OWNED: bool> DataViewColumnIsOwned<OWNED> {
         None
     }
 }
-impl Clone for DataViewColumnIsOwned<false> {
+impl Clone for DataViewColumnInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewColumnIsOwned<OWNED>> for SettableHeaderColumnIsOwned<OWNED> {
-    fn from(o: DataViewColumnIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewColumnInRust<OWNED>> for SettableHeaderColumnInRust<OWNED> {
+    fn from(o: DataViewColumnInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewColumnIsOwned<OWNED>> for HeaderColumnIsOwned<OWNED> {
-    fn from(o: DataViewColumnIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewColumnInRust<OWNED>> for HeaderColumnInRust<OWNED> {
+    fn from(o: DataViewColumnInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewColumnIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewColumnInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewColumn_delete(self.0) }
@@ -782,25 +779,25 @@ impl<const OWNED: bool> Drop for DataViewColumnIsOwned<OWNED> {
 // wxDataViewCtrl
 wxwidgets! {
     /// wxDataViewCtrl is a control to display data either in a tree like fashion or in a tabular form or both.
-    /// - [`DataViewCtrl`] represents a C++ `wxDataViewCtrl` class instance which your code has ownership, [`DataViewCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewCtrl`] represents a C++ `wxDataViewCtrl` class instance which your code has ownership, [`DataViewCtrlInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html) for more details.
     #[doc(alias = "wxDataViewCtrl")]
     #[doc(alias = "DataViewCtrl")]
     class DataViewCtrl
-        = DataViewCtrlIsOwned<true>(wxDataViewCtrl) impl
+        = DataViewCtrlInRust<true>(wxDataViewCtrl) impl
         DataViewCtrlMethods,
         // ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewCtrlInRust<OWNED> {
     /// Default Constructor.
     ///
     /// See [C++ `wxDataViewCtrl::wxDataViewCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a3c912686a7c04b53445e2e1985685a3f).
-    pub fn new_2step() -> DataViewCtrlIsOwned<OWNED> {
-        unsafe { DataViewCtrlIsOwned(ffi::wxDataViewCtrl_new()) }
+    pub fn new_2step() -> DataViewCtrlInRust<OWNED> {
+        unsafe { DataViewCtrlInRust(ffi::wxDataViewCtrl_new()) }
     }
     /// Constructor.
     ///
@@ -813,7 +810,7 @@ impl<const OWNED: bool> DataViewCtrlIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> DataViewCtrlIsOwned<OWNED> {
+    ) -> DataViewCtrlInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -824,7 +821,7 @@ impl<const OWNED: bool> DataViewCtrlIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            DataViewCtrlIsOwned(ffi::wxDataViewCtrl_new1(
+            DataViewCtrlInRust(ffi::wxDataViewCtrl_new1(
                 parent, id, pos, size, style, validator, name,
             ))
         }
@@ -833,37 +830,37 @@ impl<const OWNED: bool> DataViewCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for DataViewCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for DataViewCtrlInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: DataViewCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewCtrlInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: DataViewCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: DataViewCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewCtrlInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: DataViewCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: DataViewCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: DataViewCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewCtrl_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewCtrlInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> ControlMethods for DataViewCtrlInRust<OWNED> {
     /// Create the control.
     ///
     /// See [C++ `wxDataViewCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a1bd86d5869de4d24de791a48e9c6926e).
@@ -895,46 +892,46 @@ impl<const OWNED: bool> ControlMethods for DataViewCtrlIsOwned<OWNED> {
 // wxDataViewCustomRenderer
 wxwidgets! {
     /// You need to derive a new class from wxDataViewCustomRenderer in order to write a new renderer.
-    /// - [`DataViewCustomRenderer`] represents a C++ `wxDataViewCustomRenderer` class instance which your code has ownership, [`DataViewCustomRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewCustomRenderer`] represents a C++ `wxDataViewCustomRenderer` class instance which your code has ownership, [`DataViewCustomRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewCustomRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewCustomRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_custom_renderer.html) for more details.
     #[doc(alias = "wxDataViewCustomRenderer")]
     #[doc(alias = "DataViewCustomRenderer")]
     class DataViewCustomRenderer
-        = DataViewCustomRendererIsOwned<true>(wxDataViewCustomRenderer) impl
+        = DataViewCustomRendererInRust<true>(wxDataViewCustomRenderer) impl
         DataViewCustomRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewCustomRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewCustomRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewCustomRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewCustomRendererIsOwned<false> {
+impl Clone for DataViewCustomRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewCustomRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewCustomRendererInRust<OWNED>>
+    for DataViewRendererInRust<OWNED>
 {
-    fn from(o: DataViewCustomRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewCustomRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewCustomRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewCustomRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewCustomRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewCustomRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewCustomRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewCustomRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewCustomRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewCustomRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewCustomRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewCustomRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -945,46 +942,44 @@ impl<const OWNED: bool> Drop for DataViewCustomRendererIsOwned<OWNED> {
 // wxDataViewDateRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render calendar controls.
-    /// - [`DataViewDateRenderer`] represents a C++ `wxDataViewDateRenderer` class instance which your code has ownership, [`DataViewDateRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewDateRenderer`] represents a C++ `wxDataViewDateRenderer` class instance which your code has ownership, [`DataViewDateRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewDateRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewDateRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_date_renderer.html) for more details.
     #[doc(alias = "wxDataViewDateRenderer")]
     #[doc(alias = "DataViewDateRenderer")]
     class DataViewDateRenderer
-        = DataViewDateRendererIsOwned<true>(wxDataViewDateRenderer) impl
+        = DataViewDateRendererInRust<true>(wxDataViewDateRenderer) impl
         DataViewDateRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewDateRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewDateRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewDateRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewDateRendererIsOwned<false> {
+impl Clone for DataViewDateRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewDateRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
-{
-    fn from(o: DataViewDateRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewDateRendererInRust<OWNED>> for DataViewRendererInRust<OWNED> {
+    fn from(o: DataViewDateRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewDateRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewDateRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewDateRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewDateRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewDateRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewDateRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewDateRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewDateRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewDateRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewDateRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -995,25 +990,25 @@ impl<const OWNED: bool> Drop for DataViewDateRendererIsOwned<OWNED> {
 // wxDataViewEvent
 wxwidgets! {
     /// This is the event class for the wxDataViewCtrl notifications.
-    /// - [`DataViewEvent`] represents a C++ `wxDataViewEvent` class instance which your code has ownership, [`DataViewEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewEvent`] represents a C++ `wxDataViewEvent` class instance which your code has ownership, [`DataViewEventInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html) for more details.
     #[doc(alias = "wxDataViewEvent")]
     #[doc(alias = "DataViewEvent")]
     class DataViewEvent
-        = DataViewEventIsOwned<true>(wxDataViewEvent) impl
+        = DataViewEventInRust<true>(wxDataViewEvent) impl
         DataViewEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewEventIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewEventInRust<OWNED> {
     /// Default ctor, normally shouldn't be used and mostly exists only for backwards compatibility.
     ///
     /// See [C++ `wxDataViewEvent::wxDataViewEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#ae6dde6781192716c6c7ee9f828a2a99d).
-    pub fn new() -> DataViewEventIsOwned<OWNED> {
-        unsafe { DataViewEventIsOwned(ffi::wxDataViewEvent_new()) }
+    pub fn new() -> DataViewEventInRust<OWNED> {
+        unsafe { DataViewEventInRust(ffi::wxDataViewEvent_new()) }
     }
     // NOT_SUPPORTED: fn wxDataViewEvent1()
     // NOT_SUPPORTED: fn wxDataViewEvent2()
@@ -1022,47 +1017,47 @@ impl<const OWNED: bool> DataViewEventIsOwned<OWNED> {
     /// See [C++ `wxDataViewEvent::wxDataViewEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#a5960c6568e8407e54958e7492859ff68).
     pub fn new_with_dataviewevent<D: DataViewEventMethods>(
         event: &D,
-    ) -> DataViewEventIsOwned<OWNED> {
+    ) -> DataViewEventInRust<OWNED> {
         unsafe {
             let event = event.as_ptr();
-            DataViewEventIsOwned(ffi::wxDataViewEvent_new3(event))
+            DataViewEventInRust(ffi::wxDataViewEvent_new3(event))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewEventIsOwned<false> {
+impl Clone for DataViewEventInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
-    fn from(o: DataViewEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewEventInRust<OWNED>> for NotifyEventInRust<OWNED> {
+    fn from(o: DataViewEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: DataViewEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewEventInRust<OWNED>> for CommandEventInRust<OWNED> {
+    fn from(o: DataViewEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: DataViewEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewEventInRust<OWNED>> for EventInRust<OWNED> {
+    fn from(o: DataViewEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewEventInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewEvent_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewEventInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewEventIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewEventInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1073,61 +1068,61 @@ impl<const OWNED: bool> Drop for DataViewEventIsOwned<OWNED> {
 // wxDataViewIconText
 wxwidgets! {
     /// wxDataViewIconText is used by wxDataViewIconTextRenderer for data transfer.
-    /// - [`DataViewIconText`] represents a C++ `wxDataViewIconText` class instance which your code has ownership, [`DataViewIconTextIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewIconText`] represents a C++ `wxDataViewIconText` class instance which your code has ownership, [`DataViewIconTextInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewIconText`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewIconText` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html) for more details.
     #[doc(alias = "wxDataViewIconText")]
     #[doc(alias = "DataViewIconText")]
     class DataViewIconText
-        = DataViewIconTextIsOwned<true>(wxDataViewIconText) impl
+        = DataViewIconTextInRust<true>(wxDataViewIconText) impl
         DataViewIconTextMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewIconTextIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewIconTextInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxDataViewIconText::wxDataViewIconText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html#a1de5295b0774784c21a4d5d694df4725).
     pub fn new_with_str<B: BitmapBundleMethods>(
         text: &str,
         bitmap: &B,
-    ) -> DataViewIconTextIsOwned<OWNED> {
+    ) -> DataViewIconTextInRust<OWNED> {
         unsafe {
             let text = WxString::from(text);
             let text = text.as_ptr();
             let bitmap = bitmap.as_ptr();
-            DataViewIconTextIsOwned(ffi::wxDataViewIconText_new(text, bitmap))
+            DataViewIconTextInRust(ffi::wxDataViewIconText_new(text, bitmap))
         }
     }
     ///
     /// See [C++ `wxDataViewIconText::wxDataViewIconText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html#aa32e3db38e83550e99367f88965be72c).
     pub fn new_with_dataviewicontext<D: DataViewIconTextMethods>(
         other: &D,
-    ) -> DataViewIconTextIsOwned<OWNED> {
+    ) -> DataViewIconTextInRust<OWNED> {
         unsafe {
             let other = other.as_ptr();
-            DataViewIconTextIsOwned(ffi::wxDataViewIconText_new1(other))
+            DataViewIconTextInRust(ffi::wxDataViewIconText_new1(other))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewIconTextIsOwned<false> {
+impl Clone for DataViewIconTextInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewIconTextIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewIconTextIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewIconTextInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewIconTextInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewIconTextIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewIconText_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewIconTextInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewIconText_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewIconTextIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewIconTextInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1138,46 +1133,46 @@ impl<const OWNED: bool> Drop for DataViewIconTextIsOwned<OWNED> {
 // wxDataViewIconTextRenderer
 wxwidgets! {
     /// The wxDataViewIconTextRenderer class is used to display text with a small icon next to it as it is typically done in a file manager.
-    /// - [`DataViewIconTextRenderer`] represents a C++ `wxDataViewIconTextRenderer` class instance which your code has ownership, [`DataViewIconTextRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewIconTextRenderer`] represents a C++ `wxDataViewIconTextRenderer` class instance which your code has ownership, [`DataViewIconTextRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewIconTextRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewIconTextRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text_renderer.html) for more details.
     #[doc(alias = "wxDataViewIconTextRenderer")]
     #[doc(alias = "DataViewIconTextRenderer")]
     class DataViewIconTextRenderer
-        = DataViewIconTextRendererIsOwned<true>(wxDataViewIconTextRenderer) impl
+        = DataViewIconTextRendererInRust<true>(wxDataViewIconTextRenderer) impl
         DataViewIconTextRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewIconTextRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewIconTextRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewIconTextRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewIconTextRendererIsOwned<false> {
+impl Clone for DataViewIconTextRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewIconTextRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewIconTextRendererInRust<OWNED>>
+    for DataViewRendererInRust<OWNED>
 {
-    fn from(o: DataViewIconTextRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewIconTextRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewIconTextRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewIconTextRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewIconTextRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewIconTextRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewIconTextRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewIconTextRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewIconTextRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewIconTextRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewIconTextRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewIconTextRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1188,47 +1183,47 @@ impl<const OWNED: bool> Drop for DataViewIconTextRendererIsOwned<OWNED> {
 // wxDataViewIndexListModel
 wxwidgets! {
     /// wxDataViewIndexListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem (which you can obtain from this class).
-    /// - [`DataViewIndexListModel`] represents a C++ `wxDataViewIndexListModel` class instance which your code has ownership, [`DataViewIndexListModelIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewIndexListModel`] represents a C++ `wxDataViewIndexListModel` class instance which your code has ownership, [`DataViewIndexListModelInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewIndexListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewIndexListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_index_list_model.html) for more details.
     #[doc(alias = "wxDataViewIndexListModel")]
     #[doc(alias = "DataViewIndexListModel")]
     class DataViewIndexListModel
-        = DataViewIndexListModelIsOwned<true>(wxDataViewIndexListModel) impl
+        = DataViewIndexListModelInRust<true>(wxDataViewIndexListModel) impl
         DataViewIndexListModelMethods,
         DataViewListModelMethods,
         DataViewModelMethods,
         RefCounterMethods
 }
-impl<const OWNED: bool> DataViewIndexListModelIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewIndexListModelInRust<OWNED> {
     // BLOCKED: fn wxDataViewIndexListModel()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewIndexListModelIsOwned<false> {
+impl Clone for DataViewIndexListModelInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewIndexListModelIsOwned<OWNED>>
-    for DataViewListModelIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewIndexListModelInRust<OWNED>>
+    for DataViewListModelInRust<OWNED>
 {
-    fn from(o: DataViewIndexListModelIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewIndexListModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewIndexListModelIsOwned<OWNED>> for DataViewModelIsOwned<OWNED> {
-    fn from(o: DataViewIndexListModelIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewIndexListModelInRust<OWNED>> for DataViewModelInRust<OWNED> {
+    fn from(o: DataViewIndexListModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewIndexListModelIsOwned<OWNED>> for RefCounterIsOwned<OWNED> {
-    fn from(o: DataViewIndexListModelIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewIndexListModelInRust<OWNED>> for RefCounterInRust<OWNED> {
+    fn from(o: DataViewIndexListModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewIndexListModelIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewIndexListModelInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewIndexListModel_delete(self.0) }
@@ -1239,45 +1234,45 @@ impl<const OWNED: bool> Drop for DataViewIndexListModelIsOwned<OWNED> {
 // wxDataViewItem
 wxwidgets! {
     /// wxDataViewItem is a small opaque class that represents an item in a wxDataViewCtrl in a persistent way, i.e.
-    /// - [`DataViewItem`] represents a C++ `wxDataViewItem` class instance which your code has ownership, [`DataViewItemIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewItem`] represents a C++ `wxDataViewItem` class instance which your code has ownership, [`DataViewItemInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html) for more details.
     #[doc(alias = "wxDataViewItem")]
     #[doc(alias = "DataViewItem")]
     class DataViewItem
-        = DataViewItemIsOwned<true>(wxDataViewItem) impl
+        = DataViewItemInRust<true>(wxDataViewItem) impl
         DataViewItemMethods
 }
-impl<const OWNED: bool> DataViewItemIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewItemInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxDataViewItem::wxDataViewItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#a7a8b5a738467b471cd10e96357dc800e).
-    pub fn new() -> DataViewItemIsOwned<OWNED> {
-        unsafe { DataViewItemIsOwned(ffi::wxDataViewItem_new()) }
+    pub fn new() -> DataViewItemInRust<OWNED> {
+        unsafe { DataViewItemInRust(ffi::wxDataViewItem_new()) }
     }
     ///
     /// See [C++ `wxDataViewItem::wxDataViewItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#a355faeb0fd910141a8621c34b884153c).
-    pub fn new_with_dataviewitem<D: DataViewItemMethods>(item: &D) -> DataViewItemIsOwned<OWNED> {
+    pub fn new_with_dataviewitem<D: DataViewItemMethods>(item: &D) -> DataViewItemInRust<OWNED> {
         unsafe {
             let item = item.as_ptr();
-            DataViewItemIsOwned(ffi::wxDataViewItem_new1(item))
+            DataViewItemInRust(ffi::wxDataViewItem_new1(item))
         }
     }
     ///
     /// See [C++ `wxDataViewItem::wxDataViewItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html#aa8c216134b8e17a742c070e39753be59).
-    pub fn new_with_void(id: *mut c_void) -> DataViewItemIsOwned<OWNED> {
-        unsafe { DataViewItemIsOwned(ffi::wxDataViewItem_new2(id)) }
+    pub fn new_with_void(id: *mut c_void) -> DataViewItemInRust<OWNED> {
+        unsafe { DataViewItemInRust(ffi::wxDataViewItem_new2(id)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewItemIsOwned<false> {
+impl Clone for DataViewItemInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DataViewItemIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewItemInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewItem_delete(self.0) }
@@ -1288,32 +1283,32 @@ impl<const OWNED: bool> Drop for DataViewItemIsOwned<OWNED> {
 // wxDataViewItemAttr
 wxwidgets! {
     /// This class is used to indicate to a wxDataViewCtrl that a certain item (see wxDataViewItem) has extra font attributes for its renderer.
-    /// - [`DataViewItemAttr`] represents a C++ `wxDataViewItemAttr` class instance which your code has ownership, [`DataViewItemAttrIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewItemAttr`] represents a C++ `wxDataViewItemAttr` class instance which your code has ownership, [`DataViewItemAttrInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewItemAttr`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewItemAttr` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html) for more details.
     #[doc(alias = "wxDataViewItemAttr")]
     #[doc(alias = "DataViewItemAttr")]
     class DataViewItemAttr
-        = DataViewItemAttrIsOwned<true>(wxDataViewItemAttr) impl
+        = DataViewItemAttrInRust<true>(wxDataViewItemAttr) impl
         DataViewItemAttrMethods
 }
-impl<const OWNED: bool> DataViewItemAttrIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewItemAttrInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxDataViewItemAttr::wxDataViewItemAttr()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html#a730aee09cf5b3d45db8dcae8ffc48fde).
-    pub fn new() -> DataViewItemAttrIsOwned<OWNED> {
-        unsafe { DataViewItemAttrIsOwned(ffi::wxDataViewItemAttr_new()) }
+    pub fn new() -> DataViewItemAttrInRust<OWNED> {
+        unsafe { DataViewItemAttrInRust(ffi::wxDataViewItemAttr_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewItemAttrIsOwned<false> {
+impl Clone for DataViewItemAttrInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DataViewItemAttrIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewItemAttrInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewItemAttr_delete(self.0) }
@@ -1324,13 +1319,13 @@ impl<const OWNED: bool> Drop for DataViewItemAttrIsOwned<OWNED> {
 // wxDataViewListCtrl
 wxwidgets! {
     /// This class is a wxDataViewCtrl which internally uses a wxDataViewListStore and forwards most of its API to that class.
-    /// - [`DataViewListCtrl`] represents a C++ `wxDataViewListCtrl` class instance which your code has ownership, [`DataViewListCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewListCtrl`] represents a C++ `wxDataViewListCtrl` class instance which your code has ownership, [`DataViewListCtrlInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewListCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewListCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html) for more details.
     #[doc(alias = "wxDataViewListCtrl")]
     #[doc(alias = "DataViewListCtrl")]
     class DataViewListCtrl
-        = DataViewListCtrlIsOwned<true>(wxDataViewListCtrl) impl
+        = DataViewListCtrlInRust<true>(wxDataViewListCtrl) impl
         DataViewListCtrlMethods,
         DataViewCtrlMethods,
         ControlMethods,
@@ -1338,12 +1333,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewListCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewListCtrlInRust<OWNED> {
     /// Default ctor.
     ///
     /// See [C++ `wxDataViewListCtrl::wxDataViewListCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html#ae4ccb1d19929c49a81d3870a10d11765).
-    pub fn new_2step() -> DataViewListCtrlIsOwned<OWNED> {
-        unsafe { DataViewListCtrlIsOwned(ffi::wxDataViewListCtrl_new()) }
+    pub fn new_2step() -> DataViewListCtrlInRust<OWNED> {
+        unsafe { DataViewListCtrlInRust(ffi::wxDataViewListCtrl_new()) }
     }
     /// Constructor.
     ///
@@ -1355,7 +1350,7 @@ impl<const OWNED: bool> DataViewListCtrlIsOwned<OWNED> {
         size: &S,
         style: c_long,
         validator: &V,
-    ) -> DataViewListCtrlIsOwned<OWNED> {
+    ) -> DataViewListCtrlInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1364,7 +1359,7 @@ impl<const OWNED: bool> DataViewListCtrlIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            DataViewListCtrlIsOwned(ffi::wxDataViewListCtrl_new1(
+            DataViewListCtrlInRust(ffi::wxDataViewListCtrl_new1(
                 parent, id, pos, size, style, validator,
             ))
         }
@@ -1373,77 +1368,77 @@ impl<const OWNED: bool> DataViewListCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for DataViewListCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for DataViewListCtrlInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewListCtrlIsOwned<OWNED>> for DataViewCtrlIsOwned<OWNED> {
-    fn from(o: DataViewListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListCtrlInRust<OWNED>> for DataViewCtrlInRust<OWNED> {
+    fn from(o: DataViewListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewListCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: DataViewListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListCtrlInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: DataViewListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewListCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: DataViewListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListCtrlInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: DataViewListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewListCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: DataViewListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: DataViewListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewListCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewListCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewListCtrl_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewListCtrlInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewListCtrl_CLASSINFO()) }
     }
 }
 
 // wxDataViewListModel
 wxwidgets! {
     /// Base class with abstract API for wxDataViewIndexListModel and wxDataViewVirtualListModel.
-    /// - [`DataViewListModel`] represents a C++ `wxDataViewListModel` class instance which your code has ownership, [`DataViewListModelIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewListModel`] represents a C++ `wxDataViewListModel` class instance which your code has ownership, [`DataViewListModelInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_model.html) for more details.
     #[doc(alias = "wxDataViewListModel")]
     #[doc(alias = "DataViewListModel")]
     class DataViewListModel
-        = DataViewListModelIsOwned<true>(wxDataViewListModel) impl
+        = DataViewListModelInRust<true>(wxDataViewListModel) impl
         DataViewListModelMethods,
         DataViewModelMethods,
         RefCounterMethods
 }
-impl<const OWNED: bool> DataViewListModelIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewListModelInRust<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewListModelIsOwned<false> {
+impl Clone for DataViewListModelInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewListModelIsOwned<OWNED>> for DataViewModelIsOwned<OWNED> {
-    fn from(o: DataViewListModelIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListModelInRust<OWNED>> for DataViewModelInRust<OWNED> {
+    fn from(o: DataViewListModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewListModelIsOwned<OWNED>> for RefCounterIsOwned<OWNED> {
-    fn from(o: DataViewListModelIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListModelInRust<OWNED>> for RefCounterInRust<OWNED> {
+    fn from(o: DataViewListModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewListModelIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewListModelInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewListModel_delete(self.0) }
@@ -1454,58 +1449,58 @@ impl<const OWNED: bool> Drop for DataViewListModelIsOwned<OWNED> {
 // wxDataViewListStore
 wxwidgets! {
     /// wxDataViewListStore is a specialised wxDataViewModel for storing a simple table of data.
-    /// - [`DataViewListStore`] represents a C++ `wxDataViewListStore` class instance which your code has ownership, [`DataViewListStoreIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewListStore`] represents a C++ `wxDataViewListStore` class instance which your code has ownership, [`DataViewListStoreInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewListStore`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewListStore` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html) for more details.
     #[doc(alias = "wxDataViewListStore")]
     #[doc(alias = "DataViewListStore")]
     class DataViewListStore
-        = DataViewListStoreIsOwned<true>(wxDataViewListStore) impl
+        = DataViewListStoreInRust<true>(wxDataViewListStore) impl
         DataViewListStoreMethods,
         DataViewIndexListModelMethods,
         DataViewListModelMethods,
         DataViewModelMethods,
         RefCounterMethods
 }
-impl<const OWNED: bool> DataViewListStoreIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewListStoreInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxDataViewListStore::wxDataViewListStore()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html#ad0ea04a252cfa338caca32b9bad11640).
-    pub fn new() -> DataViewListStoreIsOwned<OWNED> {
-        unsafe { DataViewListStoreIsOwned(ffi::wxDataViewListStore_new()) }
+    pub fn new() -> DataViewListStoreInRust<OWNED> {
+        unsafe { DataViewListStoreInRust(ffi::wxDataViewListStore_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewListStoreIsOwned<false> {
+impl Clone for DataViewListStoreInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewListStoreIsOwned<OWNED>>
-    for DataViewIndexListModelIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewListStoreInRust<OWNED>>
+    for DataViewIndexListModelInRust<OWNED>
 {
-    fn from(o: DataViewListStoreIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewListStoreInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewListStoreIsOwned<OWNED>> for DataViewListModelIsOwned<OWNED> {
-    fn from(o: DataViewListStoreIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListStoreInRust<OWNED>> for DataViewListModelInRust<OWNED> {
+    fn from(o: DataViewListStoreInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewListStoreIsOwned<OWNED>> for DataViewModelIsOwned<OWNED> {
-    fn from(o: DataViewListStoreIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListStoreInRust<OWNED>> for DataViewModelInRust<OWNED> {
+    fn from(o: DataViewListStoreInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewListStoreIsOwned<OWNED>> for RefCounterIsOwned<OWNED> {
-    fn from(o: DataViewListStoreIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewListStoreInRust<OWNED>> for RefCounterInRust<OWNED> {
+    fn from(o: DataViewListStoreInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewListStoreIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewListStoreInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewListStore_delete(self.0) }
@@ -1516,33 +1511,33 @@ impl<const OWNED: bool> Drop for DataViewListStoreIsOwned<OWNED> {
 // wxDataViewModel
 wxwidgets! {
     /// wxDataViewModel is the base class for all data model to be displayed by a wxDataViewCtrl.
-    /// - [`DataViewModel`] represents a C++ `wxDataViewModel` class instance which your code has ownership, [`DataViewModelIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewModel`] represents a C++ `wxDataViewModel` class instance which your code has ownership, [`DataViewModelInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_model.html) for more details.
     #[doc(alias = "wxDataViewModel")]
     #[doc(alias = "DataViewModel")]
     class DataViewModel
-        = DataViewModelIsOwned<true>(wxDataViewModel) impl
+        = DataViewModelInRust<true>(wxDataViewModel) impl
         DataViewModelMethods,
         RefCounterMethods
 }
-impl<const OWNED: bool> DataViewModelIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewModelInRust<OWNED> {
     // BLOCKED: fn wxDataViewModel()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewModelIsOwned<false> {
+impl Clone for DataViewModelInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewModelIsOwned<OWNED>> for RefCounterIsOwned<OWNED> {
-    fn from(o: DataViewModelIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewModelInRust<OWNED>> for RefCounterInRust<OWNED> {
+    fn from(o: DataViewModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewModelIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewModelInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewModel_delete(self.0) }
@@ -1553,27 +1548,27 @@ impl<const OWNED: bool> Drop for DataViewModelIsOwned<OWNED> {
 // wxDataViewModelNotifier
 wxwidgets! {
     /// A wxDataViewModelNotifier instance is owned by a wxDataViewModel and mirrors its notification interface.
-    /// - [`DataViewModelNotifier`] represents a C++ `wxDataViewModelNotifier` class instance which your code has ownership, [`DataViewModelNotifierIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewModelNotifier`] represents a C++ `wxDataViewModelNotifier` class instance which your code has ownership, [`DataViewModelNotifierInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewModelNotifier`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewModelNotifier` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_model_notifier.html) for more details.
     #[doc(alias = "wxDataViewModelNotifier")]
     #[doc(alias = "DataViewModelNotifier")]
     class DataViewModelNotifier
-        = DataViewModelNotifierIsOwned<true>(wxDataViewModelNotifier) impl
+        = DataViewModelNotifierInRust<true>(wxDataViewModelNotifier) impl
         DataViewModelNotifierMethods
 }
-impl<const OWNED: bool> DataViewModelNotifierIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewModelNotifierInRust<OWNED> {
     // BLOCKED: fn wxDataViewModelNotifier()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewModelNotifierIsOwned<false> {
+impl Clone for DataViewModelNotifierInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DataViewModelNotifierIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewModelNotifierInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewModelNotifier_delete(self.0) }
@@ -1584,46 +1579,46 @@ impl<const OWNED: bool> Drop for DataViewModelNotifierIsOwned<OWNED> {
 // wxDataViewProgressRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render progress bars.
-    /// - [`DataViewProgressRenderer`] represents a C++ `wxDataViewProgressRenderer` class instance which your code has ownership, [`DataViewProgressRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewProgressRenderer`] represents a C++ `wxDataViewProgressRenderer` class instance which your code has ownership, [`DataViewProgressRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewProgressRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewProgressRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_progress_renderer.html) for more details.
     #[doc(alias = "wxDataViewProgressRenderer")]
     #[doc(alias = "DataViewProgressRenderer")]
     class DataViewProgressRenderer
-        = DataViewProgressRendererIsOwned<true>(wxDataViewProgressRenderer) impl
+        = DataViewProgressRendererInRust<true>(wxDataViewProgressRenderer) impl
         DataViewProgressRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewProgressRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewProgressRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewProgressRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewProgressRendererIsOwned<false> {
+impl Clone for DataViewProgressRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewProgressRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewProgressRendererInRust<OWNED>>
+    for DataViewRendererInRust<OWNED>
 {
-    fn from(o: DataViewProgressRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewProgressRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewProgressRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewProgressRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewProgressRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewProgressRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewProgressRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewProgressRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewProgressRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewProgressRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewProgressRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewProgressRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1634,38 +1629,38 @@ impl<const OWNED: bool> Drop for DataViewProgressRendererIsOwned<OWNED> {
 // wxDataViewRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render the individual cells.
-    /// - [`DataViewRenderer`] represents a C++ `wxDataViewRenderer` class instance which your code has ownership, [`DataViewRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewRenderer`] represents a C++ `wxDataViewRenderer` class instance which your code has ownership, [`DataViewRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_renderer.html) for more details.
     #[doc(alias = "wxDataViewRenderer")]
     #[doc(alias = "DataViewRenderer")]
     class DataViewRenderer
-        = DataViewRendererIsOwned<true>(wxDataViewRenderer) impl
+        = DataViewRendererInRust<true>(wxDataViewRenderer) impl
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewRendererIsOwned<false> {
+impl Clone for DataViewRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1676,54 +1671,52 @@ impl<const OWNED: bool> Drop for DataViewRendererIsOwned<OWNED> {
 // wxDataViewSpinRenderer
 wxwidgets! {
     /// This is a specialized renderer for rendering integer values.
-    /// - [`DataViewSpinRenderer`] represents a C++ `wxDataViewSpinRenderer` class instance which your code has ownership, [`DataViewSpinRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewSpinRenderer`] represents a C++ `wxDataViewSpinRenderer` class instance which your code has ownership, [`DataViewSpinRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewSpinRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewSpinRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_spin_renderer.html) for more details.
     #[doc(alias = "wxDataViewSpinRenderer")]
     #[doc(alias = "DataViewSpinRenderer")]
     class DataViewSpinRenderer
-        = DataViewSpinRendererIsOwned<true>(wxDataViewSpinRenderer) impl
+        = DataViewSpinRendererInRust<true>(wxDataViewSpinRenderer) impl
         DataViewSpinRendererMethods,
         DataViewCustomRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewSpinRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewSpinRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewSpinRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewSpinRendererIsOwned<false> {
+impl Clone for DataViewSpinRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewSpinRendererIsOwned<OWNED>>
-    for DataViewCustomRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewSpinRendererInRust<OWNED>>
+    for DataViewCustomRendererInRust<OWNED>
 {
-    fn from(o: DataViewSpinRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewSpinRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewSpinRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
-{
-    fn from(o: DataViewSpinRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewSpinRendererInRust<OWNED>> for DataViewRendererInRust<OWNED> {
+    fn from(o: DataViewSpinRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewSpinRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewSpinRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewSpinRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewSpinRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewSpinRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewSpinRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewSpinRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewSpinRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewSpinRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewSpinRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1734,46 +1727,44 @@ impl<const OWNED: bool> Drop for DataViewSpinRendererIsOwned<OWNED> {
 // wxDataViewTextRenderer
 wxwidgets! {
     /// wxDataViewTextRenderer is used for rendering text.
-    /// - [`DataViewTextRenderer`] represents a C++ `wxDataViewTextRenderer` class instance which your code has ownership, [`DataViewTextRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewTextRenderer`] represents a C++ `wxDataViewTextRenderer` class instance which your code has ownership, [`DataViewTextRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewTextRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewTextRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_text_renderer.html) for more details.
     #[doc(alias = "wxDataViewTextRenderer")]
     #[doc(alias = "DataViewTextRenderer")]
     class DataViewTextRenderer
-        = DataViewTextRendererIsOwned<true>(wxDataViewTextRenderer) impl
+        = DataViewTextRendererInRust<true>(wxDataViewTextRenderer) impl
         DataViewTextRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewTextRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewTextRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewTextRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewTextRendererIsOwned<false> {
+impl Clone for DataViewTextRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewTextRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
-{
-    fn from(o: DataViewTextRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTextRendererInRust<OWNED>> for DataViewRendererInRust<OWNED> {
+    fn from(o: DataViewTextRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewTextRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewTextRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTextRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewTextRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewTextRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewTextRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewTextRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewTextRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewTextRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewTextRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1784,46 +1775,46 @@ impl<const OWNED: bool> Drop for DataViewTextRendererIsOwned<OWNED> {
 // wxDataViewToggleRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render toggle controls.
-    /// - [`DataViewToggleRenderer`] represents a C++ `wxDataViewToggleRenderer` class instance which your code has ownership, [`DataViewToggleRendererIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewToggleRenderer`] represents a C++ `wxDataViewToggleRenderer` class instance which your code has ownership, [`DataViewToggleRendererInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewToggleRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewToggleRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_toggle_renderer.html) for more details.
     #[doc(alias = "wxDataViewToggleRenderer")]
     #[doc(alias = "DataViewToggleRenderer")]
     class DataViewToggleRenderer
-        = DataViewToggleRendererIsOwned<true>(wxDataViewToggleRenderer) impl
+        = DataViewToggleRendererInRust<true>(wxDataViewToggleRenderer) impl
         DataViewToggleRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewToggleRendererIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewToggleRendererInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDataViewToggleRenderer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewToggleRendererIsOwned<false> {
+impl Clone for DataViewToggleRendererInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewToggleRendererIsOwned<OWNED>>
-    for DataViewRendererIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewToggleRendererInRust<OWNED>>
+    for DataViewRendererInRust<OWNED>
 {
-    fn from(o: DataViewToggleRendererIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewToggleRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewToggleRendererIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewToggleRendererIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewToggleRendererInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewToggleRendererInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewToggleRendererIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewToggleRenderer_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewToggleRendererInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewToggleRenderer_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewToggleRendererIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewToggleRendererInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -1834,13 +1825,13 @@ impl<const OWNED: bool> Drop for DataViewToggleRendererIsOwned<OWNED> {
 // wxDataViewTreeCtrl
 wxwidgets! {
     /// This class is a wxDataViewCtrl which internally uses a wxDataViewTreeStore and forwards most of its API to that class.
-    /// - [`DataViewTreeCtrl`] represents a C++ `wxDataViewTreeCtrl` class instance which your code has ownership, [`DataViewTreeCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewTreeCtrl`] represents a C++ `wxDataViewTreeCtrl` class instance which your code has ownership, [`DataViewTreeCtrlInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewTreeCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewTreeCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html) for more details.
     #[doc(alias = "wxDataViewTreeCtrl")]
     #[doc(alias = "DataViewTreeCtrl")]
     class DataViewTreeCtrl
-        = DataViewTreeCtrlIsOwned<true>(wxDataViewTreeCtrl) impl
+        = DataViewTreeCtrlInRust<true>(wxDataViewTreeCtrl) impl
         DataViewTreeCtrlMethods,
         DataViewCtrlMethods,
         ControlMethods,
@@ -1848,12 +1839,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DataViewTreeCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewTreeCtrlInRust<OWNED> {
     /// Default ctor.
     ///
     /// See [C++ `wxDataViewTreeCtrl::wxDataViewTreeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html#a49d8a55c826b9b3bb75b8607a0d94fe8).
-    pub fn new_2step() -> DataViewTreeCtrlIsOwned<OWNED> {
-        unsafe { DataViewTreeCtrlIsOwned(ffi::wxDataViewTreeCtrl_new()) }
+    pub fn new_2step() -> DataViewTreeCtrlInRust<OWNED> {
+        unsafe { DataViewTreeCtrlInRust(ffi::wxDataViewTreeCtrl_new()) }
     }
     /// Constructor.
     ///
@@ -1865,7 +1856,7 @@ impl<const OWNED: bool> DataViewTreeCtrlIsOwned<OWNED> {
         size: &S,
         style: c_long,
         validator: &V,
-    ) -> DataViewTreeCtrlIsOwned<OWNED> {
+    ) -> DataViewTreeCtrlInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1874,7 +1865,7 @@ impl<const OWNED: bool> DataViewTreeCtrlIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
             let validator = validator.as_ptr();
-            DataViewTreeCtrlIsOwned(ffi::wxDataViewTreeCtrl_new1(
+            DataViewTreeCtrlInRust(ffi::wxDataViewTreeCtrl_new1(
                 parent, id, pos, size, style, validator,
             ))
         }
@@ -1883,83 +1874,83 @@ impl<const OWNED: bool> DataViewTreeCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for DataViewTreeCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for DataViewTreeCtrlInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewTreeCtrlIsOwned<OWNED>> for DataViewCtrlIsOwned<OWNED> {
-    fn from(o: DataViewTreeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTreeCtrlInRust<OWNED>> for DataViewCtrlInRust<OWNED> {
+    fn from(o: DataViewTreeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewTreeCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: DataViewTreeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTreeCtrlInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: DataViewTreeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewTreeCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: DataViewTreeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTreeCtrlInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: DataViewTreeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewTreeCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: DataViewTreeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTreeCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: DataViewTreeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewTreeCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DataViewTreeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTreeCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DataViewTreeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DataViewTreeCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDataViewTreeCtrl_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DataViewTreeCtrlInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDataViewTreeCtrl_CLASSINFO()) }
     }
 }
 
 // wxDataViewTreeStore
 wxwidgets! {
     /// wxDataViewTreeStore is a specialised wxDataViewModel for storing simple trees very much like wxTreeCtrl does and it offers a similar API.
-    /// - [`DataViewTreeStore`] represents a C++ `wxDataViewTreeStore` class instance which your code has ownership, [`DataViewTreeStoreIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewTreeStore`] represents a C++ `wxDataViewTreeStore` class instance which your code has ownership, [`DataViewTreeStoreInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewTreeStore`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewTreeStore` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html) for more details.
     #[doc(alias = "wxDataViewTreeStore")]
     #[doc(alias = "DataViewTreeStore")]
     class DataViewTreeStore
-        = DataViewTreeStoreIsOwned<true>(wxDataViewTreeStore) impl
+        = DataViewTreeStoreInRust<true>(wxDataViewTreeStore) impl
         DataViewTreeStoreMethods,
         DataViewModelMethods,
         RefCounterMethods
 }
-impl<const OWNED: bool> DataViewTreeStoreIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewTreeStoreInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxDataViewTreeStore::wxDataViewTreeStore()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html#aad8493a851fbef80f8b7c3f368ca53db).
-    pub fn new() -> DataViewTreeStoreIsOwned<OWNED> {
-        unsafe { DataViewTreeStoreIsOwned(ffi::wxDataViewTreeStore_new()) }
+    pub fn new() -> DataViewTreeStoreInRust<OWNED> {
+        unsafe { DataViewTreeStoreInRust(ffi::wxDataViewTreeStore_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewTreeStoreIsOwned<false> {
+impl Clone for DataViewTreeStoreInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewTreeStoreIsOwned<OWNED>> for DataViewModelIsOwned<OWNED> {
-    fn from(o: DataViewTreeStoreIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTreeStoreInRust<OWNED>> for DataViewModelInRust<OWNED> {
+    fn from(o: DataViewTreeStoreInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewTreeStoreIsOwned<OWNED>> for RefCounterIsOwned<OWNED> {
-    fn from(o: DataViewTreeStoreIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewTreeStoreInRust<OWNED>> for RefCounterInRust<OWNED> {
+    fn from(o: DataViewTreeStoreInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewTreeStoreIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewTreeStoreInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewTreeStore_delete(self.0) }
@@ -1970,49 +1961,47 @@ impl<const OWNED: bool> Drop for DataViewTreeStoreIsOwned<OWNED> {
 // wxDataViewVirtualListModel
 wxwidgets! {
     /// wxDataViewVirtualListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem and as such offers the exact same interface as wxDataViewIndexListModel.
-    /// - [`DataViewVirtualListModel`] represents a C++ `wxDataViewVirtualListModel` class instance which your code has ownership, [`DataViewVirtualListModelIsOwned`]`<false>` represents one which don't own.
+    /// - [`DataViewVirtualListModel`] represents a C++ `wxDataViewVirtualListModel` class instance which your code has ownership, [`DataViewVirtualListModelInRust`]`<false>` represents one which don't own.
     /// - Use [`DataViewVirtualListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewVirtualListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_virtual_list_model.html) for more details.
     #[doc(alias = "wxDataViewVirtualListModel")]
     #[doc(alias = "DataViewVirtualListModel")]
     class DataViewVirtualListModel
-        = DataViewVirtualListModelIsOwned<true>(wxDataViewVirtualListModel) impl
+        = DataViewVirtualListModelInRust<true>(wxDataViewVirtualListModel) impl
         DataViewVirtualListModelMethods,
         DataViewListModelMethods,
         DataViewModelMethods,
         RefCounterMethods
 }
-impl<const OWNED: bool> DataViewVirtualListModelIsOwned<OWNED> {
+impl<const OWNED: bool> DataViewVirtualListModelInRust<OWNED> {
     // BLOCKED: fn wxDataViewVirtualListModel()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DataViewVirtualListModelIsOwned<false> {
+impl Clone for DataViewVirtualListModelInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DataViewVirtualListModelIsOwned<OWNED>>
-    for DataViewListModelIsOwned<OWNED>
+impl<const OWNED: bool> From<DataViewVirtualListModelInRust<OWNED>>
+    for DataViewListModelInRust<OWNED>
 {
-    fn from(o: DataViewVirtualListModelIsOwned<OWNED>) -> Self {
+    fn from(o: DataViewVirtualListModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewVirtualListModelIsOwned<OWNED>>
-    for DataViewModelIsOwned<OWNED>
-{
-    fn from(o: DataViewVirtualListModelIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewVirtualListModelInRust<OWNED>> for DataViewModelInRust<OWNED> {
+    fn from(o: DataViewVirtualListModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DataViewVirtualListModelIsOwned<OWNED>> for RefCounterIsOwned<OWNED> {
-    fn from(o: DataViewVirtualListModelIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DataViewVirtualListModelInRust<OWNED>> for RefCounterInRust<OWNED> {
+    fn from(o: DataViewVirtualListModelInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DataViewVirtualListModelIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DataViewVirtualListModelInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDataViewVirtualListModel_delete(self.0) }
@@ -2023,55 +2012,55 @@ impl<const OWNED: bool> Drop for DataViewVirtualListModelIsOwned<OWNED> {
 // wxDateEvent
 wxwidgets! {
     /// This event class holds information about a date change and is used together with wxDatePickerCtrl.
-    /// - [`DateEvent`] represents a C++ `wxDateEvent` class instance which your code has ownership, [`DateEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`DateEvent`] represents a C++ `wxDateEvent` class instance which your code has ownership, [`DateEventInRust`]`<false>` represents one which don't own.
     /// - Use [`DateEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDateEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_date_event.html) for more details.
     #[doc(alias = "wxDateEvent")]
     #[doc(alias = "DateEvent")]
     class DateEvent
-        = DateEventIsOwned<true>(wxDateEvent) impl
+        = DateEventInRust<true>(wxDateEvent) impl
         DateEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DateEventIsOwned<OWNED> {
+impl<const OWNED: bool> DateEventInRust<OWNED> {
     ///
     /// See [C++ `wxDateEvent::wxDateEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_event.html#a54de582d97abba75950d2aa9b3ba84a2).
-    pub fn new() -> DateEventIsOwned<OWNED> {
-        unsafe { DateEventIsOwned(ffi::wxDateEvent_new()) }
+    pub fn new() -> DateEventInRust<OWNED> {
+        unsafe { DateEventInRust(ffi::wxDateEvent_new()) }
     }
     // NOT_SUPPORTED: fn wxDateEvent1()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DateEventIsOwned<false> {
+impl Clone for DateEventInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DateEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: DateEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DateEventInRust<OWNED>> for CommandEventInRust<OWNED> {
+    fn from(o: DateEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DateEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: DateEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DateEventInRust<OWNED>> for EventInRust<OWNED> {
+    fn from(o: DateEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DateEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DateEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DateEventInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DateEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DateEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDateEvent_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DateEventInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDateEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DateEventIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DateEventInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -2082,25 +2071,25 @@ impl<const OWNED: bool> Drop for DateEventIsOwned<OWNED> {
 // wxDatePickerCtrl
 wxwidgets! {
     /// This control allows the user to select a date.
-    /// - [`DatePickerCtrl`] represents a C++ `wxDatePickerCtrl` class instance which your code has ownership, [`DatePickerCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`DatePickerCtrl`] represents a C++ `wxDatePickerCtrl` class instance which your code has ownership, [`DatePickerCtrlInRust`]`<false>` represents one which don't own.
     /// - Use [`DatePickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDatePickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html) for more details.
     #[doc(alias = "wxDatePickerCtrl")]
     #[doc(alias = "DatePickerCtrl")]
     class DatePickerCtrl
-        = DatePickerCtrlIsOwned<true>(wxDatePickerCtrl) impl
+        = DatePickerCtrlInRust<true>(wxDatePickerCtrl) impl
         DatePickerCtrlMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DatePickerCtrlInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxDatePickerCtrl::wxDatePickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html#ae0700b0b3a7b522e3053e0bbb4de27ec).
-    pub fn new_2step() -> DatePickerCtrlIsOwned<OWNED> {
-        unsafe { DatePickerCtrlIsOwned(ffi::wxDatePickerCtrl_new()) }
+    pub fn new_2step() -> DatePickerCtrlInRust<OWNED> {
+        unsafe { DatePickerCtrlInRust(ffi::wxDatePickerCtrl_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
     ///
@@ -2120,7 +2109,7 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> DatePickerCtrlIsOwned<OWNED> {
+    ) -> DatePickerCtrlInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2132,7 +2121,7 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            DatePickerCtrlIsOwned(ffi::wxDatePickerCtrl_new1(
+            DatePickerCtrlInRust(ffi::wxDatePickerCtrl_new1(
                 parent, id, dt, pos, size, style, validator, name,
             ))
         }
@@ -2141,85 +2130,83 @@ impl<const OWNED: bool> DatePickerCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for DatePickerCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for DatePickerCtrlInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DatePickerCtrlInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: DatePickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DatePickerCtrlInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: DatePickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DatePickerCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: DatePickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DatePickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DatePickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DatePickerCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DatePickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DatePickerCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDatePickerCtrl_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DatePickerCtrlInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDatePickerCtrl_CLASSINFO()) }
     }
 }
 
 // wxDelegateRendererNative
 wxwidgets! {
     /// wxDelegateRendererNative allows reuse of renderers code by forwarding all the wxRendererNative methods to the given object and thus allowing you to only modify some of its methods  without having to reimplement all of them.
-    /// - [`DelegateRendererNative`] represents a C++ `wxDelegateRendererNative` class instance which your code has ownership, [`DelegateRendererNativeIsOwned`]`<false>` represents one which don't own.
+    /// - [`DelegateRendererNative`] represents a C++ `wxDelegateRendererNative` class instance which your code has ownership, [`DelegateRendererNativeInRust`]`<false>` represents one which don't own.
     /// - Use [`DelegateRendererNative`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDelegateRendererNative` class's documentation](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html) for more details.
     #[doc(alias = "wxDelegateRendererNative")]
     #[doc(alias = "DelegateRendererNative")]
     class DelegateRendererNative
-        = DelegateRendererNativeIsOwned<true>(wxDelegateRendererNative) impl
+        = DelegateRendererNativeInRust<true>(wxDelegateRendererNative) impl
         DelegateRendererNativeMethods,
         RendererNativeMethods
 }
-impl<const OWNED: bool> DelegateRendererNativeIsOwned<OWNED> {
+impl<const OWNED: bool> DelegateRendererNativeInRust<OWNED> {
     /// The default constructor does the same thing as the other one except that it uses the generic renderer instead of the user-specified rendererNative.
     ///
     /// See [C++ `wxDelegateRendererNative::wxDelegateRendererNative()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html#a184f122211b4632234a5398575305e2c).
-    pub fn new() -> DelegateRendererNativeIsOwned<OWNED> {
-        unsafe { DelegateRendererNativeIsOwned(ffi::wxDelegateRendererNative_new()) }
+    pub fn new() -> DelegateRendererNativeInRust<OWNED> {
+        unsafe { DelegateRendererNativeInRust(ffi::wxDelegateRendererNative_new()) }
     }
     /// This constructor uses the user-specified rendererNative to set up the delegate renderer object to follow all calls to the specified real renderer.
     ///
     /// See [C++ `wxDelegateRendererNative::wxDelegateRendererNative()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html#a8d9dc80cc471a8162a4c9360790fb4cd).
     pub fn new_with_renderernative<R: RendererNativeMethods>(
         renderer_native: &R,
-    ) -> DelegateRendererNativeIsOwned<OWNED> {
+    ) -> DelegateRendererNativeInRust<OWNED> {
         unsafe {
             let renderer_native = renderer_native.as_ptr();
-            DelegateRendererNativeIsOwned(ffi::wxDelegateRendererNative_new1(renderer_native))
+            DelegateRendererNativeInRust(ffi::wxDelegateRendererNative_new1(renderer_native))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DelegateRendererNativeIsOwned<false> {
+impl Clone for DelegateRendererNativeInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DelegateRendererNativeIsOwned<OWNED>>
-    for RendererNativeIsOwned<OWNED>
-{
-    fn from(o: DelegateRendererNativeIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DelegateRendererNativeInRust<OWNED>> for RendererNativeInRust<OWNED> {
+    fn from(o: DelegateRendererNativeInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for DelegateRendererNativeIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DelegateRendererNativeInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDelegateRendererNative_delete(self.0) }
@@ -2230,13 +2217,13 @@ impl<const OWNED: bool> Drop for DelegateRendererNativeIsOwned<OWNED> {
 // wxDialog
 wxwidgets! {
     /// A dialog box is a window with a title bar and sometimes a system menu, which can be moved around the screen.
-    /// - [`Dialog`] represents a C++ `wxDialog` class instance which your code has ownership, [`DialogIsOwned`]`<false>` represents one which don't own.
+    /// - [`Dialog`] represents a C++ `wxDialog` class instance which your code has ownership, [`DialogInRust`]`<false>` represents one which don't own.
     /// - Use [`Dialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html) for more details.
     #[doc(alias = "wxDialog")]
     #[doc(alias = "Dialog")]
     class Dialog
-        = DialogIsOwned<true>(wxDialog) impl
+        = DialogInRust<true>(wxDialog) impl
         DialogMethods,
         // TopLevelWindowMethods,
         NonOwnedWindowMethods,
@@ -2244,12 +2231,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DialogIsOwned<OWNED> {
+impl<const OWNED: bool> DialogInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxDialog::wxDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a11f9715b3975218071a4de9b29a4ed03).
-    pub fn new_2step() -> DialogIsOwned<OWNED> {
-        unsafe { DialogIsOwned(ffi::wxDialog_new()) }
+    pub fn new_2step() -> DialogInRust<OWNED> {
+        unsafe { DialogInRust(ffi::wxDialog_new()) }
     }
     /// Constructor.
     ///
@@ -2262,7 +2249,7 @@ impl<const OWNED: bool> DialogIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> DialogIsOwned<OWNED> {
+    ) -> DialogInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2274,7 +2261,7 @@ impl<const OWNED: bool> DialogIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            DialogIsOwned(ffi::wxDialog_new1(
+            DialogInRust(ffi::wxDialog_new1(
                 parent, id, title, pos, size, style, name,
             ))
         }
@@ -2283,42 +2270,42 @@ impl<const OWNED: bool> DialogIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for DialogIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for DialogInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DialogIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
-    fn from(o: DialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DialogInRust<OWNED>> for TopLevelWindowInRust<OWNED> {
+    fn from(o: DialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DialogIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
-    fn from(o: DialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DialogInRust<OWNED>> for NonOwnedWindowInRust<OWNED> {
+    fn from(o: DialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DialogIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: DialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DialogInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: DialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DialogIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: DialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DialogInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: DialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DialogInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DialogIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDialog_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DialogInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDialog_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
+impl<const OWNED: bool> TopLevelWindowMethods for DialogInRust<OWNED> {
     /// Used for two-step dialog box construction.
     ///
     /// See [C++ `wxDialog::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a44e42338cb8bd2a1b312ab7a6f1722a3).
@@ -2356,7 +2343,7 @@ impl<const OWNED: bool> TopLevelWindowMethods for DialogIsOwned<OWNED> {
         }
     }
 }
-impl<const OWNED: bool> WindowMethods for DialogIsOwned<OWNED> {
+impl<const OWNED: bool> WindowMethods for DialogInRust<OWNED> {
     /// Centres the dialog box on the display.
     ///
     /// See [C++ `wxDialog::Centre()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a6af384c4a558965bfee61784f5e0b7fc).
@@ -2368,27 +2355,27 @@ impl<const OWNED: bool> WindowMethods for DialogIsOwned<OWNED> {
 // wxDialogLayoutAdapter
 wxwidgets! {
     /// This abstract class is the base for classes that help wxWidgets perform run-time layout adaptation of dialogs.
-    /// - [`DialogLayoutAdapter`] represents a C++ `wxDialogLayoutAdapter` class instance which your code has ownership, [`DialogLayoutAdapterIsOwned`]`<false>` represents one which don't own.
+    /// - [`DialogLayoutAdapter`] represents a C++ `wxDialogLayoutAdapter` class instance which your code has ownership, [`DialogLayoutAdapterInRust`]`<false>` represents one which don't own.
     /// - Use [`DialogLayoutAdapter`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDialogLayoutAdapter` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dialog_layout_adapter.html) for more details.
     #[doc(alias = "wxDialogLayoutAdapter")]
     #[doc(alias = "DialogLayoutAdapter")]
     class DialogLayoutAdapter
-        = DialogLayoutAdapterIsOwned<true>(wxDialogLayoutAdapter) impl
+        = DialogLayoutAdapterInRust<true>(wxDialogLayoutAdapter) impl
         DialogLayoutAdapterMethods
 }
-impl<const OWNED: bool> DialogLayoutAdapterIsOwned<OWNED> {
+impl<const OWNED: bool> DialogLayoutAdapterInRust<OWNED> {
     // BLOCKED: fn wxDialogLayoutAdapter()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DialogLayoutAdapterIsOwned<false> {
+impl Clone for DialogLayoutAdapterInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DialogLayoutAdapterIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DialogLayoutAdapterInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDialogLayoutAdapter_delete(self.0) }
@@ -2399,13 +2386,13 @@ impl<const OWNED: bool> Drop for DialogLayoutAdapterIsOwned<OWNED> {
 // wxDirDialog
 wxwidgets! {
     /// This class represents the directory chooser dialog.
-    /// - [`DirDialog`] represents a C++ `wxDirDialog` class instance which your code has ownership, [`DirDialogIsOwned`]`<false>` represents one which don't own.
+    /// - [`DirDialog`] represents a C++ `wxDirDialog` class instance which your code has ownership, [`DirDialogInRust`]`<false>` represents one which don't own.
     /// - Use [`DirDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDirDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html) for more details.
     #[doc(alias = "wxDirDialog")]
     #[doc(alias = "DirDialog")]
     class DirDialog
-        = DirDialogIsOwned<true>(wxDirDialog) impl
+        = DirDialogInRust<true>(wxDirDialog) impl
         DirDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -2414,7 +2401,7 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DirDialogIsOwned<OWNED> {
+impl<const OWNED: bool> DirDialogInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxDirDialog::wxDirDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html#a72322832d7830dd637fb4daa541c267a).
@@ -2426,7 +2413,7 @@ impl<const OWNED: bool> DirDialogIsOwned<OWNED> {
         pos: &P,
         size: &S,
         name: &str,
-    ) -> DirDialogIsOwned<OWNED> {
+    ) -> DirDialogInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2440,7 +2427,7 @@ impl<const OWNED: bool> DirDialogIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            DirDialogIsOwned(ffi::wxDirDialog_new(
+            DirDialogInRust(ffi::wxDirDialog_new(
                 parent,
                 message,
                 default_path,
@@ -2455,57 +2442,57 @@ impl<const OWNED: bool> DirDialogIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for DirDialogIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for DirDialogInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DirDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
-    fn from(o: DirDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirDialogInRust<OWNED>> for DialogInRust<OWNED> {
+    fn from(o: DirDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirDialogIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
-    fn from(o: DirDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirDialogInRust<OWNED>> for TopLevelWindowInRust<OWNED> {
+    fn from(o: DirDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirDialogIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
-    fn from(o: DirDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirDialogInRust<OWNED>> for NonOwnedWindowInRust<OWNED> {
+    fn from(o: DirDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirDialogIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: DirDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirDialogInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: DirDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirDialogIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: DirDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirDialogInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: DirDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirDialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DirDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirDialogInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DirDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DirDialogIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDirDialog_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DirDialogInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDirDialog_CLASSINFO()) }
     }
 }
 
 // wxDirPickerCtrl
 wxwidgets! {
     /// This control allows the user to select a directory.
-    /// - [`DirPickerCtrl`] represents a C++ `wxDirPickerCtrl` class instance which your code has ownership, [`DirPickerCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`DirPickerCtrl`] represents a C++ `wxDirPickerCtrl` class instance which your code has ownership, [`DirPickerCtrlInRust`]`<false>` represents one which don't own.
     /// - Use [`DirPickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDirPickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html) for more details.
     #[doc(alias = "wxDirPickerCtrl")]
     #[doc(alias = "DirPickerCtrl")]
     class DirPickerCtrl
-        = DirPickerCtrlIsOwned<true>(wxDirPickerCtrl) impl
+        = DirPickerCtrlInRust<true>(wxDirPickerCtrl) impl
         DirPickerCtrlMethods,
         PickerBaseMethods,
         ControlMethods,
@@ -2513,11 +2500,11 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> DirPickerCtrlInRust<OWNED> {
     ///
     /// See [C++ `wxDirPickerCtrl::wxDirPickerCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html#a7afb789fa0326ec140f4645d49cc735b).
-    pub fn new_2step() -> DirPickerCtrlIsOwned<OWNED> {
-        unsafe { DirPickerCtrlIsOwned(ffi::wxDirPickerCtrl_new()) }
+    pub fn new_2step() -> DirPickerCtrlInRust<OWNED> {
+        unsafe { DirPickerCtrlInRust(ffi::wxDirPickerCtrl_new()) }
     }
     /// Initializes the object and calls Create() with all the parameters.
     ///
@@ -2532,7 +2519,7 @@ impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> DirPickerCtrlIsOwned<OWNED> {
+    ) -> DirPickerCtrlInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2547,7 +2534,7 @@ impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            DirPickerCtrlIsOwned(ffi::wxDirPickerCtrl_new1(
+            DirPickerCtrlInRust(ffi::wxDirPickerCtrl_new1(
                 parent, id, path, message, pos, size, style, validator, name,
             ))
         }
@@ -2556,89 +2543,89 @@ impl<const OWNED: bool> DirPickerCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for DirPickerCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for DirPickerCtrlInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for PickerBaseIsOwned<OWNED> {
-    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirPickerCtrlInRust<OWNED>> for PickerBaseInRust<OWNED> {
+    fn from(o: DirPickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirPickerCtrlInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: DirPickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirPickerCtrlInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: DirPickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirPickerCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: DirPickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DirPickerCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DirPickerCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DirPickerCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DirPickerCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DirPickerCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDirPickerCtrl_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DirPickerCtrlInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDirPickerCtrl_CLASSINFO()) }
     }
 }
 
 // wxDisplay
 wxwidgets! {
     /// Determines the sizes and locations of displays connected to the system.
-    /// - [`Display`] represents a C++ `wxDisplay` class instance which your code has ownership, [`DisplayIsOwned`]`<false>` represents one which don't own.
+    /// - [`Display`] represents a C++ `wxDisplay` class instance which your code has ownership, [`DisplayInRust`]`<false>` represents one which don't own.
     /// - Use [`Display`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDisplay` class's documentation](https://docs.wxwidgets.org/3.2/classwx_display.html) for more details.
     #[doc(alias = "wxDisplay")]
     #[doc(alias = "Display")]
     class Display
-        = DisplayIsOwned<true>(wxDisplay) impl
+        = DisplayInRust<true>(wxDisplay) impl
         DisplayMethods
 }
-impl<const OWNED: bool> DisplayIsOwned<OWNED> {
+impl<const OWNED: bool> DisplayInRust<OWNED> {
     /// Default constructor creating wxDisplay object representing the primary display.
     ///
     /// See [C++ `wxDisplay::wxDisplay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_display.html#a8455f1450af24319a5c434d9a1984437).
-    pub fn new() -> DisplayIsOwned<OWNED> {
-        unsafe { DisplayIsOwned(ffi::wxDisplay_new()) }
+    pub fn new() -> DisplayInRust<OWNED> {
+        unsafe { DisplayInRust(ffi::wxDisplay_new()) }
     }
     /// Constructor, setting up a wxDisplay instance with the specified display.
     ///
     /// See [C++ `wxDisplay::wxDisplay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_display.html#a3ff5e051699a4f9ab6ce984d9a8a8943).
-    pub fn new_with_uint(index: c_uint) -> DisplayIsOwned<OWNED> {
-        unsafe { DisplayIsOwned(ffi::wxDisplay_new1(index)) }
+    pub fn new_with_uint(index: c_uint) -> DisplayInRust<OWNED> {
+        unsafe { DisplayInRust(ffi::wxDisplay_new1(index)) }
     }
     /// Constructor creating the display object associated with the given window.
     ///
     /// See [C++ `wxDisplay::wxDisplay()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_display.html#a75dc6e0f101a1126269bb0de990b8599).
-    pub fn new_with_window<W: WindowMethods>(window: Option<&W>) -> DisplayIsOwned<OWNED> {
+    pub fn new_with_window<W: WindowMethods>(window: Option<&W>) -> DisplayInRust<OWNED> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            DisplayIsOwned(ffi::wxDisplay_new2(window))
+            DisplayInRust(ffi::wxDisplay_new2(window))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DisplayIsOwned<false> {
+impl Clone for DisplayInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DisplayIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DisplayInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDisplay_delete(self.0) }
@@ -2649,48 +2636,48 @@ impl<const OWNED: bool> Drop for DisplayIsOwned<OWNED> {
 // wxDisplayChangedEvent
 wxwidgets! {
     /// A display changed event is sent to top-level windows when the display resolution has changed.
-    /// - [`DisplayChangedEvent`] represents a C++ `wxDisplayChangedEvent` class instance which your code has ownership, [`DisplayChangedEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`DisplayChangedEvent`] represents a C++ `wxDisplayChangedEvent` class instance which your code has ownership, [`DisplayChangedEventInRust`]`<false>` represents one which don't own.
     /// - Use [`DisplayChangedEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDisplayChangedEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html) for more details.
     #[doc(alias = "wxDisplayChangedEvent")]
     #[doc(alias = "DisplayChangedEvent")]
     class DisplayChangedEvent
-        = DisplayChangedEventIsOwned<true>(wxDisplayChangedEvent) impl
+        = DisplayChangedEventInRust<true>(wxDisplayChangedEvent) impl
         DisplayChangedEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DisplayChangedEventIsOwned<OWNED> {
+impl<const OWNED: bool> DisplayChangedEventInRust<OWNED> {
     ///
     /// See [C++ `wxDisplayChangedEvent::wxDisplayChangedEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html#aa9169eb3e0bbe259a738459f39a6eb1a).
-    pub fn new() -> DisplayChangedEventIsOwned<OWNED> {
-        unsafe { DisplayChangedEventIsOwned(ffi::wxDisplayChangedEvent_new()) }
+    pub fn new() -> DisplayChangedEventInRust<OWNED> {
+        unsafe { DisplayChangedEventInRust(ffi::wxDisplayChangedEvent_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DisplayChangedEventIsOwned<false> {
+impl Clone for DisplayChangedEventInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DisplayChangedEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: DisplayChangedEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DisplayChangedEventInRust<OWNED>> for EventInRust<OWNED> {
+    fn from(o: DisplayChangedEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DisplayChangedEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DisplayChangedEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DisplayChangedEventInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DisplayChangedEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DisplayChangedEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDisplayChangedEvent_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DisplayChangedEventInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDisplayChangedEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DisplayChangedEventIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DisplayChangedEventInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -2701,22 +2688,22 @@ impl<const OWNED: bool> Drop for DisplayChangedEventIsOwned<OWNED> {
 // wxDragImage
 wxwidgets! {
     /// This class is used when you wish to drag an object on the screen, and a simple cursor is not enough.
-    /// - [`DragImage`] represents a C++ `wxDragImage` class instance which your code has ownership, [`DragImageIsOwned`]`<false>` represents one which don't own.
+    /// - [`DragImage`] represents a C++ `wxDragImage` class instance which your code has ownership, [`DragImageInRust`]`<false>` represents one which don't own.
     /// - Use [`DragImage`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDragImage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html) for more details.
     #[doc(alias = "wxDragImage")]
     #[doc(alias = "DragImage")]
     class DragImage
-        = DragImageIsOwned<true>(wxDragImage) impl
+        = DragImageInRust<true>(wxDragImage) impl
         DragImageMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DragImageIsOwned<OWNED> {
+impl<const OWNED: bool> DragImageInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxDragImage::wxDragImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a1f9e5d1596679795bedb2aebe4841e6d).
-    pub fn new() -> DragImageIsOwned<OWNED> {
-        unsafe { DragImageIsOwned(ffi::wxDragImage_new()) }
+    pub fn new() -> DragImageInRust<OWNED> {
+        unsafe { DragImageInRust(ffi::wxDragImage_new()) }
     }
     /// Constructs a drag image from a bitmap and optional cursor.
     ///
@@ -2724,11 +2711,11 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     pub fn new_with_bitmap<B: BitmapMethods, C: CursorMethods>(
         image: &B,
         cursor: &C,
-    ) -> DragImageIsOwned<OWNED> {
+    ) -> DragImageInRust<OWNED> {
         unsafe {
             let image = image.as_ptr();
             let cursor = cursor.as_ptr();
-            DragImageIsOwned(ffi::wxDragImage_new1(image, cursor))
+            DragImageInRust(ffi::wxDragImage_new1(image, cursor))
         }
     }
     /// Constructs a drag image from an icon and optional cursor.
@@ -2737,22 +2724,22 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     pub fn new_with_icon<I: IconMethods, C: CursorMethods>(
         image: &I,
         cursor: &C,
-    ) -> DragImageIsOwned<OWNED> {
+    ) -> DragImageInRust<OWNED> {
         unsafe {
             let image = image.as_ptr();
             let cursor = cursor.as_ptr();
-            DragImageIsOwned(ffi::wxDragImage_new2(image, cursor))
+            DragImageInRust(ffi::wxDragImage_new2(image, cursor))
         }
     }
     /// Constructs a drag image from a text string and optional cursor.
     ///
     /// See [C++ `wxDragImage::wxDragImage()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html#a594a13372b1c37b9a853d0817c17e9c0).
-    pub fn new_with_str<C: CursorMethods>(text: &str, cursor: &C) -> DragImageIsOwned<OWNED> {
+    pub fn new_with_str<C: CursorMethods>(text: &str, cursor: &C) -> DragImageInRust<OWNED> {
         unsafe {
             let text = WxString::from(text);
             let text = text.as_ptr();
             let cursor = cursor.as_ptr();
-            DragImageIsOwned(ffi::wxDragImage_new3(text, cursor))
+            DragImageInRust(ffi::wxDragImage_new3(text, cursor))
         }
     }
     /// Constructs a drag image from the text in the given tree control item, and optional cursor.
@@ -2761,11 +2748,11 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     pub fn new_with_treectrl<T: TreeCtrlMethods, T2: TreeItemIdMethods>(
         tree_ctrl: &T,
         id: &T2,
-    ) -> DragImageIsOwned<OWNED> {
+    ) -> DragImageInRust<OWNED> {
         unsafe {
             let tree_ctrl = tree_ctrl.as_ptr();
             let id = id.as_ptr();
-            DragImageIsOwned(ffi::wxDragImage_new4(tree_ctrl, id))
+            DragImageInRust(ffi::wxDragImage_new4(tree_ctrl, id))
         }
     }
     /// Constructs a drag image from the text in the given list control item, and optional cursor.
@@ -2774,32 +2761,32 @@ impl<const OWNED: bool> DragImageIsOwned<OWNED> {
     pub fn new_with_listctrl<L: ListCtrlMethods>(
         list_ctrl: &L,
         id: c_long,
-    ) -> DragImageIsOwned<OWNED> {
+    ) -> DragImageInRust<OWNED> {
         unsafe {
             let list_ctrl = list_ctrl.as_ptr();
-            DragImageIsOwned(ffi::wxDragImage_new5(list_ctrl, id))
+            DragImageInRust(ffi::wxDragImage_new5(list_ctrl, id))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DragImageIsOwned<false> {
+impl Clone for DragImageInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DragImageIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DragImageIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DragImageInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DragImageInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DragImageIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDragImage_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DragImageInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDragImage_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DragImageIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DragImageInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -2810,44 +2797,44 @@ impl<const OWNED: bool> Drop for DragImageIsOwned<OWNED> {
 // wxDropFilesEvent
 wxwidgets! {
     /// This class is used for drop files events, that is, when files have been dropped onto the window.
-    /// - [`DropFilesEvent`] represents a C++ `wxDropFilesEvent` class instance which your code has ownership, [`DropFilesEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`DropFilesEvent`] represents a C++ `wxDropFilesEvent` class instance which your code has ownership, [`DropFilesEventInRust`]`<false>` represents one which don't own.
     /// - Use [`DropFilesEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDropFilesEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_files_event.html) for more details.
     #[doc(alias = "wxDropFilesEvent")]
     #[doc(alias = "DropFilesEvent")]
     class DropFilesEvent
-        = DropFilesEventIsOwned<true>(wxDropFilesEvent) impl
+        = DropFilesEventInRust<true>(wxDropFilesEvent) impl
         DropFilesEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> DropFilesEventIsOwned<OWNED> {
+impl<const OWNED: bool> DropFilesEventInRust<OWNED> {
     // NOT_SUPPORTED: fn wxDropFilesEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DropFilesEventIsOwned<false> {
+impl Clone for DropFilesEventInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<DropFilesEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: DropFilesEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DropFilesEventInRust<OWNED>> for EventInRust<OWNED> {
+    fn from(o: DropFilesEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<DropFilesEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: DropFilesEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<DropFilesEventInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: DropFilesEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for DropFilesEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxDropFilesEvent_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for DropFilesEventInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxDropFilesEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for DropFilesEventIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DropFilesEventInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -2858,16 +2845,16 @@ impl<const OWNED: bool> Drop for DropFilesEventIsOwned<OWNED> {
 // wxDropSource
 wxwidgets! {
     /// This class represents a source for a drag and drop operation.
-    /// - [`DropSource`] represents a C++ `wxDropSource` class instance which your code has ownership, [`DropSourceIsOwned`]`<false>` represents one which don't own.
+    /// - [`DropSource`] represents a C++ `wxDropSource` class instance which your code has ownership, [`DropSourceInRust`]`<false>` represents one which don't own.
     /// - Use [`DropSource`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDropSource` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html) for more details.
     #[doc(alias = "wxDropSource")]
     #[doc(alias = "DropSource")]
     class DropSource
-        = DropSourceIsOwned<true>(wxDropSource) impl
+        = DropSourceInRust<true>(wxDropSource) impl
         DropSourceMethods
 }
-impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
+impl<const OWNED: bool> DropSourceInRust<OWNED> {
     /// This constructor requires that you must call SetData() later.
     ///
     /// See [C++ `wxDropSource::wxDropSource()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#a0534684be549317b7a14ce27d5afc699).
@@ -2881,7 +2868,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
         icon_copy: &C,
         icon_move: &C2,
         icon_none: &C3,
-    ) -> DropSourceIsOwned<OWNED> {
+    ) -> DropSourceInRust<OWNED> {
         unsafe {
             let win = match win {
                 Some(r) => r.as_ptr(),
@@ -2890,7 +2877,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             let icon_copy = icon_copy.as_ptr();
             let icon_move = icon_move.as_ptr();
             let icon_none = icon_none.as_ptr();
-            DropSourceIsOwned(ffi::wxDropSource_new(win, icon_copy, icon_move, icon_none))
+            DropSourceInRust(ffi::wxDropSource_new(win, icon_copy, icon_move, icon_none))
         }
     }
     /// The constructor taking a wxDataObject.
@@ -2908,7 +2895,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
         icon_copy: &C,
         icon_move: &C2,
         icon_none: &C3,
-    ) -> DropSourceIsOwned<OWNED> {
+    ) -> DropSourceInRust<OWNED> {
         unsafe {
             let data = data.as_ptr();
             let win = match win {
@@ -2918,7 +2905,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             let icon_copy = icon_copy.as_ptr();
             let icon_move = icon_move.as_ptr();
             let icon_none = icon_none.as_ptr();
-            DropSourceIsOwned(ffi::wxDropSource_new1(
+            DropSourceInRust(ffi::wxDropSource_new1(
                 data, win, icon_copy, icon_move, icon_none,
             ))
         }
@@ -2936,7 +2923,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
         icon_copy: &I,
         icon_move: &I2,
         icon_none: &I3,
-    ) -> DropSourceIsOwned<OWNED> {
+    ) -> DropSourceInRust<OWNED> {
         unsafe {
             let win = match win {
                 Some(r) => r.as_ptr(),
@@ -2945,7 +2932,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             let icon_copy = icon_copy.as_ptr();
             let icon_move = icon_move.as_ptr();
             let icon_none = icon_none.as_ptr();
-            DropSourceIsOwned(ffi::wxDropSource_new2(win, icon_copy, icon_move, icon_none))
+            DropSourceInRust(ffi::wxDropSource_new2(win, icon_copy, icon_move, icon_none))
         }
     }
     /// The constructor taking a wxDataObject.
@@ -2963,7 +2950,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
         icon_copy: &I,
         icon_move: &I2,
         icon_none: &I3,
-    ) -> DropSourceIsOwned<OWNED> {
+    ) -> DropSourceInRust<OWNED> {
         unsafe {
             let data = data.as_ptr();
             let win = match win {
@@ -2973,7 +2960,7 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
             let icon_copy = icon_copy.as_ptr();
             let icon_move = icon_move.as_ptr();
             let icon_none = icon_none.as_ptr();
-            DropSourceIsOwned(ffi::wxDropSource_new3(
+            DropSourceInRust(ffi::wxDropSource_new3(
                 data, win, icon_copy, icon_move, icon_none,
             ))
         }
@@ -2982,12 +2969,12 @@ impl<const OWNED: bool> DropSourceIsOwned<OWNED> {
         None
     }
 }
-impl Clone for DropSourceIsOwned<false> {
+impl Clone for DropSourceInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DropSourceIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DropSourceInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDropSource_delete(self.0) }
@@ -2998,27 +2985,27 @@ impl<const OWNED: bool> Drop for DropSourceIsOwned<OWNED> {
 // wxDropTarget
 wxwidgets! {
     /// This class represents a target for a drag and drop operation.
-    /// - [`DropTarget`] represents a C++ `wxDropTarget` class instance which your code has ownership, [`DropTargetIsOwned`]`<false>` represents one which don't own.
+    /// - [`DropTarget`] represents a C++ `wxDropTarget` class instance which your code has ownership, [`DropTargetInRust`]`<false>` represents one which don't own.
     /// - Use [`DropTarget`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDropTarget` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_target.html) for more details.
     #[doc(alias = "wxDropTarget")]
     #[doc(alias = "DropTarget")]
     class DropTarget
-        = DropTargetIsOwned<true>(wxDropTarget) impl
+        = DropTargetInRust<true>(wxDropTarget) impl
         DropTargetMethods
 }
-impl<const OWNED: bool> DropTargetIsOwned<OWNED> {
+impl<const OWNED: bool> DropTargetInRust<OWNED> {
     // BLOCKED: fn wxDropTarget()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for DropTargetIsOwned<false> {
+impl Clone for DropTargetInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DropTargetIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for DropTargetInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxDropTarget_delete(self.0) }

@@ -3,7 +3,7 @@ use super::*;
 // wxQuantize
 /// This trait represents [C++ `wxQuantize` class](https://docs.wxwidgets.org/3.2/classwx_quantize.html)'s methods and inheritance.
 ///
-/// See [`QuantizeIsOwned`] documentation for the class usage.
+/// See [`QuantizeInRust`] documentation for the class usage.
 pub trait QuantizeMethods: ObjectMethods {
     /// Converts input bitmap(s) into 8bit representation with custom palette.
     ///
@@ -67,7 +67,7 @@ pub trait QuantizeMethods: ObjectMethods {
 // wxQueryLayoutInfoEvent
 /// This trait represents [C++ `wxQueryLayoutInfoEvent` class](https://docs.wxwidgets.org/3.2/classwx_query_layout_info_event.html)'s methods and inheritance.
 ///
-/// See [`QueryLayoutInfoEventIsOwned`] documentation for the class usage.
+/// See [`QueryLayoutInfoEventInRust`] documentation for the class usage.
 pub trait QueryLayoutInfoEventMethods: EventMethods {
     // NOT_SUPPORTED: fn GetAlignment()
     /// Returns the flags associated with this event.

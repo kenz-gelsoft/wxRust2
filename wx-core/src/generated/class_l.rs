@@ -3,43 +3,43 @@ use super::*;
 // wxLayoutAlgorithm
 wxwidgets! {
     /// wxLayoutAlgorithm implements layout of subwindows in MDI or SDI frames.
-    /// - [`LayoutAlgorithm`] represents a C++ `wxLayoutAlgorithm` class instance which your code has ownership, [`LayoutAlgorithmIsOwned`]`<false>` represents one which don't own.
+    /// - [`LayoutAlgorithm`] represents a C++ `wxLayoutAlgorithm` class instance which your code has ownership, [`LayoutAlgorithmInRust`]`<false>` represents one which don't own.
     /// - Use [`LayoutAlgorithm`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxLayoutAlgorithm` class's documentation](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html) for more details.
     #[doc(alias = "wxLayoutAlgorithm")]
     #[doc(alias = "LayoutAlgorithm")]
     class LayoutAlgorithm
-        = LayoutAlgorithmIsOwned<true>(wxLayoutAlgorithm) impl
+        = LayoutAlgorithmInRust<true>(wxLayoutAlgorithm) impl
         LayoutAlgorithmMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> LayoutAlgorithmIsOwned<OWNED> {
+impl<const OWNED: bool> LayoutAlgorithmInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxLayoutAlgorithm::wxLayoutAlgorithm()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html#af8e2301f3e97d27ee3c2e0cbb2587488).
-    pub fn new() -> LayoutAlgorithmIsOwned<OWNED> {
-        unsafe { LayoutAlgorithmIsOwned(ffi::wxLayoutAlgorithm_new()) }
+    pub fn new() -> LayoutAlgorithmInRust<OWNED> {
+        unsafe { LayoutAlgorithmInRust(ffi::wxLayoutAlgorithm_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for LayoutAlgorithmIsOwned<false> {
+impl Clone for LayoutAlgorithmInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<LayoutAlgorithmIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: LayoutAlgorithmIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<LayoutAlgorithmInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: LayoutAlgorithmInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for LayoutAlgorithmIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxLayoutAlgorithm_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for LayoutAlgorithmInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxLayoutAlgorithm_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for LayoutAlgorithmIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for LayoutAlgorithmInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -50,25 +50,25 @@ impl<const OWNED: bool> Drop for LayoutAlgorithmIsOwned<OWNED> {
 // wxListBox
 wxwidgets! {
     /// A listbox is used to select one or more of a list of strings.
-    /// - [`ListBox`] represents a C++ `wxListBox` class instance which your code has ownership, [`ListBoxIsOwned`]`<false>` represents one which don't own.
+    /// - [`ListBox`] represents a C++ `wxListBox` class instance which your code has ownership, [`ListBoxInRust`]`<false>` represents one which don't own.
     /// - Use [`ListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_box.html) for more details.
     #[doc(alias = "wxListBox")]
     #[doc(alias = "ListBox")]
     class ListBox
-        = ListBoxIsOwned<true>(wxListBox) impl
+        = ListBoxInRust<true>(wxListBox) impl
         ListBoxMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
+impl<const OWNED: bool> ListBoxInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxListBox::wxListBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_box.html#a63347db33d1ae5a10c8eb54b3d556b56).
-    pub fn new_2step() -> ListBoxIsOwned<OWNED> {
-        unsafe { ListBoxIsOwned(ffi::wxListBox_new()) }
+    pub fn new_2step() -> ListBoxInRust<OWNED> {
+        unsafe { ListBoxInRust(ffi::wxListBox_new()) }
     }
     // NOT_SUPPORTED: fn wxListBox1()
     /// Constructor, creating and showing a list box.
@@ -89,7 +89,7 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ListBoxIsOwned<OWNED> {
+    ) -> ListBoxInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -101,7 +101,7 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ListBoxIsOwned(ffi::wxListBox_new2(
+            ListBoxInRust(ffi::wxListBox_new2(
                 parent, id, pos, size, choices, style, validator, name,
             ))
         }
@@ -110,43 +110,43 @@ impl<const OWNED: bool> ListBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ListBoxIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for ListBoxInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: ListBoxIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListBoxInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: ListBoxInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: ListBoxIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListBoxInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: ListBoxInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: ListBoxIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListBoxInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: ListBoxInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ListBoxIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListBoxInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: ListBoxInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ListBoxIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListBox_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for ListBoxInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxListBox_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxListBox
-impl<const OWNED: bool> ItemContainerMethods for ListBoxIsOwned<OWNED> {
+impl<const OWNED: bool> ItemContainerMethods for ListBoxInRust<OWNED> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxListBox_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> {
+impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxInRust<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxListBox_AsItemContainer(self.as_ptr()) }
     }
@@ -155,25 +155,25 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for ListBoxIsOwned<OWNED> 
 // wxListCtrl
 wxwidgets! {
     /// A list control presents lists in a number of formats: list view, report view, icon view and small icon view.
-    /// - [`ListCtrl`] represents a C++ `wxListCtrl` class instance which your code has ownership, [`ListCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`ListCtrl`] represents a C++ `wxListCtrl` class instance which your code has ownership, [`ListCtrlInRust`]`<false>` represents one which don't own.
     /// - Use [`ListCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html) for more details.
     #[doc(alias = "wxListCtrl")]
     #[doc(alias = "ListCtrl")]
     class ListCtrl
-        = ListCtrlIsOwned<true>(wxListCtrl) impl
+        = ListCtrlInRust<true>(wxListCtrl) impl
         ListCtrlMethods,
         // ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ListCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> ListCtrlInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxListCtrl::wxListCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#a6941e35348b00a288e833871fd0138e8).
-    pub fn new_2step() -> ListCtrlIsOwned<OWNED> {
-        unsafe { ListCtrlIsOwned(ffi::wxListCtrl_new()) }
+    pub fn new_2step() -> ListCtrlInRust<OWNED> {
+        unsafe { ListCtrlInRust(ffi::wxListCtrl_new()) }
     }
     /// Constructor, creating and showing a list control.
     ///
@@ -186,7 +186,7 @@ impl<const OWNED: bool> ListCtrlIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ListCtrlIsOwned<OWNED> {
+    ) -> ListCtrlInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -197,7 +197,7 @@ impl<const OWNED: bool> ListCtrlIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ListCtrlIsOwned(ffi::wxListCtrl_new1(
+            ListCtrlInRust(ffi::wxListCtrl_new1(
                 parent, id, pos, size, style, validator, name,
             ))
         }
@@ -206,37 +206,37 @@ impl<const OWNED: bool> ListCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ListCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for ListCtrlInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ListCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: ListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListCtrlInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: ListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: ListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListCtrlInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: ListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: ListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: ListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ListCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: ListCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ListCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListCtrl_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for ListCtrlInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxListCtrl_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> ControlMethods for ListCtrlInRust<OWNED> {
     /// Creates the list control.
     ///
     /// See [C++ `wxListCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#a5b13e700b9957677468d63558d73d5df).
@@ -268,56 +268,56 @@ impl<const OWNED: bool> ControlMethods for ListCtrlIsOwned<OWNED> {
 // wxListEvent
 wxwidgets! {
     /// A list event holds information about events associated with wxListCtrl objects.
-    /// - [`ListEvent`] represents a C++ `wxListEvent` class instance which your code has ownership, [`ListEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`ListEvent`] represents a C++ `wxListEvent` class instance which your code has ownership, [`ListEventInRust`]`<false>` represents one which don't own.
     /// - Use [`ListEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_event.html) for more details.
     #[doc(alias = "wxListEvent")]
     #[doc(alias = "ListEvent")]
     class ListEvent
-        = ListEventIsOwned<true>(wxListEvent) impl
+        = ListEventInRust<true>(wxListEvent) impl
         ListEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ListEventIsOwned<OWNED> {
+impl<const OWNED: bool> ListEventInRust<OWNED> {
     // NOT_SUPPORTED: fn wxListEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ListEventIsOwned<false> {
+impl Clone for ListEventInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ListEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
-    fn from(o: ListEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListEventInRust<OWNED>> for NotifyEventInRust<OWNED> {
+    fn from(o: ListEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: ListEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListEventInRust<OWNED>> for CommandEventInRust<OWNED> {
+    fn from(o: ListEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: ListEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListEventInRust<OWNED>> for EventInRust<OWNED> {
+    fn from(o: ListEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ListEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListEventInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: ListEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ListEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListEvent_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for ListEventInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxListEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ListEventIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for ListEventInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -328,43 +328,43 @@ impl<const OWNED: bool> Drop for ListEventIsOwned<OWNED> {
 // wxListItem
 wxwidgets! {
     /// This class stores information about a wxListCtrl item or column.
-    /// - [`ListItem`] represents a C++ `wxListItem` class instance which your code has ownership, [`ListItemIsOwned`]`<false>` represents one which don't own.
+    /// - [`ListItem`] represents a C++ `wxListItem` class instance which your code has ownership, [`ListItemInRust`]`<false>` represents one which don't own.
     /// - Use [`ListItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_item.html) for more details.
     #[doc(alias = "wxListItem")]
     #[doc(alias = "ListItem")]
     class ListItem
-        = ListItemIsOwned<true>(wxListItem) impl
+        = ListItemInRust<true>(wxListItem) impl
         ListItemMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ListItemIsOwned<OWNED> {
+impl<const OWNED: bool> ListItemInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxListItem::wxListItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_item.html#ab133f45cd8964e254cdaa1512713c153).
-    pub fn new() -> ListItemIsOwned<OWNED> {
-        unsafe { ListItemIsOwned(ffi::wxListItem_new()) }
+    pub fn new() -> ListItemInRust<OWNED> {
+        unsafe { ListItemInRust(ffi::wxListItem_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ListItemIsOwned<false> {
+impl Clone for ListItemInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ListItemIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ListItemIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListItemInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: ListItemInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ListItemIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListItem_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for ListItemInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxListItem_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ListItemIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for ListItemInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -375,13 +375,13 @@ impl<const OWNED: bool> Drop for ListItemIsOwned<OWNED> {
 // wxListView
 wxwidgets! {
     /// This class currently simply presents a simpler to use interface for the wxListCtrl  it can be thought of as a façade for that complicated class.
-    /// - [`ListView`] represents a C++ `wxListView` class instance which your code has ownership, [`ListViewIsOwned`]`<false>` represents one which don't own.
+    /// - [`ListView`] represents a C++ `wxListView` class instance which your code has ownership, [`ListViewInRust`]`<false>` represents one which don't own.
     /// - Use [`ListView`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListView` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_view.html) for more details.
     #[doc(alias = "wxListView")]
     #[doc(alias = "ListView")]
     class ListView
-        = ListViewIsOwned<true>(wxListView) impl
+        = ListViewInRust<true>(wxListView) impl
         ListViewMethods,
         ListCtrlMethods,
         ControlMethods,
@@ -389,12 +389,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ListViewIsOwned<OWNED> {
+impl<const OWNED: bool> ListViewInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxListView::wxListView()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_view.html#a103cf973c8be268b78a0c08c419f606f).
-    pub fn new_2step() -> ListViewIsOwned<OWNED> {
-        unsafe { ListViewIsOwned(ffi::wxListView_new()) }
+    pub fn new_2step() -> ListViewInRust<OWNED> {
+        unsafe { ListViewInRust(ffi::wxListView_new()) }
     }
     /// Constructor, creating and showing a listview control.
     ///
@@ -407,7 +407,7 @@ impl<const OWNED: bool> ListViewIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ListViewIsOwned<OWNED> {
+    ) -> ListViewInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -418,7 +418,7 @@ impl<const OWNED: bool> ListViewIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ListViewIsOwned(ffi::wxListView_new1(
+            ListViewInRust(ffi::wxListView_new1(
                 parent, winid, pos, size, style, validator, name,
             ))
         }
@@ -427,52 +427,52 @@ impl<const OWNED: bool> ListViewIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ListViewIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for ListViewInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ListViewIsOwned<OWNED>> for ListCtrlIsOwned<OWNED> {
-    fn from(o: ListViewIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListViewInRust<OWNED>> for ListCtrlInRust<OWNED> {
+    fn from(o: ListViewInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListViewIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: ListViewIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListViewInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: ListViewInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListViewIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: ListViewIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListViewInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: ListViewInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListViewIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: ListViewIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListViewInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: ListViewInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListViewIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ListViewIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListViewInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: ListViewInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ListViewIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListView_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for ListViewInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxListView_CLASSINFO()) }
     }
 }
 
 // wxListbook
 wxwidgets! {
     /// wxListbook is a class similar to wxNotebook but which uses a wxListCtrl to show the labels instead of the tabs.
-    /// - [`Listbook`] represents a C++ `wxListbook` class instance which your code has ownership, [`ListbookIsOwned`]`<false>` represents one which don't own.
+    /// - [`Listbook`] represents a C++ `wxListbook` class instance which your code has ownership, [`ListbookInRust`]`<false>` represents one which don't own.
     /// - Use [`Listbook`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListbook` class's documentation](https://docs.wxwidgets.org/3.2/classwx_listbook.html) for more details.
     #[doc(alias = "wxListbook")]
     #[doc(alias = "Listbook")]
     class Listbook
-        = ListbookIsOwned<true>(wxListbook) impl
+        = ListbookInRust<true>(wxListbook) impl
         ListbookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -480,12 +480,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ListbookIsOwned<OWNED> {
+impl<const OWNED: bool> ListbookInRust<OWNED> {
     /// Default ctor.
     ///
     /// See [C++ `wxListbook::wxListbook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_listbook.html#abed6de6659aaca045b6503cbf8baf622).
-    pub fn new_2step() -> ListbookIsOwned<OWNED> {
-        unsafe { ListbookIsOwned(ffi::wxListbook_new()) }
+    pub fn new_2step() -> ListbookInRust<OWNED> {
+        unsafe { ListbookInRust(ffi::wxListbook_new()) }
     }
     /// Constructs a listbook control.
     ///
@@ -497,7 +497,7 @@ impl<const OWNED: bool> ListbookIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> ListbookIsOwned<OWNED> {
+    ) -> ListbookInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -507,49 +507,49 @@ impl<const OWNED: bool> ListbookIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ListbookIsOwned(ffi::wxListbook_new1(parent, id, pos, size, style, name))
+            ListbookInRust(ffi::wxListbook_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ListbookIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for ListbookInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ListbookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {
-    fn from(o: ListbookIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListbookInRust<OWNED>> for BookCtrlBaseInRust<OWNED> {
+    fn from(o: ListbookInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListbookIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: ListbookIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListbookInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: ListbookInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListbookIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: ListbookIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListbookInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: ListbookInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListbookIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: ListbookIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListbookInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: ListbookInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ListbookIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ListbookIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ListbookInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: ListbookInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ListbookIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxListbook_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for ListbookInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxListbook_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for ListbookIsOwned<OWNED> {
+impl<const OWNED: bool> WindowMethods for ListbookInRust<OWNED> {
     /// Create the list book control that has already been constructed with the default constructor.
     ///
     /// See [C++ `wxListbook::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_listbook.html#a38a6aad6c1fb31fa24acb471a8a37fd2).

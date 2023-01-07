@@ -3,25 +3,25 @@ use super::*;
 // wxRadioBox
 wxwidgets! {
     /// A radio box item is used to select one of number of mutually exclusive choices.
-    /// - [`RadioBox`] represents a C++ `wxRadioBox` class instance which your code has ownership, [`RadioBoxIsOwned`]`<false>` represents one which don't own.
+    /// - [`RadioBox`] represents a C++ `wxRadioBox` class instance which your code has ownership, [`RadioBoxInRust`]`<false>` represents one which don't own.
     /// - Use [`RadioBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRadioBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html) for more details.
     #[doc(alias = "wxRadioBox")]
     #[doc(alias = "RadioBox")]
     class RadioBox
-        = RadioBoxIsOwned<true>(wxRadioBox) impl
+        = RadioBoxInRust<true>(wxRadioBox) impl
         RadioBoxMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
+impl<const OWNED: bool> RadioBoxInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxRadioBox::wxRadioBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#a2821fb98e7a2b2f52b0966c784bf4864).
-    pub fn new_2step() -> RadioBoxIsOwned<OWNED> {
-        unsafe { RadioBoxIsOwned(ffi::wxRadioBox_new()) }
+    pub fn new_2step() -> RadioBoxInRust<OWNED> {
+        unsafe { RadioBoxInRust(ffi::wxRadioBox_new()) }
     }
     // NOT_SUPPORTED: fn wxRadioBox1()
     /// Constructor, creating and showing a radiobox.
@@ -44,7 +44,7 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RadioBoxIsOwned<OWNED> {
+    ) -> RadioBoxInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -58,7 +58,7 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RadioBoxIsOwned(ffi::wxRadioBox_new2(
+            RadioBoxInRust(ffi::wxRadioBox_new2(
                 parent,
                 id,
                 label,
@@ -76,38 +76,38 @@ impl<const OWNED: bool> RadioBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RadioBoxIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for RadioBoxInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RadioBoxInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: RadioBoxInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RadioBoxInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: RadioBoxInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RadioBoxInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: RadioBoxInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: RadioBoxIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RadioBoxInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: RadioBoxInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RadioBoxIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for RadioBoxInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxRadioBox
-impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED> {
+impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxInRust<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxRadioBox_AsItemContainerImmutable(self.as_ptr()) }
     }
@@ -116,25 +116,25 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RadioBoxIsOwned<OWNED>
 // wxRadioButton
 wxwidgets! {
     /// A radio button item is a button which usually denotes one of several mutually exclusive options.
-    /// - [`RadioButton`] represents a C++ `wxRadioButton` class instance which your code has ownership, [`RadioButtonIsOwned`]`<false>` represents one which don't own.
+    /// - [`RadioButton`] represents a C++ `wxRadioButton` class instance which your code has ownership, [`RadioButtonInRust`]`<false>` represents one which don't own.
     /// - Use [`RadioButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRadioButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html) for more details.
     #[doc(alias = "wxRadioButton")]
     #[doc(alias = "RadioButton")]
     class RadioButton
-        = RadioButtonIsOwned<true>(wxRadioButton) impl
+        = RadioButtonInRust<true>(wxRadioButton) impl
         RadioButtonMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RadioButtonIsOwned<OWNED> {
+impl<const OWNED: bool> RadioButtonInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxRadioButton::wxRadioButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html#a295e680547c57d9ad5bfbc835770ed2b).
-    pub fn new_2step() -> RadioButtonIsOwned<OWNED> {
-        unsafe { RadioButtonIsOwned(ffi::wxRadioButton_new()) }
+    pub fn new_2step() -> RadioButtonInRust<OWNED> {
+        unsafe { RadioButtonInRust(ffi::wxRadioButton_new()) }
     }
     /// Constructor, creating and showing a radio button.
     ///
@@ -148,7 +148,7 @@ impl<const OWNED: bool> RadioButtonIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RadioButtonIsOwned<OWNED> {
+    ) -> RadioButtonInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -161,7 +161,7 @@ impl<const OWNED: bool> RadioButtonIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RadioButtonIsOwned(ffi::wxRadioButton_new1(
+            RadioButtonInRust(ffi::wxRadioButton_new1(
                 parent, id, label, pos, size, style, validator, name,
             ))
         }
@@ -170,81 +170,81 @@ impl<const OWNED: bool> RadioButtonIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RadioButtonIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for RadioButtonInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RadioButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: RadioButtonIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RadioButtonInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: RadioButtonInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: RadioButtonIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RadioButtonInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: RadioButtonInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: RadioButtonIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RadioButtonInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: RadioButtonInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RadioButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: RadioButtonIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RadioButtonInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: RadioButtonInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RadioButtonIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRadioButton_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for RadioButtonInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxRadioButton_CLASSINFO()) }
     }
 }
 
 // wxRealPoint
 wxwidgets! {
     /// A wxRealPoint is a useful data structure for graphics operations.
-    /// - [`RealPoint`] represents a C++ `wxRealPoint` class instance which your code has ownership, [`RealPointIsOwned`]`<false>` represents one which don't own.
+    /// - [`RealPoint`] represents a C++ `wxRealPoint` class instance which your code has ownership, [`RealPointInRust`]`<false>` represents one which don't own.
     /// - Use [`RealPoint`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRealPoint` class's documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html) for more details.
     #[doc(alias = "wxRealPoint")]
     #[doc(alias = "RealPoint")]
     class RealPoint
-        = RealPointIsOwned<true>(wxRealPoint) impl
+        = RealPointInRust<true>(wxRealPoint) impl
         RealPointMethods
 }
-impl<const OWNED: bool> RealPointIsOwned<OWNED> {
+impl<const OWNED: bool> RealPointInRust<OWNED> {
     /// Initializes to zero the x and y members.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a9c4d38e144bb23d0e5ce94f7653e7887).
-    pub fn new() -> RealPointIsOwned<OWNED> {
-        unsafe { RealPointIsOwned(ffi::wxRealPoint_new()) }
+    pub fn new() -> RealPointInRust<OWNED> {
+        unsafe { RealPointInRust(ffi::wxRealPoint_new()) }
     }
     /// Initializes the point with the given coordinates.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#a672ffa73a517579bfee8c32198c5d948).
-    pub fn new_with_double(x: c_double, y: c_double) -> RealPointIsOwned<OWNED> {
-        unsafe { RealPointIsOwned(ffi::wxRealPoint_new1(x, y)) }
+    pub fn new_with_double(x: c_double, y: c_double) -> RealPointInRust<OWNED> {
+        unsafe { RealPointInRust(ffi::wxRealPoint_new1(x, y)) }
     }
     /// Converts the given wxPoint (with integer coordinates) to a wxRealPoint.
     ///
     /// See [C++ `wxRealPoint::wxRealPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html#ae09522b031b035db4472500e48a0e2d3).
-    pub fn new_with_point<P: PointMethods>(pt: &P) -> RealPointIsOwned<OWNED> {
+    pub fn new_with_point<P: PointMethods>(pt: &P) -> RealPointInRust<OWNED> {
         unsafe {
             let pt = pt.as_ptr();
-            RealPointIsOwned(ffi::wxRealPoint_new2(pt))
+            RealPointInRust(ffi::wxRealPoint_new2(pt))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RealPointIsOwned<false> {
+impl Clone for RealPointInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RealPointIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for RealPointInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxRealPoint_delete(self.0) }
@@ -255,25 +255,25 @@ impl<const OWNED: bool> Drop for RealPointIsOwned<OWNED> {
 // wxRearrangeCtrl
 wxwidgets! {
     /// A composite control containing a wxRearrangeList and the buttons allowing to move the items in it.
-    /// - [`RearrangeCtrl`] represents a C++ `wxRearrangeCtrl` class instance which your code has ownership, [`RearrangeCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`RearrangeCtrl`] represents a C++ `wxRearrangeCtrl` class instance which your code has ownership, [`RearrangeCtrlInRust`]`<false>` represents one which don't own.
     /// - Use [`RearrangeCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html) for more details.
     #[doc(alias = "wxRearrangeCtrl")]
     #[doc(alias = "RearrangeCtrl")]
     class RearrangeCtrl
-        = RearrangeCtrlIsOwned<true>(wxRearrangeCtrl) impl
+        = RearrangeCtrlInRust<true>(wxRearrangeCtrl) impl
         RearrangeCtrlMethods,
         PanelMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RearrangeCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> RearrangeCtrlInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeCtrl::wxRearrangeCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html#ad47b3bbeddb36e799feb7d463376c929).
-    pub fn new_2step() -> RearrangeCtrlIsOwned<OWNED> {
-        unsafe { RearrangeCtrlIsOwned(ffi::wxRearrangeCtrl_new()) }
+    pub fn new_2step() -> RearrangeCtrlInRust<OWNED> {
+        unsafe { RearrangeCtrlInRust(ffi::wxRearrangeCtrl_new()) }
     }
     /// Constructor really creating the control.
     ///
@@ -295,7 +295,7 @@ impl<const OWNED: bool> RearrangeCtrlIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RearrangeCtrlIsOwned<OWNED> {
+    ) -> RearrangeCtrlInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -308,7 +308,7 @@ impl<const OWNED: bool> RearrangeCtrlIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RearrangeCtrlIsOwned(ffi::wxRearrangeCtrl_new1(
+            RearrangeCtrlInRust(ffi::wxRearrangeCtrl_new1(
                 parent, id, pos, size, order, items, style, validator, name,
             ))
         }
@@ -317,47 +317,47 @@ impl<const OWNED: bool> RearrangeCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RearrangeCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for RearrangeCtrlInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RearrangeCtrlIsOwned<OWNED>> for PanelIsOwned<OWNED> {
-    fn from(o: RearrangeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeCtrlInRust<OWNED>> for PanelInRust<OWNED> {
+    fn from(o: RearrangeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: RearrangeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeCtrlInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: RearrangeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: RearrangeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: RearrangeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: RearrangeCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: RearrangeCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RearrangeCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRearrangeCtrl_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for RearrangeCtrlInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeCtrl_CLASSINFO()) }
     }
 }
 
 // wxRearrangeDialog
 wxwidgets! {
     /// A dialog allowing the user to rearrange the specified items.
-    /// - [`RearrangeDialog`] represents a C++ `wxRearrangeDialog` class instance which your code has ownership, [`RearrangeDialogIsOwned`]`<false>` represents one which don't own.
+    /// - [`RearrangeDialog`] represents a C++ `wxRearrangeDialog` class instance which your code has ownership, [`RearrangeDialogInRust`]`<false>` represents one which don't own.
     /// - Use [`RearrangeDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html) for more details.
     #[doc(alias = "wxRearrangeDialog")]
     #[doc(alias = "RearrangeDialog")]
     class RearrangeDialog
-        = RearrangeDialogIsOwned<true>(wxRearrangeDialog) impl
+        = RearrangeDialogInRust<true>(wxRearrangeDialog) impl
         RearrangeDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -366,12 +366,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RearrangeDialogIsOwned<OWNED> {
+impl<const OWNED: bool> RearrangeDialogInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeDialog::wxRearrangeDialog()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html#ad230c6d3baf27e7d3f516a37e62e0d58).
-    pub fn new_2step() -> RearrangeDialogIsOwned<OWNED> {
-        unsafe { RearrangeDialogIsOwned(ffi::wxRearrangeDialog_new()) }
+    pub fn new_2step() -> RearrangeDialogInRust<OWNED> {
+        unsafe { RearrangeDialogInRust(ffi::wxRearrangeDialog_new()) }
     }
     /// Constructor creating the dialog.
     ///
@@ -384,7 +384,7 @@ impl<const OWNED: bool> RearrangeDialogIsOwned<OWNED> {
         items: &A2,
         pos: &P,
         name: &str,
-    ) -> RearrangeDialogIsOwned<OWNED> {
+    ) -> RearrangeDialogInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -399,7 +399,7 @@ impl<const OWNED: bool> RearrangeDialogIsOwned<OWNED> {
             let pos = pos.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RearrangeDialogIsOwned(ffi::wxRearrangeDialog_new1(
+            RearrangeDialogInRust(ffi::wxRearrangeDialog_new1(
                 parent, message, title, order, items, pos, name,
             ))
         }
@@ -408,57 +408,57 @@ impl<const OWNED: bool> RearrangeDialogIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RearrangeDialogIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for RearrangeDialogInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogIsOwned<OWNED>> for DialogIsOwned<OWNED> {
-    fn from(o: RearrangeDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for DialogInRust<OWNED> {
+    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
-    fn from(o: RearrangeDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for TopLevelWindowInRust<OWNED> {
+    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
-    fn from(o: RearrangeDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for NonOwnedWindowInRust<OWNED> {
+    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: RearrangeDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: RearrangeDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeDialogIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: RearrangeDialogIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeDialogInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: RearrangeDialogInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RearrangeDialogIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRearrangeDialog_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for RearrangeDialogInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeDialog_CLASSINFO()) }
     }
 }
 
 // wxRearrangeList
 wxwidgets! {
     /// A listbox-like control allowing the user to rearrange the items and to enable or disable them.
-    /// - [`RearrangeList`] represents a C++ `wxRearrangeList` class instance which your code has ownership, [`RearrangeListIsOwned`]`<false>` represents one which don't own.
+    /// - [`RearrangeList`] represents a C++ `wxRearrangeList` class instance which your code has ownership, [`RearrangeListInRust`]`<false>` represents one which don't own.
     /// - Use [`RearrangeList`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeList` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html) for more details.
     #[doc(alias = "wxRearrangeList")]
     #[doc(alias = "RearrangeList")]
     class RearrangeList
-        = RearrangeListIsOwned<true>(wxRearrangeList) impl
+        = RearrangeListInRust<true>(wxRearrangeList) impl
         RearrangeListMethods,
         CheckListBoxMethods,
         ListBoxMethods,
@@ -467,12 +467,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RearrangeListIsOwned<OWNED> {
+impl<const OWNED: bool> RearrangeListInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxRearrangeList::wxRearrangeList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#ab211f32339f81867de12d14dc962d76c).
-    pub fn new_2step() -> RearrangeListIsOwned<OWNED> {
-        unsafe { RearrangeListIsOwned(ffi::wxRearrangeList_new()) }
+    pub fn new_2step() -> RearrangeListInRust<OWNED> {
+        unsafe { RearrangeListInRust(ffi::wxRearrangeList_new()) }
     }
     /// Constructor really creating the control.
     ///
@@ -494,7 +494,7 @@ impl<const OWNED: bool> RearrangeListIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> RearrangeListIsOwned<OWNED> {
+    ) -> RearrangeListInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -507,7 +507,7 @@ impl<const OWNED: bool> RearrangeListIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            RearrangeListIsOwned(ffi::wxRearrangeList_new1(
+            RearrangeListInRust(ffi::wxRearrangeList_new1(
                 parent, id, pos, size, order, items, style, validator, name,
             ))
         }
@@ -516,53 +516,53 @@ impl<const OWNED: bool> RearrangeListIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for RearrangeListIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for RearrangeListInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RearrangeListIsOwned<OWNED>> for CheckListBoxIsOwned<OWNED> {
-    fn from(o: RearrangeListIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for CheckListBoxInRust<OWNED> {
+    fn from(o: RearrangeListInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListIsOwned<OWNED>> for ListBoxIsOwned<OWNED> {
-    fn from(o: RearrangeListIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for ListBoxInRust<OWNED> {
+    fn from(o: RearrangeListInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: RearrangeListIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: RearrangeListInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: RearrangeListIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: RearrangeListInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: RearrangeListIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: RearrangeListInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RearrangeListIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: RearrangeListIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RearrangeListInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: RearrangeListInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RearrangeListIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRearrangeList_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for RearrangeListInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxRearrangeList_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxRearrangeList
-impl<const OWNED: bool> ItemContainerMethods for RearrangeListIsOwned<OWNED> {
+impl<const OWNED: bool> ItemContainerMethods for RearrangeListInRust<OWNED> {
     fn as_item_container(&self) -> *mut c_void {
         unsafe { ffi::wxRearrangeList_AsItemContainer(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListIsOwned<OWNED> {
+impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListInRust<OWNED> {
     fn as_item_container_immutable(&self) -> *mut c_void {
         unsafe { ffi::wxRearrangeList_AsItemContainer(self.as_ptr()) }
     }
@@ -571,27 +571,27 @@ impl<const OWNED: bool> ItemContainerImmutableMethods for RearrangeListIsOwned<O
 // wxRect
 wxwidgets! {
     /// Represents a rectangle with integer coordinates.
-    /// - [`Rect`] represents a C++ `wxRect` class instance which your code has ownership, [`RectIsOwned`]`<false>` represents one which don't own.
+    /// - [`Rect`] represents a C++ `wxRect` class instance which your code has ownership, [`RectInRust`]`<false>` represents one which don't own.
     /// - Use [`Rect`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRect` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html) for more details.
     #[doc(alias = "wxRect")]
     #[doc(alias = "Rect")]
     class Rect
-        = RectIsOwned<true>(wxRect) impl
+        = RectInRust<true>(wxRect) impl
         RectMethods
 }
-impl<const OWNED: bool> RectIsOwned<OWNED> {
+impl<const OWNED: bool> RectInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a19b68679edc9030cba102a8602febded).
-    pub fn new() -> RectIsOwned<OWNED> {
-        unsafe { RectIsOwned(ffi::wxRect_new()) }
+    pub fn new() -> RectInRust<OWNED> {
+        unsafe { RectInRust(ffi::wxRect_new()) }
     }
     /// Creates a wxRect object from x, y, width and height values.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#aefb674bdc6d9d66a5c3746e5acc845d4).
-    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectIsOwned<OWNED> {
-        unsafe { RectIsOwned(ffi::wxRect_new1(x, y, width, height)) }
+    pub fn new_with_int(x: c_int, y: c_int, width: c_int, height: c_int) -> RectInRust<OWNED> {
+        unsafe { RectInRust(ffi::wxRect_new1(x, y, width, height)) }
     }
     /// Creates a wxRect object from top-left and bottom-right points.
     ///
@@ -599,11 +599,11 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
     pub fn new_with_point_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
-    ) -> RectIsOwned<OWNED> {
+    ) -> RectInRust<OWNED> {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
-            RectIsOwned(ffi::wxRect_new2(top_left, bottom_right))
+            RectInRust(ffi::wxRect_new2(top_left, bottom_right))
         }
     }
     /// Creates a wxRect object from position pos and size values.
@@ -612,32 +612,32 @@ impl<const OWNED: bool> RectIsOwned<OWNED> {
     pub fn new_with_point_size<P: PointMethods, S: SizeMethods>(
         pos: &P,
         size: &S,
-    ) -> RectIsOwned<OWNED> {
+    ) -> RectInRust<OWNED> {
         unsafe {
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            RectIsOwned(ffi::wxRect_new3(pos, size))
+            RectInRust(ffi::wxRect_new3(pos, size))
         }
     }
     /// Creates a wxRect object from size values at the origin.
     ///
     /// See [C++ `wxRect::wxRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html#a806ffe715a971157753890bab59d7d16).
-    pub fn new_with_size<S: SizeMethods>(size: &S) -> RectIsOwned<OWNED> {
+    pub fn new_with_size<S: SizeMethods>(size: &S) -> RectInRust<OWNED> {
         unsafe {
             let size = size.as_ptr();
-            RectIsOwned(ffi::wxRect_new4(size))
+            RectInRust(ffi::wxRect_new4(size))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RectIsOwned<false> {
+impl Clone for RectInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for RectInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxRect_delete(self.0) }
@@ -648,29 +648,29 @@ impl<const OWNED: bool> Drop for RectIsOwned<OWNED> {
 // wxRegion
 wxwidgets! {
     /// A wxRegion represents a simple or complex region on a device context or window.
-    /// - [`Region`] represents a C++ `wxRegion` class instance which your code has ownership, [`RegionIsOwned`]`<false>` represents one which don't own.
+    /// - [`Region`] represents a C++ `wxRegion` class instance which your code has ownership, [`RegionInRust`]`<false>` represents one which don't own.
     /// - Use [`Region`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRegion` class's documentation](https://docs.wxwidgets.org/3.2/classwx_region.html) for more details.
     #[doc(alias = "wxRegion")]
     #[doc(alias = "Region")]
     class Region
-        = RegionIsOwned<true>(wxRegion) impl
+        = RegionInRust<true>(wxRegion) impl
         RegionMethods,
         GDIObjectMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RegionIsOwned<OWNED> {
+impl<const OWNED: bool> RegionInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a1edc6768118cf02749b46774a0ca37f9).
-    pub fn new() -> RegionIsOwned<OWNED> {
-        unsafe { RegionIsOwned(ffi::wxRegion_new()) }
+    pub fn new() -> RegionInRust<OWNED> {
+        unsafe { RegionInRust(ffi::wxRegion_new()) }
     }
     /// Constructs a rectangular region with the given position and size.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#af2b51dd977107b0dd162db6e4e9e9c5c).
-    pub fn new_with_coord(x: c_int, y: c_int, width: c_int, height: c_int) -> RegionIsOwned<OWNED> {
-        unsafe { RegionIsOwned(ffi::wxRegion_new1(x, y, width, height)) }
+    pub fn new_with_coord(x: c_int, y: c_int, width: c_int, height: c_int) -> RegionInRust<OWNED> {
+        unsafe { RegionInRust(ffi::wxRegion_new1(x, y, width, height)) }
     }
     /// Constructs a rectangular region from the top left point and the bottom right point.
     ///
@@ -678,39 +678,39 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
     pub fn new_with_point<P: PointMethods, P2: PointMethods>(
         top_left: &P,
         bottom_right: &P2,
-    ) -> RegionIsOwned<OWNED> {
+    ) -> RegionInRust<OWNED> {
         unsafe {
             let top_left = top_left.as_ptr();
             let bottom_right = bottom_right.as_ptr();
-            RegionIsOwned(ffi::wxRegion_new2(top_left, bottom_right))
+            RegionInRust(ffi::wxRegion_new2(top_left, bottom_right))
         }
     }
     /// Constructs a rectangular region a wxRect object.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#a66708b42c8bce4a76ada65cb312b60f9).
-    pub fn new_with_rect<R: RectMethods>(rect: &R) -> RegionIsOwned<OWNED> {
+    pub fn new_with_rect<R: RectMethods>(rect: &R) -> RegionInRust<OWNED> {
         unsafe {
             let rect = rect.as_ptr();
-            RegionIsOwned(ffi::wxRegion_new3(rect))
+            RegionInRust(ffi::wxRegion_new3(rect))
         }
     }
     /// Copy constructor, uses Reference Counting.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#ad88c11689e65f02bb99acea6d59a6d9f).
-    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIsOwned<OWNED> {
+    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionInRust<OWNED> {
         unsafe {
             let region = region.as_ptr();
-            RegionIsOwned(ffi::wxRegion_new4(region))
+            RegionInRust(ffi::wxRegion_new4(region))
         }
     }
     // NOT_SUPPORTED: fn wxRegion5()
     /// Constructs a region using a bitmap.
     ///
     /// See [C++ `wxRegion::wxRegion()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region.html#ad7bfbeb79fe8dc281b91cfba43e8bd0a).
-    pub fn new_with_bitmap<B: BitmapMethods>(bmp: &B) -> RegionIsOwned<OWNED> {
+    pub fn new_with_bitmap<B: BitmapMethods>(bmp: &B) -> RegionInRust<OWNED> {
         unsafe {
             let bmp = bmp.as_ptr();
-            RegionIsOwned(ffi::wxRegion_new6(bmp))
+            RegionInRust(ffi::wxRegion_new6(bmp))
         }
     }
     /// Constructs a region using the non-transparent pixels of a bitmap.
@@ -720,38 +720,38 @@ impl<const OWNED: bool> RegionIsOwned<OWNED> {
         bmp: &B,
         trans_colour: &C,
         tolerance: c_int,
-    ) -> RegionIsOwned<OWNED> {
+    ) -> RegionInRust<OWNED> {
         unsafe {
             let bmp = bmp.as_ptr();
             let trans_colour = trans_colour.as_ptr();
-            RegionIsOwned(ffi::wxRegion_new7(bmp, trans_colour, tolerance))
+            RegionInRust(ffi::wxRegion_new7(bmp, trans_colour, tolerance))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RegionIsOwned<false> {
+impl Clone for RegionInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RegionIsOwned<OWNED>> for GDIObjectIsOwned<OWNED> {
-    fn from(o: RegionIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RegionInRust<OWNED>> for GDIObjectInRust<OWNED> {
+    fn from(o: RegionInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<RegionIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: RegionIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RegionInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: RegionInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RegionIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRegion_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for RegionInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxRegion_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for RegionIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for RegionInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -762,52 +762,52 @@ impl<const OWNED: bool> Drop for RegionIsOwned<OWNED> {
 // wxRegionIterator
 wxwidgets! {
     /// This class is used to iterate through the rectangles in a region, typically when examining the damaged regions of a window within an OnPaint call.
-    /// - [`RegionIterator`] represents a C++ `wxRegionIterator` class instance which your code has ownership, [`RegionIteratorIsOwned`]`<false>` represents one which don't own.
+    /// - [`RegionIterator`] represents a C++ `wxRegionIterator` class instance which your code has ownership, [`RegionIteratorInRust`]`<false>` represents one which don't own.
     /// - Use [`RegionIterator`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRegionIterator` class's documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html) for more details.
     #[doc(alias = "wxRegionIterator")]
     #[doc(alias = "RegionIterator")]
     class RegionIterator
-        = RegionIteratorIsOwned<true>(wxRegionIterator) impl
+        = RegionIteratorInRust<true>(wxRegionIterator) impl
         RegionIteratorMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> RegionIteratorIsOwned<OWNED> {
+impl<const OWNED: bool> RegionIteratorInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxRegionIterator::wxRegionIterator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a1a2d17672c9585f86e26b8ee054e08e5).
-    pub fn new() -> RegionIteratorIsOwned<OWNED> {
-        unsafe { RegionIteratorIsOwned(ffi::wxRegionIterator_new()) }
+    pub fn new() -> RegionIteratorInRust<OWNED> {
+        unsafe { RegionIteratorInRust(ffi::wxRegionIterator_new()) }
     }
     /// Creates an iterator object given a region.
     ///
     /// See [C++ `wxRegionIterator::wxRegionIterator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html#a01b1845c8ecb190d244dfcc97d358f99).
-    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIteratorIsOwned<OWNED> {
+    pub fn new_with_region<R: RegionMethods>(region: &R) -> RegionIteratorInRust<OWNED> {
         unsafe {
             let region = region.as_ptr();
-            RegionIteratorIsOwned(ffi::wxRegionIterator_new1(region))
+            RegionIteratorInRust(ffi::wxRegionIterator_new1(region))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RegionIteratorIsOwned<false> {
+impl Clone for RegionIteratorInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<RegionIteratorIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: RegionIteratorIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<RegionIteratorInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: RegionIteratorInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for RegionIteratorIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxRegionIterator_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for RegionIteratorInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxRegionIterator_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for RegionIteratorIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for RegionIteratorInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -818,26 +818,26 @@ impl<const OWNED: bool> Drop for RegionIteratorIsOwned<OWNED> {
 // wxRendererNative
 wxwidgets! {
     /// First, a brief introduction to wxRendererNative and why it is needed.
-    /// - [`RendererNative`] represents a C++ `wxRendererNative` class instance which your code has ownership, [`RendererNativeIsOwned`]`<false>` represents one which don't own.
+    /// - [`RendererNative`] represents a C++ `wxRendererNative` class instance which your code has ownership, [`RendererNativeInRust`]`<false>` represents one which don't own.
     /// - Use [`RendererNative`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRendererNative` class's documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html) for more details.
     #[doc(alias = "wxRendererNative")]
     #[doc(alias = "RendererNative")]
     class RendererNative
-        = RendererNativeIsOwned<true>(wxRendererNative) impl
+        = RendererNativeInRust<true>(wxRendererNative) impl
         RendererNativeMethods
 }
-impl<const OWNED: bool> RendererNativeIsOwned<OWNED> {
+impl<const OWNED: bool> RendererNativeInRust<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RendererNativeIsOwned<false> {
+impl Clone for RendererNativeInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RendererNativeIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for RendererNativeInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxRendererNative_delete(self.0) }
@@ -848,38 +848,38 @@ impl<const OWNED: bool> Drop for RendererNativeIsOwned<OWNED> {
 // wxRichToolTip
 wxwidgets! {
     /// Allows showing a tool tip with more customizations than wxToolTip.
-    /// - [`RichToolTip`] represents a C++ `wxRichToolTip` class instance which your code has ownership, [`RichToolTipIsOwned`]`<false>` represents one which don't own.
+    /// - [`RichToolTip`] represents a C++ `wxRichToolTip` class instance which your code has ownership, [`RichToolTipInRust`]`<false>` represents one which don't own.
     /// - Use [`RichToolTip`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRichToolTip` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html) for more details.
     #[doc(alias = "wxRichToolTip")]
     #[doc(alias = "RichToolTip")]
     class RichToolTip
-        = RichToolTipIsOwned<true>(wxRichToolTip) impl
+        = RichToolTipInRust<true>(wxRichToolTip) impl
         RichToolTipMethods
 }
-impl<const OWNED: bool> RichToolTipIsOwned<OWNED> {
+impl<const OWNED: bool> RichToolTipInRust<OWNED> {
     /// Constructor must specify the tooltip title and main message.
     ///
     /// See [C++ `wxRichToolTip::wxRichToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html#ada22072c75eaca6de3de2e89e66a352f).
-    pub fn new(title: &str, message: &str) -> RichToolTipIsOwned<OWNED> {
+    pub fn new(title: &str, message: &str) -> RichToolTipInRust<OWNED> {
         unsafe {
             let title = WxString::from(title);
             let title = title.as_ptr();
             let message = WxString::from(message);
             let message = message.as_ptr();
-            RichToolTipIsOwned(ffi::wxRichToolTip_new(title, message))
+            RichToolTipInRust(ffi::wxRichToolTip_new(title, message))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for RichToolTipIsOwned<false> {
+impl Clone for RichToolTipInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for RichToolTipIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for RichToolTipInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxRichToolTip_delete(self.0) }

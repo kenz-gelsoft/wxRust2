@@ -3,7 +3,7 @@ use super::*;
 // wxFileName
 /// This trait represents [C++ `wxFileName` class](https://docs.wxwidgets.org/3.2/classwx_file_name.html)'s methods and inheritance.
 ///
-/// See [`FileNameIsOwned`] documentation for the class usage.
+/// See [`FileNameInRust`] documentation for the class usage.
 pub trait FileNameMethods: WxRustMethods {
     /// Appends a directory component to the path.
     ///
@@ -122,8 +122,8 @@ pub trait FileNameMethods: WxRustMethods {
     /// Returns the directories in string array form.
     ///
     /// See [C++ `wxFileName::GetDirs()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_name.html#ae7a4a2abba5a95a547dc35e1ed43a67b).
-    fn get_dirs(&self) -> ArrayStringIsOwned<false> {
-        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxFileName_GetDirs(self.as_ptr())) }
+    fn get_dirs(&self) -> ArrayStringInRust<false> {
+        unsafe { ArrayStringInRust::from_ptr(ffi::wxFileName_GetDirs(self.as_ptr())) }
     }
     /// Returns the file name extension.
     ///

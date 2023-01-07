@@ -3,32 +3,32 @@ use super::*;
 // wxAboutDialogInfo
 wxwidgets! {
     /// wxAboutDialogInfo contains information shown in the standard About dialog displayed by the wxAboutBox() function.
-    /// - [`AboutDialogInfo`] represents a C++ `wxAboutDialogInfo` class instance which your code has ownership, [`AboutDialogInfoIsOwned`]`<false>` represents one which don't own.
+    /// - [`AboutDialogInfo`] represents a C++ `wxAboutDialogInfo` class instance which your code has ownership, [`AboutDialogInfoInRust`]`<false>` represents one which don't own.
     /// - Use [`AboutDialogInfo`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAboutDialogInfo` class's documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html) for more details.
     #[doc(alias = "wxAboutDialogInfo")]
     #[doc(alias = "AboutDialogInfo")]
     class AboutDialogInfo
-        = AboutDialogInfoIsOwned<true>(wxAboutDialogInfo) impl
+        = AboutDialogInfoInRust<true>(wxAboutDialogInfo) impl
         AboutDialogInfoMethods
 }
-impl<const OWNED: bool> AboutDialogInfoIsOwned<OWNED> {
+impl<const OWNED: bool> AboutDialogInfoInRust<OWNED> {
     /// Default constructor leaves all fields are initially uninitialized, in general you should call at least SetVersion(), SetCopyright() and SetDescription().
     ///
     /// See [C++ `wxAboutDialogInfo::wxAboutDialogInfo()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#ab58b7d0d7bb3aa40eca4531c4f8c1e6f).
-    pub fn new() -> AboutDialogInfoIsOwned<OWNED> {
-        unsafe { AboutDialogInfoIsOwned(ffi::wxAboutDialogInfo_new()) }
+    pub fn new() -> AboutDialogInfoInRust<OWNED> {
+        unsafe { AboutDialogInfoInRust(ffi::wxAboutDialogInfo_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for AboutDialogInfoIsOwned<false> {
+impl Clone for AboutDialogInfoInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for AboutDialogInfoIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for AboutDialogInfoInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxAboutDialogInfo_delete(self.0) }
@@ -39,16 +39,16 @@ impl<const OWNED: bool> Drop for AboutDialogInfoIsOwned<OWNED> {
 // wxAcceleratorEntry
 wxwidgets! {
     /// An object used by an application wishing to create an accelerator table (see wxAcceleratorTable).
-    /// - [`AcceleratorEntry`] represents a C++ `wxAcceleratorEntry` class instance which your code has ownership, [`AcceleratorEntryIsOwned`]`<false>` represents one which don't own.
+    /// - [`AcceleratorEntry`] represents a C++ `wxAcceleratorEntry` class instance which your code has ownership, [`AcceleratorEntryInRust`]`<false>` represents one which don't own.
     /// - Use [`AcceleratorEntry`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAcceleratorEntry` class's documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html) for more details.
     #[doc(alias = "wxAcceleratorEntry")]
     #[doc(alias = "AcceleratorEntry")]
     class AcceleratorEntry
-        = AcceleratorEntryIsOwned<true>(wxAcceleratorEntry) impl
+        = AcceleratorEntryInRust<true>(wxAcceleratorEntry) impl
         AcceleratorEntryMethods
 }
-impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
+impl<const OWNED: bool> AcceleratorEntryInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxAcceleratorEntry::wxAcceleratorEntry()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html#a9387fbbaed1cbfb8673308ec2b10da3e).
@@ -57,13 +57,13 @@ impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
         key_code: c_int,
         cmd: c_int,
         item: Option<&M>,
-    ) -> AcceleratorEntryIsOwned<OWNED> {
+    ) -> AcceleratorEntryInRust<OWNED> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            AcceleratorEntryIsOwned(ffi::wxAcceleratorEntry_new(flags, key_code, cmd, item))
+            AcceleratorEntryInRust(ffi::wxAcceleratorEntry_new(flags, key_code, cmd, item))
         }
     }
     /// Copy ctor.
@@ -71,22 +71,22 @@ impl<const OWNED: bool> AcceleratorEntryIsOwned<OWNED> {
     /// See [C++ `wxAcceleratorEntry::wxAcceleratorEntry()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html#a8853051e5706c505d15ff70e1e44c7df).
     pub fn new_with_acceleratorentry<A: AcceleratorEntryMethods>(
         entry: &A,
-    ) -> AcceleratorEntryIsOwned<OWNED> {
+    ) -> AcceleratorEntryInRust<OWNED> {
         unsafe {
             let entry = entry.as_ptr();
-            AcceleratorEntryIsOwned(ffi::wxAcceleratorEntry_new1(entry))
+            AcceleratorEntryInRust(ffi::wxAcceleratorEntry_new1(entry))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for AcceleratorEntryIsOwned<false> {
+impl Clone for AcceleratorEntryInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for AcceleratorEntryIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for AcceleratorEntryInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxAcceleratorEntry_delete(self.0) }
@@ -97,22 +97,22 @@ impl<const OWNED: bool> Drop for AcceleratorEntryIsOwned<OWNED> {
 // wxAcceleratorTable
 wxwidgets! {
     /// An accelerator table allows the application to specify a table of keyboard shortcuts for menu or button commands.
-    /// - [`AcceleratorTable`] represents a C++ `wxAcceleratorTable` class instance which your code has ownership, [`AcceleratorTableIsOwned`]`<false>` represents one which don't own.
+    /// - [`AcceleratorTable`] represents a C++ `wxAcceleratorTable` class instance which your code has ownership, [`AcceleratorTableInRust`]`<false>` represents one which don't own.
     /// - Use [`AcceleratorTable`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAcceleratorTable` class's documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_table.html) for more details.
     #[doc(alias = "wxAcceleratorTable")]
     #[doc(alias = "AcceleratorTable")]
     class AcceleratorTable
-        = AcceleratorTableIsOwned<true>(wxAcceleratorTable) impl
+        = AcceleratorTableInRust<true>(wxAcceleratorTable) impl
         AcceleratorTableMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> AcceleratorTableIsOwned<OWNED> {
+impl<const OWNED: bool> AcceleratorTableInRust<OWNED> {
     /// Default ctor.
     ///
     /// See [C++ `wxAcceleratorTable::wxAcceleratorTable()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_table.html#af172242a8a1487aa326f7965857df7f7).
-    pub fn new() -> AcceleratorTableIsOwned<OWNED> {
-        unsafe { AcceleratorTableIsOwned(ffi::wxAcceleratorTable_new()) }
+    pub fn new() -> AcceleratorTableInRust<OWNED> {
+        unsafe { AcceleratorTableInRust(ffi::wxAcceleratorTable_new()) }
     }
     // NOT_SUPPORTED: fn wxAcceleratorTable1()
     // BLOCKED: fn wxAcceleratorTable2()
@@ -120,22 +120,22 @@ impl<const OWNED: bool> AcceleratorTableIsOwned<OWNED> {
         None
     }
 }
-impl Clone for AcceleratorTableIsOwned<false> {
+impl Clone for AcceleratorTableInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<AcceleratorTableIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: AcceleratorTableIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AcceleratorTableInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: AcceleratorTableInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for AcceleratorTableIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAcceleratorTable_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for AcceleratorTableInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxAcceleratorTable_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for AcceleratorTableIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for AcceleratorTableInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -146,18 +146,18 @@ impl<const OWNED: bool> Drop for AcceleratorTableIsOwned<OWNED> {
 // wxActivateEvent
 wxwidgets! {
     /// An activate event is sent when a window or application is being activated or deactivated.
-    /// - [`ActivateEvent`] represents a C++ `wxActivateEvent` class instance which your code has ownership, [`ActivateEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`ActivateEvent`] represents a C++ `wxActivateEvent` class instance which your code has ownership, [`ActivateEventInRust`]`<false>` represents one which don't own.
     /// - Use [`ActivateEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxActivateEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_activate_event.html) for more details.
     #[doc(alias = "wxActivateEvent")]
     #[doc(alias = "ActivateEvent")]
     class ActivateEvent
-        = ActivateEventIsOwned<true>(wxActivateEvent) impl
+        = ActivateEventInRust<true>(wxActivateEvent) impl
         ActivateEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ActivateEventIsOwned<OWNED> {
+impl<const OWNED: bool> ActivateEventInRust<OWNED> {
     //  ENUM: Reason
     pub const Reason_Mouse: c_int = 0;
     pub const Reason_Unknown: c_int = 0 + 1;
@@ -167,27 +167,27 @@ impl<const OWNED: bool> ActivateEventIsOwned<OWNED> {
         None
     }
 }
-impl Clone for ActivateEventIsOwned<false> {
+impl Clone for ActivateEventInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ActivateEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: ActivateEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ActivateEventInRust<OWNED>> for EventInRust<OWNED> {
+    fn from(o: ActivateEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ActivateEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ActivateEventIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ActivateEventInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: ActivateEventInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ActivateEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxActivateEvent_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for ActivateEventInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxActivateEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ActivateEventIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for ActivateEventInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -198,45 +198,45 @@ impl<const OWNED: bool> Drop for ActivateEventIsOwned<OWNED> {
 // wxAffineMatrix2D
 wxwidgets! {
     /// A 3x2 matrix representing an affine 2D transformation.
-    /// - [`AffineMatrix2D`] represents a C++ `wxAffineMatrix2D` class instance which your code has ownership, [`AffineMatrix2DIsOwned`]`<false>` represents one which don't own.
+    /// - [`AffineMatrix2D`] represents a C++ `wxAffineMatrix2D` class instance which your code has ownership, [`AffineMatrix2DInRust`]`<false>` represents one which don't own.
     /// - Use [`AffineMatrix2D`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAffineMatrix2D` class's documentation](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html) for more details.
     #[doc(alias = "wxAffineMatrix2D")]
     #[doc(alias = "AffineMatrix2D")]
     class AffineMatrix2D
-        = AffineMatrix2DIsOwned<true>(wxAffineMatrix2D) impl
+        = AffineMatrix2DInRust<true>(wxAffineMatrix2D) impl
         AffineMatrix2DMethods
         // AffineMatrix2DBaseMethods
 }
-impl<const OWNED: bool> AffineMatrix2DIsOwned<OWNED> {
+impl<const OWNED: bool> AffineMatrix2DInRust<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxAffineMatrix2D::wxAffineMatrix2D()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html#a00fa188b54418b476d122e4de408dc27).
-    pub fn new() -> AffineMatrix2DIsOwned<OWNED> {
-        unsafe { AffineMatrix2DIsOwned(ffi::wxAffineMatrix2D_new()) }
+    pub fn new() -> AffineMatrix2DInRust<OWNED> {
+        unsafe { AffineMatrix2DInRust(ffi::wxAffineMatrix2D_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for AffineMatrix2DIsOwned<false> {
+impl Clone for AffineMatrix2DInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<AffineMatrix2DIsOwned<OWNED>> for AffineMatrix2DBaseIsOwned<OWNED> {
-    fn from(o: AffineMatrix2DIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AffineMatrix2DInRust<OWNED>> for AffineMatrix2DBaseInRust<OWNED> {
+    fn from(o: AffineMatrix2DInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for AffineMatrix2DIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for AffineMatrix2DInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxAffineMatrix2D_delete(self.0) }
         }
     }
 }
-impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DIsOwned<OWNED> {
+impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DInRust<OWNED> {
     // BLOCKED: fn operator==()
     // BLOCKED: fn operator!=()
     /// Add mirroring to this matrix.
@@ -262,27 +262,27 @@ impl<const OWNED: bool> AffineMatrix2DBaseMethods for AffineMatrix2DIsOwned<OWNE
 // wxAffineMatrix2DBase
 wxwidgets! {
     /// A 2x3 matrix representing an affine 2D transformation.
-    /// - [`AffineMatrix2DBase`] represents a C++ `wxAffineMatrix2DBase` class instance which your code has ownership, [`AffineMatrix2DBaseIsOwned`]`<false>` represents one which don't own.
+    /// - [`AffineMatrix2DBase`] represents a C++ `wxAffineMatrix2DBase` class instance which your code has ownership, [`AffineMatrix2DBaseInRust`]`<false>` represents one which don't own.
     /// - Use [`AffineMatrix2DBase`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAffineMatrix2DBase` class's documentation](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d_base.html) for more details.
     #[doc(alias = "wxAffineMatrix2DBase")]
     #[doc(alias = "AffineMatrix2DBase")]
     class AffineMatrix2DBase
-        = AffineMatrix2DBaseIsOwned<true>(wxAffineMatrix2DBase) impl
+        = AffineMatrix2DBaseInRust<true>(wxAffineMatrix2DBase) impl
         AffineMatrix2DBaseMethods
 }
-impl<const OWNED: bool> AffineMatrix2DBaseIsOwned<OWNED> {
+impl<const OWNED: bool> AffineMatrix2DBaseInRust<OWNED> {
     // BLOCKED: fn wxAffineMatrix2DBase()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for AffineMatrix2DBaseIsOwned<false> {
+impl Clone for AffineMatrix2DBaseInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for AffineMatrix2DBaseIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for AffineMatrix2DBaseInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxAffineMatrix2DBase_delete(self.0) }
@@ -293,20 +293,20 @@ impl<const OWNED: bool> Drop for AffineMatrix2DBaseIsOwned<OWNED> {
 // wxAnimationCtrl
 wxwidgets! {
     /// This is a static control which displays an animation.
-    /// - [`AnimationCtrl`] represents a C++ `wxAnimationCtrl` class instance which your code has ownership, [`AnimationCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`AnimationCtrl`] represents a C++ `wxAnimationCtrl` class instance which your code has ownership, [`AnimationCtrlInRust`]`<false>` represents one which don't own.
     /// - Use [`AnimationCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAnimationCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_animation_ctrl.html) for more details.
     #[doc(alias = "wxAnimationCtrl")]
     #[doc(alias = "AnimationCtrl")]
     class AnimationCtrl
-        = AnimationCtrlIsOwned<true>(wxAnimationCtrl) impl
+        = AnimationCtrlInRust<true>(wxAnimationCtrl) impl
         AnimationCtrlMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> AnimationCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> AnimationCtrlInRust<OWNED> {
     /// Initializes the object and calls Create() with all the parameters.
     ///
     /// See [C++ `wxAnimationCtrl::wxAnimationCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_animation_ctrl.html#ae661663278f7e2650ba70c08817e0511).
@@ -318,7 +318,7 @@ impl<const OWNED: bool> AnimationCtrlIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> AnimationCtrlIsOwned<OWNED> {
+    ) -> AnimationCtrlInRust<OWNED> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -328,7 +328,7 @@ impl<const OWNED: bool> AnimationCtrlIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            AnimationCtrlIsOwned(ffi::wxAnimationCtrl_new(
+            AnimationCtrlInRust(ffi::wxAnimationCtrl_new(
                 parent, id, anim, pos, size, style, name,
             ))
         }
@@ -337,128 +337,128 @@ impl<const OWNED: bool> AnimationCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for AnimationCtrlIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for AnimationCtrlInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<AnimationCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: AnimationCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AnimationCtrlInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: AnimationCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AnimationCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: AnimationCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AnimationCtrlInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: AnimationCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AnimationCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: AnimationCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AnimationCtrlInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: AnimationCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AnimationCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: AnimationCtrlIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AnimationCtrlInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: AnimationCtrlInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for AnimationCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAnimationCtrl_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for AnimationCtrlInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxAnimationCtrl_CLASSINFO()) }
     }
 }
 
 // wxAnyButton
 wxwidgets! {
     /// A class for common button functionality used as the base for the various button classes.
-    /// - [`AnyButton`] represents a C++ `wxAnyButton` class instance which your code has ownership, [`AnyButtonIsOwned`]`<false>` represents one which don't own.
+    /// - [`AnyButton`] represents a C++ `wxAnyButton` class instance which your code has ownership, [`AnyButtonInRust`]`<false>` represents one which don't own.
     /// - Use [`AnyButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAnyButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_any_button.html) for more details.
     #[doc(alias = "wxAnyButton")]
     #[doc(alias = "AnyButton")]
     class AnyButton
-        = AnyButtonIsOwned<true>(wxAnyButton) impl
+        = AnyButtonInRust<true>(wxAnyButton) impl
         AnyButtonMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> AnyButtonIsOwned<OWNED> {
+impl<const OWNED: bool> AnyButtonInRust<OWNED> {
     ///
     /// See [C++ `wxAnyButton::wxAnyButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_any_button.html#a89b895988e816974fa5f5971e2f3e2a4).
-    pub fn new() -> AnyButtonIsOwned<OWNED> {
-        unsafe { AnyButtonIsOwned(ffi::wxAnyButton_new()) }
+    pub fn new() -> AnyButtonInRust<OWNED> {
+        unsafe { AnyButtonInRust(ffi::wxAnyButton_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for AnyButtonIsOwned<OWNED> {
+impl<const OWNED: bool> Clone for AnyButtonInRust<OWNED> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AnyButtonInRust<OWNED>> for ControlInRust<OWNED> {
+    fn from(o: AnyButtonInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AnyButtonInRust<OWNED>> for WindowInRust<OWNED> {
+    fn from(o: AnyButtonInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AnyButtonInRust<OWNED>> for EvtHandlerInRust<OWNED> {
+    fn from(o: AnyButtonInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AnyButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: AnyButtonIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AnyButtonInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: AnyButtonInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for AnyButtonIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAnyButton_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for AnyButtonInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxAnyButton_CLASSINFO()) }
     }
 }
 
 // wxArtProvider
 wxwidgets! {
     /// wxArtProvider class is used to customize the look of wxWidgets application.
-    /// - [`ArtProvider`] represents a C++ `wxArtProvider` class instance which your code has ownership, [`ArtProviderIsOwned`]`<false>` represents one which don't own.
+    /// - [`ArtProvider`] represents a C++ `wxArtProvider` class instance which your code has ownership, [`ArtProviderInRust`]`<false>` represents one which don't own.
     /// - Use [`ArtProvider`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxArtProvider` class's documentation](https://docs.wxwidgets.org/3.2/classwx_art_provider.html) for more details.
     #[doc(alias = "wxArtProvider")]
     #[doc(alias = "ArtProvider")]
     class ArtProvider
-        = ArtProviderIsOwned<true>(wxArtProvider) impl
+        = ArtProviderInRust<true>(wxArtProvider) impl
         ArtProviderMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ArtProviderIsOwned<OWNED> {
+impl<const OWNED: bool> ArtProviderInRust<OWNED> {
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ArtProviderIsOwned<false> {
+impl Clone for ArtProviderInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ArtProviderIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ArtProviderIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<ArtProviderInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: ArtProviderInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ArtProviderIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxArtProvider_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for ArtProviderInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxArtProvider_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for ArtProviderInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }
@@ -469,13 +469,13 @@ impl<const OWNED: bool> Drop for ArtProviderIsOwned<OWNED> {
 // wxAutoBufferedPaintDC
 wxwidgets! {
     /// This wxDC derivative can be used inside of an EVT_PAINT() event handler to achieve double-buffered drawing.
-    /// - [`AutoBufferedPaintDC`] represents a C++ `wxAutoBufferedPaintDC` class instance which your code has ownership, [`AutoBufferedPaintDCIsOwned`]`<false>` represents one which don't own.
+    /// - [`AutoBufferedPaintDC`] represents a C++ `wxAutoBufferedPaintDC` class instance which your code has ownership, [`AutoBufferedPaintDCInRust`]`<false>` represents one which don't own.
     /// - Use [`AutoBufferedPaintDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAutoBufferedPaintDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_auto_buffered_paint_d_c.html) for more details.
     #[doc(alias = "wxAutoBufferedPaintDC")]
     #[doc(alias = "AutoBufferedPaintDC")]
     class AutoBufferedPaintDC
-        = AutoBufferedPaintDCIsOwned<true>(wxAutoBufferedPaintDC) impl
+        = AutoBufferedPaintDCInRust<true>(wxAutoBufferedPaintDC) impl
         AutoBufferedPaintDCMethods,
         BufferedPaintDCMethods,
         BufferedDCMethods,
@@ -483,59 +483,59 @@ wxwidgets! {
         DCMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> AutoBufferedPaintDCIsOwned<OWNED> {
+impl<const OWNED: bool> AutoBufferedPaintDCInRust<OWNED> {
     /// Constructor.
     ///
     /// See [C++ `wxAutoBufferedPaintDC::wxAutoBufferedPaintDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_auto_buffered_paint_d_c.html#a80468adfa451fbec5345ba8c32ae01b1).
-    pub fn new<W: WindowMethods>(window: Option<&W>) -> AutoBufferedPaintDCIsOwned<OWNED> {
+    pub fn new<W: WindowMethods>(window: Option<&W>) -> AutoBufferedPaintDCInRust<OWNED> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            AutoBufferedPaintDCIsOwned(ffi::wxAutoBufferedPaintDC_new(window))
+            AutoBufferedPaintDCInRust(ffi::wxAutoBufferedPaintDC_new(window))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for AutoBufferedPaintDCIsOwned<false> {
+impl Clone for AutoBufferedPaintDCInRust<false> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for BufferedPaintDCIsOwned<OWNED> {
-    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AutoBufferedPaintDCInRust<OWNED>> for BufferedPaintDCInRust<OWNED> {
+    fn from(o: AutoBufferedPaintDCInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for BufferedDCIsOwned<OWNED> {
-    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AutoBufferedPaintDCInRust<OWNED>> for BufferedDCInRust<OWNED> {
+    fn from(o: AutoBufferedPaintDCInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for MemoryDCIsOwned<OWNED> {
-    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AutoBufferedPaintDCInRust<OWNED>> for MemoryDCInRust<OWNED> {
+    fn from(o: AutoBufferedPaintDCInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
-    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AutoBufferedPaintDCInRust<OWNED>> for DCInRust<OWNED> {
+    fn from(o: AutoBufferedPaintDCInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<AutoBufferedPaintDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: AutoBufferedPaintDCIsOwned<OWNED>) -> Self {
+impl<const OWNED: bool> From<AutoBufferedPaintDCInRust<OWNED>> for ObjectInRust<OWNED> {
+    fn from(o: AutoBufferedPaintDCInRust<OWNED>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for AutoBufferedPaintDCIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxAutoBufferedPaintDC_CLASSINFO()) }
+impl<const OWNED: bool> DynamicCast for AutoBufferedPaintDCInRust<OWNED> {
+    fn class_info() -> ClassInfoInRust<false> {
+        unsafe { ClassInfoInRust::from_ptr(ffi::wxAutoBufferedPaintDC_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for AutoBufferedPaintDCIsOwned<OWNED> {
+impl<const OWNED: bool> Drop for AutoBufferedPaintDCInRust<OWNED> {
     fn drop(&mut self) {
         if OWNED {
             unsafe { ffi::wxObject_delete(self.0) }

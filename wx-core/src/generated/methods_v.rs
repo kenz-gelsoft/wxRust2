@@ -3,7 +3,7 @@ use super::*;
 // wxVListBox
 /// This trait represents [C++ `wxVListBox` class](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html)'s methods and inheritance.
 ///
-/// See [`VListBoxIsOwned`] documentation for the class usage.
+/// See [`VListBoxInRust`] documentation for the class usage.
 pub trait VListBoxMethods: VScrolledWindowMethods {
     // DTOR: fn ~wxVListBox()
     /// Deletes all items from the control.
@@ -63,8 +63,8 @@ pub trait VListBoxMethods: VScrolledWindowMethods {
     /// Returns the background colour used for the selected cells.
     ///
     /// See [C++ `wxVListBox::GetSelectionBackground()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html#a6fc9b1d5737d51c001148f1563a7a737).
-    fn get_selection_background(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxVListBox_GetSelectionBackground(self.as_ptr())) }
+    fn get_selection_background(&self) -> ColourInRust<false> {
+        unsafe { ColourInRust::from_ptr(ffi::wxVListBox_GetSelectionBackground(self.as_ptr())) }
     }
     /// Returns true if the listbox was created with wxLB_MULTIPLE style and so supports multiple selection or false if it is a single selection listbox.
     ///
@@ -148,13 +148,13 @@ pub trait VListBoxMethods: VScrolledWindowMethods {
 // wxVScrolledWindow
 /// This trait represents [C++ `wxVScrolledWindow` class](https://docs.wxwidgets.org/3.2/classwx_v_scrolled_window.html)'s methods and inheritance.
 ///
-/// See [`VScrolledWindowIsOwned`] documentation for the class usage.
+/// See [`VScrolledWindowInRust`] documentation for the class usage.
 pub trait VScrolledWindowMethods: PanelMethods {}
 
 // wxValidator
 /// This trait represents [C++ `wxValidator` class](https://docs.wxwidgets.org/3.2/classwx_validator.html)'s methods and inheritance.
 ///
-/// See [`ValidatorIsOwned`] documentation for the class usage.
+/// See [`ValidatorInRust`] documentation for the class usage.
 pub trait ValidatorMethods: EvtHandlerMethods {
     // DTOR: fn ~wxValidator()
     /// All validator classes must implement the Clone() function, which returns an identical copy of itself.

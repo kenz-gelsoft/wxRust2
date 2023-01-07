@@ -3,7 +3,7 @@ use super::*;
 // wxLayoutAlgorithm
 /// This trait represents [C++ `wxLayoutAlgorithm` class](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html)'s methods and inheritance.
 ///
-/// See [`LayoutAlgorithmIsOwned`] documentation for the class usage.
+/// See [`LayoutAlgorithmInRust`] documentation for the class usage.
 pub trait LayoutAlgorithmMethods: ObjectMethods {
     // DTOR: fn ~wxLayoutAlgorithm()
     /// Lays out the children of a normal frame.
@@ -52,7 +52,7 @@ pub trait LayoutAlgorithmMethods: ObjectMethods {
 // wxListBox
 /// This trait represents [C++ `wxListBox` class](https://docs.wxwidgets.org/3.2/classwx_list_box.html)'s methods and inheritance.
 ///
-/// See [`ListBoxIsOwned`] documentation for the class usage.
+/// See [`ListBoxInRust`] documentation for the class usage.
 pub trait ListBoxMethods: ControlMethods {
     // DTOR: fn ~wxListBox()
     // NOT_SUPPORTED: fn Create()
@@ -209,7 +209,7 @@ pub trait ListBoxMethods: ControlMethods {
 // wxListCtrl
 /// This trait represents [C++ `wxListCtrl` class](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html)'s methods and inheritance.
 ///
-/// See [`ListCtrlIsOwned`] documentation for the class usage.
+/// See [`ListCtrlInRust`] documentation for the class usage.
 pub trait ListCtrlMethods: ControlMethods {
     // DTOR: fn ~wxListCtrl()
     // NOT_SUPPORTED: fn AppendColumn()
@@ -379,7 +379,7 @@ pub trait ListCtrlMethods: ControlMethods {
     /// Returns the specified image list.
     ///
     /// See [C++ `wxListCtrl::GetImageList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#aed8cdb5d1e453c91a764dd202b50b8b6).
-    fn get_image_list(&self, which: c_int) -> Option<ImageListIsOwned<false>> {
+    fn get_image_list(&self, which: c_int) -> Option<ImageListInRust<false>> {
         unsafe { ImageList::option_from(ffi::wxListCtrl_GetImageList(self.as_ptr(), which)) }
     }
     /// Gets information about the item.
@@ -853,7 +853,7 @@ pub trait ListCtrlMethods: ControlMethods {
 // wxListEvent
 /// This trait represents [C++ `wxListEvent` class](https://docs.wxwidgets.org/3.2/classwx_list_event.html)'s methods and inheritance.
 ///
-/// See [`ListEventIsOwned`] documentation for the class usage.
+/// See [`ListEventInRust`] documentation for the class usage.
 pub trait ListEventMethods: NotifyEventMethods {
     /// For EVT_LIST_CACHE_HINT event only: return the first item which the list control advises us to cache.
     ///
@@ -889,8 +889,8 @@ pub trait ListEventMethods: NotifyEventMethods {
     /// An item object, used by some events.
     ///
     /// See [C++ `wxListEvent::GetItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_event.html#aa855597658bab6bbdf4ab0d85223724d).
-    fn get_item(&self) -> ListItemIsOwned<false> {
-        unsafe { ListItemIsOwned::from_ptr(ffi::wxListEvent_GetItem(self.as_ptr())) }
+    fn get_item(&self) -> ListItemInRust<false> {
+        unsafe { ListItemInRust::from_ptr(ffi::wxListEvent_GetItem(self.as_ptr())) }
     }
     /// Key code if the event is a keypress event.
     ///
@@ -974,7 +974,7 @@ pub trait ListEventMethods: NotifyEventMethods {
 // wxListItem
 /// This trait represents [C++ `wxListItem` class](https://docs.wxwidgets.org/3.2/classwx_list_item.html)'s methods and inheritance.
 ///
-/// See [`ListItemIsOwned`] documentation for the class usage.
+/// See [`ListItemInRust`] documentation for the class usage.
 pub trait ListItemMethods: ObjectMethods {
     /// Resets the item state to the default.
     ///
@@ -1140,7 +1140,7 @@ pub trait ListItemMethods: ObjectMethods {
 // wxListView
 /// This trait represents [C++ `wxListView` class](https://docs.wxwidgets.org/3.2/classwx_list_view.html)'s methods and inheritance.
 ///
-/// See [`ListViewIsOwned`] documentation for the class usage.
+/// See [`ListViewInRust`] documentation for the class usage.
 pub trait ListViewMethods: ListCtrlMethods {
     // DTOR: fn ~wxListView()
     /// Resets the column image  after calling this function, no image will be shown.
@@ -1196,7 +1196,7 @@ pub trait ListViewMethods: ListCtrlMethods {
 // wxListbook
 /// This trait represents [C++ `wxListbook` class](https://docs.wxwidgets.org/3.2/classwx_listbook.html)'s methods and inheritance.
 ///
-/// See [`ListbookIsOwned`] documentation for the class usage.
+/// See [`ListbookInRust`] documentation for the class usage.
 pub trait ListbookMethods: BookCtrlBaseMethods {
     /// Returns the wxListView associated with the control.
     ///

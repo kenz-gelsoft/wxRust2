@@ -3,7 +3,7 @@ use super::*;
 // wxEvent
 /// This trait represents [C++ `wxEvent` class](https://docs.wxwidgets.org/3.2/classwx_event.html)'s methods and inheritance.
 ///
-/// See [`EventIsOwned`] documentation for the class usage.
+/// See [`EventInRust`] documentation for the class usage.
 pub trait EventMethods: ObjectMethods {
     /// Returns a copy of the event.
     ///
@@ -14,7 +14,7 @@ pub trait EventMethods: ObjectMethods {
     /// Returns the object (usually a window) associated with the event, if any.
     ///
     /// See [C++ `wxEvent::GetEventObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_event.html#a1ed12f8a9b61af6a76c6746cb8acfeae).
-    fn get_event_object(&self) -> Option<ObjectIsOwned<false>> {
+    fn get_event_object(&self) -> Option<ObjectInRust<false>> {
         unsafe { Object::option_from(ffi::wxEvent_GetEventObject(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetEventType()
@@ -28,7 +28,7 @@ pub trait EventMethods: ObjectMethods {
     /// Return the user data associated with a dynamically connected event handler.
     ///
     /// See [C++ `wxEvent::GetEventUserData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_event.html#aa46a14bdca4d0ebcd4f42e5805db1df9).
-    fn get_event_user_data(&self) -> Option<ObjectIsOwned<false>> {
+    fn get_event_user_data(&self) -> Option<ObjectInRust<false>> {
         unsafe { Object::option_from(ffi::wxEvent_GetEventUserData(self.as_ptr())) }
     }
     /// Returns true if the event handler should be skipped, false otherwise.
@@ -103,7 +103,7 @@ pub trait EventMethods: ObjectMethods {
 // wxEvtHandler
 /// This trait represents [C++ `wxEvtHandler` class](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html)'s methods and inheritance.
 ///
-/// See [`EvtHandlerIsOwned`] documentation for the class usage.
+/// See [`EvtHandlerInRust`] documentation for the class usage.
 pub trait EvtHandlerMethods: ObjectMethods {
     /// Queue event for a later processing.
     ///
@@ -181,7 +181,7 @@ pub trait EvtHandlerMethods: ObjectMethods {
     /// Returns a pointer to the user-supplied client data object.
     ///
     /// See [C++ `wxEvtHandler::GetClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_evt_handler.html#a537d17d644e48bc1735c4dd28b8b8c04).
-    fn get_client_object(&self) -> Option<ClientDataIsOwned<false>> {
+    fn get_client_object(&self) -> Option<ClientDataInRust<false>> {
         unsafe { ClientData::option_from(ffi::wxEvtHandler_GetClientObject(self.as_ptr())) }
     }
     // BLOCKED: fn SetClientData()

@@ -3,7 +3,7 @@ use super::*;
 // wxKeyEvent
 /// This trait represents [C++ `wxKeyEvent` class](https://docs.wxwidgets.org/3.2/classwx_key_event.html)'s methods and inheritance.
 ///
-/// See [`KeyEventIsOwned`] documentation for the class usage.
+/// See [`KeyEventInRust`] documentation for the class usage.
 pub trait KeyEventMethods: EventMethods {
     /// Returns the key code of the key that generated this event.
     ///

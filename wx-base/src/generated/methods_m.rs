@@ -3,18 +3,18 @@ use super::*;
 // wxMessageOutput
 /// This trait represents [C++ `wxMessageOutput` class](https://docs.wxwidgets.org/3.2/classwx_message_output.html)'s methods and inheritance.
 ///
-/// See [`MessageOutputIsOwned`] documentation for the class usage.
+/// See [`MessageOutputInRust`] documentation for the class usage.
 pub trait MessageOutputMethods: WxRustMethods {
     /// Return the global message output object.
     ///
     /// See [C++ `wxMessageOutput::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_message_output.html#aad01aa8c43d59976cd19d8b81311b089).
-    fn get() -> Option<MessageOutputIsOwned<false>> {
+    fn get() -> Option<MessageOutputInRust<false>> {
         unsafe { MessageOutput::option_from(ffi::wxMessageOutput_Get()) }
     }
     /// Sets the global message output object.
     ///
     /// See [C++ `wxMessageOutput::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_message_output.html#a14dc1b2024d1b440e1fb574167f80442).
-    fn set<M: MessageOutputMethods>(msgout: Option<&M>) -> Option<MessageOutputIsOwned<false>> {
+    fn set<M: MessageOutputMethods>(msgout: Option<&M>) -> Option<MessageOutputInRust<false>> {
         unsafe {
             let msgout = match msgout {
                 Some(r) => r.as_ptr(),
