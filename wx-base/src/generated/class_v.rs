@@ -3,13 +3,13 @@ use super::*;
 // wxVariantData
 wxwidgets! {
     /// The wxVariantData class is used to implement a new type for wxVariant.
-    /// - [`VariantData`] represents a C++ `wxVariantData` class instance which your code has ownership, [`VariantDataFromCpp`]`<false>` represents one which don't own.
+    /// - [`VariantData`] represents a C++ `wxVariantData` class instance which your code has ownership, [`VariantDataFromCpp`]`<true>` represents one which don't own.
     /// - Use [`VariantData`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxVariantData` class's documentation](https://docs.wxwidgets.org/3.2/classwx_variant_data.html) for more details.
     #[doc(alias = "wxVariantData")]
     #[doc(alias = "VariantData")]
     class VariantData
-        = VariantDataFromCpp<true>(wxVariantData) impl
+        = VariantDataFromCpp<false>(wxVariantData) impl
         VariantDataMethods,
         ObjectRefDataMethods
 }
@@ -19,7 +19,7 @@ impl<const FROM_CPP: bool> VariantDataFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for VariantDataFromCpp<false> {
+impl Clone for VariantDataFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -31,7 +31,7 @@ impl<const FROM_CPP: bool> From<VariantDataFromCpp<FROM_CPP>> for ObjectRefDataF
 }
 impl<const FROM_CPP: bool> Drop for VariantDataFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxVariantData_delete(self.0) }
         }
     }

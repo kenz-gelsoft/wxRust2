@@ -8,7 +8,7 @@ pub trait VariantDataMethods: ObjectRefDataMethods {
     /// This function can be overridden to clone the data.
     ///
     /// See [C++ `wxVariantData::Clone()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_variant_data.html#a532ef084409dc34bab886b59d41fc7d3).
-    fn clone(&self) -> Option<VariantDataFromCpp<false>> {
+    fn clone(&self) -> Option<VariantDataFromCpp<true>> {
         unsafe { VariantData::option_from(ffi::wxVariantData_Clone(self.as_ptr())) }
     }
     /// Decreases reference count.
@@ -36,7 +36,7 @@ pub trait VariantDataMethods: ObjectRefDataMethods {
     /// If the data is a wxObject returns a pointer to the objects wxClassInfo structure, if the data isn't a wxObject the method returns NULL.
     ///
     /// See [C++ `wxVariantData::GetValueClassInfo()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_variant_data.html#ae5c91c7065e3faadacb4ae2ec7cbf772).
-    fn get_value_class_info(&self) -> Option<ClassInfoFromCpp<false>> {
+    fn get_value_class_info(&self) -> Option<ClassInfoFromCpp<true>> {
         unsafe { ClassInfo::option_from(ffi::wxVariantData_GetValueClassInfo(self.as_ptr())) }
     }
     /// Increases reference count.

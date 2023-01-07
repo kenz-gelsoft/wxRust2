@@ -3,13 +3,13 @@ use super::*;
 // wxOverlay
 wxwidgets! {
     /// Creates an overlay over an existing window, allowing for manipulations like rubberbanding, etc.
-    /// - [`Overlay`] represents a C++ `wxOverlay` class instance which your code has ownership, [`OverlayFromCpp`]`<false>` represents one which don't own.
+    /// - [`Overlay`] represents a C++ `wxOverlay` class instance which your code has ownership, [`OverlayFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Overlay`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxOverlay` class's documentation](https://docs.wxwidgets.org/3.2/classwx_overlay.html) for more details.
     #[doc(alias = "wxOverlay")]
     #[doc(alias = "Overlay")]
     class Overlay
-        = OverlayFromCpp<true>(wxOverlay) impl
+        = OverlayFromCpp<false>(wxOverlay) impl
         OverlayMethods
 }
 impl<const FROM_CPP: bool> OverlayFromCpp<FROM_CPP> {
@@ -22,14 +22,14 @@ impl<const FROM_CPP: bool> OverlayFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for OverlayFromCpp<false> {
+impl Clone for OverlayFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for OverlayFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxOverlay_delete(self.0) }
         }
     }
@@ -38,13 +38,13 @@ impl<const FROM_CPP: bool> Drop for OverlayFromCpp<FROM_CPP> {
 // wxOwnerDrawnComboBox
 wxwidgets! {
     /// wxOwnerDrawnComboBox is a combobox with owner-drawn list items.
-    /// - [`OwnerDrawnComboBox`] represents a C++ `wxOwnerDrawnComboBox` class instance which your code has ownership, [`OwnerDrawnComboBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`OwnerDrawnComboBox`] represents a C++ `wxOwnerDrawnComboBox` class instance which your code has ownership, [`OwnerDrawnComboBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`OwnerDrawnComboBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxOwnerDrawnComboBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html) for more details.
     #[doc(alias = "wxOwnerDrawnComboBox")]
     #[doc(alias = "OwnerDrawnComboBox")]
     class OwnerDrawnComboBox
-        = OwnerDrawnComboBoxFromCpp<true>(wxOwnerDrawnComboBox) impl
+        = OwnerDrawnComboBoxFromCpp<false>(wxOwnerDrawnComboBox) impl
         OwnerDrawnComboBoxMethods,
         // ComboCtrlMethods,
         ControlMethods,
@@ -137,7 +137,7 @@ impl<const FROM_CPP: bool> From<OwnerDrawnComboBoxFromCpp<FROM_CPP>> for ObjectF
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for OwnerDrawnComboBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxOwnerDrawnComboBox_CLASSINFO()) }
     }
 }

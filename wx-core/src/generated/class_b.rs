@@ -3,13 +3,13 @@ use super::*;
 // wxBannerWindow
 wxwidgets! {
     /// A simple banner window showing either a bitmap or text.
-    /// - [`BannerWindow`] represents a C++ `wxBannerWindow` class instance which your code has ownership, [`BannerWindowFromCpp`]`<false>` represents one which don't own.
+    /// - [`BannerWindow`] represents a C++ `wxBannerWindow` class instance which your code has ownership, [`BannerWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BannerWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBannerWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_banner_window.html) for more details.
     #[doc(alias = "wxBannerWindow")]
     #[doc(alias = "BannerWindow")]
     class BannerWindow
-        = BannerWindowFromCpp<true>(wxBannerWindow) impl
+        = BannerWindowFromCpp<false>(wxBannerWindow) impl
         BannerWindowMethods,
         WindowMethods,
         EvtHandlerMethods,
@@ -74,7 +74,7 @@ impl<const FROM_CPP: bool> From<BannerWindowFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BannerWindowFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBannerWindow_CLASSINFO()) }
     }
 }
@@ -82,13 +82,13 @@ impl<const FROM_CPP: bool> DynamicCast for BannerWindowFromCpp<FROM_CPP> {
 // wxBitmap
 wxwidgets! {
     /// This class encapsulates the concept of a platform-dependent bitmap, either monochrome or colour or colour with alpha channel support.
-    /// - [`Bitmap`] represents a C++ `wxBitmap` class instance which your code has ownership, [`BitmapFromCpp`]`<false>` represents one which don't own.
+    /// - [`Bitmap`] represents a C++ `wxBitmap` class instance which your code has ownership, [`BitmapFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Bitmap`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBitmap` class's documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html) for more details.
     #[doc(alias = "wxBitmap")]
     #[doc(alias = "Bitmap")]
     class Bitmap
-        = BitmapFromCpp<true>(wxBitmap) impl
+        = BitmapFromCpp<false>(wxBitmap) impl
         BitmapMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -180,7 +180,7 @@ impl<const FROM_CPP: bool> BitmapFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BitmapFromCpp<false> {
+impl Clone for BitmapFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -196,13 +196,13 @@ impl<const FROM_CPP: bool> From<BitmapFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BitmapFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBitmap_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for BitmapFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -211,13 +211,13 @@ impl<const FROM_CPP: bool> Drop for BitmapFromCpp<FROM_CPP> {
 // wxBitmapBundle
 wxwidgets! {
     /// Contains representations of the same bitmap in different resolutions.
-    /// - [`BitmapBundle`] represents a C++ `wxBitmapBundle` class instance which your code has ownership, [`BitmapBundleFromCpp`]`<false>` represents one which don't own.
+    /// - [`BitmapBundle`] represents a C++ `wxBitmapBundle` class instance which your code has ownership, [`BitmapBundleFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BitmapBundle`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBitmapBundle` class's documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_bundle.html) for more details.
     #[doc(alias = "wxBitmapBundle")]
     #[doc(alias = "BitmapBundle")]
     class BitmapBundle
-        = BitmapBundleFromCpp<true>(wxBitmapBundle) impl
+        = BitmapBundleFromCpp<false>(wxBitmapBundle) impl
         BitmapBundleMethods
 }
 impl<const FROM_CPP: bool> BitmapBundleFromCpp<FROM_CPP> {
@@ -275,14 +275,14 @@ impl<const FROM_CPP: bool> BitmapBundleFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BitmapBundleFromCpp<false> {
+impl Clone for BitmapBundleFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for BitmapBundleFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxBitmapBundle_delete(self.0) }
         }
     }
@@ -291,13 +291,13 @@ impl<const FROM_CPP: bool> Drop for BitmapBundleFromCpp<FROM_CPP> {
 // wxBitmapButton
 wxwidgets! {
     /// A bitmap button is a control that contains a bitmap.
-    /// - [`BitmapButton`] represents a C++ `wxBitmapButton` class instance which your code has ownership, [`BitmapButtonFromCpp`]`<false>` represents one which don't own.
+    /// - [`BitmapButton`] represents a C++ `wxBitmapButton` class instance which your code has ownership, [`BitmapButtonFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BitmapButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBitmapButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_button.html) for more details.
     #[doc(alias = "wxBitmapButton")]
     #[doc(alias = "BitmapButton")]
     class BitmapButton
-        = BitmapButtonFromCpp<true>(wxBitmapButton) impl
+        = BitmapButtonFromCpp<false>(wxBitmapButton) impl
         BitmapButtonMethods,
         ButtonMethods,
         AnyButtonMethods,
@@ -388,7 +388,7 @@ impl<const FROM_CPP: bool> From<BitmapButtonFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BitmapButtonFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBitmapButton_CLASSINFO()) }
     }
 }
@@ -396,13 +396,13 @@ impl<const FROM_CPP: bool> DynamicCast for BitmapButtonFromCpp<FROM_CPP> {
 // wxBitmapComboBox
 wxwidgets! {
     /// A combobox that displays bitmap in front of the list items.
-    /// - [`BitmapComboBox`] represents a C++ `wxBitmapComboBox` class instance which your code has ownership, [`BitmapComboBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`BitmapComboBox`] represents a C++ `wxBitmapComboBox` class instance which your code has ownership, [`BitmapComboBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BitmapComboBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBitmapComboBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_combo_box.html) for more details.
     #[doc(alias = "wxBitmapComboBox")]
     #[doc(alias = "BitmapComboBox")]
     class BitmapComboBox
-        = BitmapComboBoxFromCpp<true>(wxBitmapComboBox) impl
+        = BitmapComboBoxFromCpp<false>(wxBitmapComboBox) impl
         BitmapComboBoxMethods,
         // ComboBoxMethods,
         ControlMethods,
@@ -491,7 +491,7 @@ impl<const FROM_CPP: bool> From<BitmapComboBoxFromCpp<FROM_CPP>> for ObjectFromC
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BitmapComboBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBitmapComboBox_CLASSINFO()) }
     }
 }
@@ -566,13 +566,13 @@ impl<const FROM_CPP: bool> ComboBoxMethods for BitmapComboBoxFromCpp<FROM_CPP> {
 // wxBitmapDataObject
 wxwidgets! {
     /// wxBitmapDataObject is a specialization of wxDataObject for bitmap data.
-    /// - [`BitmapDataObject`] represents a C++ `wxBitmapDataObject` class instance which your code has ownership, [`BitmapDataObjectFromCpp`]`<false>` represents one which don't own.
+    /// - [`BitmapDataObject`] represents a C++ `wxBitmapDataObject` class instance which your code has ownership, [`BitmapDataObjectFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BitmapDataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBitmapDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_data_object.html) for more details.
     #[doc(alias = "wxBitmapDataObject")]
     #[doc(alias = "BitmapDataObject")]
     class BitmapDataObject
-        = BitmapDataObjectFromCpp<true>(wxBitmapDataObject) impl
+        = BitmapDataObjectFromCpp<false>(wxBitmapDataObject) impl
         BitmapDataObjectMethods,
         DataObjectSimpleMethods,
         DataObjectMethods
@@ -591,7 +591,7 @@ impl<const FROM_CPP: bool> BitmapDataObjectFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BitmapDataObjectFromCpp<false> {
+impl Clone for BitmapDataObjectFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -610,7 +610,7 @@ impl<const FROM_CPP: bool> From<BitmapDataObjectFromCpp<FROM_CPP>> for DataObjec
 }
 impl<const FROM_CPP: bool> Drop for BitmapDataObjectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxBitmapDataObject_delete(self.0) }
         }
     }
@@ -619,13 +619,13 @@ impl<const FROM_CPP: bool> Drop for BitmapDataObjectFromCpp<FROM_CPP> {
 // wxBitmapHandler
 wxwidgets! {
     /// This is the base class for implementing bitmap file loading/saving, and bitmap creation from data.
-    /// - [`BitmapHandler`] represents a C++ `wxBitmapHandler` class instance which your code has ownership, [`BitmapHandlerFromCpp`]`<false>` represents one which don't own.
+    /// - [`BitmapHandler`] represents a C++ `wxBitmapHandler` class instance which your code has ownership, [`BitmapHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BitmapHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBitmapHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_handler.html) for more details.
     #[doc(alias = "wxBitmapHandler")]
     #[doc(alias = "BitmapHandler")]
     class BitmapHandler
-        = BitmapHandlerFromCpp<true>(wxBitmapHandler) impl
+        = BitmapHandlerFromCpp<false>(wxBitmapHandler) impl
         BitmapHandlerMethods,
         ObjectMethods
 }
@@ -640,7 +640,7 @@ impl<const FROM_CPP: bool> BitmapHandlerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BitmapHandlerFromCpp<false> {
+impl Clone for BitmapHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -651,13 +651,13 @@ impl<const FROM_CPP: bool> From<BitmapHandlerFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BitmapHandlerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBitmapHandler_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for BitmapHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -666,13 +666,13 @@ impl<const FROM_CPP: bool> Drop for BitmapHandlerFromCpp<FROM_CPP> {
 // wxBitmapToggleButton
 wxwidgets! {
     /// wxBitmapToggleButton is a wxToggleButton that contains a bitmap instead of text.
-    /// - [`BitmapToggleButton`] represents a C++ `wxBitmapToggleButton` class instance which your code has ownership, [`BitmapToggleButtonFromCpp`]`<false>` represents one which don't own.
+    /// - [`BitmapToggleButton`] represents a C++ `wxBitmapToggleButton` class instance which your code has ownership, [`BitmapToggleButtonFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BitmapToggleButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBitmapToggleButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap_toggle_button.html) for more details.
     #[doc(alias = "wxBitmapToggleButton")]
     #[doc(alias = "BitmapToggleButton")]
     class BitmapToggleButton
-        = BitmapToggleButtonFromCpp<true>(wxBitmapToggleButton) impl
+        = BitmapToggleButtonFromCpp<false>(wxBitmapToggleButton) impl
         BitmapToggleButtonMethods,
         ToggleButtonMethods,
         AnyButtonMethods,
@@ -769,7 +769,7 @@ impl<const FROM_CPP: bool> From<BitmapToggleButtonFromCpp<FROM_CPP>> for ObjectF
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BitmapToggleButtonFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBitmapToggleButton_CLASSINFO()) }
     }
 }
@@ -777,13 +777,13 @@ impl<const FROM_CPP: bool> DynamicCast for BitmapToggleButtonFromCpp<FROM_CPP> {
 // wxBookCtrlBase
 wxwidgets! {
     /// A book control is a convenient way of displaying multiple pages of information, displayed one page at a time.
-    /// - [`BookCtrlBase`] represents a C++ `wxBookCtrlBase` class instance which your code has ownership, [`BookCtrlBaseFromCpp`]`<false>` represents one which don't own.
+    /// - [`BookCtrlBase`] represents a C++ `wxBookCtrlBase` class instance which your code has ownership, [`BookCtrlBaseFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BookCtrlBase`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBookCtrlBase` class's documentation](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_base.html) for more details.
     #[doc(alias = "wxBookCtrlBase")]
     #[doc(alias = "BookCtrlBase")]
     class BookCtrlBase
-        = BookCtrlBaseFromCpp<true>(wxBookCtrlBase) impl
+        = BookCtrlBaseFromCpp<false>(wxBookCtrlBase) impl
         BookCtrlBaseMethods,
         ControlMethods,
         // WindowMethods,
@@ -826,7 +826,7 @@ impl<const FROM_CPP: bool> From<BookCtrlBaseFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BookCtrlBaseFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBookCtrlBase_CLASSINFO()) }
     }
 }
@@ -860,13 +860,13 @@ impl<const FROM_CPP: bool> WindowMethods for BookCtrlBaseFromCpp<FROM_CPP> {
 // wxBookCtrlEvent
 wxwidgets! {
     /// This class represents the events generated by book controls (wxNotebook, wxListbook, wxChoicebook, wxTreebook, wxAuiNotebook).
-    /// - [`BookCtrlEvent`] represents a C++ `wxBookCtrlEvent` class instance which your code has ownership, [`BookCtrlEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`BookCtrlEvent`] represents a C++ `wxBookCtrlEvent` class instance which your code has ownership, [`BookCtrlEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BookCtrlEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBookCtrlEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_book_ctrl_event.html) for more details.
     #[doc(alias = "wxBookCtrlEvent")]
     #[doc(alias = "BookCtrlEvent")]
     class BookCtrlEvent
-        = BookCtrlEventFromCpp<true>(wxBookCtrlEvent) impl
+        = BookCtrlEventFromCpp<false>(wxBookCtrlEvent) impl
         BookCtrlEventMethods,
         NotifyEventMethods,
         // CommandEventMethods,
@@ -879,7 +879,7 @@ impl<const FROM_CPP: bool> BookCtrlEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BookCtrlEventFromCpp<false> {
+impl Clone for BookCtrlEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -905,13 +905,13 @@ impl<const FROM_CPP: bool> From<BookCtrlEventFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BookCtrlEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBookCtrlEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for BookCtrlEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -928,13 +928,13 @@ impl<const FROM_CPP: bool> CommandEventMethods for BookCtrlEventFromCpp<FROM_CPP
 // wxBoxSizer
 wxwidgets! {
     /// The basic idea behind a box sizer is that windows will most often be laid out in rather simple basic geometry, typically in a row or a column or several hierarchies of either.
-    /// - [`BoxSizer`] represents a C++ `wxBoxSizer` class instance which your code has ownership, [`BoxSizerFromCpp`]`<false>` represents one which don't own.
+    /// - [`BoxSizer`] represents a C++ `wxBoxSizer` class instance which your code has ownership, [`BoxSizerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BoxSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBoxSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_box_sizer.html) for more details.
     #[doc(alias = "wxBoxSizer")]
     #[doc(alias = "BoxSizer")]
     class BoxSizer
-        = BoxSizerFromCpp<true>(wxBoxSizer) impl
+        = BoxSizerFromCpp<false>(wxBoxSizer) impl
         BoxSizerMethods,
         SizerMethods,
         ObjectMethods
@@ -966,7 +966,7 @@ impl<const FROM_CPP: bool> From<BoxSizerFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BoxSizerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBoxSizer_CLASSINFO()) }
     }
 }
@@ -974,13 +974,13 @@ impl<const FROM_CPP: bool> DynamicCast for BoxSizerFromCpp<FROM_CPP> {
 // wxBrush
 wxwidgets! {
     /// A brush is a drawing tool for filling in areas.
-    /// - [`Brush`] represents a C++ `wxBrush` class instance which your code has ownership, [`BrushFromCpp`]`<false>` represents one which don't own.
+    /// - [`Brush`] represents a C++ `wxBrush` class instance which your code has ownership, [`BrushFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Brush`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBrush` class's documentation](https://docs.wxwidgets.org/3.2/classwx_brush.html) for more details.
     #[doc(alias = "wxBrush")]
     #[doc(alias = "Brush")]
     class Brush
-        = BrushFromCpp<true>(wxBrush) impl
+        = BrushFromCpp<false>(wxBrush) impl
         BrushMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -1015,7 +1015,7 @@ impl<const FROM_CPP: bool> BrushFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BrushFromCpp<false> {
+impl Clone for BrushFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1031,13 +1031,13 @@ impl<const FROM_CPP: bool> From<BrushFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_C
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BrushFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBrush_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for BrushFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1046,13 +1046,13 @@ impl<const FROM_CPP: bool> Drop for BrushFromCpp<FROM_CPP> {
 // wxBrushList
 wxwidgets! {
     /// A brush list is a list containing all brushes which have been created.
-    /// - [`BrushList`] represents a C++ `wxBrushList` class instance which your code has ownership, [`BrushListFromCpp`]`<false>` represents one which don't own.
+    /// - [`BrushList`] represents a C++ `wxBrushList` class instance which your code has ownership, [`BrushListFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BrushList`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBrushList` class's documentation](https://docs.wxwidgets.org/3.2/classwx_brush_list.html) for more details.
     #[doc(alias = "wxBrushList")]
     #[doc(alias = "BrushList")]
     class BrushList
-        = BrushListFromCpp<true>(wxBrushList) impl
+        = BrushListFromCpp<false>(wxBrushList) impl
         BrushListMethods
 }
 impl<const FROM_CPP: bool> BrushListFromCpp<FROM_CPP> {
@@ -1060,14 +1060,14 @@ impl<const FROM_CPP: bool> BrushListFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BrushListFromCpp<false> {
+impl Clone for BrushListFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for BrushListFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxBrushList_delete(self.0) }
         }
     }
@@ -1076,13 +1076,13 @@ impl<const FROM_CPP: bool> Drop for BrushListFromCpp<FROM_CPP> {
 // wxBufferedDC
 wxwidgets! {
     /// This class provides a simple way to avoid flicker: when drawing on it, everything is in fact first drawn on an in-memory buffer (a wxBitmap) and then copied to the screen, using the associated wxDC, only once, when this object is destroyed.
-    /// - [`BufferedDC`] represents a C++ `wxBufferedDC` class instance which your code has ownership, [`BufferedDCFromCpp`]`<false>` represents one which don't own.
+    /// - [`BufferedDC`] represents a C++ `wxBufferedDC` class instance which your code has ownership, [`BufferedDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BufferedDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBufferedDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_buffered_d_c.html) for more details.
     #[doc(alias = "wxBufferedDC")]
     #[doc(alias = "BufferedDC")]
     class BufferedDC
-        = BufferedDCFromCpp<true>(wxBufferedDC) impl
+        = BufferedDCFromCpp<false>(wxBufferedDC) impl
         BufferedDCMethods,
         MemoryDCMethods,
         DCMethods,
@@ -1133,7 +1133,7 @@ impl<const FROM_CPP: bool> BufferedDCFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BufferedDCFromCpp<false> {
+impl Clone for BufferedDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1154,13 +1154,13 @@ impl<const FROM_CPP: bool> From<BufferedDCFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BufferedDCFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBufferedDC_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for BufferedDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1169,13 +1169,13 @@ impl<const FROM_CPP: bool> Drop for BufferedDCFromCpp<FROM_CPP> {
 // wxBufferedPaintDC
 wxwidgets! {
     /// This is a subclass of wxBufferedDC which can be used inside of an EVT_PAINT() event handler to achieve double-buffered drawing.
-    /// - [`BufferedPaintDC`] represents a C++ `wxBufferedPaintDC` class instance which your code has ownership, [`BufferedPaintDCFromCpp`]`<false>` represents one which don't own.
+    /// - [`BufferedPaintDC`] represents a C++ `wxBufferedPaintDC` class instance which your code has ownership, [`BufferedPaintDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BufferedPaintDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBufferedPaintDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_buffered_paint_d_c.html) for more details.
     #[doc(alias = "wxBufferedPaintDC")]
     #[doc(alias = "BufferedPaintDC")]
     class BufferedPaintDC
-        = BufferedPaintDCFromCpp<true>(wxBufferedPaintDC) impl
+        = BufferedPaintDCFromCpp<false>(wxBufferedPaintDC) impl
         BufferedPaintDCMethods,
         BufferedDCMethods,
         MemoryDCMethods,
@@ -1218,7 +1218,7 @@ impl<const FROM_CPP: bool> BufferedPaintDCFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BufferedPaintDCFromCpp<false> {
+impl Clone for BufferedPaintDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1244,13 +1244,13 @@ impl<const FROM_CPP: bool> From<BufferedPaintDCFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for BufferedPaintDCFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxBufferedPaintDC_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for BufferedPaintDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1259,13 +1259,13 @@ impl<const FROM_CPP: bool> Drop for BufferedPaintDCFromCpp<FROM_CPP> {
 // wxBusyCursor
 wxwidgets! {
     /// This class makes it easy to tell your user that the program is temporarily busy.
-    /// - [`BusyCursor`] represents a C++ `wxBusyCursor` class instance which your code has ownership, [`BusyCursorFromCpp`]`<false>` represents one which don't own.
+    /// - [`BusyCursor`] represents a C++ `wxBusyCursor` class instance which your code has ownership, [`BusyCursorFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BusyCursor`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBusyCursor` class's documentation](https://docs.wxwidgets.org/3.2/classwx_busy_cursor.html) for more details.
     #[doc(alias = "wxBusyCursor")]
     #[doc(alias = "BusyCursor")]
     class BusyCursor
-        = BusyCursorFromCpp<true>(wxBusyCursor) impl
+        = BusyCursorFromCpp<false>(wxBusyCursor) impl
         BusyCursorMethods
 }
 impl<const FROM_CPP: bool> BusyCursorFromCpp<FROM_CPP> {
@@ -1285,14 +1285,14 @@ impl<const FROM_CPP: bool> BusyCursorFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BusyCursorFromCpp<false> {
+impl Clone for BusyCursorFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for BusyCursorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxBusyCursor_delete(self.0) }
         }
     }
@@ -1301,13 +1301,13 @@ impl<const FROM_CPP: bool> Drop for BusyCursorFromCpp<FROM_CPP> {
 // wxBusyInfo
 wxwidgets! {
     /// This class makes it easy to tell your user that the program is temporarily busy.
-    /// - [`BusyInfo`] represents a C++ `wxBusyInfo` class instance which your code has ownership, [`BusyInfoFromCpp`]`<false>` represents one which don't own.
+    /// - [`BusyInfo`] represents a C++ `wxBusyInfo` class instance which your code has ownership, [`BusyInfoFromCpp`]`<true>` represents one which don't own.
     /// - Use [`BusyInfo`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxBusyInfo` class's documentation](https://docs.wxwidgets.org/3.2/classwx_busy_info.html) for more details.
     #[doc(alias = "wxBusyInfo")]
     #[doc(alias = "BusyInfo")]
     class BusyInfo
-        = BusyInfoFromCpp<true>(wxBusyInfo) impl
+        = BusyInfoFromCpp<false>(wxBusyInfo) impl
         BusyInfoMethods
 }
 impl<const FROM_CPP: bool> BusyInfoFromCpp<FROM_CPP> {
@@ -1338,14 +1338,14 @@ impl<const FROM_CPP: bool> BusyInfoFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for BusyInfoFromCpp<false> {
+impl Clone for BusyInfoFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for BusyInfoFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxBusyInfo_delete(self.0) }
         }
     }
@@ -1354,13 +1354,13 @@ impl<const FROM_CPP: bool> Drop for BusyInfoFromCpp<FROM_CPP> {
 // wxButton
 wxwidgets! {
     /// A button is a control that contains a text string, and is one of the most common elements of a GUI.
-    /// - [`Button`] represents a C++ `wxButton` class instance which your code has ownership, [`ButtonFromCpp`]`<false>` represents one which don't own.
+    /// - [`Button`] represents a C++ `wxButton` class instance which your code has ownership, [`ButtonFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Button`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_button.html) for more details.
     #[doc(alias = "wxButton")]
     #[doc(alias = "Button")]
     class Button
-        = ButtonFromCpp<true>(wxButton) impl
+        = ButtonFromCpp<false>(wxButton) impl
         ButtonMethods,
         AnyButtonMethods,
         ControlMethods,
@@ -1440,7 +1440,7 @@ impl<const FROM_CPP: bool> From<ButtonFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ButtonFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxButton_CLASSINFO()) }
     }
 }

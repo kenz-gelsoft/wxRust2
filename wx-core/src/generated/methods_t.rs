@@ -88,7 +88,7 @@ pub trait TextAttrMethods: WxRustMethods {
     /// Returns the background colour.
     ///
     /// See [C++ `wxTextAttr::GetBackgroundColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#a8e4e02b11235e6a907c3dc79c2eaf459).
-    fn get_background_colour(&self) -> ColourFromCpp<false> {
+    fn get_background_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxTextAttr_GetBackgroundColour(self.as_ptr())) }
     }
     /// Returns a string containing the name of the font associated with the bullet symbol.
@@ -173,7 +173,7 @@ pub trait TextAttrMethods: WxRustMethods {
     /// Returns the underline color used.
     ///
     /// See [C++ `wxTextAttr::GetUnderlineColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#aa7d3a1bd71a4bd65c62d4e07c36bdb3a).
-    fn get_underline_colour(&self) -> ColourFromCpp<false> {
+    fn get_underline_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxTextAttr_GetUnderlineColour(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetFontWeight()
@@ -234,13 +234,13 @@ pub trait TextAttrMethods: WxRustMethods {
     /// Returns an array of tab stops, each expressed in tenths of a millimeter.
     ///
     /// See [C++ `wxTextAttr::GetTabs()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#a58d46d58d8bd430078d86360381d30f1).
-    fn get_tabs(&self) -> ArrayIntFromCpp<false> {
+    fn get_tabs(&self) -> ArrayIntFromCpp<true> {
         unsafe { ArrayIntFromCpp::from_ptr(ffi::wxTextAttr_GetTabs(self.as_ptr())) }
     }
     /// Returns the text foreground colour.
     ///
     /// See [C++ `wxTextAttr::GetTextColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#a3ee332af4536a29a894d202a532f9f89).
-    fn get_text_colour(&self) -> ColourFromCpp<false> {
+    fn get_text_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxTextAttr_GetTextColour(self.as_ptr())) }
     }
     /// Returns the text effect bits of interest.
@@ -819,7 +819,7 @@ pub trait TextCtrlMethods: ControlMethods {
     /// Returns the style currently used for the new text.
     ///
     /// See [C++ `wxTextCtrl::GetDefaultStyle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_ctrl.html#a922bfcaf404dbaff10837c80b40744bf).
-    fn get_default_style(&self) -> TextAttrFromCpp<false> {
+    fn get_default_style(&self) -> TextAttrFromCpp<true> {
         unsafe { TextAttrFromCpp::from_ptr(ffi::wxTextCtrl_GetDefaultStyle(self.as_ptr())) }
     }
     /// Gets the length of the specified line, not including any trailing newline character(s).
@@ -1381,13 +1381,13 @@ pub trait TextValidatorMethods: ValidatorMethods {
     /// Returns a const reference to the exclude list (the list of invalid values).
     ///
     /// See [C++ `wxTextValidator::GetExcludes()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_validator.html#a470219e1cac3953dc2ff015e43891665).
-    fn get_excludes(&self) -> ArrayStringFromCpp<false> {
+    fn get_excludes(&self) -> ArrayStringFromCpp<true> {
         unsafe { ArrayStringFromCpp::from_ptr(ffi::wxTextValidator_GetExcludes(self.as_ptr())) }
     }
     /// Returns a const reference to the include list (the list of valid values).
     ///
     /// See [C++ `wxTextValidator::GetIncludes()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_validator.html#a5466e57dff6e7edcd0957ac7a2150beb).
-    fn get_includes(&self) -> ArrayStringFromCpp<false> {
+    fn get_includes(&self) -> ArrayStringFromCpp<true> {
         unsafe { ArrayStringFromCpp::from_ptr(ffi::wxTextValidator_GetIncludes(self.as_ptr())) }
     }
     /// Returns the validator style.
@@ -1977,7 +1977,7 @@ pub trait ToolBarMethods: ControlMethods {
     /// Get any client data associated with the tool.
     ///
     /// See [C++ `wxToolBar::GetToolClientData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tool_bar.html#a7b4027b1a5f6e91f356a7bc4dc024e32).
-    fn get_tool_client_data(&self, tool_id: c_int) -> Option<ObjectFromCpp<false>> {
+    fn get_tool_client_data(&self, tool_id: c_int) -> Option<ObjectFromCpp<true>> {
         unsafe { Object::option_from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id)) }
     }
     /// Called to determine whether a tool is enabled (responds to user input).
@@ -2891,7 +2891,7 @@ pub trait TreeCtrlMethods: ControlMethods {
     /// Returns the buttons image list (from which application-defined button images are taken).
     ///
     /// See [C++ `wxTreeCtrl::GetButtonsImageList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#a439e5fe7606b5b33f04655edcad45760).
-    fn get_buttons_image_list(&self) -> Option<ImageListFromCpp<false>> {
+    fn get_buttons_image_list(&self) -> Option<ImageListFromCpp<true>> {
         unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetButtonsImageList(self.as_ptr())) }
     }
     /// Returns the number of items in the branch.
@@ -2975,7 +2975,7 @@ pub trait TreeCtrlMethods: ControlMethods {
     /// Returns the tree item data associated with the item.
     ///
     /// See [C++ `wxTreeCtrl::GetItemData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#ae87589185698639e796b166aeeaaacb6).
-    fn get_item_data<T: TreeItemIdMethods>(&self, item: &T) -> Option<TreeItemDataFromCpp<false>> {
+    fn get_item_data<T: TreeItemIdMethods>(&self, item: &T) -> Option<TreeItemDataFromCpp<true>> {
         unsafe {
             let item = item.as_ptr();
             TreeItemData::option_from(ffi::wxTreeCtrl_GetItemData(self.as_ptr(), item))
@@ -3108,7 +3108,7 @@ pub trait TreeCtrlMethods: ControlMethods {
     /// Returns the state image list (from which application-defined state images are taken).
     ///
     /// See [C++ `wxTreeCtrl::GetStateImageList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#aeb27fd93365bb9cd9a9b88f32c386941).
-    fn get_state_image_list(&self) -> Option<ImageListFromCpp<false>> {
+    fn get_state_image_list(&self) -> Option<ImageListFromCpp<true>> {
         unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetStateImageList(self.as_ptr())) }
     }
     /// Calculates which (if any) item is under the given point, returning the tree item id at this point plus extra information flags.
@@ -3519,7 +3519,7 @@ pub trait TreeEventMethods: NotifyEventMethods {
     /// Returns the key event for EVT_TREE_KEY_DOWN events.
     ///
     /// See [C++ `wxTreeEvent::GetKeyEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_event.html#a7d37b3a4be2c44a4640b193fad237a6f).
-    fn get_key_event(&self) -> KeyEventFromCpp<false> {
+    fn get_key_event(&self) -> KeyEventFromCpp<true> {
         unsafe { KeyEventFromCpp::from_ptr(ffi::wxTreeEvent_GetKeyEvent(self.as_ptr())) }
     }
     /// Returns the label if the event is a begin or end edit label event.
@@ -3567,7 +3567,7 @@ pub trait TreeItemDataMethods: ClientDataMethods {
     /// Returns the item associated with this node.
     ///
     /// See [C++ `wxTreeItemData::GetId()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_item_data.html#ad29ad85ec3390e8900a3c3f5b2b22eb0).
-    fn get_id(&self) -> TreeItemIdFromCpp<false> {
+    fn get_id(&self) -> TreeItemIdFromCpp<true> {
         unsafe { TreeItemIdFromCpp::from_ptr(ffi::wxTreeItemData_GetId(self.as_ptr())) }
     }
     /// Sets the item associated with this node.

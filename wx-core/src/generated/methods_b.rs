@@ -186,13 +186,13 @@ pub trait BitmapMethods: GDIObjectMethods {
     /// Gets the associated mask (if any) which may have been loaded from a file or set for the bitmap.
     ///
     /// See [C++ `wxBitmap::GetMask()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#aa978a534193f3e21f933b1dba73fbfec).
-    fn get_mask(&self) -> Option<MaskFromCpp<false>> {
+    fn get_mask(&self) -> Option<MaskFromCpp<true>> {
         unsafe { Mask::option_from(ffi::wxBitmap_GetMask(self.as_ptr())) }
     }
     /// Gets the associated palette (if any) which may have been loaded from a file or set for the bitmap.
     ///
     /// See [C++ `wxBitmap::GetPalette()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a3ed8209f53fe2f843ad8b00c679a8704).
-    fn get_palette(&self) -> Option<PaletteFromCpp<false>> {
+    fn get_palette(&self) -> Option<PaletteFromCpp<true>> {
         unsafe { Palette::option_from(ffi::wxBitmap_GetPalette(self.as_ptr())) }
     }
     /// Returns a sub bitmap of the current one as long as the rect belongs entirely to the bitmap.
@@ -307,7 +307,7 @@ pub trait BitmapMethods: GDIObjectMethods {
     /// Finds the handler with the given name.
     ///
     /// See [C++ `wxBitmap::FindHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_bitmap.html#a7351c37e4e13cc1ebab1d788cafe0139).
-    fn find_handler(name: &str) -> Option<BitmapHandlerFromCpp<false>> {
+    fn find_handler(name: &str) -> Option<BitmapHandlerFromCpp<true>> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
@@ -1150,7 +1150,7 @@ pub trait BrushMethods: GDIObjectMethods {
     /// Gets a pointer to the stipple bitmap.
     ///
     /// See [C++ `wxBrush::GetStipple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_brush.html#a9f6d3e31079107f82ce28b40ea3fd04f).
-    fn get_stipple(&self) -> Option<BitmapFromCpp<false>> {
+    fn get_stipple(&self) -> Option<BitmapFromCpp<true>> {
         unsafe { Bitmap::option_from(ffi::wxBrush_GetStipple(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetStyle()

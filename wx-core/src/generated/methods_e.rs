@@ -61,7 +61,7 @@ pub trait EraseEventMethods: EventMethods {
     /// Returns the device context associated with the erase event to draw on.
     ///
     /// See [C++ `wxEraseEvent::GetDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html#a44679163c23de75ecdbb2594add850cc).
-    fn get_dc(&self) -> Option<DCFromCpp<false>> {
+    fn get_dc(&self) -> Option<DCFromCpp<true>> {
         unsafe { DC::option_from(ffi::wxEraseEvent_GetDC(self.as_ptr())) }
     }
 }

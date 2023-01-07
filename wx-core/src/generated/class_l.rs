@@ -3,13 +3,13 @@ use super::*;
 // wxLayoutAlgorithm
 wxwidgets! {
     /// wxLayoutAlgorithm implements layout of subwindows in MDI or SDI frames.
-    /// - [`LayoutAlgorithm`] represents a C++ `wxLayoutAlgorithm` class instance which your code has ownership, [`LayoutAlgorithmFromCpp`]`<false>` represents one which don't own.
+    /// - [`LayoutAlgorithm`] represents a C++ `wxLayoutAlgorithm` class instance which your code has ownership, [`LayoutAlgorithmFromCpp`]`<true>` represents one which don't own.
     /// - Use [`LayoutAlgorithm`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxLayoutAlgorithm` class's documentation](https://docs.wxwidgets.org/3.2/classwx_layout_algorithm.html) for more details.
     #[doc(alias = "wxLayoutAlgorithm")]
     #[doc(alias = "LayoutAlgorithm")]
     class LayoutAlgorithm
-        = LayoutAlgorithmFromCpp<true>(wxLayoutAlgorithm) impl
+        = LayoutAlgorithmFromCpp<false>(wxLayoutAlgorithm) impl
         LayoutAlgorithmMethods,
         ObjectMethods
 }
@@ -24,7 +24,7 @@ impl<const FROM_CPP: bool> LayoutAlgorithmFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for LayoutAlgorithmFromCpp<false> {
+impl Clone for LayoutAlgorithmFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -35,13 +35,13 @@ impl<const FROM_CPP: bool> From<LayoutAlgorithmFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for LayoutAlgorithmFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxLayoutAlgorithm_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for LayoutAlgorithmFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -50,13 +50,13 @@ impl<const FROM_CPP: bool> Drop for LayoutAlgorithmFromCpp<FROM_CPP> {
 // wxListBox
 wxwidgets! {
     /// A listbox is used to select one or more of a list of strings.
-    /// - [`ListBox`] represents a C++ `wxListBox` class instance which your code has ownership, [`ListBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`ListBox`] represents a C++ `wxListBox` class instance which your code has ownership, [`ListBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_box.html) for more details.
     #[doc(alias = "wxListBox")]
     #[doc(alias = "ListBox")]
     class ListBox
-        = ListBoxFromCpp<true>(wxListBox) impl
+        = ListBoxFromCpp<false>(wxListBox) impl
         ListBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -136,7 +136,7 @@ impl<const FROM_CPP: bool> From<ListBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FROM
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ListBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxListBox_CLASSINFO()) }
     }
 }
@@ -155,13 +155,13 @@ impl<const FROM_CPP: bool> ItemContainerImmutableMethods for ListBoxFromCpp<FROM
 // wxListCtrl
 wxwidgets! {
     /// A list control presents lists in a number of formats: list view, report view, icon view and small icon view.
-    /// - [`ListCtrl`] represents a C++ `wxListCtrl` class instance which your code has ownership, [`ListCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`ListCtrl`] represents a C++ `wxListCtrl` class instance which your code has ownership, [`ListCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ListCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html) for more details.
     #[doc(alias = "wxListCtrl")]
     #[doc(alias = "ListCtrl")]
     class ListCtrl
-        = ListCtrlFromCpp<true>(wxListCtrl) impl
+        = ListCtrlFromCpp<false>(wxListCtrl) impl
         ListCtrlMethods,
         // ControlMethods,
         WindowMethods,
@@ -232,7 +232,7 @@ impl<const FROM_CPP: bool> From<ListCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ListCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxListCtrl_CLASSINFO()) }
     }
 }
@@ -268,13 +268,13 @@ impl<const FROM_CPP: bool> ControlMethods for ListCtrlFromCpp<FROM_CPP> {
 // wxListEvent
 wxwidgets! {
     /// A list event holds information about events associated with wxListCtrl objects.
-    /// - [`ListEvent`] represents a C++ `wxListEvent` class instance which your code has ownership, [`ListEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`ListEvent`] represents a C++ `wxListEvent` class instance which your code has ownership, [`ListEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ListEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_event.html) for more details.
     #[doc(alias = "wxListEvent")]
     #[doc(alias = "ListEvent")]
     class ListEvent
-        = ListEventFromCpp<true>(wxListEvent) impl
+        = ListEventFromCpp<false>(wxListEvent) impl
         ListEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -287,7 +287,7 @@ impl<const FROM_CPP: bool> ListEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ListEventFromCpp<false> {
+impl Clone for ListEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -313,13 +313,13 @@ impl<const FROM_CPP: bool> From<ListEventFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ListEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxListEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ListEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -328,13 +328,13 @@ impl<const FROM_CPP: bool> Drop for ListEventFromCpp<FROM_CPP> {
 // wxListItem
 wxwidgets! {
     /// This class stores information about a wxListCtrl item or column.
-    /// - [`ListItem`] represents a C++ `wxListItem` class instance which your code has ownership, [`ListItemFromCpp`]`<false>` represents one which don't own.
+    /// - [`ListItem`] represents a C++ `wxListItem` class instance which your code has ownership, [`ListItemFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ListItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_item.html) for more details.
     #[doc(alias = "wxListItem")]
     #[doc(alias = "ListItem")]
     class ListItem
-        = ListItemFromCpp<true>(wxListItem) impl
+        = ListItemFromCpp<false>(wxListItem) impl
         ListItemMethods,
         ObjectMethods
 }
@@ -349,7 +349,7 @@ impl<const FROM_CPP: bool> ListItemFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ListItemFromCpp<false> {
+impl Clone for ListItemFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -360,13 +360,13 @@ impl<const FROM_CPP: bool> From<ListItemFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ListItemFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxListItem_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ListItemFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -375,13 +375,13 @@ impl<const FROM_CPP: bool> Drop for ListItemFromCpp<FROM_CPP> {
 // wxListView
 wxwidgets! {
     /// This class currently simply presents a simpler to use interface for the wxListCtrl  it can be thought of as a façade for that complicated class.
-    /// - [`ListView`] represents a C++ `wxListView` class instance which your code has ownership, [`ListViewFromCpp`]`<false>` represents one which don't own.
+    /// - [`ListView`] represents a C++ `wxListView` class instance which your code has ownership, [`ListViewFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ListView`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListView` class's documentation](https://docs.wxwidgets.org/3.2/classwx_list_view.html) for more details.
     #[doc(alias = "wxListView")]
     #[doc(alias = "ListView")]
     class ListView
-        = ListViewFromCpp<true>(wxListView) impl
+        = ListViewFromCpp<false>(wxListView) impl
         ListViewMethods,
         ListCtrlMethods,
         ControlMethods,
@@ -458,7 +458,7 @@ impl<const FROM_CPP: bool> From<ListViewFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ListViewFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxListView_CLASSINFO()) }
     }
 }
@@ -466,13 +466,13 @@ impl<const FROM_CPP: bool> DynamicCast for ListViewFromCpp<FROM_CPP> {
 // wxListbook
 wxwidgets! {
     /// wxListbook is a class similar to wxNotebook but which uses a wxListCtrl to show the labels instead of the tabs.
-    /// - [`Listbook`] represents a C++ `wxListbook` class instance which your code has ownership, [`ListbookFromCpp`]`<false>` represents one which don't own.
+    /// - [`Listbook`] represents a C++ `wxListbook` class instance which your code has ownership, [`ListbookFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Listbook`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxListbook` class's documentation](https://docs.wxwidgets.org/3.2/classwx_listbook.html) for more details.
     #[doc(alias = "wxListbook")]
     #[doc(alias = "Listbook")]
     class Listbook
-        = ListbookFromCpp<true>(wxListbook) impl
+        = ListbookFromCpp<false>(wxListbook) impl
         ListbookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -545,7 +545,7 @@ impl<const FROM_CPP: bool> From<ListbookFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ListbookFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxListbook_CLASSINFO()) }
     }
 }

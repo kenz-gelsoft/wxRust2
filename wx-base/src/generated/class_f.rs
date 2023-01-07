@@ -3,13 +3,13 @@ use super::*;
 // wxFileName
 wxwidgets! {
     /// wxFileName encapsulates a file name.
-    /// - [`FileName`] represents a C++ `wxFileName` class instance which your code has ownership, [`FileNameFromCpp`]`<false>` represents one which don't own.
+    /// - [`FileName`] represents a C++ `wxFileName` class instance which your code has ownership, [`FileNameFromCpp`]`<true>` represents one which don't own.
     /// - Use [`FileName`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxFileName` class's documentation](https://docs.wxwidgets.org/3.2/classwx_file_name.html) for more details.
     #[doc(alias = "wxFileName")]
     #[doc(alias = "FileName")]
     class FileName
-        = FileNameFromCpp<true>(wxFileName) impl
+        = FileNameFromCpp<false>(wxFileName) impl
         FileNameMethods
 }
 impl<const FROM_CPP: bool> FileNameFromCpp<FROM_CPP> {
@@ -36,14 +36,14 @@ impl<const FROM_CPP: bool> FileNameFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for FileNameFromCpp<false> {
+impl Clone for FileNameFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for FileNameFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxFileName_delete(self.0) }
         }
     }

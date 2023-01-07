@@ -115,7 +115,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Returns a const reference to the list of the window's children.
     ///
     /// See [C++ `wxWindow::GetChildren()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#aba31a46e73a980313da20b6277eb8c93).
-    fn get_children(&self) -> WindowListFromCpp<false> {
+    fn get_children(&self) -> WindowListFromCpp<true> {
         unsafe { WindowListFromCpp::from_ptr(ffi::wxWindow_GetChildren1(self.as_ptr())) }
     }
     /// Removes a child window.
@@ -1641,7 +1641,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Get the associated tooltip or NULL if none.
     ///
     /// See [C++ `wxWindow::GetToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a5192577a8c6d35a73a1cde9acfe03dd4).
-    fn get_tool_tip(&self) -> Option<ToolTipFromCpp<false>> {
+    fn get_tool_tip(&self) -> Option<ToolTipFromCpp<true>> {
         unsafe { ToolTip::option_from(ffi::wxWindow_GetToolTip(self.as_ptr())) }
     }
     /// Get the text of the associated tooltip or empty string if none.
@@ -1831,7 +1831,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Gets the accelerator table for this window.
     ///
     /// See [C++ `wxWindow::GetAcceleratorTable()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a9cf3fd71ffab949cdf06f8f8e2646d56).
-    fn get_accelerator_table(&self) -> Option<AcceleratorTableFromCpp<false>> {
+    fn get_accelerator_table(&self) -> Option<AcceleratorTableFromCpp<true>> {
         unsafe { AcceleratorTable::option_from(ffi::wxWindow_GetAcceleratorTable(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetAccessible()
@@ -1866,7 +1866,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Returns the associated drop target, which may be NULL.
     ///
     /// See [C++ `wxWindow::GetDropTarget()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a9303a2de5ad692557b7db9fb3e651549).
-    fn get_drop_target(&self) -> Option<DropTargetFromCpp<false>> {
+    fn get_drop_target(&self) -> Option<DropTargetFromCpp<true>> {
         unsafe { DropTarget::option_from(ffi::wxWindow_GetDropTarget(self.as_ptr())) }
     }
     /// Associates a drop target with this window.
@@ -1890,13 +1890,13 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Returns the sizer of which this window is a member, if any, otherwise NULL.
     ///
     /// See [C++ `wxWindow::GetContainingSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#ad9e45e32ec75f3288f065d83263194a3).
-    fn get_containing_sizer(&self) -> Option<SizerFromCpp<false>> {
+    fn get_containing_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxWindow_GetContainingSizer(self.as_ptr())) }
     }
     /// Returns the sizer associated with the window by a previous call to SetSizer(), or NULL.
     ///
     /// See [C++ `wxWindow::GetSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#ae05f09350b273af1c47a82253538c5c4).
-    fn get_sizer(&self) -> Option<SizerFromCpp<false>> {
+    fn get_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxWindow_GetSizer(self.as_ptr())) }
     }
     /// Sets the window to have the given layout sizer.
@@ -1962,7 +1962,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Returns the caret() associated with the window.
     ///
     /// See [C++ `wxWindow::GetCaret()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a147ceedef6bd261d7a0ddf709f536233).
-    fn get_caret(&self) -> Option<CaretFromCpp<false>> {
+    fn get_caret(&self) -> Option<CaretFromCpp<true>> {
         unsafe { Caret::option_from(ffi::wxWindow_GetCaret(self.as_ptr())) }
     }
     // BLOCKED: fn GetCursor()
@@ -2286,13 +2286,13 @@ pub trait WizardMethods: DialogMethods {
     /// Returns the bitmap used for the wizard.
     ///
     /// See [C++ `wxWizard::GetBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html#a7183729eb9e8992298b944da87d7bdc5).
-    fn get_bitmap(&self) -> BitmapFromCpp<false> {
+    fn get_bitmap(&self) -> BitmapFromCpp<true> {
         unsafe { BitmapFromCpp::from_ptr(ffi::wxWizard_GetBitmap(self.as_ptr())) }
     }
     /// Returns the colour that should be used to fill the area not taken up by the wizard or page bitmap, if a non-zero bitmap placement flag has been set.
     ///
     /// See [C++ `wxWizard::GetBitmapBackgroundColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html#ac75615eb0b2808b3cb22e2ffdd661eef).
-    fn get_bitmap_background_colour(&self) -> ColourFromCpp<false> {
+    fn get_bitmap_background_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxWizard_GetBitmapBackgroundColour(self.as_ptr())) }
     }
     /// Returns the flags indicating how the wizard or page bitmap should be expanded and positioned to fit the page height.
@@ -2316,7 +2316,7 @@ pub trait WizardMethods: DialogMethods {
     /// Returns pointer to page area sizer.
     ///
     /// See [C++ `wxWizard::GetPageAreaSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html#a0af838517d05fc40293edfff6bfe93ce).
-    fn get_page_area_sizer(&self) -> Option<SizerFromCpp<false>> {
+    fn get_page_area_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxWizard_GetPageAreaSizer(self.as_ptr())) }
     }
     /// Returns the size available for the pages.

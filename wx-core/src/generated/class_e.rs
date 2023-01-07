@@ -3,13 +3,13 @@ use super::*;
 // wxEditableListBox
 wxwidgets! {
     /// An editable listbox is composite control that lets the user easily enter, delete and reorder a list of strings.
-    /// - [`EditableListBox`] represents a C++ `wxEditableListBox` class instance which your code has ownership, [`EditableListBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`EditableListBox`] represents a C++ `wxEditableListBox` class instance which your code has ownership, [`EditableListBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`EditableListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxEditableListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_editable_list_box.html) for more details.
     #[doc(alias = "wxEditableListBox")]
     #[doc(alias = "EditableListBox")]
     class EditableListBox
-        = EditableListBoxFromCpp<true>(wxEditableListBox) impl
+        = EditableListBoxFromCpp<false>(wxEditableListBox) impl
         EditableListBoxMethods,
         PanelMethods,
         WindowMethods,
@@ -81,7 +81,7 @@ impl<const FROM_CPP: bool> From<EditableListBoxFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for EditableListBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxEditableListBox_CLASSINFO()) }
     }
 }
@@ -89,13 +89,13 @@ impl<const FROM_CPP: bool> DynamicCast for EditableListBoxFromCpp<FROM_CPP> {
 // wxEraseEvent
 wxwidgets! {
     /// An erase event is sent when a window's background needs to be repainted.
-    /// - [`EraseEvent`] represents a C++ `wxEraseEvent` class instance which your code has ownership, [`EraseEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`EraseEvent`] represents a C++ `wxEraseEvent` class instance which your code has ownership, [`EraseEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`EraseEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxEraseEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_erase_event.html) for more details.
     #[doc(alias = "wxEraseEvent")]
     #[doc(alias = "EraseEvent")]
     class EraseEvent
-        = EraseEventFromCpp<true>(wxEraseEvent) impl
+        = EraseEventFromCpp<false>(wxEraseEvent) impl
         EraseEventMethods,
         EventMethods,
         ObjectMethods
@@ -117,7 +117,7 @@ impl<const FROM_CPP: bool> EraseEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for EraseEventFromCpp<false> {
+impl Clone for EraseEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -133,13 +133,13 @@ impl<const FROM_CPP: bool> From<EraseEventFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for EraseEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxEraseEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for EraseEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -148,13 +148,13 @@ impl<const FROM_CPP: bool> Drop for EraseEventFromCpp<FROM_CPP> {
 // wxEventBlocker
 wxwidgets! {
     /// This class is a special event handler which allows discarding any event (or a set of event types) directed to a specific window.
-    /// - [`EventBlocker`] represents a C++ `wxEventBlocker` class instance which your code has ownership, [`EventBlockerFromCpp`]`<false>` represents one which don't own.
+    /// - [`EventBlocker`] represents a C++ `wxEventBlocker` class instance which your code has ownership, [`EventBlockerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`EventBlocker`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxEventBlocker` class's documentation](https://docs.wxwidgets.org/3.2/classwx_event_blocker.html) for more details.
     #[doc(alias = "wxEventBlocker")]
     #[doc(alias = "EventBlocker")]
     class EventBlocker
-        = EventBlockerFromCpp<true>(wxEventBlocker) impl
+        = EventBlockerFromCpp<false>(wxEventBlocker) impl
         EventBlockerMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -181,7 +181,7 @@ impl<const FROM_CPP: bool> From<EventBlockerFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for EventBlockerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxEventBlocker_CLASSINFO()) }
     }
 }

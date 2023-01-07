@@ -8,7 +8,7 @@ pub trait ClassInfoMethods: WxRustMethods {
     /// Creates an object of the appropriate kind.
     ///
     /// See [C++ `wxClassInfo::CreateObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_class_info.html#a99df2fd7d0ec6b0f90790ffaeac872ca).
-    fn create_object(&self) -> Option<ObjectFromCpp<false>> {
+    fn create_object(&self) -> Option<ObjectFromCpp<true>> {
         unsafe { Object::option_from(ffi::wxClassInfo_CreateObject(self.as_ptr())) }
     }
     /// Returns the name of the first base class (NULL if none).
@@ -56,7 +56,7 @@ pub trait ClassInfoMethods: WxRustMethods {
     /// Finds the wxClassInfo object for a class with the given name.
     ///
     /// See [C++ `wxClassInfo::FindClass()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_class_info.html#a57553434bc28e74412b58d368702301d).
-    fn find_class(class_name: &str) -> Option<ClassInfoFromCpp<false>> {
+    fn find_class(class_name: &str) -> Option<ClassInfoFromCpp<true>> {
         unsafe {
             let class_name = WxString::from(class_name);
             let class_name = class_name.as_ptr();

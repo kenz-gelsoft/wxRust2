@@ -9,13 +9,13 @@ pub trait ObjectMethods: WxRustMethods {
     /// This virtual function is redefined for every class that requires run-time type information, when using the wxDECLARE_CLASS macro (or similar).
     ///
     /// See [C++ `wxObject::GetClassInfo()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_object.html#a9fd1bc8bc3a47c6e14e679a80e3cb8f4).
-    fn get_class_info(&self) -> Option<ClassInfoFromCpp<false>> {
+    fn get_class_info(&self) -> Option<ClassInfoFromCpp<true>> {
         unsafe { ClassInfo::option_from(ffi::wxObject_GetClassInfo(self.as_ptr())) }
     }
     /// Returns the wxObject::m_refData pointer, i.e. the data referenced by this object.
     ///
     /// See [C++ `wxObject::GetRefData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_object.html#a0e06d77b52ee4c44a31c7cb62c9a4b68).
-    fn get_ref_data(&self) -> Option<ObjectRefDataFromCpp<false>> {
+    fn get_ref_data(&self) -> Option<ObjectRefDataFromCpp<true>> {
         unsafe { ObjectRefData::option_from(ffi::wxObject_GetRefData(self.as_ptr())) }
     }
     /// Determines whether this class is a subclass of (or the same class as) the given class.

@@ -116,7 +116,7 @@ pub trait CalendarCtrlMethods: ControlMethods {
     /// Returns the attribute for the given date (should be in the range 1...31).
     ///
     /// See [C++ `wxCalendarCtrl::GetAttr()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#afa23290a3f6bbec4496578801e72c159).
-    fn get_attr(&self, day: usize) -> Option<CalendarDateAttrFromCpp<false>> {
+    fn get_attr(&self, day: usize) -> Option<CalendarDateAttrFromCpp<true>> {
         unsafe { CalendarDateAttr::option_from(ffi::wxCalendarCtrl_GetAttr(self.as_ptr(), day)) }
     }
     /// Gets the currently selected date.
@@ -128,37 +128,37 @@ pub trait CalendarCtrlMethods: ControlMethods {
     /// Gets the background colour of the header part of the calendar window.
     ///
     /// See [C++ `wxCalendarCtrl::GetHeaderColourBg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a3db6a6be0d2cec679acabd7e095779e1).
-    fn get_header_colour_bg(&self) -> ColourFromCpp<false> {
+    fn get_header_colour_bg(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourBg(self.as_ptr())) }
     }
     /// Gets the foreground colour of the header part of the calendar window.
     ///
     /// See [C++ `wxCalendarCtrl::GetHeaderColourFg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ace569b6138e8c37516f214b5492bfb03).
-    fn get_header_colour_fg(&self) -> ColourFromCpp<false> {
+    fn get_header_colour_fg(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourFg(self.as_ptr())) }
     }
     /// Gets the background highlight colour.
     ///
     /// See [C++ `wxCalendarCtrl::GetHighlightColourBg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a59a2dd56e4ffd96e1b9279cf965cf8af).
-    fn get_highlight_colour_bg(&self) -> ColourFromCpp<false> {
+    fn get_highlight_colour_bg(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourBg(self.as_ptr())) }
     }
     /// Gets the foreground highlight colour.
     ///
     /// See [C++ `wxCalendarCtrl::GetHighlightColourFg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ad69b653c2bc19eb17b95ad4e1bb8cdd2).
-    fn get_highlight_colour_fg(&self) -> ColourFromCpp<false> {
+    fn get_highlight_colour_fg(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourFg(self.as_ptr())) }
     }
     /// Return the background colour currently used for holiday highlighting.
     ///
     /// See [C++ `wxCalendarCtrl::GetHolidayColourBg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a5bfcd8b7c80b83693aec3a5584c18faa).
-    fn get_holiday_colour_bg(&self) -> ColourFromCpp<false> {
+    fn get_holiday_colour_bg(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourBg(self.as_ptr())) }
     }
     /// Return the foreground colour currently used for holiday highlighting.
     ///
     /// See [C++ `wxCalendarCtrl::GetHolidayColourFg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a24bb3a3f41f6a4e0059ea5a1cccb6eb8).
-    fn get_holiday_colour_fg(&self) -> ColourFromCpp<false> {
+    fn get_holiday_colour_fg(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourFg(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn HitTest()
@@ -241,7 +241,7 @@ pub trait CalendarDateAttrMethods: WxRustMethods {
     /// Returns the background colour set for the calendar date.
     ///
     /// See [C++ `wxCalendarDateAttr::GetBackgroundColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a2d01d011d63f439566338654aa94e6b7).
-    fn get_background_colour(&self) -> ColourFromCpp<false> {
+    fn get_background_colour(&self) -> ColourFromCpp<true> {
         unsafe {
             ColourFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetBackgroundColour(self.as_ptr()))
         }
@@ -250,19 +250,19 @@ pub trait CalendarDateAttrMethods: WxRustMethods {
     /// Returns the border colour set for the calendar date.
     ///
     /// See [C++ `wxCalendarDateAttr::GetBorderColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a5a6dc761f338621ef9aab76d35fbb941).
-    fn get_border_colour(&self) -> ColourFromCpp<false> {
+    fn get_border_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetBorderColour(self.as_ptr())) }
     }
     /// Returns the font set for the calendar date.
     ///
     /// See [C++ `wxCalendarDateAttr::GetFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#aae0094a81cf4d134b866532bdaa48e66).
-    fn get_font(&self) -> FontFromCpp<false> {
+    fn get_font(&self) -> FontFromCpp<true> {
         unsafe { FontFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetFont(self.as_ptr())) }
     }
     /// Returns the text colour set for the calendar date.
     ///
     /// See [C++ `wxCalendarDateAttr::GetTextColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a60a1c912c70d11e17fe79cb29a424477).
-    fn get_text_colour(&self) -> ColourFromCpp<false> {
+    fn get_text_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetTextColour(self.as_ptr())) }
     }
     /// Returns true if a non-default text background colour is set.
@@ -347,7 +347,7 @@ pub trait CalendarDateAttrMethods: WxRustMethods {
     /// Used (internally) by the generic wxCalendarCtrl::Mark().
     ///
     /// See [C++ `wxCalendarDateAttr::GetMark()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a49e21270d2613902f656c36113f516fd).
-    fn get_mark() -> CalendarDateAttrFromCpp<false> {
+    fn get_mark() -> CalendarDateAttrFromCpp<true> {
         unsafe { CalendarDateAttrFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetMark()) }
     }
     /// Set the attributes that will be used to Mark() days on the generic wxCalendarCtrl.
@@ -816,7 +816,7 @@ pub trait ClipboardMethods: ObjectMethods {
     /// Returns the global instance (wxTheClipboard) of the clipboard object.
     ///
     /// See [C++ `wxClipboard::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a6f3a1f27cd3de59bfafd538827bc89a8).
-    fn get() -> Option<ClipboardFromCpp<false>> {
+    fn get() -> Option<ClipboardFromCpp<true>> {
         unsafe { Clipboard::option_from(ffi::wxClipboard_Get()) }
     }
 }
@@ -1098,7 +1098,7 @@ pub trait ColourDataMethods: ObjectMethods {
     /// Gets the current colour associated with the colour dialog.
     ///
     /// See [C++ `wxColourData::GetColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a1e9b73d93d5e49627faa8ce926318606).
-    fn get_colour(&self) -> ColourFromCpp<false> {
+    fn get_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxColourData_GetColour(self.as_ptr())) }
     }
     /// Returns custom colours associated with the colour dialog.
@@ -1222,7 +1222,7 @@ pub trait ColourDialogMethods: DialogMethods {
     /// Returns the colour data associated with the colour dialog.
     ///
     /// See [C++ `wxColourDialog::GetColourData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html#a527d63fdb2b83eb9ee80d1c4b5da5c09).
-    fn get_colour_data(&self) -> ColourDataFromCpp<false> {
+    fn get_colour_data(&self) -> ColourDataFromCpp<true> {
         unsafe { ColourDataFromCpp::from_ptr(ffi::wxColourDialog_GetColourData(self.as_ptr())) }
     }
 }
@@ -1529,7 +1529,7 @@ pub trait ComboCtrlMethods: ControlMethods {
     /// Returns current popup interface that has been set with SetPopupControl().
     ///
     /// See [C++ `wxComboCtrl::GetPopupControl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ac3d072940f2c6c2c92e6fe629bf4c4a8).
-    fn get_popup_control(&self) -> Option<ComboPopupFromCpp<false>> {
+    fn get_popup_control(&self) -> Option<ComboPopupFromCpp<true>> {
         unsafe { ComboPopup::option_from(ffi::wxComboCtrl_GetPopupControl(self.as_ptr())) }
     }
     /// Returns popup window containing the popup control.
@@ -1548,7 +1548,7 @@ pub trait ComboCtrlMethods: ControlMethods {
     /// Returns area covered by the text field (includes everything except borders and the dropdown button).
     ///
     /// See [C++ `wxComboCtrl::GetTextRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ac25a4b9b325106dd5ec285ec2b368bdf).
-    fn get_text_rect(&self) -> RectFromCpp<false> {
+    fn get_text_rect(&self) -> RectFromCpp<true> {
         unsafe { RectFromCpp::from_ptr(ffi::wxComboCtrl_GetTextRect(self.as_ptr())) }
     }
     /// Dismisses the popup window.
@@ -1916,7 +1916,7 @@ pub trait CommandEventMethods: EventMethods {
     /// Returns client object pointer for a listbox or choice selection event (not valid for a deselection).
     ///
     /// See [C++ `wxCommandEvent::GetClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a48e7b34762b82cdc9d1b5d58d1e6a17f).
-    fn get_client_object(&self) -> Option<ClientDataFromCpp<false>> {
+    fn get_client_object(&self) -> Option<ClientDataFromCpp<true>> {
         unsafe { ClientData::option_from(ffi::wxCommandEvent_GetClientObject(self.as_ptr())) }
     }
     /// Returns extra information dependent on the event objects type.
@@ -2119,7 +2119,7 @@ pub trait CommandProcessorMethods: ObjectMethods {
     /// Returns the current command.
     ///
     /// See [C++ `wxCommandProcessor::GetCurrentCommand()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a026a00fa665813b2ae5ffb64d8d90b0e).
-    fn get_current_command(&self) -> Option<CommandFromCpp<false>> {
+    fn get_current_command(&self) -> Option<CommandFromCpp<true>> {
         unsafe { Command::option_from(ffi::wxCommandProcessor_GetCurrentCommand(self.as_ptr())) }
     }
     /// Returns the edit menu associated with the command processor.
@@ -2268,7 +2268,7 @@ pub trait ContextMenuEventMethods: CommandEventMethods {
     /// Returns the position in screen coordinates at which the menu should be shown.
     ///
     /// See [C++ `wxContextMenuEvent::GetPosition()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html#a6017c932b59f627bc62dbc2f2347f940).
-    fn get_position(&self) -> PointFromCpp<false> {
+    fn get_position(&self) -> PointFromCpp<true> {
         unsafe { PointFromCpp::from_ptr(ffi::wxContextMenuEvent_GetPosition(self.as_ptr())) }
     }
     /// Sets the position at which the menu should be shown.

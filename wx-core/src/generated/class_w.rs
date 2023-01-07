@@ -3,13 +3,13 @@ use super::*;
 // wxWindow
 wxwidgets! {
     /// wxWindow is the base class for all windows and represents any visible object on screen.
-    /// - [`Window`] represents a C++ `wxWindow` class instance which your code has ownership, [`WindowFromCpp`]`<false>` represents one which don't own.
+    /// - [`Window`] represents a C++ `wxWindow` class instance which your code has ownership, [`WindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Window`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window.html) for more details.
     #[doc(alias = "wxWindow")]
     #[doc(alias = "Window")]
     class Window
-        = WindowFromCpp<true>(wxWindow) impl
+        = WindowFromCpp<false>(wxWindow) impl
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -64,7 +64,7 @@ impl<const FROM_CPP: bool> From<WindowFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WindowFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWindow_CLASSINFO()) }
     }
 }
@@ -72,13 +72,13 @@ impl<const FROM_CPP: bool> DynamicCast for WindowFromCpp<FROM_CPP> {
 // wxWindowCreateEvent
 wxwidgets! {
     /// This event is sent just after the actual window associated with a wxWindow object has been created.
-    /// - [`WindowCreateEvent`] represents a C++ `wxWindowCreateEvent` class instance which your code has ownership, [`WindowCreateEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`WindowCreateEvent`] represents a C++ `wxWindowCreateEvent` class instance which your code has ownership, [`WindowCreateEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`WindowCreateEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWindowCreateEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window_create_event.html) for more details.
     #[doc(alias = "wxWindowCreateEvent")]
     #[doc(alias = "WindowCreateEvent")]
     class WindowCreateEvent
-        = WindowCreateEventFromCpp<true>(wxWindowCreateEvent) impl
+        = WindowCreateEventFromCpp<false>(wxWindowCreateEvent) impl
         WindowCreateEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -101,7 +101,7 @@ impl<const FROM_CPP: bool> WindowCreateEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for WindowCreateEventFromCpp<false> {
+impl Clone for WindowCreateEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -124,13 +124,13 @@ impl<const FROM_CPP: bool> From<WindowCreateEventFromCpp<FROM_CPP>> for ObjectFr
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WindowCreateEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWindowCreateEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for WindowCreateEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -139,13 +139,13 @@ impl<const FROM_CPP: bool> Drop for WindowCreateEventFromCpp<FROM_CPP> {
 // wxWindowDC
 wxwidgets! {
     /// A wxWindowDC must be constructed if an application wishes to paint on the whole area of a window (client and decorations).
-    /// - [`WindowDC`] represents a C++ `wxWindowDC` class instance which your code has ownership, [`WindowDCFromCpp`]`<false>` represents one which don't own.
+    /// - [`WindowDC`] represents a C++ `wxWindowDC` class instance which your code has ownership, [`WindowDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`WindowDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWindowDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window_d_c.html) for more details.
     #[doc(alias = "wxWindowDC")]
     #[doc(alias = "WindowDC")]
     class WindowDC
-        = WindowDCFromCpp<true>(wxWindowDC) impl
+        = WindowDCFromCpp<false>(wxWindowDC) impl
         WindowDCMethods,
         DCMethods,
         ObjectMethods
@@ -167,7 +167,7 @@ impl<const FROM_CPP: bool> WindowDCFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for WindowDCFromCpp<false> {
+impl Clone for WindowDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -183,13 +183,13 @@ impl<const FROM_CPP: bool> From<WindowDCFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WindowDCFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWindowDC_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for WindowDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -198,13 +198,13 @@ impl<const FROM_CPP: bool> Drop for WindowDCFromCpp<FROM_CPP> {
 // wxWindowDestroyEvent
 wxwidgets! {
     /// This event is sent as early as possible during the window destruction process.
-    /// - [`WindowDestroyEvent`] represents a C++ `wxWindowDestroyEvent` class instance which your code has ownership, [`WindowDestroyEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`WindowDestroyEvent`] represents a C++ `wxWindowDestroyEvent` class instance which your code has ownership, [`WindowDestroyEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`WindowDestroyEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWindowDestroyEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window_destroy_event.html) for more details.
     #[doc(alias = "wxWindowDestroyEvent")]
     #[doc(alias = "WindowDestroyEvent")]
     class WindowDestroyEvent
-        = WindowDestroyEventFromCpp<true>(wxWindowDestroyEvent) impl
+        = WindowDestroyEventFromCpp<false>(wxWindowDestroyEvent) impl
         WindowDestroyEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -227,7 +227,7 @@ impl<const FROM_CPP: bool> WindowDestroyEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for WindowDestroyEventFromCpp<false> {
+impl Clone for WindowDestroyEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -250,13 +250,13 @@ impl<const FROM_CPP: bool> From<WindowDestroyEventFromCpp<FROM_CPP>> for ObjectF
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WindowDestroyEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWindowDestroyEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for WindowDestroyEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -265,13 +265,13 @@ impl<const FROM_CPP: bool> Drop for WindowDestroyEventFromCpp<FROM_CPP> {
 // wxWindowDisabler
 wxwidgets! {
     /// This class disables all top level windows of the application (maybe with the exception of one of them) in its constructor and enables them back in its destructor.
-    /// - [`WindowDisabler`] represents a C++ `wxWindowDisabler` class instance which your code has ownership, [`WindowDisablerFromCpp`]`<false>` represents one which don't own.
+    /// - [`WindowDisabler`] represents a C++ `wxWindowDisabler` class instance which your code has ownership, [`WindowDisablerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`WindowDisabler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWindowDisabler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_window_disabler.html) for more details.
     #[doc(alias = "wxWindowDisabler")]
     #[doc(alias = "WindowDisabler")]
     class WindowDisabler
-        = WindowDisablerFromCpp<true>(wxWindowDisabler) impl
+        = WindowDisablerFromCpp<false>(wxWindowDisabler) impl
         WindowDisablerMethods
 }
 impl<const FROM_CPP: bool> WindowDisablerFromCpp<FROM_CPP> {
@@ -304,14 +304,14 @@ impl<const FROM_CPP: bool> WindowDisablerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for WindowDisablerFromCpp<false> {
+impl Clone for WindowDisablerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for WindowDisablerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxWindowDisabler_delete(self.0) }
         }
     }
@@ -320,13 +320,13 @@ impl<const FROM_CPP: bool> Drop for WindowDisablerFromCpp<FROM_CPP> {
 // wxWizard
 wxwidgets! {
     /// wxWizard is the central class for implementing 'wizard-like' dialogs.
-    /// - [`Wizard`] represents a C++ `wxWizard` class instance which your code has ownership, [`WizardFromCpp`]`<false>` represents one which don't own.
+    /// - [`Wizard`] represents a C++ `wxWizard` class instance which your code has ownership, [`WizardFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Wizard`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWizard` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html) for more details.
     #[doc(alias = "wxWizard")]
     #[doc(alias = "Wizard")]
     class Wizard
-        = WizardFromCpp<true>(wxWizard) impl
+        = WizardFromCpp<false>(wxWizard) impl
         WizardMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -405,7 +405,7 @@ impl<const FROM_CPP: bool> From<WizardFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WizardFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWizard_CLASSINFO()) }
     }
 }
@@ -413,13 +413,13 @@ impl<const FROM_CPP: bool> DynamicCast for WizardFromCpp<FROM_CPP> {
 // wxWizardEvent
 wxwidgets! {
     /// wxWizardEvent class represents an event generated by the wxWizard: this event is first sent to the page itself and, if not processed there, goes up the window hierarchy as usual.
-    /// - [`WizardEvent`] represents a C++ `wxWizardEvent` class instance which your code has ownership, [`WizardEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`WizardEvent`] represents a C++ `wxWizardEvent` class instance which your code has ownership, [`WizardEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`WizardEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWizardEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wizard_event.html) for more details.
     #[doc(alias = "wxWizardEvent")]
     #[doc(alias = "WizardEvent")]
     class WizardEvent
-        = WizardEventFromCpp<true>(wxWizardEvent) impl
+        = WizardEventFromCpp<false>(wxWizardEvent) impl
         WizardEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -432,7 +432,7 @@ impl<const FROM_CPP: bool> WizardEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for WizardEventFromCpp<false> {
+impl Clone for WizardEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -458,13 +458,13 @@ impl<const FROM_CPP: bool> From<WizardEventFromCpp<FROM_CPP>> for ObjectFromCpp<
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WizardEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWizardEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for WizardEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -473,13 +473,13 @@ impl<const FROM_CPP: bool> Drop for WizardEventFromCpp<FROM_CPP> {
 // wxWizardPage
 wxwidgets! {
     /// wxWizardPage is one of the screens in wxWizard: it must know what are the following and preceding pages (which may be NULL for the first/last page).
-    /// - [`WizardPage`] represents a C++ `wxWizardPage` class instance which your code has ownership, [`WizardPageFromCpp`]`<false>` represents one which don't own.
+    /// - [`WizardPage`] represents a C++ `wxWizardPage` class instance which your code has ownership, [`WizardPageFromCpp`]`<true>` represents one which don't own.
     /// - Use [`WizardPage`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWizardPage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wizard_page.html) for more details.
     #[doc(alias = "wxWizardPage")]
     #[doc(alias = "WizardPage")]
     class WizardPage
-        = WizardPageFromCpp<true>(wxWizardPage) impl
+        = WizardPageFromCpp<false>(wxWizardPage) impl
         WizardPageMethods,
         PanelMethods,
         WindowMethods,
@@ -519,7 +519,7 @@ impl<const FROM_CPP: bool> From<WizardPageFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WizardPageFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWizardPage_CLASSINFO()) }
     }
 }
@@ -527,13 +527,13 @@ impl<const FROM_CPP: bool> DynamicCast for WizardPageFromCpp<FROM_CPP> {
 // wxWizardPageSimple
 wxwidgets! {
     /// wxWizardPageSimple is the simplest possible wxWizardPage implementation: it just returns the pointers given to its constructor from wxWizardPage::GetNext() and wxWizardPage::GetPrev() functions.
-    /// - [`WizardPageSimple`] represents a C++ `wxWizardPageSimple` class instance which your code has ownership, [`WizardPageSimpleFromCpp`]`<false>` represents one which don't own.
+    /// - [`WizardPageSimple`] represents a C++ `wxWizardPageSimple` class instance which your code has ownership, [`WizardPageSimpleFromCpp`]`<true>` represents one which don't own.
     /// - Use [`WizardPageSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWizardPageSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wizard_page_simple.html) for more details.
     #[doc(alias = "wxWizardPageSimple")]
     #[doc(alias = "WizardPageSimple")]
     class WizardPageSimple
-        = WizardPageSimpleFromCpp<true>(wxWizardPageSimple) impl
+        = WizardPageSimpleFromCpp<false>(wxWizardPageSimple) impl
         WizardPageSimpleMethods,
         WizardPageMethods,
         PanelMethods,
@@ -614,7 +614,7 @@ impl<const FROM_CPP: bool> From<WizardPageSimpleFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WizardPageSimpleFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWizardPageSimple_CLASSINFO()) }
     }
 }
@@ -622,13 +622,13 @@ impl<const FROM_CPP: bool> DynamicCast for WizardPageSimpleFromCpp<FROM_CPP> {
 // wxWrapSizer
 wxwidgets! {
     /// A wrap sizer lays out its items in a single line, like a box sizer  as long as there is space available in that direction.
-    /// - [`WrapSizer`] represents a C++ `wxWrapSizer` class instance which your code has ownership, [`WrapSizerFromCpp`]`<false>` represents one which don't own.
+    /// - [`WrapSizer`] represents a C++ `wxWrapSizer` class instance which your code has ownership, [`WrapSizerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`WrapSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxWrapSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_wrap_sizer.html) for more details.
     #[doc(alias = "wxWrapSizer")]
     #[doc(alias = "WrapSizer")]
     class WrapSizer
-        = WrapSizerFromCpp<true>(wxWrapSizer) impl
+        = WrapSizerFromCpp<false>(wxWrapSizer) impl
         WrapSizerMethods,
         BoxSizerMethods,
         SizerMethods,
@@ -666,7 +666,7 @@ impl<const FROM_CPP: bool> From<WrapSizerFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for WrapSizerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxWrapSizer_CLASSINFO()) }
     }
 }

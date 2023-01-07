@@ -3,13 +3,13 @@ use super::*;
 // wxGBPosition
 wxwidgets! {
     /// This class represents the position of an item in a virtual grid of rows and columns managed by a wxGridBagSizer.
-    /// - [`GBPosition`] represents a C++ `wxGBPosition` class instance which your code has ownership, [`GBPositionFromCpp`]`<false>` represents one which don't own.
+    /// - [`GBPosition`] represents a C++ `wxGBPosition` class instance which your code has ownership, [`GBPositionFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GBPosition`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGBPosition` class's documentation](https://docs.wxwidgets.org/3.2/classwx_g_b_position.html) for more details.
     #[doc(alias = "wxGBPosition")]
     #[doc(alias = "GBPosition")]
     class GBPosition
-        = GBPositionFromCpp<true>(wxGBPosition) impl
+        = GBPositionFromCpp<false>(wxGBPosition) impl
         GBPositionMethods
 }
 impl<const FROM_CPP: bool> GBPositionFromCpp<FROM_CPP> {
@@ -29,14 +29,14 @@ impl<const FROM_CPP: bool> GBPositionFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GBPositionFromCpp<false> {
+impl Clone for GBPositionFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for GBPositionFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxGBPosition_delete(self.0) }
         }
     }
@@ -45,13 +45,13 @@ impl<const FROM_CPP: bool> Drop for GBPositionFromCpp<FROM_CPP> {
 // wxGBSizerItem
 wxwidgets! {
     /// The wxGBSizerItem class is used by the wxGridBagSizer for tracking the items in the sizer.
-    /// - [`GBSizerItem`] represents a C++ `wxGBSizerItem` class instance which your code has ownership, [`GBSizerItemFromCpp`]`<false>` represents one which don't own.
+    /// - [`GBSizerItem`] represents a C++ `wxGBSizerItem` class instance which your code has ownership, [`GBSizerItemFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GBSizerItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGBSizerItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_g_b_sizer_item.html) for more details.
     #[doc(alias = "wxGBSizerItem")]
     #[doc(alias = "GBSizerItem")]
     class GBSizerItem
-        = GBSizerItemFromCpp<true>(wxGBSizerItem) impl
+        = GBSizerItemFromCpp<false>(wxGBSizerItem) impl
         GBSizerItemMethods,
         SizerItemMethods,
         ObjectMethods
@@ -149,7 +149,7 @@ impl<const FROM_CPP: bool> GBSizerItemFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GBSizerItemFromCpp<false> {
+impl Clone for GBSizerItemFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -165,13 +165,13 @@ impl<const FROM_CPP: bool> From<GBSizerItemFromCpp<FROM_CPP>> for ObjectFromCpp<
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GBSizerItemFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGBSizerItem_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GBSizerItemFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -180,13 +180,13 @@ impl<const FROM_CPP: bool> Drop for GBSizerItemFromCpp<FROM_CPP> {
 // wxGBSpan
 wxwidgets! {
     /// This class is used to hold the row and column spanning attributes of items in a wxGridBagSizer.
-    /// - [`GBSpan`] represents a C++ `wxGBSpan` class instance which your code has ownership, [`GBSpanFromCpp`]`<false>` represents one which don't own.
+    /// - [`GBSpan`] represents a C++ `wxGBSpan` class instance which your code has ownership, [`GBSpanFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GBSpan`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGBSpan` class's documentation](https://docs.wxwidgets.org/3.2/classwx_g_b_span.html) for more details.
     #[doc(alias = "wxGBSpan")]
     #[doc(alias = "GBSpan")]
     class GBSpan
-        = GBSpanFromCpp<true>(wxGBSpan) impl
+        = GBSpanFromCpp<false>(wxGBSpan) impl
         GBSpanMethods
 }
 impl<const FROM_CPP: bool> GBSpanFromCpp<FROM_CPP> {
@@ -206,14 +206,14 @@ impl<const FROM_CPP: bool> GBSpanFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GBSpanFromCpp<false> {
+impl Clone for GBSpanFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for GBSpanFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxGBSpan_delete(self.0) }
         }
     }
@@ -222,13 +222,13 @@ impl<const FROM_CPP: bool> Drop for GBSpanFromCpp<FROM_CPP> {
 // wxGCDC
 wxwidgets! {
     /// wxGCDC is a device context that draws on a wxGraphicsContext.
-    /// - [`GCDC`] represents a C++ `wxGCDC` class instance which your code has ownership, [`GCDCFromCpp`]`<false>` represents one which don't own.
+    /// - [`GCDC`] represents a C++ `wxGCDC` class instance which your code has ownership, [`GCDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GCDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGCDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_g_c_d_c.html) for more details.
     #[doc(alias = "wxGCDC")]
     #[doc(alias = "GCDC")]
     class GCDC
-        = GCDCFromCpp<true>(wxGCDC) impl
+        = GCDCFromCpp<false>(wxGCDC) impl
         GCDCMethods,
         DCMethods,
         ObjectMethods
@@ -282,7 +282,7 @@ impl<const FROM_CPP: bool> GCDCFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GCDCFromCpp<false> {
+impl Clone for GCDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -298,13 +298,13 @@ impl<const FROM_CPP: bool> From<GCDCFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CP
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GCDCFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGCDC_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GCDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -313,13 +313,13 @@ impl<const FROM_CPP: bool> Drop for GCDCFromCpp<FROM_CPP> {
 // wxGDIObject
 wxwidgets! {
     /// This class allows platforms to implement functionality to optimise GDI objects, such as wxPen, wxBrush and wxFont.
-    /// - [`GDIObject`] represents a C++ `wxGDIObject` class instance which your code has ownership, [`GDIObjectFromCpp`]`<false>` represents one which don't own.
+    /// - [`GDIObject`] represents a C++ `wxGDIObject` class instance which your code has ownership, [`GDIObjectFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GDIObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGDIObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_g_d_i_object.html) for more details.
     #[doc(alias = "wxGDIObject")]
     #[doc(alias = "GDIObject")]
     class GDIObject
-        = GDIObjectFromCpp<true>(wxGDIObject) impl
+        = GDIObjectFromCpp<false>(wxGDIObject) impl
         GDIObjectMethods,
         ObjectMethods
 }
@@ -329,7 +329,7 @@ impl<const FROM_CPP: bool> GDIObjectFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GDIObjectFromCpp<false> {
+impl Clone for GDIObjectFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -340,13 +340,13 @@ impl<const FROM_CPP: bool> From<GDIObjectFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GDIObjectFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGDIObject_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GDIObjectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -355,13 +355,13 @@ impl<const FROM_CPP: bool> Drop for GDIObjectFromCpp<FROM_CPP> {
 // wxGIFHandler
 wxwidgets! {
     /// This is the image handler for the GIF format.
-    /// - [`GIFHandler`] represents a C++ `wxGIFHandler` class instance which your code has ownership, [`GIFHandlerFromCpp`]`<false>` represents one which don't own.
+    /// - [`GIFHandler`] represents a C++ `wxGIFHandler` class instance which your code has ownership, [`GIFHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GIFHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGIFHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_g_i_f_handler.html) for more details.
     #[doc(alias = "wxGIFHandler")]
     #[doc(alias = "GIFHandler")]
     class GIFHandler
-        = GIFHandlerFromCpp<true>(wxGIFHandler) impl
+        = GIFHandlerFromCpp<false>(wxGIFHandler) impl
         GIFHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -377,7 +377,7 @@ impl<const FROM_CPP: bool> GIFHandlerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GIFHandlerFromCpp<false> {
+impl Clone for GIFHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -393,13 +393,13 @@ impl<const FROM_CPP: bool> From<GIFHandlerFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GIFHandlerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGIFHandler_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GIFHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -408,13 +408,13 @@ impl<const FROM_CPP: bool> Drop for GIFHandlerFromCpp<FROM_CPP> {
 // wxGauge
 wxwidgets! {
     /// A gauge is a horizontal or vertical bar which shows a quantity (often time).
-    /// - [`Gauge`] represents a C++ `wxGauge` class instance which your code has ownership, [`GaugeFromCpp`]`<false>` represents one which don't own.
+    /// - [`Gauge`] represents a C++ `wxGauge` class instance which your code has ownership, [`GaugeFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Gauge`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGauge` class's documentation](https://docs.wxwidgets.org/3.2/classwx_gauge.html) for more details.
     #[doc(alias = "wxGauge")]
     #[doc(alias = "Gauge")]
     class Gauge
-        = GaugeFromCpp<true>(wxGauge) impl
+        = GaugeFromCpp<false>(wxGauge) impl
         GaugeMethods,
         ControlMethods,
         WindowMethods,
@@ -486,7 +486,7 @@ impl<const FROM_CPP: bool> From<GaugeFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_C
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GaugeFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGauge_CLASSINFO()) }
     }
 }
@@ -494,13 +494,13 @@ impl<const FROM_CPP: bool> DynamicCast for GaugeFromCpp<FROM_CPP> {
 // wxGenericAboutDialog
 wxwidgets! {
     /// This class defines a customizable About dialog.
-    /// - [`GenericAboutDialog`] represents a C++ `wxGenericAboutDialog` class instance which your code has ownership, [`GenericAboutDialogFromCpp`]`<false>` represents one which don't own.
+    /// - [`GenericAboutDialog`] represents a C++ `wxGenericAboutDialog` class instance which your code has ownership, [`GenericAboutDialogFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GenericAboutDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGenericAboutDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_generic_about_dialog.html) for more details.
     #[doc(alias = "wxGenericAboutDialog")]
     #[doc(alias = "GenericAboutDialog")]
     class GenericAboutDialog
-        = GenericAboutDialogFromCpp<true>(wxGenericAboutDialog) impl
+        = GenericAboutDialogFromCpp<false>(wxGenericAboutDialog) impl
         GenericAboutDialogMethods
 }
 impl<const FROM_CPP: bool> GenericAboutDialogFromCpp<FROM_CPP> {
@@ -530,14 +530,14 @@ impl<const FROM_CPP: bool> GenericAboutDialogFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GenericAboutDialogFromCpp<false> {
+impl Clone for GenericAboutDialogFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for GenericAboutDialogFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxGenericAboutDialog_delete(self.0) }
         }
     }
@@ -546,13 +546,13 @@ impl<const FROM_CPP: bool> Drop for GenericAboutDialogFromCpp<FROM_CPP> {
 // wxGenericDirCtrl
 wxwidgets! {
     /// This control can be used to place a directory listing (with optional files) on an arbitrary window.
-    /// - [`GenericDirCtrl`] represents a C++ `wxGenericDirCtrl` class instance which your code has ownership, [`GenericDirCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`GenericDirCtrl`] represents a C++ `wxGenericDirCtrl` class instance which your code has ownership, [`GenericDirCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GenericDirCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGenericDirCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_generic_dir_ctrl.html) for more details.
     #[doc(alias = "wxGenericDirCtrl")]
     #[doc(alias = "GenericDirCtrl")]
     class GenericDirCtrl
-        = GenericDirCtrlFromCpp<true>(wxGenericDirCtrl) impl
+        = GenericDirCtrlFromCpp<false>(wxGenericDirCtrl) impl
         GenericDirCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -636,7 +636,7 @@ impl<const FROM_CPP: bool> From<GenericDirCtrlFromCpp<FROM_CPP>> for ObjectFromC
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GenericDirCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGenericDirCtrl_CLASSINFO()) }
     }
 }
@@ -644,13 +644,13 @@ impl<const FROM_CPP: bool> DynamicCast for GenericDirCtrlFromCpp<FROM_CPP> {
 // wxGenericProgressDialog
 wxwidgets! {
     /// This class represents a dialog that shows a short message and a progress bar.
-    /// - [`GenericProgressDialog`] represents a C++ `wxGenericProgressDialog` class instance which your code has ownership, [`GenericProgressDialogFromCpp`]`<false>` represents one which don't own.
+    /// - [`GenericProgressDialog`] represents a C++ `wxGenericProgressDialog` class instance which your code has ownership, [`GenericProgressDialogFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GenericProgressDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGenericProgressDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_generic_progress_dialog.html) for more details.
     #[doc(alias = "wxGenericProgressDialog")]
     #[doc(alias = "GenericProgressDialog")]
     class GenericProgressDialog
-        = GenericProgressDialogFromCpp<true>(wxGenericProgressDialog) impl
+        = GenericProgressDialogFromCpp<false>(wxGenericProgressDialog) impl
         GenericProgressDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -736,7 +736,7 @@ impl<const FROM_CPP: bool> From<GenericProgressDialogFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GenericProgressDialogFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGenericProgressDialog_CLASSINFO()) }
     }
 }
@@ -744,13 +744,13 @@ impl<const FROM_CPP: bool> DynamicCast for GenericProgressDialogFromCpp<FROM_CPP
 // wxGenericValidator
 wxwidgets! {
     /// wxGenericValidator performs data transfer (but not validation or filtering) for many type of controls.
-    /// - [`GenericValidator`] represents a C++ `wxGenericValidator` class instance which your code has ownership, [`GenericValidatorFromCpp`]`<false>` represents one which don't own.
+    /// - [`GenericValidator`] represents a C++ `wxGenericValidator` class instance which your code has ownership, [`GenericValidatorFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GenericValidator`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGenericValidator` class's documentation](https://docs.wxwidgets.org/3.2/classwx_generic_validator.html) for more details.
     #[doc(alias = "wxGenericValidator")]
     #[doc(alias = "GenericValidator")]
     class GenericValidator
-        = GenericValidatorFromCpp<true>(wxGenericValidator) impl
+        = GenericValidatorFromCpp<false>(wxGenericValidator) impl
         GenericValidatorMethods,
         ValidatorMethods,
         EvtHandlerMethods,
@@ -865,7 +865,7 @@ impl<const FROM_CPP: bool> From<GenericValidatorFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GenericValidatorFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGenericValidator_CLASSINFO()) }
     }
 }
@@ -873,13 +873,13 @@ impl<const FROM_CPP: bool> DynamicCast for GenericValidatorFromCpp<FROM_CPP> {
 // wxGraphicsBrush
 wxwidgets! {
     /// A wxGraphicsBrush is a native representation of a brush.
-    /// - [`GraphicsBrush`] represents a C++ `wxGraphicsBrush` class instance which your code has ownership, [`GraphicsBrushFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsBrush`] represents a C++ `wxGraphicsBrush` class instance which your code has ownership, [`GraphicsBrushFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsBrush`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsBrush` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_brush.html) for more details.
     #[doc(alias = "wxGraphicsBrush")]
     #[doc(alias = "GraphicsBrush")]
     class GraphicsBrush
-        = GraphicsBrushFromCpp<true>(wxGraphicsBrush) impl
+        = GraphicsBrushFromCpp<false>(wxGraphicsBrush) impl
         GraphicsBrushMethods,
         GraphicsObjectMethods,
         ObjectMethods
@@ -889,7 +889,7 @@ impl<const FROM_CPP: bool> GraphicsBrushFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsBrushFromCpp<false> {
+impl Clone for GraphicsBrushFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -907,13 +907,13 @@ impl<const FROM_CPP: bool> From<GraphicsBrushFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GraphicsBrushFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGraphicsBrush_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsBrushFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -922,13 +922,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsBrushFromCpp<FROM_CPP> {
 // wxGraphicsContext
 wxwidgets! {
     /// A wxGraphicsContext instance is the object that is drawn upon.
-    /// - [`GraphicsContext`] represents a C++ `wxGraphicsContext` class instance which your code has ownership, [`GraphicsContextFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsContext`] represents a C++ `wxGraphicsContext` class instance which your code has ownership, [`GraphicsContextFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsContext`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsContext` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html) for more details.
     #[doc(alias = "wxGraphicsContext")]
     #[doc(alias = "GraphicsContext")]
     class GraphicsContext
-        = GraphicsContextFromCpp<true>(wxGraphicsContext) impl
+        = GraphicsContextFromCpp<false>(wxGraphicsContext) impl
         GraphicsContextMethods,
         GraphicsObjectMethods,
         ObjectMethods
@@ -938,7 +938,7 @@ impl<const FROM_CPP: bool> GraphicsContextFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsContextFromCpp<false> {
+impl Clone for GraphicsContextFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -956,13 +956,13 @@ impl<const FROM_CPP: bool> From<GraphicsContextFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GraphicsContextFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGraphicsContext_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsContextFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -971,13 +971,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsContextFromCpp<FROM_CPP> {
 // wxGraphicsFont
 wxwidgets! {
     /// A wxGraphicsFont is a native representation of a font.
-    /// - [`GraphicsFont`] represents a C++ `wxGraphicsFont` class instance which your code has ownership, [`GraphicsFontFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsFont`] represents a C++ `wxGraphicsFont` class instance which your code has ownership, [`GraphicsFontFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsFont`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsFont` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_font.html) for more details.
     #[doc(alias = "wxGraphicsFont")]
     #[doc(alias = "GraphicsFont")]
     class GraphicsFont
-        = GraphicsFontFromCpp<true>(wxGraphicsFont) impl
+        = GraphicsFontFromCpp<false>(wxGraphicsFont) impl
         GraphicsFontMethods,
         GraphicsObjectMethods,
         ObjectMethods
@@ -987,7 +987,7 @@ impl<const FROM_CPP: bool> GraphicsFontFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsFontFromCpp<false> {
+impl Clone for GraphicsFontFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1003,13 +1003,13 @@ impl<const FROM_CPP: bool> From<GraphicsFontFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GraphicsFontFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGraphicsFont_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsFontFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1018,13 +1018,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsFontFromCpp<FROM_CPP> {
 // wxGraphicsGradientStop
 wxwidgets! {
     /// Represents a single gradient stop in a collection of gradient stops as represented by wxGraphicsGradientStops.
-    /// - [`GraphicsGradientStop`] represents a C++ `wxGraphicsGradientStop` class instance which your code has ownership, [`GraphicsGradientStopFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsGradientStop`] represents a C++ `wxGraphicsGradientStop` class instance which your code has ownership, [`GraphicsGradientStopFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsGradientStop`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsGradientStop` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stop.html) for more details.
     #[doc(alias = "wxGraphicsGradientStop")]
     #[doc(alias = "GraphicsGradientStop")]
     class GraphicsGradientStop
-        = GraphicsGradientStopFromCpp<true>(wxGraphicsGradientStop) impl
+        = GraphicsGradientStopFromCpp<false>(wxGraphicsGradientStop) impl
         GraphicsGradientStopMethods
 }
 impl<const FROM_CPP: bool> GraphicsGradientStopFromCpp<FROM_CPP> {
@@ -1033,14 +1033,14 @@ impl<const FROM_CPP: bool> GraphicsGradientStopFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsGradientStopFromCpp<false> {
+impl Clone for GraphicsGradientStopFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsGradientStopFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxGraphicsGradientStop_delete(self.0) }
         }
     }
@@ -1049,13 +1049,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsGradientStopFromCpp<FROM_CPP> {
 // wxGraphicsGradientStops
 wxwidgets! {
     /// Represents a collection of wxGraphicGradientStop values for use with CreateLinearGradientBrush and CreateRadialGradientBrush.
-    /// - [`GraphicsGradientStops`] represents a C++ `wxGraphicsGradientStops` class instance which your code has ownership, [`GraphicsGradientStopsFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsGradientStops`] represents a C++ `wxGraphicsGradientStops` class instance which your code has ownership, [`GraphicsGradientStopsFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsGradientStops`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsGradientStops` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stops.html) for more details.
     #[doc(alias = "wxGraphicsGradientStops")]
     #[doc(alias = "GraphicsGradientStops")]
     class GraphicsGradientStops
-        = GraphicsGradientStopsFromCpp<true>(wxGraphicsGradientStops) impl
+        = GraphicsGradientStopsFromCpp<false>(wxGraphicsGradientStops) impl
         GraphicsGradientStopsMethods
 }
 impl<const FROM_CPP: bool> GraphicsGradientStopsFromCpp<FROM_CPP> {
@@ -1064,14 +1064,14 @@ impl<const FROM_CPP: bool> GraphicsGradientStopsFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsGradientStopsFromCpp<false> {
+impl Clone for GraphicsGradientStopsFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsGradientStopsFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxGraphicsGradientStops_delete(self.0) }
         }
     }
@@ -1080,13 +1080,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsGradientStopsFromCpp<FROM_CPP> {
 // wxGraphicsMatrix
 wxwidgets! {
     /// A wxGraphicsMatrix is a native representation of an affine matrix.
-    /// - [`GraphicsMatrix`] represents a C++ `wxGraphicsMatrix` class instance which your code has ownership, [`GraphicsMatrixFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsMatrix`] represents a C++ `wxGraphicsMatrix` class instance which your code has ownership, [`GraphicsMatrixFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsMatrix`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsMatrix` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_matrix.html) for more details.
     #[doc(alias = "wxGraphicsMatrix")]
     #[doc(alias = "GraphicsMatrix")]
     class GraphicsMatrix
-        = GraphicsMatrixFromCpp<true>(wxGraphicsMatrix) impl
+        = GraphicsMatrixFromCpp<false>(wxGraphicsMatrix) impl
         GraphicsMatrixMethods,
         GraphicsObjectMethods,
         ObjectMethods
@@ -1096,7 +1096,7 @@ impl<const FROM_CPP: bool> GraphicsMatrixFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsMatrixFromCpp<false> {
+impl Clone for GraphicsMatrixFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1114,13 +1114,13 @@ impl<const FROM_CPP: bool> From<GraphicsMatrixFromCpp<FROM_CPP>> for ObjectFromC
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GraphicsMatrixFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGraphicsMatrix_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsMatrixFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1129,13 +1129,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsMatrixFromCpp<FROM_CPP> {
 // wxGraphicsObject
 wxwidgets! {
     /// This class is the superclass of native graphics objects like pens etc.
-    /// - [`GraphicsObject`] represents a C++ `wxGraphicsObject` class instance which your code has ownership, [`GraphicsObjectFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsObject`] represents a C++ `wxGraphicsObject` class instance which your code has ownership, [`GraphicsObjectFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_object.html) for more details.
     #[doc(alias = "wxGraphicsObject")]
     #[doc(alias = "GraphicsObject")]
     class GraphicsObject
-        = GraphicsObjectFromCpp<true>(wxGraphicsObject) impl
+        = GraphicsObjectFromCpp<false>(wxGraphicsObject) impl
         GraphicsObjectMethods,
         ObjectMethods
 }
@@ -1144,7 +1144,7 @@ impl<const FROM_CPP: bool> GraphicsObjectFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsObjectFromCpp<false> {
+impl Clone for GraphicsObjectFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1155,13 +1155,13 @@ impl<const FROM_CPP: bool> From<GraphicsObjectFromCpp<FROM_CPP>> for ObjectFromC
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GraphicsObjectFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGraphicsObject_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsObjectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1170,13 +1170,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsObjectFromCpp<FROM_CPP> {
 // wxGraphicsPath
 wxwidgets! {
     /// A wxGraphicsPath is a native representation of a geometric path.
-    /// - [`GraphicsPath`] represents a C++ `wxGraphicsPath` class instance which your code has ownership, [`GraphicsPathFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsPath`] represents a C++ `wxGraphicsPath` class instance which your code has ownership, [`GraphicsPathFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsPath`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsPath` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_path.html) for more details.
     #[doc(alias = "wxGraphicsPath")]
     #[doc(alias = "GraphicsPath")]
     class GraphicsPath
-        = GraphicsPathFromCpp<true>(wxGraphicsPath) impl
+        = GraphicsPathFromCpp<false>(wxGraphicsPath) impl
         GraphicsPathMethods,
         GraphicsObjectMethods,
         ObjectMethods
@@ -1186,7 +1186,7 @@ impl<const FROM_CPP: bool> GraphicsPathFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsPathFromCpp<false> {
+impl Clone for GraphicsPathFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1202,13 +1202,13 @@ impl<const FROM_CPP: bool> From<GraphicsPathFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GraphicsPathFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGraphicsPath_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsPathFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1217,13 +1217,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsPathFromCpp<FROM_CPP> {
 // wxGraphicsPen
 wxwidgets! {
     /// A wxGraphicsPen is a native representation of a pen.
-    /// - [`GraphicsPen`] represents a C++ `wxGraphicsPen` class instance which your code has ownership, [`GraphicsPenFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsPen`] represents a C++ `wxGraphicsPen` class instance which your code has ownership, [`GraphicsPenFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsPen`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsPen` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_pen.html) for more details.
     #[doc(alias = "wxGraphicsPen")]
     #[doc(alias = "GraphicsPen")]
     class GraphicsPen
-        = GraphicsPenFromCpp<true>(wxGraphicsPen) impl
+        = GraphicsPenFromCpp<false>(wxGraphicsPen) impl
         GraphicsPenMethods,
         GraphicsObjectMethods,
         ObjectMethods
@@ -1233,7 +1233,7 @@ impl<const FROM_CPP: bool> GraphicsPenFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsPenFromCpp<false> {
+impl Clone for GraphicsPenFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1249,13 +1249,13 @@ impl<const FROM_CPP: bool> From<GraphicsPenFromCpp<FROM_CPP>> for ObjectFromCpp<
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GraphicsPenFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGraphicsPen_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsPenFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1264,13 +1264,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsPenFromCpp<FROM_CPP> {
 // wxGraphicsRenderer
 wxwidgets! {
     /// A wxGraphicsRenderer is the instance corresponding to the rendering engine used.
-    /// - [`GraphicsRenderer`] represents a C++ `wxGraphicsRenderer` class instance which your code has ownership, [`GraphicsRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`GraphicsRenderer`] represents a C++ `wxGraphicsRenderer` class instance which your code has ownership, [`GraphicsRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GraphicsRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGraphicsRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html) for more details.
     #[doc(alias = "wxGraphicsRenderer")]
     #[doc(alias = "GraphicsRenderer")]
     class GraphicsRenderer
-        = GraphicsRendererFromCpp<true>(wxGraphicsRenderer) impl
+        = GraphicsRendererFromCpp<false>(wxGraphicsRenderer) impl
         GraphicsRendererMethods,
         ObjectMethods
 }
@@ -1279,7 +1279,7 @@ impl<const FROM_CPP: bool> GraphicsRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GraphicsRendererFromCpp<false> {
+impl Clone for GraphicsRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1290,13 +1290,13 @@ impl<const FROM_CPP: bool> From<GraphicsRendererFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GraphicsRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGraphicsRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GraphicsRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1305,13 +1305,13 @@ impl<const FROM_CPP: bool> Drop for GraphicsRendererFromCpp<FROM_CPP> {
 // wxGridBagSizer
 wxwidgets! {
     /// A wxSizer that can lay out items in a virtual grid like a wxFlexGridSizer but in this case explicit positioning of the items is allowed using wxGBPosition, and items can optionally span more than one row and/or column using wxGBSpan.
-    /// - [`GridBagSizer`] represents a C++ `wxGridBagSizer` class instance which your code has ownership, [`GridBagSizerFromCpp`]`<false>` represents one which don't own.
+    /// - [`GridBagSizer`] represents a C++ `wxGridBagSizer` class instance which your code has ownership, [`GridBagSizerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GridBagSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGridBagSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_grid_bag_sizer.html) for more details.
     #[doc(alias = "wxGridBagSizer")]
     #[doc(alias = "GridBagSizer")]
     class GridBagSizer
-        = GridBagSizerFromCpp<true>(wxGridBagSizer) impl
+        = GridBagSizerFromCpp<false>(wxGridBagSizer) impl
         GridBagSizerMethods,
         FlexGridSizerMethods,
         GridSizerMethods,
@@ -1355,7 +1355,7 @@ impl<const FROM_CPP: bool> From<GridBagSizerFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GridBagSizerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGridBagSizer_CLASSINFO()) }
     }
 }
@@ -1363,13 +1363,13 @@ impl<const FROM_CPP: bool> DynamicCast for GridBagSizerFromCpp<FROM_CPP> {
 // wxGridEditorCreatedEvent
 wxwidgets! {
     ///
-    /// - [`GridEditorCreatedEvent`] represents a C++ `wxGridEditorCreatedEvent` class instance which your code has ownership, [`GridEditorCreatedEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`GridEditorCreatedEvent`] represents a C++ `wxGridEditorCreatedEvent` class instance which your code has ownership, [`GridEditorCreatedEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GridEditorCreatedEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGridEditorCreatedEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_grid_editor_created_event.html) for more details.
     #[doc(alias = "wxGridEditorCreatedEvent")]
     #[doc(alias = "GridEditorCreatedEvent")]
     class GridEditorCreatedEvent
-        = GridEditorCreatedEventFromCpp<true>(wxGridEditorCreatedEvent) impl
+        = GridEditorCreatedEventFromCpp<false>(wxGridEditorCreatedEvent) impl
         GridEditorCreatedEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -1387,7 +1387,7 @@ impl<const FROM_CPP: bool> GridEditorCreatedEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GridEditorCreatedEventFromCpp<false> {
+impl Clone for GridEditorCreatedEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1414,13 +1414,13 @@ impl<const FROM_CPP: bool> From<GridEditorCreatedEventFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GridEditorCreatedEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGridEditorCreatedEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GridEditorCreatedEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1429,13 +1429,13 @@ impl<const FROM_CPP: bool> Drop for GridEditorCreatedEventFromCpp<FROM_CPP> {
 // wxGridEvent
 wxwidgets! {
     /// This event class contains information about various grid events.
-    /// - [`GridEvent`] represents a C++ `wxGridEvent` class instance which your code has ownership, [`GridEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`GridEvent`] represents a C++ `wxGridEvent` class instance which your code has ownership, [`GridEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GridEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGridEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_grid_event.html) for more details.
     #[doc(alias = "wxGridEvent")]
     #[doc(alias = "GridEvent")]
     class GridEvent
-        = GridEventFromCpp<true>(wxGridEvent) impl
+        = GridEventFromCpp<false>(wxGridEvent) impl
         GridEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -1454,7 +1454,7 @@ impl<const FROM_CPP: bool> GridEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GridEventFromCpp<false> {
+impl Clone for GridEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1480,13 +1480,13 @@ impl<const FROM_CPP: bool> From<GridEventFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GridEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGridEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GridEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1495,13 +1495,13 @@ impl<const FROM_CPP: bool> Drop for GridEventFromCpp<FROM_CPP> {
 // wxGridRangeSelectEvent
 wxwidgets! {
     /// Events of this class notify about a range of cells being selected.
-    /// - [`GridRangeSelectEvent`] represents a C++ `wxGridRangeSelectEvent` class instance which your code has ownership, [`GridRangeSelectEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`GridRangeSelectEvent`] represents a C++ `wxGridRangeSelectEvent` class instance which your code has ownership, [`GridRangeSelectEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GridRangeSelectEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGridRangeSelectEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_grid_range_select_event.html) for more details.
     #[doc(alias = "wxGridRangeSelectEvent")]
     #[doc(alias = "GridRangeSelectEvent")]
     class GridRangeSelectEvent
-        = GridRangeSelectEventFromCpp<true>(wxGridRangeSelectEvent) impl
+        = GridRangeSelectEventFromCpp<false>(wxGridRangeSelectEvent) impl
         GridRangeSelectEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -1520,7 +1520,7 @@ impl<const FROM_CPP: bool> GridRangeSelectEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GridRangeSelectEventFromCpp<false> {
+impl Clone for GridRangeSelectEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1550,13 +1550,13 @@ impl<const FROM_CPP: bool> From<GridRangeSelectEventFromCpp<FROM_CPP>> for Objec
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GridRangeSelectEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGridRangeSelectEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GridRangeSelectEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1565,13 +1565,13 @@ impl<const FROM_CPP: bool> Drop for GridRangeSelectEventFromCpp<FROM_CPP> {
 // wxGridSizeEvent
 wxwidgets! {
     /// This event class contains information about a row/column resize event.
-    /// - [`GridSizeEvent`] represents a C++ `wxGridSizeEvent` class instance which your code has ownership, [`GridSizeEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`GridSizeEvent`] represents a C++ `wxGridSizeEvent` class instance which your code has ownership, [`GridSizeEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GridSizeEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGridSizeEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_grid_size_event.html) for more details.
     #[doc(alias = "wxGridSizeEvent")]
     #[doc(alias = "GridSizeEvent")]
     class GridSizeEvent
-        = GridSizeEventFromCpp<true>(wxGridSizeEvent) impl
+        = GridSizeEventFromCpp<false>(wxGridSizeEvent) impl
         GridSizeEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -1590,7 +1590,7 @@ impl<const FROM_CPP: bool> GridSizeEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GridSizeEventFromCpp<false> {
+impl Clone for GridSizeEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1616,13 +1616,13 @@ impl<const FROM_CPP: bool> From<GridSizeEventFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GridSizeEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGridSizeEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GridSizeEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1631,13 +1631,13 @@ impl<const FROM_CPP: bool> Drop for GridSizeEventFromCpp<FROM_CPP> {
 // wxGridSizer
 wxwidgets! {
     /// A grid sizer is a sizer which lays out its children in a two-dimensional table with all table fields having the same size, i.e.
-    /// - [`GridSizer`] represents a C++ `wxGridSizer` class instance which your code has ownership, [`GridSizerFromCpp`]`<false>` represents one which don't own.
+    /// - [`GridSizer`] represents a C++ `wxGridSizer` class instance which your code has ownership, [`GridSizerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GridSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGridSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_grid_sizer.html) for more details.
     #[doc(alias = "wxGridSizer")]
     #[doc(alias = "GridSizer")]
     class GridSizer
-        = GridSizerFromCpp<true>(wxGridSizer) impl
+        = GridSizerFromCpp<false>(wxGridSizer) impl
         GridSizerMethods,
         SizerMethods,
         ObjectMethods
@@ -1699,7 +1699,7 @@ impl<const FROM_CPP: bool> From<GridSizerFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GridSizerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGridSizer_CLASSINFO()) }
     }
 }
@@ -1707,13 +1707,13 @@ impl<const FROM_CPP: bool> DynamicCast for GridSizerFromCpp<FROM_CPP> {
 // wxGridTableBase
 wxwidgets! {
     /// The almost abstract base class for grid tables.
-    /// - [`GridTableBase`] represents a C++ `wxGridTableBase` class instance which your code has ownership, [`GridTableBaseFromCpp`]`<false>` represents one which don't own.
+    /// - [`GridTableBase`] represents a C++ `wxGridTableBase` class instance which your code has ownership, [`GridTableBaseFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GridTableBase`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGridTableBase` class's documentation](https://docs.wxwidgets.org/3.2/classwx_grid_table_base.html) for more details.
     #[doc(alias = "wxGridTableBase")]
     #[doc(alias = "GridTableBase")]
     class GridTableBase
-        = GridTableBaseFromCpp<true>(wxGridTableBase) impl
+        = GridTableBaseFromCpp<false>(wxGridTableBase) impl
         GridTableBaseMethods,
         ObjectMethods
 }
@@ -1723,7 +1723,7 @@ impl<const FROM_CPP: bool> GridTableBaseFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GridTableBaseFromCpp<false> {
+impl Clone for GridTableBaseFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1734,13 +1734,13 @@ impl<const FROM_CPP: bool> From<GridTableBaseFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for GridTableBaseFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxGridTableBase_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for GridTableBaseFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1749,13 +1749,13 @@ impl<const FROM_CPP: bool> Drop for GridTableBaseFromCpp<FROM_CPP> {
 // wxGridUpdateLocker
 wxwidgets! {
     /// This small class can be used to prevent wxGrid from redrawing during its lifetime by calling wxGrid::BeginBatch() in its constructor and wxGrid::EndBatch() in its destructor.
-    /// - [`GridUpdateLocker`] represents a C++ `wxGridUpdateLocker` class instance which your code has ownership, [`GridUpdateLockerFromCpp`]`<false>` represents one which don't own.
+    /// - [`GridUpdateLocker`] represents a C++ `wxGridUpdateLocker` class instance which your code has ownership, [`GridUpdateLockerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`GridUpdateLocker`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxGridUpdateLocker` class's documentation](https://docs.wxwidgets.org/3.2/classwx_grid_update_locker.html) for more details.
     #[doc(alias = "wxGridUpdateLocker")]
     #[doc(alias = "GridUpdateLocker")]
     class GridUpdateLocker
-        = GridUpdateLockerFromCpp<true>(wxGridUpdateLocker) impl
+        = GridUpdateLockerFromCpp<false>(wxGridUpdateLocker) impl
         GridUpdateLockerMethods
 }
 impl<const FROM_CPP: bool> GridUpdateLockerFromCpp<FROM_CPP> {
@@ -1769,14 +1769,14 @@ impl<const FROM_CPP: bool> GridUpdateLockerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for GridUpdateLockerFromCpp<false> {
+impl Clone for GridUpdateLockerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for GridUpdateLockerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxGridUpdateLocker_delete(self.0) }
         }
     }

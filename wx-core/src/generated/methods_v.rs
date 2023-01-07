@@ -63,7 +63,7 @@ pub trait VListBoxMethods: VScrolledWindowMethods {
     /// Returns the background colour used for the selected cells.
     ///
     /// See [C++ `wxVListBox::GetSelectionBackground()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html#a6fc9b1d5737d51c001148f1563a7a737).
-    fn get_selection_background(&self) -> ColourFromCpp<false> {
+    fn get_selection_background(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxVListBox_GetSelectionBackground(self.as_ptr())) }
     }
     /// Returns true if the listbox was created with wxLB_MULTIPLE style and so supports multiple selection or false if it is a single selection listbox.

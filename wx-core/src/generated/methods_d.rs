@@ -726,7 +726,7 @@ pub trait DCMethods: ObjectMethods {
     /// Gets the current font.
     ///
     /// See [C++ `wxDC::GetFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html#a159ff92c61d4886e52d688ac4cb1128b).
-    fn get_font(&self) -> FontFromCpp<false> {
+    fn get_font(&self) -> FontFromCpp<true> {
         unsafe { FontFromCpp::from_ptr(ffi::wxDC_GetFont(self.as_ptr())) }
     }
     /// Gets the current layout direction of the device context.
@@ -738,13 +738,13 @@ pub trait DCMethods: ObjectMethods {
     /// Gets the current text background colour.
     ///
     /// See [C++ `wxDC::GetTextBackground()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html#a9252db582396706072cc1e107eed401d).
-    fn get_text_background(&self) -> ColourFromCpp<false> {
+    fn get_text_background(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxDC_GetTextBackground(self.as_ptr())) }
     }
     /// Gets the current text foreground colour.
     ///
     /// See [C++ `wxDC::GetTextForeground()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html#a6ce1f3e3beaf3af14bbff878b670b597).
-    fn get_text_foreground(&self) -> ColourFromCpp<false> {
+    fn get_text_foreground(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxDC_GetTextForeground(self.as_ptr())) }
     }
     /// Change the current background mode.
@@ -855,13 +855,13 @@ pub trait DCMethods: ObjectMethods {
     /// Gets the brush used for painting the background.
     ///
     /// See [C++ `wxDC::GetBackground()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html#adfd305c5b5bc597f6c976fe511d30d08).
-    fn get_background(&self) -> BrushFromCpp<false> {
+    fn get_background(&self) -> BrushFromCpp<true> {
         unsafe { BrushFromCpp::from_ptr(ffi::wxDC_GetBackground(self.as_ptr())) }
     }
     /// Gets the current brush.
     ///
     /// See [C++ `wxDC::GetBrush()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html#a2c7a9220abfcd672bf9b0839aef6e874).
-    fn get_brush(&self) -> BrushFromCpp<false> {
+    fn get_brush(&self) -> BrushFromCpp<true> {
         unsafe { BrushFromCpp::from_ptr(ffi::wxDC_GetBrush(self.as_ptr())) }
     }
     // BLOCKED: fn GetPen()
@@ -1142,7 +1142,7 @@ pub trait DCMethods: ObjectMethods {
     /// If supported by the platform and the wxDC implementation, this method will return the wxGraphicsContext associated with the DC.
     ///
     /// See [C++ `wxDC::GetGraphicsContext()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html#a5e837724cf289516f37790d5f8c20844).
-    fn get_graphics_context(&self) -> Option<GraphicsContextFromCpp<false>> {
+    fn get_graphics_context(&self) -> Option<GraphicsContextFromCpp<true>> {
         unsafe { GraphicsContext::option_from(ffi::wxDC_GetGraphicsContext(self.as_ptr())) }
     }
     /// Associate a wxGraphicsContext with the DC.
@@ -1399,7 +1399,7 @@ pub trait DataViewChoiceRendererMethods: DataViewRendererMethods {
     /// Returns all choices.
     ///
     /// See [C++ `wxDataViewChoiceRenderer::GetChoices()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_renderer.html#ae1a00bb7d4c566f799256a8935e2707c).
-    fn get_choices(&self) -> ArrayStringFromCpp<false> {
+    fn get_choices(&self) -> ArrayStringFromCpp<true> {
         unsafe {
             ArrayStringFromCpp::from_ptr(ffi::wxDataViewChoiceRenderer_GetChoices(self.as_ptr()))
         }
@@ -1426,7 +1426,7 @@ pub trait DataViewColumnMethods: SettableHeaderColumnMethods {
     /// Returns the renderer of this wxDataViewColumn.
     ///
     /// See [C++ `wxDataViewColumn::GetRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html#a03f763111d1790ef0f49044ed09f1bb4).
-    fn get_renderer(&self) -> Option<DataViewRendererFromCpp<false>> {
+    fn get_renderer(&self) -> Option<DataViewRendererFromCpp<true>> {
         unsafe { DataViewRenderer::option_from(ffi::wxDataViewColumn_GetRenderer(self.as_ptr())) }
     }
 }
@@ -1630,7 +1630,7 @@ pub trait DataViewCtrlMethods: ControlMethods {
     /// Returns pointer to the column.
     ///
     /// See [C++ `wxDataViewCtrl::GetColumn()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a180d390bdbb305f4e4f7e655ab3f53c9).
-    fn get_column(&self, pos: c_uint) -> Option<DataViewColumnFromCpp<false>> {
+    fn get_column(&self, pos: c_uint) -> Option<DataViewColumnFromCpp<true>> {
         unsafe { DataViewColumn::option_from(ffi::wxDataViewCtrl_GetColumn(self.as_ptr(), pos)) }
     }
     /// Returns the number of columns.
@@ -1654,7 +1654,7 @@ pub trait DataViewCtrlMethods: ControlMethods {
     /// Returns column containing the expanders.
     ///
     /// See [C++ `wxDataViewCtrl::GetExpanderColumn()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#ab7b0674d41e845ae2172293d5dfdf1d1).
-    fn get_expander_column(&self) -> Option<DataViewColumnFromCpp<false>> {
+    fn get_expander_column(&self) -> Option<DataViewColumnFromCpp<true>> {
         unsafe { DataViewColumn::option_from(ffi::wxDataViewCtrl_GetExpanderColumn(self.as_ptr())) }
     }
     /// Returns the currently focused item.
@@ -1666,7 +1666,7 @@ pub trait DataViewCtrlMethods: ControlMethods {
     /// Returns the column that currently has focus.
     ///
     /// See [C++ `wxDataViewCtrl::GetCurrentColumn()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#aaee1feadf50bc3b35900ddb694410c9f).
-    fn get_current_column(&self) -> Option<DataViewColumnFromCpp<false>> {
+    fn get_current_column(&self) -> Option<DataViewColumnFromCpp<true>> {
         unsafe { DataViewColumn::option_from(ffi::wxDataViewCtrl_GetCurrentColumn(self.as_ptr())) }
     }
     /// Returns indentation.
@@ -1701,7 +1701,7 @@ pub trait DataViewCtrlMethods: ControlMethods {
     /// Returns pointer to the data model associated with the control (if any).
     ///
     /// See [C++ `wxDataViewCtrl::GetModel()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#a8382fd6669ed2f0c7689d1ee7f9abd74).
-    fn get_model(&self) -> Option<DataViewModelFromCpp<false>> {
+    fn get_model(&self) -> Option<DataViewModelFromCpp<true>> {
         unsafe { DataViewModel::option_from(ffi::wxDataViewCtrl_GetModel(self.as_ptr())) }
     }
     /// Returns the number of currently selected items.
@@ -1725,7 +1725,7 @@ pub trait DataViewCtrlMethods: ControlMethods {
     /// Returns the wxDataViewColumn currently responsible for sorting or NULL if none has been selected.
     ///
     /// See [C++ `wxDataViewCtrl::GetSortingColumn()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html#ae86cea223ed5272396a479864940005a).
-    fn get_sorting_column(&self) -> Option<DataViewColumnFromCpp<false>> {
+    fn get_sorting_column(&self) -> Option<DataViewColumnFromCpp<true>> {
         unsafe { DataViewColumn::option_from(ffi::wxDataViewCtrl_GetSortingColumn(self.as_ptr())) }
     }
     // BLOCKED: fn GetSortingColumns()
@@ -1934,7 +1934,7 @@ pub trait DataViewCustomRendererMethods: DataViewRendererMethods {
     /// Return the attribute to be used for rendering.
     ///
     /// See [C++ `wxDataViewCustomRenderer::GetAttr()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_custom_renderer.html#abb608aea38255f682d0f79cdcbabc54c).
-    fn get_attr(&self) -> DataViewItemAttrFromCpp<false> {
+    fn get_attr(&self) -> DataViewItemAttrFromCpp<true> {
         unsafe {
             DataViewItemAttrFromCpp::from_ptr(ffi::wxDataViewCustomRenderer_GetAttr(self.as_ptr()))
         }
@@ -2005,7 +2005,7 @@ pub trait DataViewEventMethods: NotifyEventMethods {
     /// Returns a pointer to the wxDataViewColumn from which the event was emitted or NULL.
     ///
     /// See [C++ `wxDataViewEvent::GetDataViewColumn()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#a1bbb9ce4bd2c7bff2c630e5988a38ffe).
-    fn get_data_view_column(&self) -> Option<DataViewColumnFromCpp<false>> {
+    fn get_data_view_column(&self) -> Option<DataViewColumnFromCpp<true>> {
         unsafe {
             DataViewColumn::option_from(ffi::wxDataViewEvent_GetDataViewColumn(self.as_ptr()))
         }
@@ -2013,7 +2013,7 @@ pub trait DataViewEventMethods: NotifyEventMethods {
     /// Returns the wxDataViewModel associated with the event.
     ///
     /// See [C++ `wxDataViewEvent::GetModel()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#a6c6bb8ff9e302e033fc0076df01a7c68).
-    fn get_model(&self) -> Option<DataViewModelFromCpp<false>> {
+    fn get_model(&self) -> Option<DataViewModelFromCpp<true>> {
         unsafe { DataViewModel::option_from(ffi::wxDataViewEvent_GetModel(self.as_ptr())) }
     }
     /// Returns the position of a context menu event in client coordinates.
@@ -2117,7 +2117,7 @@ pub trait DataViewEventMethods: NotifyEventMethods {
     }
     ///
     /// See [C++ `wxDataViewEvent::GetDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html#a2fbee2bb8348b837079d60ccd989add8).
-    fn get_data_object(&self) -> Option<DataObjectFromCpp<false>> {
+    fn get_data_object(&self) -> Option<DataObjectFromCpp<true>> {
         unsafe { DataObject::option_from(ffi::wxDataViewEvent_GetDataObject(self.as_ptr())) }
     }
     ///
@@ -2154,7 +2154,7 @@ pub trait DataViewIconTextMethods: ObjectMethods {
     /// Gets the associated image.
     ///
     /// See [C++ `wxDataViewIconText::GetBitmapBundle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html#ad5e60844191755e2dbdd02a91cf857a4).
-    fn get_bitmap_bundle(&self) -> BitmapBundleFromCpp<false> {
+    fn get_bitmap_bundle(&self) -> BitmapBundleFromCpp<true> {
         unsafe {
             BitmapBundleFromCpp::from_ptr(ffi::wxDataViewIconText_GetBitmapBundle(self.as_ptr()))
         }
@@ -2347,7 +2347,7 @@ pub trait DataViewItemAttrMethods: WxRustMethods {
     /// Returns this attribute's colour.
     ///
     /// See [C++ `wxDataViewItemAttr::GetColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html#a9b80872555a855204555047d34726a75).
-    fn get_colour(&self) -> ColourFromCpp<false> {
+    fn get_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxDataViewItemAttr_GetColour(self.as_ptr())) }
     }
     /// Returns true if any property affecting the font has been set.
@@ -2377,7 +2377,7 @@ pub trait DataViewItemAttrMethods: WxRustMethods {
     /// Returns the colour to be used for the background.
     ///
     /// See [C++ `wxDataViewItemAttr::GetBackgroundColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html#a34dfcc59a7c303c4ea4ad7c45ab383d4).
-    fn get_background_colour(&self) -> ColourFromCpp<false> {
+    fn get_background_colour(&self) -> ColourFromCpp<true> {
         unsafe {
             ColourFromCpp::from_ptr(ffi::wxDataViewItemAttr_GetBackgroundColour(self.as_ptr()))
         }
@@ -2515,7 +2515,7 @@ pub trait DataViewListCtrlMethods: DataViewCtrlMethods {
     // BLOCKED: fn GetStore()
     ///
     /// See [C++ `wxDataViewListCtrl::GetStore()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html#a42ef4d50ff8e434528991d7118b20e8f).
-    fn get_store(&self) -> Option<DataViewListStoreFromCpp<false>> {
+    fn get_store(&self) -> Option<DataViewListStoreFromCpp<true>> {
         unsafe { DataViewListStore::option_from(ffi::wxDataViewListCtrl_GetStore1(self.as_ptr())) }
     }
     /// Returns the position of given item or wxNOT_FOUND if it's not a valid item.
@@ -2904,7 +2904,7 @@ pub trait DataViewModelNotifierMethods: WxRustMethods {
     /// Get owning wxDataViewModel.
     ///
     /// See [C++ `wxDataViewModelNotifier::GetOwner()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_model_notifier.html#acc8ea9240f76c6c1712ca3d7ecfdcce4).
-    fn get_owner(&self) -> Option<DataViewModelFromCpp<false>> {
+    fn get_owner(&self) -> Option<DataViewModelFromCpp<true>> {
         unsafe { DataViewModel::option_from(ffi::wxDataViewModelNotifier_GetOwner(self.as_ptr())) }
     }
     /// Called by owning model.
@@ -3044,7 +3044,7 @@ pub trait DataViewRendererMethods: ObjectMethods {
     /// Returns pointer to the owning wxDataViewColumn.
     ///
     /// See [C++ `wxDataViewRenderer::GetOwner()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_renderer.html#acb902597ff5a2023654a0ac1c045a381).
-    fn get_owner(&self) -> Option<DataViewColumnFromCpp<false>> {
+    fn get_owner(&self) -> Option<DataViewColumnFromCpp<true>> {
         unsafe { DataViewColumn::option_from(ffi::wxDataViewRenderer_GetOwner(self.as_ptr())) }
     }
     /// This methods retrieves the value from the renderer in order to transfer the value back to the data model.
@@ -3309,13 +3309,13 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
     /// Returns the image list.
     ///
     /// See [C++ `wxDataViewTreeCtrl::GetImageList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html#a53db83152fced93887f5ad2cb1e40af4).
-    fn get_image_list(&self) -> Option<ImageListFromCpp<false>> {
+    fn get_image_list(&self) -> Option<ImageListFromCpp<true>> {
         unsafe { ImageList::option_from(ffi::wxDataViewTreeCtrl_GetImageList(self.as_ptr())) }
     }
     /// Calls the identical method from wxDataViewTreeStore.
     ///
     /// See [C++ `wxDataViewTreeCtrl::GetItemData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html#aa52f34ad4946bd2b4c0bf07c7e6d7521).
-    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> Option<ClientDataFromCpp<false>> {
+    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> Option<ClientDataFromCpp<true>> {
         unsafe {
             let item = item.as_ptr();
             ClientData::option_from(ffi::wxDataViewTreeCtrl_GetItemData(self.as_ptr(), item))
@@ -3368,7 +3368,7 @@ pub trait DataViewTreeCtrlMethods: DataViewCtrlMethods {
     // BLOCKED: fn GetStore()
     ///
     /// See [C++ `wxDataViewTreeCtrl::GetStore()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html#a1500c5f73e443ceff35409fd27e0afcf).
-    fn get_store(&self) -> Option<DataViewTreeStoreFromCpp<false>> {
+    fn get_store(&self) -> Option<DataViewTreeStoreFromCpp<true>> {
         unsafe { DataViewTreeStore::option_from(ffi::wxDataViewTreeCtrl_GetStore1(self.as_ptr())) }
     }
     /// Calls the same method from wxDataViewTreeStore but uses an index position in the image list instead of a wxIcon.
@@ -3670,7 +3670,7 @@ pub trait DataViewTreeStoreMethods: DataViewModelMethods {
     /// Returns the client data associated with the item.
     ///
     /// See [C++ `wxDataViewTreeStore::GetItemData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html#a299e1db9b0e7c9f5692b75c0f9cd3d29).
-    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> Option<ClientDataFromCpp<false>> {
+    fn get_item_data<D: DataViewItemMethods>(&self, item: &D) -> Option<ClientDataFromCpp<true>> {
         unsafe {
             let item = item.as_ptr();
             ClientData::option_from(ffi::wxDataViewTreeStore_GetItemData(self.as_ptr(), item))
@@ -3976,7 +3976,7 @@ pub trait DateEventMethods: CommandEventMethods {
     /// Returns the date.
     ///
     /// See [C++ `wxDateEvent::GetDate()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_event.html#a45124ab6292bfadef1be0c9a2ce1411f).
-    fn get_date(&self) -> DateTimeFromCpp<false> {
+    fn get_date(&self) -> DateTimeFromCpp<true> {
         unsafe { DateTimeFromCpp::from_ptr(ffi::wxDateEvent_GetDate(self.as_ptr())) }
     }
     /// Sets the date carried by the event, normally only used by the library internally.
@@ -4123,13 +4123,13 @@ pub trait DialogMethods: TopLevelWindowMethods {
     /// Creates a sizer with standard buttons.
     ///
     /// See [C++ `wxDialog::CreateButtonSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a2af344ab6bbbc9a3af3681ac0c2f5e71).
-    fn create_button_sizer(&self, flags: c_long) -> Option<SizerFromCpp<false>> {
+    fn create_button_sizer(&self, flags: c_long) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxDialog_CreateButtonSizer(self.as_ptr(), flags)) }
     }
     /// Creates a sizer with standard buttons using CreateButtonSizer() separated from the rest of the dialog contents by a horizontal wxStaticLine.
     ///
     /// See [C++ `wxDialog::CreateSeparatedButtonSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#ac93ff63b02d4fbc749614a36458a4a67).
-    fn create_separated_button_sizer(&self, flags: c_long) -> Option<SizerFromCpp<false>> {
+    fn create_separated_button_sizer(&self, flags: c_long) -> Option<SizerFromCpp<true>> {
         unsafe {
             Sizer::option_from(ffi::wxDialog_CreateSeparatedButtonSizer(
                 self.as_ptr(),
@@ -4143,7 +4143,7 @@ pub trait DialogMethods: TopLevelWindowMethods {
     fn create_separated_sizer<S: SizerMethods>(
         &self,
         sizer: Option<&S>,
-    ) -> Option<SizerFromCpp<false>> {
+    ) -> Option<SizerFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -4158,7 +4158,7 @@ pub trait DialogMethods: TopLevelWindowMethods {
     fn create_std_dialog_button_sizer(
         &self,
         flags: c_long,
-    ) -> Option<StdDialogButtonSizerFromCpp<false>> {
+    ) -> Option<StdDialogButtonSizerFromCpp<true>> {
         unsafe {
             StdDialogButtonSizer::option_from(ffi::wxDialog_CreateStdDialogButtonSizer(
                 self.as_ptr(),
@@ -4169,7 +4169,7 @@ pub trait DialogMethods: TopLevelWindowMethods {
     /// Splits text up at newlines and places the lines into wxStaticText objects with the specified maximum width in a vertical wxBoxSizer.
     ///
     /// See [C++ `wxDialog::CreateTextSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a65c9eb80fa95a9d02c6f662d2c8d6a7f).
-    fn create_text_sizer(&self, message: &str, width_max: c_int) -> Option<SizerFromCpp<false>> {
+    fn create_text_sizer(&self, message: &str, width_max: c_int) -> Option<SizerFromCpp<true>> {
         unsafe {
             let message = WxString::from(message);
             let message = message.as_ptr();
@@ -4226,7 +4226,7 @@ pub trait DialogMethods: TopLevelWindowMethods {
     /// Returns an array of identifiers to be regarded as the main buttons for the non-scrolling area of a dialog.
     ///
     /// See [C++ `wxDialog::GetMainButtonIds()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#ade1e5cfe8bc5a7a00fa76598664cae8d).
-    fn get_main_button_ids(&self) -> ArrayIntFromCpp<false> {
+    fn get_main_button_ids(&self) -> ArrayIntFromCpp<true> {
         unsafe { ArrayIntFromCpp::from_ptr(ffi::wxDialog_GetMainButtonIds(self.as_ptr())) }
     }
     /// Gets the return code for this window.
@@ -4301,7 +4301,7 @@ pub trait DialogMethods: TopLevelWindowMethods {
     /// A static function getting the current layout adapter object.
     ///
     /// See [C++ `wxDialog::GetLayoutAdapter()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a57b2381829d95e3d65f61d7dc03079e5).
-    fn get_layout_adapter() -> Option<DialogLayoutAdapterFromCpp<false>> {
+    fn get_layout_adapter() -> Option<DialogLayoutAdapterFromCpp<true>> {
         unsafe { DialogLayoutAdapter::option_from(ffi::wxDialog_GetLayoutAdapter()) }
     }
     /// A static function returning true if layout adaptation is enabled for all dialogs.
@@ -4315,7 +4315,7 @@ pub trait DialogMethods: TopLevelWindowMethods {
     /// See [C++ `wxDialog::SetLayoutAdapter()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html#a321e92831be659bbb6ddafe075d855d7).
     fn set_layout_adapter<D: DialogLayoutAdapterMethods>(
         adapter: Option<&D>,
-    ) -> Option<DialogLayoutAdapterFromCpp<false>> {
+    ) -> Option<DialogLayoutAdapterFromCpp<true>> {
         unsafe {
             let adapter = match adapter {
                 Some(r) => r.as_ptr(),
@@ -4750,7 +4750,7 @@ pub trait DropSourceMethods: WxRustMethods {
     /// Returns the wxDataObject object that has been assigned previously.
     ///
     /// See [C++ `wxDropSource::GetDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html#a9391804c155eafbcce8f24cd22491f17).
-    fn get_data_object(&self) -> Option<DataObjectFromCpp<false>> {
+    fn get_data_object(&self) -> Option<DataObjectFromCpp<true>> {
         unsafe { DataObject::option_from(ffi::wxDropSource_GetDataObject(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GiveFeedback()
@@ -4797,7 +4797,7 @@ pub trait DropTargetMethods: WxRustMethods {
     /// Returns the data wxDataObject associated with the drop target.
     ///
     /// See [C++ `wxDropTarget::GetDataObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_drop_target.html#ab7921ce232715427dc2f064dc97ed3d6).
-    fn get_data_object(&self) -> Option<DataObjectFromCpp<false>> {
+    fn get_data_object(&self) -> Option<DataObjectFromCpp<true>> {
         unsafe { DataObject::option_from(ffi::wxDropTarget_GetDataObject(self.as_ptr())) }
     }
     /// Sets the data wxDataObject associated with the drop target and deletes any previously associated data object.

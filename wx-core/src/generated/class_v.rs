@@ -3,13 +3,13 @@ use super::*;
 // wxVListBox
 wxwidgets! {
     /// wxVListBox is a wxListBox-like control with the following two main differences from a regular wxListBox: it can have an arbitrarily huge number of items because it doesn't store them itself but uses the OnDrawItem() callback to draw them (so it is a virtual listbox) and its items can have variable height as determined by OnMeasureItem() (so it is also a listbox with the lines of variable height).
-    /// - [`VListBox`] represents a C++ `wxVListBox` class instance which your code has ownership, [`VListBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`VListBox`] represents a C++ `wxVListBox` class instance which your code has ownership, [`VListBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`VListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxVListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_v_list_box.html) for more details.
     #[doc(alias = "wxVListBox")]
     #[doc(alias = "VListBox")]
     class VListBox
-        = VListBoxFromCpp<true>(wxVListBox) impl
+        = VListBoxFromCpp<false>(wxVListBox) impl
         VListBoxMethods,
         VScrolledWindowMethods,
         PanelMethods,
@@ -55,7 +55,7 @@ impl<const FROM_CPP: bool> From<VListBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for VListBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxVListBox_CLASSINFO()) }
     }
 }
@@ -89,13 +89,13 @@ impl<const FROM_CPP: bool> WindowMethods for VListBoxFromCpp<FROM_CPP> {
 // wxVScrolledWindow
 wxwidgets! {
     /// In the name of this class, "V" may stand for "variable" because it can be used for scrolling rows of variable heights; "virtual", because it is not necessary to know the heights of all rows in advance  only those which are shown on the screen need to be measured; or even "vertical", because this class only supports scrolling vertically.
-    /// - [`VScrolledWindow`] represents a C++ `wxVScrolledWindow` class instance which your code has ownership, [`VScrolledWindowFromCpp`]`<false>` represents one which don't own.
+    /// - [`VScrolledWindow`] represents a C++ `wxVScrolledWindow` class instance which your code has ownership, [`VScrolledWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`VScrolledWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxVScrolledWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_v_scrolled_window.html) for more details.
     #[doc(alias = "wxVScrolledWindow")]
     #[doc(alias = "VScrolledWindow")]
     class VScrolledWindow
-        = VScrolledWindowFromCpp<true>(wxVScrolledWindow) impl
+        = VScrolledWindowFromCpp<false>(wxVScrolledWindow) impl
         VScrolledWindowMethods,
         PanelMethods,
         // WindowMethods,
@@ -135,7 +135,7 @@ impl<const FROM_CPP: bool> From<VScrolledWindowFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for VScrolledWindowFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxVScrolledWindow_CLASSINFO()) }
     }
 }
@@ -169,13 +169,13 @@ impl<const FROM_CPP: bool> WindowMethods for VScrolledWindowFromCpp<FROM_CPP> {
 // wxValidator
 wxwidgets! {
     /// wxValidator is the base class for a family of validator classes that mediate between a class of control, and application data.
-    /// - [`Validator`] represents a C++ `wxValidator` class instance which your code has ownership, [`ValidatorFromCpp`]`<false>` represents one which don't own.
+    /// - [`Validator`] represents a C++ `wxValidator` class instance which your code has ownership, [`ValidatorFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Validator`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxValidator` class's documentation](https://docs.wxwidgets.org/3.2/classwx_validator.html) for more details.
     #[doc(alias = "wxValidator")]
     #[doc(alias = "Validator")]
     class Validator
-        = ValidatorFromCpp<true>(wxValidator) impl
+        = ValidatorFromCpp<false>(wxValidator) impl
         ValidatorMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -207,7 +207,7 @@ impl<const FROM_CPP: bool> From<ValidatorFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ValidatorFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxValidator_CLASSINFO()) }
     }
 }

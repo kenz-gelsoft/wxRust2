@@ -131,7 +131,7 @@ pub trait StandardPathsMethods: WxRustMethods {
     /// Returns reference to the unique global standard paths object.
     ///
     /// See [C++ `wxStandardPaths::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html#adcc47d33eccc3d432e40f6952d405c23).
-    fn get() -> StandardPathsFromCpp<false> {
+    fn get() -> StandardPathsFromCpp<true> {
         unsafe { StandardPathsFromCpp::from_ptr(ffi::wxStandardPaths_Get()) }
     }
     /// Returns location of Windows shell special folder.

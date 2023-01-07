@@ -708,7 +708,7 @@ pub trait ImageMethods: ObjectMethods {
     /// Finds the handler with the given name.
     ///
     /// See [C++ `wxImage::FindHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a474c80c4f2a344d131fc9b26778f8440).
-    fn find_handler(name: &str) -> Option<ImageHandlerFromCpp<false>> {
+    fn find_handler(name: &str) -> Option<ImageHandlerFromCpp<true>> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
@@ -720,7 +720,7 @@ pub trait ImageMethods: ObjectMethods {
     /// Finds the handler associated with the given MIME type.
     ///
     /// See [C++ `wxImage::FindHandlerMime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image.html#a464676dac510648439549482e4ed07bd).
-    fn find_handler_mime(mimetype: &str) -> Option<ImageHandlerFromCpp<false>> {
+    fn find_handler_mime(mimetype: &str) -> Option<ImageHandlerFromCpp<true>> {
         unsafe {
             let mimetype = WxString::from(mimetype);
             let mimetype = mimetype.as_ptr();
@@ -822,7 +822,7 @@ pub trait ImageHandlerMethods: ObjectMethods {
     /// Returns the other file extensions associated with this handler.
     ///
     /// See [C++ `wxImageHandler::GetAltExtensions()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html#ad7507ccdf4d120820bd7be84826e86dd).
-    fn get_alt_extensions(&self) -> ArrayStringFromCpp<false> {
+    fn get_alt_extensions(&self) -> ArrayStringFromCpp<true> {
         unsafe { ArrayStringFromCpp::from_ptr(ffi::wxImageHandler_GetAltExtensions(self.as_ptr())) }
     }
     /// If the image file contains more than one image and the image handler is capable of retrieving these individually, this function will return the number of available images.
@@ -1281,7 +1281,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     /// Returns the client object associated with the given item and transfers its ownership to the caller.
     ///
     /// See [C++ `wxItemContainer::DetachClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a9b4c80ee2cc91ccfe534fb56fc4e8bdf).
-    fn detach_client_object(&self, n: c_uint) -> Option<ClientDataFromCpp<false>> {
+    fn detach_client_object(&self, n: c_uint) -> Option<ClientDataFromCpp<true>> {
         unsafe {
             ClientData::option_from(ffi::wxItemContainer_DetachClientObject(
                 self.as_item_container(),
@@ -1316,7 +1316,7 @@ pub trait ItemContainerMethods: ItemContainerImmutableMethods {
     /// Returns a pointer to the client data associated with the given item (if any).
     ///
     /// See [C++ `wxItemContainer::GetClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html#a95f1b730f3ddcf8eb2d8d8ec4e09dadd).
-    fn get_client_object_uint(&self, n: c_uint) -> Option<ClientDataFromCpp<false>> {
+    fn get_client_object_uint(&self, n: c_uint) -> Option<ClientDataFromCpp<true>> {
         unsafe {
             ClientData::option_from(ffi::wxItemContainer_GetClientObject(
                 self.as_item_container(),

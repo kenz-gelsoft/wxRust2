@@ -88,7 +88,7 @@ pub trait TimerEventMethods: EventMethods {
     /// Returns the timer object which generated this event.
     ///
     /// See [C++ `wxTimerEvent::GetTimer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_timer_event.html#af2174f494ca4bb926691ac4657397578).
-    fn get_timer(&self) -> TimerFromCpp<false> {
+    fn get_timer(&self) -> TimerFromCpp<true> {
         unsafe { TimerFromCpp::from_ptr(ffi::wxTimerEvent_GetTimer(self.as_ptr())) }
     }
 }

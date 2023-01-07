@@ -3,13 +3,13 @@ use super::*;
 // wxPCXHandler
 wxwidgets! {
     /// This is the image handler for the PCX format.
-    /// - [`PCXHandler`] represents a C++ `wxPCXHandler` class instance which your code has ownership, [`PCXHandlerFromCpp`]`<false>` represents one which don't own.
+    /// - [`PCXHandler`] represents a C++ `wxPCXHandler` class instance which your code has ownership, [`PCXHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PCXHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPCXHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_p_c_x_handler.html) for more details.
     #[doc(alias = "wxPCXHandler")]
     #[doc(alias = "PCXHandler")]
     class PCXHandler
-        = PCXHandlerFromCpp<true>(wxPCXHandler) impl
+        = PCXHandlerFromCpp<false>(wxPCXHandler) impl
         PCXHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -25,7 +25,7 @@ impl<const FROM_CPP: bool> PCXHandlerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PCXHandlerFromCpp<false> {
+impl Clone for PCXHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -41,13 +41,13 @@ impl<const FROM_CPP: bool> From<PCXHandlerFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PCXHandlerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPCXHandler_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for PCXHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -56,13 +56,13 @@ impl<const FROM_CPP: bool> Drop for PCXHandlerFromCpp<FROM_CPP> {
 // wxPNGHandler
 wxwidgets! {
     /// This is the image handler for the PNG format.
-    /// - [`PNGHandler`] represents a C++ `wxPNGHandler` class instance which your code has ownership, [`PNGHandlerFromCpp`]`<false>` represents one which don't own.
+    /// - [`PNGHandler`] represents a C++ `wxPNGHandler` class instance which your code has ownership, [`PNGHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PNGHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPNGHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_p_n_g_handler.html) for more details.
     #[doc(alias = "wxPNGHandler")]
     #[doc(alias = "PNGHandler")]
     class PNGHandler
-        = PNGHandlerFromCpp<true>(wxPNGHandler) impl
+        = PNGHandlerFromCpp<false>(wxPNGHandler) impl
         PNGHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -78,7 +78,7 @@ impl<const FROM_CPP: bool> PNGHandlerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PNGHandlerFromCpp<false> {
+impl Clone for PNGHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -94,13 +94,13 @@ impl<const FROM_CPP: bool> From<PNGHandlerFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PNGHandlerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPNGHandler_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for PNGHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -109,13 +109,13 @@ impl<const FROM_CPP: bool> Drop for PNGHandlerFromCpp<FROM_CPP> {
 // wxPNMHandler
 wxwidgets! {
     /// This is the image handler for the PNM format.
-    /// - [`PNMHandler`] represents a C++ `wxPNMHandler` class instance which your code has ownership, [`PNMHandlerFromCpp`]`<false>` represents one which don't own.
+    /// - [`PNMHandler`] represents a C++ `wxPNMHandler` class instance which your code has ownership, [`PNMHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PNMHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPNMHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_p_n_m_handler.html) for more details.
     #[doc(alias = "wxPNMHandler")]
     #[doc(alias = "PNMHandler")]
     class PNMHandler
-        = PNMHandlerFromCpp<true>(wxPNMHandler) impl
+        = PNMHandlerFromCpp<false>(wxPNMHandler) impl
         PNMHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -131,7 +131,7 @@ impl<const FROM_CPP: bool> PNMHandlerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PNMHandlerFromCpp<false> {
+impl Clone for PNMHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -147,13 +147,13 @@ impl<const FROM_CPP: bool> From<PNMHandlerFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PNMHandlerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPNMHandler_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for PNMHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -162,13 +162,13 @@ impl<const FROM_CPP: bool> Drop for PNMHandlerFromCpp<FROM_CPP> {
 // wxPaintDC
 wxwidgets! {
     /// A wxPaintDC must be constructed if an application wishes to paint on the client area of a window from within an EVT_PAINT() event handler.
-    /// - [`PaintDC`] represents a C++ `wxPaintDC` class instance which your code has ownership, [`PaintDCFromCpp`]`<false>` represents one which don't own.
+    /// - [`PaintDC`] represents a C++ `wxPaintDC` class instance which your code has ownership, [`PaintDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PaintDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPaintDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_paint_d_c.html) for more details.
     #[doc(alias = "wxPaintDC")]
     #[doc(alias = "PaintDC")]
     class PaintDC
-        = PaintDCFromCpp<true>(wxPaintDC) impl
+        = PaintDCFromCpp<false>(wxPaintDC) impl
         PaintDCMethods,
         ClientDCMethods,
         WindowDCMethods,
@@ -192,7 +192,7 @@ impl<const FROM_CPP: bool> PaintDCFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PaintDCFromCpp<false> {
+impl Clone for PaintDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -218,13 +218,13 @@ impl<const FROM_CPP: bool> From<PaintDCFromCpp<FROM_CPP>> for ObjectFromCpp<FROM
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PaintDCFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPaintDC_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for PaintDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -233,13 +233,13 @@ impl<const FROM_CPP: bool> Drop for PaintDCFromCpp<FROM_CPP> {
 // wxPaintEvent
 wxwidgets! {
     /// A paint event is sent when a window's contents needs to be repainted.
-    /// - [`PaintEvent`] represents a C++ `wxPaintEvent` class instance which your code has ownership, [`PaintEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`PaintEvent`] represents a C++ `wxPaintEvent` class instance which your code has ownership, [`PaintEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PaintEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPaintEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_paint_event.html) for more details.
     #[doc(alias = "wxPaintEvent")]
     #[doc(alias = "PaintEvent")]
     class PaintEvent
-        = PaintEventFromCpp<true>(wxPaintEvent) impl
+        = PaintEventFromCpp<false>(wxPaintEvent) impl
         PaintEventMethods,
         EventMethods,
         ObjectMethods
@@ -250,7 +250,7 @@ impl<const FROM_CPP: bool> PaintEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PaintEventFromCpp<false> {
+impl Clone for PaintEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -266,13 +266,13 @@ impl<const FROM_CPP: bool> From<PaintEventFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PaintEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPaintEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for PaintEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -281,13 +281,13 @@ impl<const FROM_CPP: bool> Drop for PaintEventFromCpp<FROM_CPP> {
 // wxPalette
 wxwidgets! {
     /// A palette is a table that maps pixel values to RGB colours.
-    /// - [`Palette`] represents a C++ `wxPalette` class instance which your code has ownership, [`PaletteFromCpp`]`<false>` represents one which don't own.
+    /// - [`Palette`] represents a C++ `wxPalette` class instance which your code has ownership, [`PaletteFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Palette`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPalette` class's documentation](https://docs.wxwidgets.org/3.2/classwx_palette.html) for more details.
     #[doc(alias = "wxPalette")]
     #[doc(alias = "Palette")]
     class Palette
-        = PaletteFromCpp<true>(wxPalette) impl
+        = PaletteFromCpp<false>(wxPalette) impl
         PaletteMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -323,7 +323,7 @@ impl<const FROM_CPP: bool> PaletteFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PaletteFromCpp<false> {
+impl Clone for PaletteFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -339,13 +339,13 @@ impl<const FROM_CPP: bool> From<PaletteFromCpp<FROM_CPP>> for ObjectFromCpp<FROM
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PaletteFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPalette_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for PaletteFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -354,13 +354,13 @@ impl<const FROM_CPP: bool> Drop for PaletteFromCpp<FROM_CPP> {
 // wxPanel
 wxwidgets! {
     /// A panel is a window on which controls are placed.
-    /// - [`Panel`] represents a C++ `wxPanel` class instance which your code has ownership, [`PanelFromCpp`]`<false>` represents one which don't own.
+    /// - [`Panel`] represents a C++ `wxPanel` class instance which your code has ownership, [`PanelFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Panel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPanel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_panel.html) for more details.
     #[doc(alias = "wxPanel")]
     #[doc(alias = "Panel")]
     class Panel
-        = PanelFromCpp<true>(wxPanel) impl
+        = PanelFromCpp<false>(wxPanel) impl
         PanelMethods,
         // WindowMethods,
         EvtHandlerMethods,
@@ -421,7 +421,7 @@ impl<const FROM_CPP: bool> From<PanelFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_C
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PanelFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPanel_CLASSINFO()) }
     }
 }
@@ -455,13 +455,13 @@ impl<const FROM_CPP: bool> WindowMethods for PanelFromCpp<FROM_CPP> {
 // wxPasswordEntryDialog
 wxwidgets! {
     /// This class represents a dialog that requests a one-line password string from the user.
-    /// - [`PasswordEntryDialog`] represents a C++ `wxPasswordEntryDialog` class instance which your code has ownership, [`PasswordEntryDialogFromCpp`]`<false>` represents one which don't own.
+    /// - [`PasswordEntryDialog`] represents a C++ `wxPasswordEntryDialog` class instance which your code has ownership, [`PasswordEntryDialogFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PasswordEntryDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPasswordEntryDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_password_entry_dialog.html) for more details.
     #[doc(alias = "wxPasswordEntryDialog")]
     #[doc(alias = "PasswordEntryDialog")]
     class PasswordEntryDialog
-        = PasswordEntryDialogFromCpp<true>(wxPasswordEntryDialog) impl
+        = PasswordEntryDialogFromCpp<false>(wxPasswordEntryDialog) impl
         PasswordEntryDialogMethods,
         TextEntryDialogMethods,
         DialogMethods,
@@ -558,7 +558,7 @@ impl<const FROM_CPP: bool> From<PasswordEntryDialogFromCpp<FROM_CPP>> for Object
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PasswordEntryDialogFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPasswordEntryDialog_CLASSINFO()) }
     }
 }
@@ -566,13 +566,13 @@ impl<const FROM_CPP: bool> DynamicCast for PasswordEntryDialogFromCpp<FROM_CPP> 
 // wxPen
 wxwidgets! {
     /// A pen is a drawing tool for drawing outlines.
-    /// - [`Pen`] represents a C++ `wxPen` class instance which your code has ownership, [`PenFromCpp`]`<false>` represents one which don't own.
+    /// - [`Pen`] represents a C++ `wxPen` class instance which your code has ownership, [`PenFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Pen`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPen` class's documentation](https://docs.wxwidgets.org/3.2/classwx_pen.html) for more details.
     #[doc(alias = "wxPen")]
     #[doc(alias = "Pen")]
     class Pen
-        = PenFromCpp<true>(wxPen) impl
+        = PenFromCpp<false>(wxPen) impl
         PenMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -613,7 +613,7 @@ impl<const FROM_CPP: bool> PenFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PenFromCpp<false> {
+impl Clone for PenFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -629,13 +629,13 @@ impl<const FROM_CPP: bool> From<PenFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PenFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPen_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for PenFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -644,13 +644,13 @@ impl<const FROM_CPP: bool> Drop for PenFromCpp<FROM_CPP> {
 // wxPenList
 wxwidgets! {
     /// There is only one instance of this class: wxThePenList.
-    /// - [`PenList`] represents a C++ `wxPenList` class instance which your code has ownership, [`PenListFromCpp`]`<false>` represents one which don't own.
+    /// - [`PenList`] represents a C++ `wxPenList` class instance which your code has ownership, [`PenListFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PenList`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPenList` class's documentation](https://docs.wxwidgets.org/3.2/classwx_pen_list.html) for more details.
     #[doc(alias = "wxPenList")]
     #[doc(alias = "PenList")]
     class PenList
-        = PenListFromCpp<true>(wxPenList) impl
+        = PenListFromCpp<false>(wxPenList) impl
         PenListMethods
 }
 impl<const FROM_CPP: bool> PenListFromCpp<FROM_CPP> {
@@ -664,14 +664,14 @@ impl<const FROM_CPP: bool> PenListFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PenListFromCpp<false> {
+impl Clone for PenListFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for PenListFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxPenList_delete(self.0) }
         }
     }
@@ -680,13 +680,13 @@ impl<const FROM_CPP: bool> Drop for PenListFromCpp<FROM_CPP> {
 // wxPersistenceManager
 wxwidgets! {
     /// Provides support for automatically saving and restoring object properties to persistent storage.
-    /// - [`PersistenceManager`] represents a C++ `wxPersistenceManager` class instance which your code has ownership, [`PersistenceManagerFromCpp`]`<false>` represents one which don't own.
+    /// - [`PersistenceManager`] represents a C++ `wxPersistenceManager` class instance which your code has ownership, [`PersistenceManagerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PersistenceManager`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPersistenceManager` class's documentation](https://docs.wxwidgets.org/3.2/classwx_persistence_manager.html) for more details.
     #[doc(alias = "wxPersistenceManager")]
     #[doc(alias = "PersistenceManager")]
     class PersistenceManager
-        = PersistenceManagerFromCpp<true>(wxPersistenceManager) impl
+        = PersistenceManagerFromCpp<false>(wxPersistenceManager) impl
         PersistenceManagerMethods
 }
 impl<const FROM_CPP: bool> PersistenceManagerFromCpp<FROM_CPP> {
@@ -694,14 +694,14 @@ impl<const FROM_CPP: bool> PersistenceManagerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PersistenceManagerFromCpp<false> {
+impl Clone for PersistenceManagerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for PersistenceManagerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxPersistenceManager_delete(self.0) }
         }
     }
@@ -710,13 +710,13 @@ impl<const FROM_CPP: bool> Drop for PersistenceManagerFromCpp<FROM_CPP> {
 // wxPickerBase
 wxwidgets! {
     /// Base abstract class for all pickers which support an auxiliary text control.
-    /// - [`PickerBase`] represents a C++ `wxPickerBase` class instance which your code has ownership, [`PickerBaseFromCpp`]`<false>` represents one which don't own.
+    /// - [`PickerBase`] represents a C++ `wxPickerBase` class instance which your code has ownership, [`PickerBaseFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PickerBase`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPickerBase` class's documentation](https://docs.wxwidgets.org/3.2/classwx_picker_base.html) for more details.
     #[doc(alias = "wxPickerBase")]
     #[doc(alias = "PickerBase")]
     class PickerBase
-        = PickerBaseFromCpp<true>(wxPickerBase) impl
+        = PickerBaseFromCpp<false>(wxPickerBase) impl
         PickerBaseMethods,
         ControlMethods,
         WindowMethods,
@@ -755,7 +755,7 @@ impl<const FROM_CPP: bool> From<PickerBaseFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PickerBaseFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPickerBase_CLASSINFO()) }
     }
 }
@@ -763,13 +763,13 @@ impl<const FROM_CPP: bool> DynamicCast for PickerBaseFromCpp<FROM_CPP> {
 // wxPoint
 wxwidgets! {
     /// A wxPoint is a useful data structure for graphics operations.
-    /// - [`Point`] represents a C++ `wxPoint` class instance which your code has ownership, [`PointFromCpp`]`<false>` represents one which don't own.
+    /// - [`Point`] represents a C++ `wxPoint` class instance which your code has ownership, [`PointFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Point`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPoint` class's documentation](https://docs.wxwidgets.org/3.2/classwx_point.html) for more details.
     #[doc(alias = "wxPoint")]
     #[doc(alias = "Point")]
     class Point
-        = PointFromCpp<true>(wxPoint) impl
+        = PointFromCpp<false>(wxPoint) impl
         PointMethods
 }
 impl<const FROM_CPP: bool> PointFromCpp<FROM_CPP> {
@@ -798,14 +798,14 @@ impl<const FROM_CPP: bool> PointFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PointFromCpp<false> {
+impl Clone for PointFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for PointFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxPoint_delete(self.0) }
         }
     }
@@ -814,13 +814,13 @@ impl<const FROM_CPP: bool> Drop for PointFromCpp<FROM_CPP> {
 // wxPopupTransientWindow
 wxwidgets! {
     /// A wxPopupWindow which disappears automatically when the user clicks mouse outside it or if it loses focus in any other way.
-    /// - [`PopupTransientWindow`] represents a C++ `wxPopupTransientWindow` class instance which your code has ownership, [`PopupTransientWindowFromCpp`]`<false>` represents one which don't own.
+    /// - [`PopupTransientWindow`] represents a C++ `wxPopupTransientWindow` class instance which your code has ownership, [`PopupTransientWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PopupTransientWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPopupTransientWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_popup_transient_window.html) for more details.
     #[doc(alias = "wxPopupTransientWindow")]
     #[doc(alias = "PopupTransientWindow")]
     class PopupTransientWindow
-        = PopupTransientWindowFromCpp<true>(wxPopupTransientWindow) impl
+        = PopupTransientWindowFromCpp<false>(wxPopupTransientWindow) impl
         PopupTransientWindowMethods,
         PopupWindowMethods,
         NonOwnedWindowMethods,
@@ -891,7 +891,7 @@ impl<const FROM_CPP: bool> From<PopupTransientWindowFromCpp<FROM_CPP>> for Objec
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PopupTransientWindowFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPopupTransientWindow_CLASSINFO()) }
     }
 }
@@ -899,13 +899,13 @@ impl<const FROM_CPP: bool> DynamicCast for PopupTransientWindowFromCpp<FROM_CPP>
 // wxPopupWindow
 wxwidgets! {
     /// A special kind of top level window used for popup menus, combobox popups and such.
-    /// - [`PopupWindow`] represents a C++ `wxPopupWindow` class instance which your code has ownership, [`PopupWindowFromCpp`]`<false>` represents one which don't own.
+    /// - [`PopupWindow`] represents a C++ `wxPopupWindow` class instance which your code has ownership, [`PopupWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PopupWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPopupWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_popup_window.html) for more details.
     #[doc(alias = "wxPopupWindow")]
     #[doc(alias = "PopupWindow")]
     class PopupWindow
-        = PopupWindowFromCpp<true>(wxPopupWindow) impl
+        = PopupWindowFromCpp<false>(wxPopupWindow) impl
         PopupWindowMethods,
         NonOwnedWindowMethods,
         WindowMethods,
@@ -961,7 +961,7 @@ impl<const FROM_CPP: bool> From<PopupWindowFromCpp<FROM_CPP>> for ObjectFromCpp<
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PopupWindowFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPopupWindow_CLASSINFO()) }
     }
 }
@@ -969,13 +969,13 @@ impl<const FROM_CPP: bool> DynamicCast for PopupWindowFromCpp<FROM_CPP> {
 // wxPreferencesEditor
 wxwidgets! {
     /// Manage preferences dialog.
-    /// - [`PreferencesEditor`] represents a C++ `wxPreferencesEditor` class instance which your code has ownership, [`PreferencesEditorFromCpp`]`<false>` represents one which don't own.
+    /// - [`PreferencesEditor`] represents a C++ `wxPreferencesEditor` class instance which your code has ownership, [`PreferencesEditorFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PreferencesEditor`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPreferencesEditor` class's documentation](https://docs.wxwidgets.org/3.2/classwx_preferences_editor.html) for more details.
     #[doc(alias = "wxPreferencesEditor")]
     #[doc(alias = "PreferencesEditor")]
     class PreferencesEditor
-        = PreferencesEditorFromCpp<true>(wxPreferencesEditor) impl
+        = PreferencesEditorFromCpp<false>(wxPreferencesEditor) impl
         PreferencesEditorMethods
 }
 impl<const FROM_CPP: bool> PreferencesEditorFromCpp<FROM_CPP> {
@@ -993,14 +993,14 @@ impl<const FROM_CPP: bool> PreferencesEditorFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PreferencesEditorFromCpp<false> {
+impl Clone for PreferencesEditorFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for PreferencesEditorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxPreferencesEditor_delete(self.0) }
         }
     }
@@ -1009,13 +1009,13 @@ impl<const FROM_CPP: bool> Drop for PreferencesEditorFromCpp<FROM_CPP> {
 // wxPreferencesPage
 wxwidgets! {
     /// One page of preferences dialog.
-    /// - [`PreferencesPage`] represents a C++ `wxPreferencesPage` class instance which your code has ownership, [`PreferencesPageFromCpp`]`<false>` represents one which don't own.
+    /// - [`PreferencesPage`] represents a C++ `wxPreferencesPage` class instance which your code has ownership, [`PreferencesPageFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PreferencesPage`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPreferencesPage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_preferences_page.html) for more details.
     #[doc(alias = "wxPreferencesPage")]
     #[doc(alias = "PreferencesPage")]
     class PreferencesPage
-        = PreferencesPageFromCpp<true>(wxPreferencesPage) impl
+        = PreferencesPageFromCpp<false>(wxPreferencesPage) impl
         PreferencesPageMethods
 }
 impl<const FROM_CPP: bool> PreferencesPageFromCpp<FROM_CPP> {
@@ -1024,14 +1024,14 @@ impl<const FROM_CPP: bool> PreferencesPageFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for PreferencesPageFromCpp<false> {
+impl Clone for PreferencesPageFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for PreferencesPageFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxPreferencesPage_delete(self.0) }
         }
     }
@@ -1040,13 +1040,13 @@ impl<const FROM_CPP: bool> Drop for PreferencesPageFromCpp<FROM_CPP> {
 // wxPropertySheetDialog
 wxwidgets! {
     /// This class represents a property sheet dialog: a tabbed dialog for showing settings.
-    /// - [`PropertySheetDialog`] represents a C++ `wxPropertySheetDialog` class instance which your code has ownership, [`PropertySheetDialogFromCpp`]`<false>` represents one which don't own.
+    /// - [`PropertySheetDialog`] represents a C++ `wxPropertySheetDialog` class instance which your code has ownership, [`PropertySheetDialogFromCpp`]`<true>` represents one which don't own.
     /// - Use [`PropertySheetDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxPropertySheetDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html) for more details.
     #[doc(alias = "wxPropertySheetDialog")]
     #[doc(alias = "PropertySheetDialog")]
     class PropertySheetDialog
-        = PropertySheetDialogFromCpp<true>(wxPropertySheetDialog) impl
+        = PropertySheetDialogFromCpp<false>(wxPropertySheetDialog) impl
         PropertySheetDialogMethods,
         DialogMethods,
         // TopLevelWindowMethods,
@@ -1136,7 +1136,7 @@ impl<const FROM_CPP: bool> From<PropertySheetDialogFromCpp<FROM_CPP>> for Object
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for PropertySheetDialogFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxPropertySheetDialog_CLASSINFO()) }
     }
 }

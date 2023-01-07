@@ -3,13 +3,13 @@ use super::*;
 // wxQuantize
 wxwidgets! {
     /// Performs quantization, or colour reduction, on a wxImage.
-    /// - [`Quantize`] represents a C++ `wxQuantize` class instance which your code has ownership, [`QuantizeFromCpp`]`<false>` represents one which don't own.
+    /// - [`Quantize`] represents a C++ `wxQuantize` class instance which your code has ownership, [`QuantizeFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Quantize`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxQuantize` class's documentation](https://docs.wxwidgets.org/3.2/classwx_quantize.html) for more details.
     #[doc(alias = "wxQuantize")]
     #[doc(alias = "Quantize")]
     class Quantize
-        = QuantizeFromCpp<true>(wxQuantize) impl
+        = QuantizeFromCpp<false>(wxQuantize) impl
         QuantizeMethods,
         ObjectMethods
 }
@@ -24,7 +24,7 @@ impl<const FROM_CPP: bool> QuantizeFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for QuantizeFromCpp<false> {
+impl Clone for QuantizeFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -35,13 +35,13 @@ impl<const FROM_CPP: bool> From<QuantizeFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for QuantizeFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxQuantize_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for QuantizeFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -50,13 +50,13 @@ impl<const FROM_CPP: bool> Drop for QuantizeFromCpp<FROM_CPP> {
 // wxQueryLayoutInfoEvent
 wxwidgets! {
     /// This event is sent when wxLayoutAlgorithm wishes to get the size, orientation and alignment of a window.
-    /// - [`QueryLayoutInfoEvent`] represents a C++ `wxQueryLayoutInfoEvent` class instance which your code has ownership, [`QueryLayoutInfoEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`QueryLayoutInfoEvent`] represents a C++ `wxQueryLayoutInfoEvent` class instance which your code has ownership, [`QueryLayoutInfoEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`QueryLayoutInfoEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxQueryLayoutInfoEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_query_layout_info_event.html) for more details.
     #[doc(alias = "wxQueryLayoutInfoEvent")]
     #[doc(alias = "QueryLayoutInfoEvent")]
     class QueryLayoutInfoEvent
-        = QueryLayoutInfoEventFromCpp<true>(wxQueryLayoutInfoEvent) impl
+        = QueryLayoutInfoEventFromCpp<false>(wxQueryLayoutInfoEvent) impl
         QueryLayoutInfoEventMethods,
         EventMethods,
         ObjectMethods
@@ -72,7 +72,7 @@ impl<const FROM_CPP: bool> QueryLayoutInfoEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for QueryLayoutInfoEventFromCpp<false> {
+impl Clone for QueryLayoutInfoEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -88,13 +88,13 @@ impl<const FROM_CPP: bool> From<QueryLayoutInfoEventFromCpp<FROM_CPP>> for Objec
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for QueryLayoutInfoEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxQueryLayoutInfoEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for QueryLayoutInfoEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

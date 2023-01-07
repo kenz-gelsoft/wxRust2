@@ -82,7 +82,7 @@ pub trait RadioBoxMethods: ControlMethods {
     /// Returns the tooltip associated with the specified item if any or NULL.
     ///
     /// See [C++ `wxRadioBox::GetItemToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html#aae17bd6b2707de2d93ab1fba78850a41).
-    fn get_item_tool_tip(&self, item: c_uint) -> Option<ToolTipFromCpp<false>> {
+    fn get_item_tool_tip(&self, item: c_uint) -> Option<ToolTipFromCpp<true>> {
         unsafe { ToolTip::option_from(ffi::wxRadioBox_GetItemToolTip(self.as_ptr(), item)) }
     }
     /// Returns the number of rows in the radiobox.
@@ -428,7 +428,7 @@ pub trait RearrangeListMethods: CheckListBoxMethods {
     /// Return the current order of the items.
     ///
     /// See [C++ `wxRearrangeList::GetCurrentOrder()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html#a7d9953adf768501bf27bdaf2c3b6e20d).
-    fn get_current_order(&self) -> ArrayIntFromCpp<false> {
+    fn get_current_order(&self) -> ArrayIntFromCpp<true> {
         unsafe { ArrayIntFromCpp::from_ptr(ffi::wxRearrangeList_GetCurrentOrder(self.as_ptr())) }
     }
     /// Return true if the currently selected item can be moved up.
@@ -1445,25 +1445,25 @@ pub trait RendererNativeMethods: WxRustMethods {
     /// Return the currently used renderer.
     ///
     /// See [C++ `wxRendererNative::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#a9526c5b65e880112597ce89f82f7c79a).
-    fn get() -> RendererNativeFromCpp<false> {
+    fn get() -> RendererNativeFromCpp<true> {
         unsafe { RendererNativeFromCpp::from_ptr(ffi::wxRendererNative_Get()) }
     }
     /// Return the default (native) implementation for this platform  this is also the one used by default but this may be changed by calling Set() in which case the return value of this method may be different from the return value of Get().
     ///
     /// See [C++ `wxRendererNative::GetDefault()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#ab0da0d81fc83357893336e9c6789f2e9).
-    fn get_default() -> RendererNativeFromCpp<false> {
+    fn get_default() -> RendererNativeFromCpp<true> {
         unsafe { RendererNativeFromCpp::from_ptr(ffi::wxRendererNative_GetDefault()) }
     }
     /// Return the generic implementation of the renderer.
     ///
     /// See [C++ `wxRendererNative::GetGeneric()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#a30c27eccbf079dbab0b5c51c909d423b).
-    fn get_generic() -> RendererNativeFromCpp<false> {
+    fn get_generic() -> RendererNativeFromCpp<true> {
         unsafe { RendererNativeFromCpp::from_ptr(ffi::wxRendererNative_GetGeneric()) }
     }
     /// Load the renderer from the specified DLL, the returned pointer must be deleted by caller if not NULL when it is not used any more.
     ///
     /// See [C++ `wxRendererNative::Load()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#a3370fada68174ae45bbf1ce52757bf0b).
-    fn load(name: &str) -> Option<RendererNativeFromCpp<false>> {
+    fn load(name: &str) -> Option<RendererNativeFromCpp<true>> {
         unsafe {
             let name = WxString::from(name);
             let name = name.as_ptr();
@@ -1473,7 +1473,7 @@ pub trait RendererNativeMethods: WxRustMethods {
     /// Set the renderer to use, passing NULL reverts to using the default renderer (the global renderer must always exist).
     ///
     /// See [C++ `wxRendererNative::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html#afc00cb4f831444446a275bf990448efe).
-    fn set<R: RendererNativeMethods>(renderer: Option<&R>) -> Option<RendererNativeFromCpp<false>> {
+    fn set<R: RendererNativeMethods>(renderer: Option<&R>) -> Option<RendererNativeFromCpp<true>> {
         unsafe {
             let renderer = match renderer {
                 Some(r) => r.as_ptr(),

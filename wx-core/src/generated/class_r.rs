@@ -3,13 +3,13 @@ use super::*;
 // wxRadioBox
 wxwidgets! {
     /// A radio box item is used to select one of number of mutually exclusive choices.
-    /// - [`RadioBox`] represents a C++ `wxRadioBox` class instance which your code has ownership, [`RadioBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`RadioBox`] represents a C++ `wxRadioBox` class instance which your code has ownership, [`RadioBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RadioBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRadioBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_radio_box.html) for more details.
     #[doc(alias = "wxRadioBox")]
     #[doc(alias = "RadioBox")]
     class RadioBox
-        = RadioBoxFromCpp<true>(wxRadioBox) impl
+        = RadioBoxFromCpp<false>(wxRadioBox) impl
         RadioBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -102,7 +102,7 @@ impl<const FROM_CPP: bool> From<RadioBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for RadioBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRadioBox_CLASSINFO()) }
     }
 }
@@ -116,13 +116,13 @@ impl<const FROM_CPP: bool> ItemContainerImmutableMethods for RadioBoxFromCpp<FRO
 // wxRadioButton
 wxwidgets! {
     /// A radio button item is a button which usually denotes one of several mutually exclusive options.
-    /// - [`RadioButton`] represents a C++ `wxRadioButton` class instance which your code has ownership, [`RadioButtonFromCpp`]`<false>` represents one which don't own.
+    /// - [`RadioButton`] represents a C++ `wxRadioButton` class instance which your code has ownership, [`RadioButtonFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RadioButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRadioButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_radio_button.html) for more details.
     #[doc(alias = "wxRadioButton")]
     #[doc(alias = "RadioButton")]
     class RadioButton
-        = RadioButtonFromCpp<true>(wxRadioButton) impl
+        = RadioButtonFromCpp<false>(wxRadioButton) impl
         RadioButtonMethods,
         ControlMethods,
         WindowMethods,
@@ -196,7 +196,7 @@ impl<const FROM_CPP: bool> From<RadioButtonFromCpp<FROM_CPP>> for ObjectFromCpp<
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for RadioButtonFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRadioButton_CLASSINFO()) }
     }
 }
@@ -204,13 +204,13 @@ impl<const FROM_CPP: bool> DynamicCast for RadioButtonFromCpp<FROM_CPP> {
 // wxRealPoint
 wxwidgets! {
     /// A wxRealPoint is a useful data structure for graphics operations.
-    /// - [`RealPoint`] represents a C++ `wxRealPoint` class instance which your code has ownership, [`RealPointFromCpp`]`<false>` represents one which don't own.
+    /// - [`RealPoint`] represents a C++ `wxRealPoint` class instance which your code has ownership, [`RealPointFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RealPoint`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRealPoint` class's documentation](https://docs.wxwidgets.org/3.2/classwx_real_point.html) for more details.
     #[doc(alias = "wxRealPoint")]
     #[doc(alias = "RealPoint")]
     class RealPoint
-        = RealPointFromCpp<true>(wxRealPoint) impl
+        = RealPointFromCpp<false>(wxRealPoint) impl
         RealPointMethods
 }
 impl<const FROM_CPP: bool> RealPointFromCpp<FROM_CPP> {
@@ -239,14 +239,14 @@ impl<const FROM_CPP: bool> RealPointFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for RealPointFromCpp<false> {
+impl Clone for RealPointFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for RealPointFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxRealPoint_delete(self.0) }
         }
     }
@@ -255,13 +255,13 @@ impl<const FROM_CPP: bool> Drop for RealPointFromCpp<FROM_CPP> {
 // wxRearrangeCtrl
 wxwidgets! {
     /// A composite control containing a wxRearrangeList and the buttons allowing to move the items in it.
-    /// - [`RearrangeCtrl`] represents a C++ `wxRearrangeCtrl` class instance which your code has ownership, [`RearrangeCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`RearrangeCtrl`] represents a C++ `wxRearrangeCtrl` class instance which your code has ownership, [`RearrangeCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RearrangeCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_ctrl.html) for more details.
     #[doc(alias = "wxRearrangeCtrl")]
     #[doc(alias = "RearrangeCtrl")]
     class RearrangeCtrl
-        = RearrangeCtrlFromCpp<true>(wxRearrangeCtrl) impl
+        = RearrangeCtrlFromCpp<false>(wxRearrangeCtrl) impl
         RearrangeCtrlMethods,
         PanelMethods,
         WindowMethods,
@@ -343,7 +343,7 @@ impl<const FROM_CPP: bool> From<RearrangeCtrlFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for RearrangeCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRearrangeCtrl_CLASSINFO()) }
     }
 }
@@ -351,13 +351,13 @@ impl<const FROM_CPP: bool> DynamicCast for RearrangeCtrlFromCpp<FROM_CPP> {
 // wxRearrangeDialog
 wxwidgets! {
     /// A dialog allowing the user to rearrange the specified items.
-    /// - [`RearrangeDialog`] represents a C++ `wxRearrangeDialog` class instance which your code has ownership, [`RearrangeDialogFromCpp`]`<false>` represents one which don't own.
+    /// - [`RearrangeDialog`] represents a C++ `wxRearrangeDialog` class instance which your code has ownership, [`RearrangeDialogFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RearrangeDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_dialog.html) for more details.
     #[doc(alias = "wxRearrangeDialog")]
     #[doc(alias = "RearrangeDialog")]
     class RearrangeDialog
-        = RearrangeDialogFromCpp<true>(wxRearrangeDialog) impl
+        = RearrangeDialogFromCpp<false>(wxRearrangeDialog) impl
         RearrangeDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -448,7 +448,7 @@ impl<const FROM_CPP: bool> From<RearrangeDialogFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for RearrangeDialogFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRearrangeDialog_CLASSINFO()) }
     }
 }
@@ -456,13 +456,13 @@ impl<const FROM_CPP: bool> DynamicCast for RearrangeDialogFromCpp<FROM_CPP> {
 // wxRearrangeList
 wxwidgets! {
     /// A listbox-like control allowing the user to rearrange the items and to enable or disable them.
-    /// - [`RearrangeList`] represents a C++ `wxRearrangeList` class instance which your code has ownership, [`RearrangeListFromCpp`]`<false>` represents one which don't own.
+    /// - [`RearrangeList`] represents a C++ `wxRearrangeList` class instance which your code has ownership, [`RearrangeListFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RearrangeList`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRearrangeList` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rearrange_list.html) for more details.
     #[doc(alias = "wxRearrangeList")]
     #[doc(alias = "RearrangeList")]
     class RearrangeList
-        = RearrangeListFromCpp<true>(wxRearrangeList) impl
+        = RearrangeListFromCpp<false>(wxRearrangeList) impl
         RearrangeListMethods,
         CheckListBoxMethods,
         ListBoxMethods,
@@ -556,7 +556,7 @@ impl<const FROM_CPP: bool> From<RearrangeListFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for RearrangeListFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRearrangeList_CLASSINFO()) }
     }
 }
@@ -575,13 +575,13 @@ impl<const FROM_CPP: bool> ItemContainerImmutableMethods for RearrangeListFromCp
 // wxRect
 wxwidgets! {
     /// Represents a rectangle with integer coordinates.
-    /// - [`Rect`] represents a C++ `wxRect` class instance which your code has ownership, [`RectFromCpp`]`<false>` represents one which don't own.
+    /// - [`Rect`] represents a C++ `wxRect` class instance which your code has ownership, [`RectFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Rect`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRect` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rect.html) for more details.
     #[doc(alias = "wxRect")]
     #[doc(alias = "Rect")]
     class Rect
-        = RectFromCpp<true>(wxRect) impl
+        = RectFromCpp<false>(wxRect) impl
         RectMethods
 }
 impl<const FROM_CPP: bool> RectFromCpp<FROM_CPP> {
@@ -636,14 +636,14 @@ impl<const FROM_CPP: bool> RectFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for RectFromCpp<false> {
+impl Clone for RectFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for RectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxRect_delete(self.0) }
         }
     }
@@ -652,13 +652,13 @@ impl<const FROM_CPP: bool> Drop for RectFromCpp<FROM_CPP> {
 // wxRegion
 wxwidgets! {
     /// A wxRegion represents a simple or complex region on a device context or window.
-    /// - [`Region`] represents a C++ `wxRegion` class instance which your code has ownership, [`RegionFromCpp`]`<false>` represents one which don't own.
+    /// - [`Region`] represents a C++ `wxRegion` class instance which your code has ownership, [`RegionFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Region`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRegion` class's documentation](https://docs.wxwidgets.org/3.2/classwx_region.html) for more details.
     #[doc(alias = "wxRegion")]
     #[doc(alias = "Region")]
     class Region
-        = RegionFromCpp<true>(wxRegion) impl
+        = RegionFromCpp<false>(wxRegion) impl
         RegionMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -740,7 +740,7 @@ impl<const FROM_CPP: bool> RegionFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for RegionFromCpp<false> {
+impl Clone for RegionFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -756,13 +756,13 @@ impl<const FROM_CPP: bool> From<RegionFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for RegionFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRegion_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for RegionFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -771,13 +771,13 @@ impl<const FROM_CPP: bool> Drop for RegionFromCpp<FROM_CPP> {
 // wxRegionIterator
 wxwidgets! {
     /// This class is used to iterate through the rectangles in a region, typically when examining the damaged regions of a window within an OnPaint call.
-    /// - [`RegionIterator`] represents a C++ `wxRegionIterator` class instance which your code has ownership, [`RegionIteratorFromCpp`]`<false>` represents one which don't own.
+    /// - [`RegionIterator`] represents a C++ `wxRegionIterator` class instance which your code has ownership, [`RegionIteratorFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RegionIterator`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRegionIterator` class's documentation](https://docs.wxwidgets.org/3.2/classwx_region_iterator.html) for more details.
     #[doc(alias = "wxRegionIterator")]
     #[doc(alias = "RegionIterator")]
     class RegionIterator
-        = RegionIteratorFromCpp<true>(wxRegionIterator) impl
+        = RegionIteratorFromCpp<false>(wxRegionIterator) impl
         RegionIteratorMethods,
         ObjectMethods
 }
@@ -801,7 +801,7 @@ impl<const FROM_CPP: bool> RegionIteratorFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for RegionIteratorFromCpp<false> {
+impl Clone for RegionIteratorFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -812,13 +812,13 @@ impl<const FROM_CPP: bool> From<RegionIteratorFromCpp<FROM_CPP>> for ObjectFromC
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for RegionIteratorFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxRegionIterator_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for RegionIteratorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -827,13 +827,13 @@ impl<const FROM_CPP: bool> Drop for RegionIteratorFromCpp<FROM_CPP> {
 // wxRendererNative
 wxwidgets! {
     /// First, a brief introduction to wxRendererNative and why it is needed.
-    /// - [`RendererNative`] represents a C++ `wxRendererNative` class instance which your code has ownership, [`RendererNativeFromCpp`]`<false>` represents one which don't own.
+    /// - [`RendererNative`] represents a C++ `wxRendererNative` class instance which your code has ownership, [`RendererNativeFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RendererNative`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRendererNative` class's documentation](https://docs.wxwidgets.org/3.2/classwx_renderer_native.html) for more details.
     #[doc(alias = "wxRendererNative")]
     #[doc(alias = "RendererNative")]
     class RendererNative
-        = RendererNativeFromCpp<true>(wxRendererNative) impl
+        = RendererNativeFromCpp<false>(wxRendererNative) impl
         RendererNativeMethods
 }
 impl<const FROM_CPP: bool> RendererNativeFromCpp<FROM_CPP> {
@@ -841,14 +841,14 @@ impl<const FROM_CPP: bool> RendererNativeFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for RendererNativeFromCpp<false> {
+impl Clone for RendererNativeFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for RendererNativeFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxRendererNative_delete(self.0) }
         }
     }
@@ -857,13 +857,13 @@ impl<const FROM_CPP: bool> Drop for RendererNativeFromCpp<FROM_CPP> {
 // wxRichToolTip
 wxwidgets! {
     /// Allows showing a tool tip with more customizations than wxToolTip.
-    /// - [`RichToolTip`] represents a C++ `wxRichToolTip` class instance which your code has ownership, [`RichToolTipFromCpp`]`<false>` represents one which don't own.
+    /// - [`RichToolTip`] represents a C++ `wxRichToolTip` class instance which your code has ownership, [`RichToolTipFromCpp`]`<true>` represents one which don't own.
     /// - Use [`RichToolTip`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxRichToolTip` class's documentation](https://docs.wxwidgets.org/3.2/classwx_rich_tool_tip.html) for more details.
     #[doc(alias = "wxRichToolTip")]
     #[doc(alias = "RichToolTip")]
     class RichToolTip
-        = RichToolTipFromCpp<true>(wxRichToolTip) impl
+        = RichToolTipFromCpp<false>(wxRichToolTip) impl
         RichToolTipMethods
 }
 impl<const FROM_CPP: bool> RichToolTipFromCpp<FROM_CPP> {
@@ -883,14 +883,14 @@ impl<const FROM_CPP: bool> RichToolTipFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for RichToolTipFromCpp<false> {
+impl Clone for RichToolTipFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for RichToolTipFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxRichToolTip_delete(self.0) }
         }
     }

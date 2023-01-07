@@ -3,13 +3,13 @@ use super::*;
 // wxTimer
 wxwidgets! {
     /// The wxTimer class allows you to execute code at specified intervals.
-    /// - [`Timer`] represents a C++ `wxTimer` class instance which your code has ownership, [`TimerFromCpp`]`<false>` represents one which don't own.
+    /// - [`Timer`] represents a C++ `wxTimer` class instance which your code has ownership, [`TimerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Timer`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxTimer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_timer.html) for more details.
     #[doc(alias = "wxTimer")]
     #[doc(alias = "Timer")]
     class Timer
-        = TimerFromCpp<true>(wxTimer) impl
+        = TimerFromCpp<false>(wxTimer) impl
         TimerMethods,
         EvtHandlerMethods,
         ObjectMethods
@@ -56,7 +56,7 @@ impl<const FROM_CPP: bool> From<TimerFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_C
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for TimerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxTimer_CLASSINFO()) }
     }
 }
@@ -64,13 +64,13 @@ impl<const FROM_CPP: bool> DynamicCast for TimerFromCpp<FROM_CPP> {
 // wxTimerEvent
 wxwidgets! {
     /// wxTimerEvent object is passed to the event handler of timer events (see wxTimer::SetOwner).
-    /// - [`TimerEvent`] represents a C++ `wxTimerEvent` class instance which your code has ownership, [`TimerEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`TimerEvent`] represents a C++ `wxTimerEvent` class instance which your code has ownership, [`TimerEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`TimerEvent`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxTimerEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_timer_event.html) for more details.
     #[doc(alias = "wxTimerEvent")]
     #[doc(alias = "TimerEvent")]
     class TimerEvent
-        = TimerEventFromCpp<true>(wxTimerEvent) impl
+        = TimerEventFromCpp<false>(wxTimerEvent) impl
         TimerEventMethods,
         EventMethods,
         ObjectMethods
@@ -88,7 +88,7 @@ impl<const FROM_CPP: bool> TimerEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for TimerEventFromCpp<false> {
+impl Clone for TimerEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -104,13 +104,13 @@ impl<const FROM_CPP: bool> From<TimerEventFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for TimerEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxTimerEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for TimerEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

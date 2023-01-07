@@ -3,13 +3,13 @@ use super::*;
 // wxDC
 wxwidgets! {
     /// A wxDC is a "device context" onto which graphics and text can be drawn.
-    /// - [`DC`] represents a C++ `wxDC` class instance which your code has ownership, [`DCFromCpp`]`<false>` represents one which don't own.
+    /// - [`DC`] represents a C++ `wxDC` class instance which your code has ownership, [`DCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c.html) for more details.
     #[doc(alias = "wxDC")]
     #[doc(alias = "DC")]
     class DC
-        = DCFromCpp<true>(wxDC) impl
+        = DCFromCpp<false>(wxDC) impl
         DCMethods,
         ObjectMethods
 }
@@ -18,7 +18,7 @@ impl<const FROM_CPP: bool> DCFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DCFromCpp<false> {
+impl Clone for DCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -29,13 +29,13 @@ impl<const FROM_CPP: bool> From<DCFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DCFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDC_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -44,13 +44,13 @@ impl<const FROM_CPP: bool> Drop for DCFromCpp<FROM_CPP> {
 // wxDCBrushChanger
 wxwidgets! {
     /// wxDCBrushChanger is a small helper class for setting a brush on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    /// - [`DCBrushChanger`] represents a C++ `wxDCBrushChanger` class instance which your code has ownership, [`DCBrushChangerFromCpp`]`<false>` represents one which don't own.
+    /// - [`DCBrushChanger`] represents a C++ `wxDCBrushChanger` class instance which your code has ownership, [`DCBrushChangerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DCBrushChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCBrushChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_brush_changer.html) for more details.
     #[doc(alias = "wxDCBrushChanger")]
     #[doc(alias = "DCBrushChanger")]
     class DCBrushChanger
-        = DCBrushChangerFromCpp<true>(wxDCBrushChanger) impl
+        = DCBrushChangerFromCpp<false>(wxDCBrushChanger) impl
         DCBrushChangerMethods
 }
 impl<const FROM_CPP: bool> DCBrushChangerFromCpp<FROM_CPP> {
@@ -71,14 +71,14 @@ impl<const FROM_CPP: bool> DCBrushChangerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DCBrushChangerFromCpp<false> {
+impl Clone for DCBrushChangerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DCBrushChangerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDCBrushChanger_delete(self.0) }
         }
     }
@@ -87,13 +87,13 @@ impl<const FROM_CPP: bool> Drop for DCBrushChangerFromCpp<FROM_CPP> {
 // wxDCClipper
 wxwidgets! {
     /// wxDCClipper is a helper class for setting a clipping region on a wxDC during its lifetime.
-    /// - [`DCClipper`] represents a C++ `wxDCClipper` class instance which your code has ownership, [`DCClipperFromCpp`]`<false>` represents one which don't own.
+    /// - [`DCClipper`] represents a C++ `wxDCClipper` class instance which your code has ownership, [`DCClipperFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DCClipper`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCClipper` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_clipper.html) for more details.
     #[doc(alias = "wxDCClipper")]
     #[doc(alias = "DCClipper")]
     class DCClipper
-        = DCClipperFromCpp<true>(wxDCClipper) impl
+        = DCClipperFromCpp<false>(wxDCClipper) impl
         DCClipperMethods
 }
 impl<const FROM_CPP: bool> DCClipperFromCpp<FROM_CPP> {
@@ -140,14 +140,14 @@ impl<const FROM_CPP: bool> DCClipperFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DCClipperFromCpp<false> {
+impl Clone for DCClipperFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DCClipperFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDCClipper_delete(self.0) }
         }
     }
@@ -156,13 +156,13 @@ impl<const FROM_CPP: bool> Drop for DCClipperFromCpp<FROM_CPP> {
 // wxDCFontChanger
 wxwidgets! {
     /// wxDCFontChanger is a small helper class for setting a font on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    /// - [`DCFontChanger`] represents a C++ `wxDCFontChanger` class instance which your code has ownership, [`DCFontChangerFromCpp`]`<false>` represents one which don't own.
+    /// - [`DCFontChanger`] represents a C++ `wxDCFontChanger` class instance which your code has ownership, [`DCFontChangerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DCFontChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCFontChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_font_changer.html) for more details.
     #[doc(alias = "wxDCFontChanger")]
     #[doc(alias = "DCFontChanger")]
     class DCFontChanger
-        = DCFontChangerFromCpp<true>(wxDCFontChanger) impl
+        = DCFontChangerFromCpp<false>(wxDCFontChanger) impl
         DCFontChangerMethods
 }
 impl<const FROM_CPP: bool> DCFontChangerFromCpp<FROM_CPP> {
@@ -192,14 +192,14 @@ impl<const FROM_CPP: bool> DCFontChangerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DCFontChangerFromCpp<false> {
+impl Clone for DCFontChangerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DCFontChangerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDCFontChanger_delete(self.0) }
         }
     }
@@ -208,13 +208,13 @@ impl<const FROM_CPP: bool> Drop for DCFontChangerFromCpp<FROM_CPP> {
 // wxDCOverlay
 wxwidgets! {
     /// Connects an overlay with a drawing DC.
-    /// - [`DCOverlay`] represents a C++ `wxDCOverlay` class instance which your code has ownership, [`DCOverlayFromCpp`]`<false>` represents one which don't own.
+    /// - [`DCOverlay`] represents a C++ `wxDCOverlay` class instance which your code has ownership, [`DCOverlayFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DCOverlay`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCOverlay` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_overlay.html) for more details.
     #[doc(alias = "wxDCOverlay")]
     #[doc(alias = "DCOverlay")]
     class DCOverlay
-        = DCOverlayFromCpp<true>(wxDCOverlay) impl
+        = DCOverlayFromCpp<false>(wxDCOverlay) impl
         DCOverlayMethods
 }
 impl<const FROM_CPP: bool> DCOverlayFromCpp<FROM_CPP> {
@@ -258,14 +258,14 @@ impl<const FROM_CPP: bool> DCOverlayFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DCOverlayFromCpp<false> {
+impl Clone for DCOverlayFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DCOverlayFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDCOverlay_delete(self.0) }
         }
     }
@@ -274,13 +274,13 @@ impl<const FROM_CPP: bool> Drop for DCOverlayFromCpp<FROM_CPP> {
 // wxDCPenChanger
 wxwidgets! {
     /// wxDCPenChanger is a small helper class for setting a pen on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    /// - [`DCPenChanger`] represents a C++ `wxDCPenChanger` class instance which your code has ownership, [`DCPenChangerFromCpp`]`<false>` represents one which don't own.
+    /// - [`DCPenChanger`] represents a C++ `wxDCPenChanger` class instance which your code has ownership, [`DCPenChangerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DCPenChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCPenChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_pen_changer.html) for more details.
     #[doc(alias = "wxDCPenChanger")]
     #[doc(alias = "DCPenChanger")]
     class DCPenChanger
-        = DCPenChangerFromCpp<true>(wxDCPenChanger) impl
+        = DCPenChangerFromCpp<false>(wxDCPenChanger) impl
         DCPenChangerMethods
 }
 impl<const FROM_CPP: bool> DCPenChangerFromCpp<FROM_CPP> {
@@ -298,14 +298,14 @@ impl<const FROM_CPP: bool> DCPenChangerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DCPenChangerFromCpp<false> {
+impl Clone for DCPenChangerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DCPenChangerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDCPenChanger_delete(self.0) }
         }
     }
@@ -314,13 +314,13 @@ impl<const FROM_CPP: bool> Drop for DCPenChangerFromCpp<FROM_CPP> {
 // wxDCTextColourChanger
 wxwidgets! {
     /// wxDCTextColourChanger is a small helper class for setting a foreground text colour on a wxDC and unsetting it automatically in the destructor, restoring the previous one.
-    /// - [`DCTextColourChanger`] represents a C++ `wxDCTextColourChanger` class instance which your code has ownership, [`DCTextColourChangerFromCpp`]`<false>` represents one which don't own.
+    /// - [`DCTextColourChanger`] represents a C++ `wxDCTextColourChanger` class instance which your code has ownership, [`DCTextColourChangerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DCTextColourChanger`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDCTextColourChanger` class's documentation](https://docs.wxwidgets.org/3.2/classwx_d_c_text_colour_changer.html) for more details.
     #[doc(alias = "wxDCTextColourChanger")]
     #[doc(alias = "DCTextColourChanger")]
     class DCTextColourChanger
-        = DCTextColourChangerFromCpp<true>(wxDCTextColourChanger) impl
+        = DCTextColourChangerFromCpp<false>(wxDCTextColourChanger) impl
         DCTextColourChangerMethods
 }
 impl<const FROM_CPP: bool> DCTextColourChangerFromCpp<FROM_CPP> {
@@ -350,14 +350,14 @@ impl<const FROM_CPP: bool> DCTextColourChangerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DCTextColourChangerFromCpp<false> {
+impl Clone for DCTextColourChangerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DCTextColourChangerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDCTextColourChanger_delete(self.0) }
         }
     }
@@ -366,13 +366,13 @@ impl<const FROM_CPP: bool> Drop for DCTextColourChangerFromCpp<FROM_CPP> {
 // wxDataFormat
 wxwidgets! {
     /// A wxDataFormat is an encapsulation of a platform-specific format handle which is used by the system for the clipboard and drag and drop operations.
-    /// - [`DataFormat`] represents a C++ `wxDataFormat` class instance which your code has ownership, [`DataFormatFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataFormat`] represents a C++ `wxDataFormat` class instance which your code has ownership, [`DataFormatFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataFormat`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataFormat` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_format.html) for more details.
     #[doc(alias = "wxDataFormat")]
     #[doc(alias = "DataFormat")]
     class DataFormat
-        = DataFormatFromCpp<true>(wxDataFormat) impl
+        = DataFormatFromCpp<false>(wxDataFormat) impl
         DataFormatMethods
 }
 impl<const FROM_CPP: bool> DataFormatFromCpp<FROM_CPP> {
@@ -391,14 +391,14 @@ impl<const FROM_CPP: bool> DataFormatFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataFormatFromCpp<false> {
+impl Clone for DataFormatFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DataFormatFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataFormat_delete(self.0) }
         }
     }
@@ -407,13 +407,13 @@ impl<const FROM_CPP: bool> Drop for DataFormatFromCpp<FROM_CPP> {
 // wxDataObject
 wxwidgets! {
     /// A wxDataObject represents data that can be copied to or from the clipboard, or dragged and dropped.
-    /// - [`DataObject`] represents a C++ `wxDataObject` class instance which your code has ownership, [`DataObjectFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataObject`] represents a C++ `wxDataObject` class instance which your code has ownership, [`DataObjectFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object.html) for more details.
     #[doc(alias = "wxDataObject")]
     #[doc(alias = "DataObject")]
     class DataObject
-        = DataObjectFromCpp<true>(wxDataObject) impl
+        = DataObjectFromCpp<false>(wxDataObject) impl
         DataObjectMethods
 }
 impl<const FROM_CPP: bool> DataObjectFromCpp<FROM_CPP> {
@@ -427,14 +427,14 @@ impl<const FROM_CPP: bool> DataObjectFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataObjectFromCpp<false> {
+impl Clone for DataObjectFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DataObjectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataObject_delete(self.0) }
         }
     }
@@ -443,13 +443,13 @@ impl<const FROM_CPP: bool> Drop for DataObjectFromCpp<FROM_CPP> {
 // wxDataObjectComposite
 wxwidgets! {
     /// wxDataObjectComposite is the simplest wxDataObject derivation which may be used to support multiple formats.
-    /// - [`DataObjectComposite`] represents a C++ `wxDataObjectComposite` class instance which your code has ownership, [`DataObjectCompositeFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataObjectComposite`] represents a C++ `wxDataObjectComposite` class instance which your code has ownership, [`DataObjectCompositeFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataObjectComposite`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataObjectComposite` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_composite.html) for more details.
     #[doc(alias = "wxDataObjectComposite")]
     #[doc(alias = "DataObjectComposite")]
     class DataObjectComposite
-        = DataObjectCompositeFromCpp<true>(wxDataObjectComposite) impl
+        = DataObjectCompositeFromCpp<false>(wxDataObjectComposite) impl
         DataObjectCompositeMethods,
         DataObjectMethods
 }
@@ -464,7 +464,7 @@ impl<const FROM_CPP: bool> DataObjectCompositeFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataObjectCompositeFromCpp<false> {
+impl Clone for DataObjectCompositeFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -478,7 +478,7 @@ impl<const FROM_CPP: bool> From<DataObjectCompositeFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for DataObjectCompositeFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataObjectComposite_delete(self.0) }
         }
     }
@@ -487,13 +487,13 @@ impl<const FROM_CPP: bool> Drop for DataObjectCompositeFromCpp<FROM_CPP> {
 // wxDataObjectSimple
 wxwidgets! {
     /// This is the simplest possible implementation of the wxDataObject class.
-    /// - [`DataObjectSimple`] represents a C++ `wxDataObjectSimple` class instance which your code has ownership, [`DataObjectSimpleFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataObjectSimple`] represents a C++ `wxDataObjectSimple` class instance which your code has ownership, [`DataObjectSimpleFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataObjectSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataObjectSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_object_simple.html) for more details.
     #[doc(alias = "wxDataObjectSimple")]
     #[doc(alias = "DataObjectSimple")]
     class DataObjectSimple
-        = DataObjectSimpleFromCpp<true>(wxDataObjectSimple) impl
+        = DataObjectSimpleFromCpp<false>(wxDataObjectSimple) impl
         DataObjectSimpleMethods,
         DataObjectMethods
 }
@@ -511,7 +511,7 @@ impl<const FROM_CPP: bool> DataObjectSimpleFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataObjectSimpleFromCpp<false> {
+impl Clone for DataObjectSimpleFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -523,7 +523,7 @@ impl<const FROM_CPP: bool> From<DataObjectSimpleFromCpp<FROM_CPP>> for DataObjec
 }
 impl<const FROM_CPP: bool> Drop for DataObjectSimpleFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataObjectSimple_delete(self.0) }
         }
     }
@@ -532,13 +532,13 @@ impl<const FROM_CPP: bool> Drop for DataObjectSimpleFromCpp<FROM_CPP> {
 // wxDataViewBitmapRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render bitmaps.
-    /// - [`DataViewBitmapRenderer`] represents a C++ `wxDataViewBitmapRenderer` class instance which your code has ownership, [`DataViewBitmapRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewBitmapRenderer`] represents a C++ `wxDataViewBitmapRenderer` class instance which your code has ownership, [`DataViewBitmapRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewBitmapRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewBitmapRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_bitmap_renderer.html) for more details.
     #[doc(alias = "wxDataViewBitmapRenderer")]
     #[doc(alias = "DataViewBitmapRenderer")]
     class DataViewBitmapRenderer
-        = DataViewBitmapRendererFromCpp<true>(wxDataViewBitmapRenderer) impl
+        = DataViewBitmapRendererFromCpp<false>(wxDataViewBitmapRenderer) impl
         DataViewBitmapRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -549,7 +549,7 @@ impl<const FROM_CPP: bool> DataViewBitmapRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewBitmapRendererFromCpp<false> {
+impl Clone for DataViewBitmapRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -569,13 +569,13 @@ impl<const FROM_CPP: bool> From<DataViewBitmapRendererFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewBitmapRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewBitmapRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewBitmapRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -584,13 +584,13 @@ impl<const FROM_CPP: bool> Drop for DataViewBitmapRendererFromCpp<FROM_CPP> {
 // wxDataViewChoiceByIndexRenderer
 wxwidgets! {
     /// A wxDataViewCtrl renderer using wxChoice control and indexes into it.
-    /// - [`DataViewChoiceByIndexRenderer`] represents a C++ `wxDataViewChoiceByIndexRenderer` class instance which your code has ownership, [`DataViewChoiceByIndexRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewChoiceByIndexRenderer`] represents a C++ `wxDataViewChoiceByIndexRenderer` class instance which your code has ownership, [`DataViewChoiceByIndexRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewChoiceByIndexRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewChoiceByIndexRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_by_index_renderer.html) for more details.
     #[doc(alias = "wxDataViewChoiceByIndexRenderer")]
     #[doc(alias = "DataViewChoiceByIndexRenderer")]
     class DataViewChoiceByIndexRenderer
-        = DataViewChoiceByIndexRendererFromCpp<true>(wxDataViewChoiceByIndexRenderer) impl
+        = DataViewChoiceByIndexRendererFromCpp<false>(wxDataViewChoiceByIndexRenderer) impl
         DataViewChoiceByIndexRendererMethods,
         DataViewChoiceRendererMethods,
         DataViewRendererMethods,
@@ -602,7 +602,7 @@ impl<const FROM_CPP: bool> DataViewChoiceByIndexRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewChoiceByIndexRendererFromCpp<false> {
+impl Clone for DataViewChoiceByIndexRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -629,13 +629,13 @@ impl<const FROM_CPP: bool> From<DataViewChoiceByIndexRendererFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewChoiceByIndexRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewChoiceByIndexRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewChoiceByIndexRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -644,13 +644,13 @@ impl<const FROM_CPP: bool> Drop for DataViewChoiceByIndexRendererFromCpp<FROM_CP
 // wxDataViewChoiceRenderer
 wxwidgets! {
     /// A wxDataViewCtrl renderer using wxChoice control and values of strings in it.
-    /// - [`DataViewChoiceRenderer`] represents a C++ `wxDataViewChoiceRenderer` class instance which your code has ownership, [`DataViewChoiceRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewChoiceRenderer`] represents a C++ `wxDataViewChoiceRenderer` class instance which your code has ownership, [`DataViewChoiceRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewChoiceRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewChoiceRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_choice_renderer.html) for more details.
     #[doc(alias = "wxDataViewChoiceRenderer")]
     #[doc(alias = "DataViewChoiceRenderer")]
     class DataViewChoiceRenderer
-        = DataViewChoiceRendererFromCpp<true>(wxDataViewChoiceRenderer) impl
+        = DataViewChoiceRendererFromCpp<false>(wxDataViewChoiceRenderer) impl
         DataViewChoiceRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -661,7 +661,7 @@ impl<const FROM_CPP: bool> DataViewChoiceRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewChoiceRendererFromCpp<false> {
+impl Clone for DataViewChoiceRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -681,13 +681,13 @@ impl<const FROM_CPP: bool> From<DataViewChoiceRendererFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewChoiceRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewChoiceRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewChoiceRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -696,13 +696,13 @@ impl<const FROM_CPP: bool> Drop for DataViewChoiceRendererFromCpp<FROM_CPP> {
 // wxDataViewColumn
 wxwidgets! {
     /// This class represents a column in a wxDataViewCtrl.
-    /// - [`DataViewColumn`] represents a C++ `wxDataViewColumn` class instance which your code has ownership, [`DataViewColumnFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewColumn`] represents a C++ `wxDataViewColumn` class instance which your code has ownership, [`DataViewColumnFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewColumn`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewColumn` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_column.html) for more details.
     #[doc(alias = "wxDataViewColumn")]
     #[doc(alias = "DataViewColumn")]
     class DataViewColumn
-        = DataViewColumnFromCpp<true>(wxDataViewColumn) impl
+        = DataViewColumnFromCpp<false>(wxDataViewColumn) impl
         DataViewColumnMethods,
         SettableHeaderColumnMethods,
         HeaderColumnMethods
@@ -767,7 +767,7 @@ impl<const FROM_CPP: bool> DataViewColumnFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewColumnFromCpp<false> {
+impl Clone for DataViewColumnFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -786,7 +786,7 @@ impl<const FROM_CPP: bool> From<DataViewColumnFromCpp<FROM_CPP>> for HeaderColum
 }
 impl<const FROM_CPP: bool> Drop for DataViewColumnFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewColumn_delete(self.0) }
         }
     }
@@ -795,13 +795,13 @@ impl<const FROM_CPP: bool> Drop for DataViewColumnFromCpp<FROM_CPP> {
 // wxDataViewCtrl
 wxwidgets! {
     /// wxDataViewCtrl is a control to display data either in a tree like fashion or in a tabular form or both.
-    /// - [`DataViewCtrl`] represents a C++ `wxDataViewCtrl` class instance which your code has ownership, [`DataViewCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewCtrl`] represents a C++ `wxDataViewCtrl` class instance which your code has ownership, [`DataViewCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_ctrl.html) for more details.
     #[doc(alias = "wxDataViewCtrl")]
     #[doc(alias = "DataViewCtrl")]
     class DataViewCtrl
-        = DataViewCtrlFromCpp<true>(wxDataViewCtrl) impl
+        = DataViewCtrlFromCpp<false>(wxDataViewCtrl) impl
         DataViewCtrlMethods,
         // ControlMethods,
         WindowMethods,
@@ -872,7 +872,7 @@ impl<const FROM_CPP: bool> From<DataViewCtrlFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewCtrl_CLASSINFO()) }
     }
 }
@@ -908,13 +908,13 @@ impl<const FROM_CPP: bool> ControlMethods for DataViewCtrlFromCpp<FROM_CPP> {
 // wxDataViewCustomRenderer
 wxwidgets! {
     /// You need to derive a new class from wxDataViewCustomRenderer in order to write a new renderer.
-    /// - [`DataViewCustomRenderer`] represents a C++ `wxDataViewCustomRenderer` class instance which your code has ownership, [`DataViewCustomRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewCustomRenderer`] represents a C++ `wxDataViewCustomRenderer` class instance which your code has ownership, [`DataViewCustomRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewCustomRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewCustomRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_custom_renderer.html) for more details.
     #[doc(alias = "wxDataViewCustomRenderer")]
     #[doc(alias = "DataViewCustomRenderer")]
     class DataViewCustomRenderer
-        = DataViewCustomRendererFromCpp<true>(wxDataViewCustomRenderer) impl
+        = DataViewCustomRendererFromCpp<false>(wxDataViewCustomRenderer) impl
         DataViewCustomRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -925,7 +925,7 @@ impl<const FROM_CPP: bool> DataViewCustomRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewCustomRendererFromCpp<false> {
+impl Clone for DataViewCustomRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -945,13 +945,13 @@ impl<const FROM_CPP: bool> From<DataViewCustomRendererFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewCustomRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewCustomRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewCustomRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -960,13 +960,13 @@ impl<const FROM_CPP: bool> Drop for DataViewCustomRendererFromCpp<FROM_CPP> {
 // wxDataViewDateRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render calendar controls.
-    /// - [`DataViewDateRenderer`] represents a C++ `wxDataViewDateRenderer` class instance which your code has ownership, [`DataViewDateRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewDateRenderer`] represents a C++ `wxDataViewDateRenderer` class instance which your code has ownership, [`DataViewDateRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewDateRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewDateRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_date_renderer.html) for more details.
     #[doc(alias = "wxDataViewDateRenderer")]
     #[doc(alias = "DataViewDateRenderer")]
     class DataViewDateRenderer
-        = DataViewDateRendererFromCpp<true>(wxDataViewDateRenderer) impl
+        = DataViewDateRendererFromCpp<false>(wxDataViewDateRenderer) impl
         DataViewDateRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -977,7 +977,7 @@ impl<const FROM_CPP: bool> DataViewDateRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewDateRendererFromCpp<false> {
+impl Clone for DataViewDateRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -995,13 +995,13 @@ impl<const FROM_CPP: bool> From<DataViewDateRendererFromCpp<FROM_CPP>> for Objec
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewDateRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewDateRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewDateRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1010,13 +1010,13 @@ impl<const FROM_CPP: bool> Drop for DataViewDateRendererFromCpp<FROM_CPP> {
 // wxDataViewEvent
 wxwidgets! {
     /// This is the event class for the wxDataViewCtrl notifications.
-    /// - [`DataViewEvent`] represents a C++ `wxDataViewEvent` class instance which your code has ownership, [`DataViewEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewEvent`] represents a C++ `wxDataViewEvent` class instance which your code has ownership, [`DataViewEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_event.html) for more details.
     #[doc(alias = "wxDataViewEvent")]
     #[doc(alias = "DataViewEvent")]
     class DataViewEvent
-        = DataViewEventFromCpp<true>(wxDataViewEvent) impl
+        = DataViewEventFromCpp<false>(wxDataViewEvent) impl
         DataViewEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -1047,7 +1047,7 @@ impl<const FROM_CPP: bool> DataViewEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewEventFromCpp<false> {
+impl Clone for DataViewEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1073,13 +1073,13 @@ impl<const FROM_CPP: bool> From<DataViewEventFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1088,13 +1088,13 @@ impl<const FROM_CPP: bool> Drop for DataViewEventFromCpp<FROM_CPP> {
 // wxDataViewIconText
 wxwidgets! {
     /// wxDataViewIconText is used by wxDataViewIconTextRenderer for data transfer.
-    /// - [`DataViewIconText`] represents a C++ `wxDataViewIconText` class instance which your code has ownership, [`DataViewIconTextFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewIconText`] represents a C++ `wxDataViewIconText` class instance which your code has ownership, [`DataViewIconTextFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewIconText`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewIconText` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text.html) for more details.
     #[doc(alias = "wxDataViewIconText")]
     #[doc(alias = "DataViewIconText")]
     class DataViewIconText
-        = DataViewIconTextFromCpp<true>(wxDataViewIconText) impl
+        = DataViewIconTextFromCpp<false>(wxDataViewIconText) impl
         DataViewIconTextMethods,
         ObjectMethods
 }
@@ -1127,7 +1127,7 @@ impl<const FROM_CPP: bool> DataViewIconTextFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewIconTextFromCpp<false> {
+impl Clone for DataViewIconTextFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1138,13 +1138,13 @@ impl<const FROM_CPP: bool> From<DataViewIconTextFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewIconTextFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewIconText_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewIconTextFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1153,13 +1153,13 @@ impl<const FROM_CPP: bool> Drop for DataViewIconTextFromCpp<FROM_CPP> {
 // wxDataViewIconTextRenderer
 wxwidgets! {
     /// The wxDataViewIconTextRenderer class is used to display text with a small icon next to it as it is typically done in a file manager.
-    /// - [`DataViewIconTextRenderer`] represents a C++ `wxDataViewIconTextRenderer` class instance which your code has ownership, [`DataViewIconTextRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewIconTextRenderer`] represents a C++ `wxDataViewIconTextRenderer` class instance which your code has ownership, [`DataViewIconTextRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewIconTextRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewIconTextRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_icon_text_renderer.html) for more details.
     #[doc(alias = "wxDataViewIconTextRenderer")]
     #[doc(alias = "DataViewIconTextRenderer")]
     class DataViewIconTextRenderer
-        = DataViewIconTextRendererFromCpp<true>(wxDataViewIconTextRenderer) impl
+        = DataViewIconTextRendererFromCpp<false>(wxDataViewIconTextRenderer) impl
         DataViewIconTextRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -1170,7 +1170,7 @@ impl<const FROM_CPP: bool> DataViewIconTextRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewIconTextRendererFromCpp<false> {
+impl Clone for DataViewIconTextRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1190,13 +1190,13 @@ impl<const FROM_CPP: bool> From<DataViewIconTextRendererFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewIconTextRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewIconTextRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewIconTextRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1205,13 +1205,13 @@ impl<const FROM_CPP: bool> Drop for DataViewIconTextRendererFromCpp<FROM_CPP> {
 // wxDataViewIndexListModel
 wxwidgets! {
     /// wxDataViewIndexListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem (which you can obtain from this class).
-    /// - [`DataViewIndexListModel`] represents a C++ `wxDataViewIndexListModel` class instance which your code has ownership, [`DataViewIndexListModelFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewIndexListModel`] represents a C++ `wxDataViewIndexListModel` class instance which your code has ownership, [`DataViewIndexListModelFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewIndexListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewIndexListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_index_list_model.html) for more details.
     #[doc(alias = "wxDataViewIndexListModel")]
     #[doc(alias = "DataViewIndexListModel")]
     class DataViewIndexListModel
-        = DataViewIndexListModelFromCpp<true>(wxDataViewIndexListModel) impl
+        = DataViewIndexListModelFromCpp<false>(wxDataViewIndexListModel) impl
         DataViewIndexListModelMethods,
         DataViewListModelMethods,
         DataViewModelMethods,
@@ -1223,7 +1223,7 @@ impl<const FROM_CPP: bool> DataViewIndexListModelFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewIndexListModelFromCpp<false> {
+impl Clone for DataViewIndexListModelFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1251,7 +1251,7 @@ impl<const FROM_CPP: bool> From<DataViewIndexListModelFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for DataViewIndexListModelFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewIndexListModel_delete(self.0) }
         }
     }
@@ -1260,13 +1260,13 @@ impl<const FROM_CPP: bool> Drop for DataViewIndexListModelFromCpp<FROM_CPP> {
 // wxDataViewItem
 wxwidgets! {
     /// wxDataViewItem is a small opaque class that represents an item in a wxDataViewCtrl in a persistent way, i.e.
-    /// - [`DataViewItem`] represents a C++ `wxDataViewItem` class instance which your code has ownership, [`DataViewItemFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewItem`] represents a C++ `wxDataViewItem` class instance which your code has ownership, [`DataViewItemFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item.html) for more details.
     #[doc(alias = "wxDataViewItem")]
     #[doc(alias = "DataViewItem")]
     class DataViewItem
-        = DataViewItemFromCpp<true>(wxDataViewItem) impl
+        = DataViewItemFromCpp<false>(wxDataViewItem) impl
         DataViewItemMethods
 }
 impl<const FROM_CPP: bool> DataViewItemFromCpp<FROM_CPP> {
@@ -1295,14 +1295,14 @@ impl<const FROM_CPP: bool> DataViewItemFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewItemFromCpp<false> {
+impl Clone for DataViewItemFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewItemFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewItem_delete(self.0) }
         }
     }
@@ -1311,13 +1311,13 @@ impl<const FROM_CPP: bool> Drop for DataViewItemFromCpp<FROM_CPP> {
 // wxDataViewItemAttr
 wxwidgets! {
     /// This class is used to indicate to a wxDataViewCtrl that a certain item (see wxDataViewItem) has extra font attributes for its renderer.
-    /// - [`DataViewItemAttr`] represents a C++ `wxDataViewItemAttr` class instance which your code has ownership, [`DataViewItemAttrFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewItemAttr`] represents a C++ `wxDataViewItemAttr` class instance which your code has ownership, [`DataViewItemAttrFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewItemAttr`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewItemAttr` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_item_attr.html) for more details.
     #[doc(alias = "wxDataViewItemAttr")]
     #[doc(alias = "DataViewItemAttr")]
     class DataViewItemAttr
-        = DataViewItemAttrFromCpp<true>(wxDataViewItemAttr) impl
+        = DataViewItemAttrFromCpp<false>(wxDataViewItemAttr) impl
         DataViewItemAttrMethods
 }
 impl<const FROM_CPP: bool> DataViewItemAttrFromCpp<FROM_CPP> {
@@ -1331,14 +1331,14 @@ impl<const FROM_CPP: bool> DataViewItemAttrFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewItemAttrFromCpp<false> {
+impl Clone for DataViewItemAttrFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewItemAttrFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewItemAttr_delete(self.0) }
         }
     }
@@ -1347,13 +1347,13 @@ impl<const FROM_CPP: bool> Drop for DataViewItemAttrFromCpp<FROM_CPP> {
 // wxDataViewListCtrl
 wxwidgets! {
     /// This class is a wxDataViewCtrl which internally uses a wxDataViewListStore and forwards most of its API to that class.
-    /// - [`DataViewListCtrl`] represents a C++ `wxDataViewListCtrl` class instance which your code has ownership, [`DataViewListCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewListCtrl`] represents a C++ `wxDataViewListCtrl` class instance which your code has ownership, [`DataViewListCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewListCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewListCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_ctrl.html) for more details.
     #[doc(alias = "wxDataViewListCtrl")]
     #[doc(alias = "DataViewListCtrl")]
     class DataViewListCtrl
-        = DataViewListCtrlFromCpp<true>(wxDataViewListCtrl) impl
+        = DataViewListCtrlFromCpp<false>(wxDataViewListCtrl) impl
         DataViewListCtrlMethods,
         DataViewCtrlMethods,
         ControlMethods,
@@ -1429,7 +1429,7 @@ impl<const FROM_CPP: bool> From<DataViewListCtrlFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewListCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewListCtrl_CLASSINFO()) }
     }
 }
@@ -1437,13 +1437,13 @@ impl<const FROM_CPP: bool> DynamicCast for DataViewListCtrlFromCpp<FROM_CPP> {
 // wxDataViewListModel
 wxwidgets! {
     /// Base class with abstract API for wxDataViewIndexListModel and wxDataViewVirtualListModel.
-    /// - [`DataViewListModel`] represents a C++ `wxDataViewListModel` class instance which your code has ownership, [`DataViewListModelFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewListModel`] represents a C++ `wxDataViewListModel` class instance which your code has ownership, [`DataViewListModelFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_model.html) for more details.
     #[doc(alias = "wxDataViewListModel")]
     #[doc(alias = "DataViewListModel")]
     class DataViewListModel
-        = DataViewListModelFromCpp<true>(wxDataViewListModel) impl
+        = DataViewListModelFromCpp<false>(wxDataViewListModel) impl
         DataViewListModelMethods,
         DataViewModelMethods,
         RefCounterMethods
@@ -1453,7 +1453,7 @@ impl<const FROM_CPP: bool> DataViewListModelFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewListModelFromCpp<false> {
+impl Clone for DataViewListModelFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1474,7 +1474,7 @@ impl<const FROM_CPP: bool> From<DataViewListModelFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for DataViewListModelFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewListModel_delete(self.0) }
         }
     }
@@ -1483,13 +1483,13 @@ impl<const FROM_CPP: bool> Drop for DataViewListModelFromCpp<FROM_CPP> {
 // wxDataViewListStore
 wxwidgets! {
     /// wxDataViewListStore is a specialised wxDataViewModel for storing a simple table of data.
-    /// - [`DataViewListStore`] represents a C++ `wxDataViewListStore` class instance which your code has ownership, [`DataViewListStoreFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewListStore`] represents a C++ `wxDataViewListStore` class instance which your code has ownership, [`DataViewListStoreFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewListStore`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewListStore` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_list_store.html) for more details.
     #[doc(alias = "wxDataViewListStore")]
     #[doc(alias = "DataViewListStore")]
     class DataViewListStore
-        = DataViewListStoreFromCpp<true>(wxDataViewListStore) impl
+        = DataViewListStoreFromCpp<false>(wxDataViewListStore) impl
         DataViewListStoreMethods,
         DataViewIndexListModelMethods,
         DataViewListModelMethods,
@@ -1507,7 +1507,7 @@ impl<const FROM_CPP: bool> DataViewListStoreFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewListStoreFromCpp<false> {
+impl Clone for DataViewListStoreFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1542,7 +1542,7 @@ impl<const FROM_CPP: bool> From<DataViewListStoreFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for DataViewListStoreFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewListStore_delete(self.0) }
         }
     }
@@ -1551,13 +1551,13 @@ impl<const FROM_CPP: bool> Drop for DataViewListStoreFromCpp<FROM_CPP> {
 // wxDataViewModel
 wxwidgets! {
     /// wxDataViewModel is the base class for all data model to be displayed by a wxDataViewCtrl.
-    /// - [`DataViewModel`] represents a C++ `wxDataViewModel` class instance which your code has ownership, [`DataViewModelFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewModel`] represents a C++ `wxDataViewModel` class instance which your code has ownership, [`DataViewModelFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_model.html) for more details.
     #[doc(alias = "wxDataViewModel")]
     #[doc(alias = "DataViewModel")]
     class DataViewModel
-        = DataViewModelFromCpp<true>(wxDataViewModel) impl
+        = DataViewModelFromCpp<false>(wxDataViewModel) impl
         DataViewModelMethods,
         RefCounterMethods
 }
@@ -1567,7 +1567,7 @@ impl<const FROM_CPP: bool> DataViewModelFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewModelFromCpp<false> {
+impl Clone for DataViewModelFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1579,7 +1579,7 @@ impl<const FROM_CPP: bool> From<DataViewModelFromCpp<FROM_CPP>> for RefCounterFr
 }
 impl<const FROM_CPP: bool> Drop for DataViewModelFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewModel_delete(self.0) }
         }
     }
@@ -1588,13 +1588,13 @@ impl<const FROM_CPP: bool> Drop for DataViewModelFromCpp<FROM_CPP> {
 // wxDataViewModelNotifier
 wxwidgets! {
     /// A wxDataViewModelNotifier instance is owned by a wxDataViewModel and mirrors its notification interface.
-    /// - [`DataViewModelNotifier`] represents a C++ `wxDataViewModelNotifier` class instance which your code has ownership, [`DataViewModelNotifierFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewModelNotifier`] represents a C++ `wxDataViewModelNotifier` class instance which your code has ownership, [`DataViewModelNotifierFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewModelNotifier`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewModelNotifier` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_model_notifier.html) for more details.
     #[doc(alias = "wxDataViewModelNotifier")]
     #[doc(alias = "DataViewModelNotifier")]
     class DataViewModelNotifier
-        = DataViewModelNotifierFromCpp<true>(wxDataViewModelNotifier) impl
+        = DataViewModelNotifierFromCpp<false>(wxDataViewModelNotifier) impl
         DataViewModelNotifierMethods
 }
 impl<const FROM_CPP: bool> DataViewModelNotifierFromCpp<FROM_CPP> {
@@ -1603,14 +1603,14 @@ impl<const FROM_CPP: bool> DataViewModelNotifierFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewModelNotifierFromCpp<false> {
+impl Clone for DataViewModelNotifierFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewModelNotifierFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewModelNotifier_delete(self.0) }
         }
     }
@@ -1619,13 +1619,13 @@ impl<const FROM_CPP: bool> Drop for DataViewModelNotifierFromCpp<FROM_CPP> {
 // wxDataViewProgressRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render progress bars.
-    /// - [`DataViewProgressRenderer`] represents a C++ `wxDataViewProgressRenderer` class instance which your code has ownership, [`DataViewProgressRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewProgressRenderer`] represents a C++ `wxDataViewProgressRenderer` class instance which your code has ownership, [`DataViewProgressRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewProgressRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewProgressRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_progress_renderer.html) for more details.
     #[doc(alias = "wxDataViewProgressRenderer")]
     #[doc(alias = "DataViewProgressRenderer")]
     class DataViewProgressRenderer
-        = DataViewProgressRendererFromCpp<true>(wxDataViewProgressRenderer) impl
+        = DataViewProgressRendererFromCpp<false>(wxDataViewProgressRenderer) impl
         DataViewProgressRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -1636,7 +1636,7 @@ impl<const FROM_CPP: bool> DataViewProgressRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewProgressRendererFromCpp<false> {
+impl Clone for DataViewProgressRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1656,13 +1656,13 @@ impl<const FROM_CPP: bool> From<DataViewProgressRendererFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewProgressRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewProgressRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewProgressRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1671,13 +1671,13 @@ impl<const FROM_CPP: bool> Drop for DataViewProgressRendererFromCpp<FROM_CPP> {
 // wxDataViewRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render the individual cells.
-    /// - [`DataViewRenderer`] represents a C++ `wxDataViewRenderer` class instance which your code has ownership, [`DataViewRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewRenderer`] represents a C++ `wxDataViewRenderer` class instance which your code has ownership, [`DataViewRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_renderer.html) for more details.
     #[doc(alias = "wxDataViewRenderer")]
     #[doc(alias = "DataViewRenderer")]
     class DataViewRenderer
-        = DataViewRendererFromCpp<true>(wxDataViewRenderer) impl
+        = DataViewRendererFromCpp<false>(wxDataViewRenderer) impl
         DataViewRendererMethods,
         ObjectMethods
 }
@@ -1687,7 +1687,7 @@ impl<const FROM_CPP: bool> DataViewRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewRendererFromCpp<false> {
+impl Clone for DataViewRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1698,13 +1698,13 @@ impl<const FROM_CPP: bool> From<DataViewRendererFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1713,13 +1713,13 @@ impl<const FROM_CPP: bool> Drop for DataViewRendererFromCpp<FROM_CPP> {
 // wxDataViewSpinRenderer
 wxwidgets! {
     /// This is a specialized renderer for rendering integer values.
-    /// - [`DataViewSpinRenderer`] represents a C++ `wxDataViewSpinRenderer` class instance which your code has ownership, [`DataViewSpinRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewSpinRenderer`] represents a C++ `wxDataViewSpinRenderer` class instance which your code has ownership, [`DataViewSpinRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewSpinRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewSpinRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_spin_renderer.html) for more details.
     #[doc(alias = "wxDataViewSpinRenderer")]
     #[doc(alias = "DataViewSpinRenderer")]
     class DataViewSpinRenderer
-        = DataViewSpinRendererFromCpp<true>(wxDataViewSpinRenderer) impl
+        = DataViewSpinRendererFromCpp<false>(wxDataViewSpinRenderer) impl
         DataViewSpinRendererMethods,
         DataViewCustomRendererMethods,
         DataViewRendererMethods,
@@ -1731,7 +1731,7 @@ impl<const FROM_CPP: bool> DataViewSpinRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewSpinRendererFromCpp<false> {
+impl Clone for DataViewSpinRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1756,13 +1756,13 @@ impl<const FROM_CPP: bool> From<DataViewSpinRendererFromCpp<FROM_CPP>> for Objec
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewSpinRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewSpinRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewSpinRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1771,13 +1771,13 @@ impl<const FROM_CPP: bool> Drop for DataViewSpinRendererFromCpp<FROM_CPP> {
 // wxDataViewTextRenderer
 wxwidgets! {
     /// wxDataViewTextRenderer is used for rendering text.
-    /// - [`DataViewTextRenderer`] represents a C++ `wxDataViewTextRenderer` class instance which your code has ownership, [`DataViewTextRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewTextRenderer`] represents a C++ `wxDataViewTextRenderer` class instance which your code has ownership, [`DataViewTextRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewTextRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewTextRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_text_renderer.html) for more details.
     #[doc(alias = "wxDataViewTextRenderer")]
     #[doc(alias = "DataViewTextRenderer")]
     class DataViewTextRenderer
-        = DataViewTextRendererFromCpp<true>(wxDataViewTextRenderer) impl
+        = DataViewTextRendererFromCpp<false>(wxDataViewTextRenderer) impl
         DataViewTextRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -1788,7 +1788,7 @@ impl<const FROM_CPP: bool> DataViewTextRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewTextRendererFromCpp<false> {
+impl Clone for DataViewTextRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1806,13 +1806,13 @@ impl<const FROM_CPP: bool> From<DataViewTextRendererFromCpp<FROM_CPP>> for Objec
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewTextRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewTextRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewTextRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1821,13 +1821,13 @@ impl<const FROM_CPP: bool> Drop for DataViewTextRendererFromCpp<FROM_CPP> {
 // wxDataViewToggleRenderer
 wxwidgets! {
     /// This class is used by wxDataViewCtrl to render toggle controls.
-    /// - [`DataViewToggleRenderer`] represents a C++ `wxDataViewToggleRenderer` class instance which your code has ownership, [`DataViewToggleRendererFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewToggleRenderer`] represents a C++ `wxDataViewToggleRenderer` class instance which your code has ownership, [`DataViewToggleRendererFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewToggleRenderer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewToggleRenderer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_toggle_renderer.html) for more details.
     #[doc(alias = "wxDataViewToggleRenderer")]
     #[doc(alias = "DataViewToggleRenderer")]
     class DataViewToggleRenderer
-        = DataViewToggleRendererFromCpp<true>(wxDataViewToggleRenderer) impl
+        = DataViewToggleRendererFromCpp<false>(wxDataViewToggleRenderer) impl
         DataViewToggleRendererMethods,
         DataViewRendererMethods,
         ObjectMethods
@@ -1838,7 +1838,7 @@ impl<const FROM_CPP: bool> DataViewToggleRendererFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewToggleRendererFromCpp<false> {
+impl Clone for DataViewToggleRendererFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1858,13 +1858,13 @@ impl<const FROM_CPP: bool> From<DataViewToggleRendererFromCpp<FROM_CPP>>
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewToggleRendererFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewToggleRenderer_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DataViewToggleRendererFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1873,13 +1873,13 @@ impl<const FROM_CPP: bool> Drop for DataViewToggleRendererFromCpp<FROM_CPP> {
 // wxDataViewTreeCtrl
 wxwidgets! {
     /// This class is a wxDataViewCtrl which internally uses a wxDataViewTreeStore and forwards most of its API to that class.
-    /// - [`DataViewTreeCtrl`] represents a C++ `wxDataViewTreeCtrl` class instance which your code has ownership, [`DataViewTreeCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewTreeCtrl`] represents a C++ `wxDataViewTreeCtrl` class instance which your code has ownership, [`DataViewTreeCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewTreeCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewTreeCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_ctrl.html) for more details.
     #[doc(alias = "wxDataViewTreeCtrl")]
     #[doc(alias = "DataViewTreeCtrl")]
     class DataViewTreeCtrl
-        = DataViewTreeCtrlFromCpp<true>(wxDataViewTreeCtrl) impl
+        = DataViewTreeCtrlFromCpp<false>(wxDataViewTreeCtrl) impl
         DataViewTreeCtrlMethods,
         DataViewCtrlMethods,
         ControlMethods,
@@ -1955,7 +1955,7 @@ impl<const FROM_CPP: bool> From<DataViewTreeCtrlFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DataViewTreeCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDataViewTreeCtrl_CLASSINFO()) }
     }
 }
@@ -1963,13 +1963,13 @@ impl<const FROM_CPP: bool> DynamicCast for DataViewTreeCtrlFromCpp<FROM_CPP> {
 // wxDataViewTreeStore
 wxwidgets! {
     /// wxDataViewTreeStore is a specialised wxDataViewModel for storing simple trees very much like wxTreeCtrl does and it offers a similar API.
-    /// - [`DataViewTreeStore`] represents a C++ `wxDataViewTreeStore` class instance which your code has ownership, [`DataViewTreeStoreFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewTreeStore`] represents a C++ `wxDataViewTreeStore` class instance which your code has ownership, [`DataViewTreeStoreFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewTreeStore`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewTreeStore` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_tree_store.html) for more details.
     #[doc(alias = "wxDataViewTreeStore")]
     #[doc(alias = "DataViewTreeStore")]
     class DataViewTreeStore
-        = DataViewTreeStoreFromCpp<true>(wxDataViewTreeStore) impl
+        = DataViewTreeStoreFromCpp<false>(wxDataViewTreeStore) impl
         DataViewTreeStoreMethods,
         DataViewModelMethods,
         RefCounterMethods
@@ -1985,7 +1985,7 @@ impl<const FROM_CPP: bool> DataViewTreeStoreFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewTreeStoreFromCpp<false> {
+impl Clone for DataViewTreeStoreFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2006,7 +2006,7 @@ impl<const FROM_CPP: bool> From<DataViewTreeStoreFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for DataViewTreeStoreFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewTreeStore_delete(self.0) }
         }
     }
@@ -2015,13 +2015,13 @@ impl<const FROM_CPP: bool> Drop for DataViewTreeStoreFromCpp<FROM_CPP> {
 // wxDataViewVirtualListModel
 wxwidgets! {
     /// wxDataViewVirtualListModel is a specialized data model which lets you address an item by its position (row) rather than its wxDataViewItem and as such offers the exact same interface as wxDataViewIndexListModel.
-    /// - [`DataViewVirtualListModel`] represents a C++ `wxDataViewVirtualListModel` class instance which your code has ownership, [`DataViewVirtualListModelFromCpp`]`<false>` represents one which don't own.
+    /// - [`DataViewVirtualListModel`] represents a C++ `wxDataViewVirtualListModel` class instance which your code has ownership, [`DataViewVirtualListModelFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DataViewVirtualListModel`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDataViewVirtualListModel` class's documentation](https://docs.wxwidgets.org/3.2/classwx_data_view_virtual_list_model.html) for more details.
     #[doc(alias = "wxDataViewVirtualListModel")]
     #[doc(alias = "DataViewVirtualListModel")]
     class DataViewVirtualListModel
-        = DataViewVirtualListModelFromCpp<true>(wxDataViewVirtualListModel) impl
+        = DataViewVirtualListModelFromCpp<false>(wxDataViewVirtualListModel) impl
         DataViewVirtualListModelMethods,
         DataViewListModelMethods,
         DataViewModelMethods,
@@ -2033,7 +2033,7 @@ impl<const FROM_CPP: bool> DataViewVirtualListModelFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DataViewVirtualListModelFromCpp<false> {
+impl Clone for DataViewVirtualListModelFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2061,7 +2061,7 @@ impl<const FROM_CPP: bool> From<DataViewVirtualListModelFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for DataViewVirtualListModelFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDataViewVirtualListModel_delete(self.0) }
         }
     }
@@ -2070,13 +2070,13 @@ impl<const FROM_CPP: bool> Drop for DataViewVirtualListModelFromCpp<FROM_CPP> {
 // wxDateEvent
 wxwidgets! {
     /// This event class holds information about a date change and is used together with wxDatePickerCtrl.
-    /// - [`DateEvent`] represents a C++ `wxDateEvent` class instance which your code has ownership, [`DateEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`DateEvent`] represents a C++ `wxDateEvent` class instance which your code has ownership, [`DateEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DateEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDateEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_date_event.html) for more details.
     #[doc(alias = "wxDateEvent")]
     #[doc(alias = "DateEvent")]
     class DateEvent
-        = DateEventFromCpp<true>(wxDateEvent) impl
+        = DateEventFromCpp<false>(wxDateEvent) impl
         DateEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -2093,7 +2093,7 @@ impl<const FROM_CPP: bool> DateEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DateEventFromCpp<false> {
+impl Clone for DateEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2114,13 +2114,13 @@ impl<const FROM_CPP: bool> From<DateEventFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DateEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDateEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DateEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2129,13 +2129,13 @@ impl<const FROM_CPP: bool> Drop for DateEventFromCpp<FROM_CPP> {
 // wxDatePickerCtrl
 wxwidgets! {
     /// This control allows the user to select a date.
-    /// - [`DatePickerCtrl`] represents a C++ `wxDatePickerCtrl` class instance which your code has ownership, [`DatePickerCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`DatePickerCtrl`] represents a C++ `wxDatePickerCtrl` class instance which your code has ownership, [`DatePickerCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DatePickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDatePickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_date_picker_ctrl.html) for more details.
     #[doc(alias = "wxDatePickerCtrl")]
     #[doc(alias = "DatePickerCtrl")]
     class DatePickerCtrl
-        = DatePickerCtrlFromCpp<true>(wxDatePickerCtrl) impl
+        = DatePickerCtrlFromCpp<false>(wxDatePickerCtrl) impl
         DatePickerCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -2214,7 +2214,7 @@ impl<const FROM_CPP: bool> From<DatePickerCtrlFromCpp<FROM_CPP>> for ObjectFromC
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DatePickerCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDatePickerCtrl_CLASSINFO()) }
     }
 }
@@ -2222,13 +2222,13 @@ impl<const FROM_CPP: bool> DynamicCast for DatePickerCtrlFromCpp<FROM_CPP> {
 // wxDelegateRendererNative
 wxwidgets! {
     /// wxDelegateRendererNative allows reuse of renderers code by forwarding all the wxRendererNative methods to the given object and thus allowing you to only modify some of its methods  without having to reimplement all of them.
-    /// - [`DelegateRendererNative`] represents a C++ `wxDelegateRendererNative` class instance which your code has ownership, [`DelegateRendererNativeFromCpp`]`<false>` represents one which don't own.
+    /// - [`DelegateRendererNative`] represents a C++ `wxDelegateRendererNative` class instance which your code has ownership, [`DelegateRendererNativeFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DelegateRendererNative`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDelegateRendererNative` class's documentation](https://docs.wxwidgets.org/3.2/classwx_delegate_renderer_native.html) for more details.
     #[doc(alias = "wxDelegateRendererNative")]
     #[doc(alias = "DelegateRendererNative")]
     class DelegateRendererNative
-        = DelegateRendererNativeFromCpp<true>(wxDelegateRendererNative) impl
+        = DelegateRendererNativeFromCpp<false>(wxDelegateRendererNative) impl
         DelegateRendererNativeMethods,
         RendererNativeMethods
 }
@@ -2254,7 +2254,7 @@ impl<const FROM_CPP: bool> DelegateRendererNativeFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DelegateRendererNativeFromCpp<false> {
+impl Clone for DelegateRendererNativeFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2268,7 +2268,7 @@ impl<const FROM_CPP: bool> From<DelegateRendererNativeFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for DelegateRendererNativeFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDelegateRendererNative_delete(self.0) }
         }
     }
@@ -2277,13 +2277,13 @@ impl<const FROM_CPP: bool> Drop for DelegateRendererNativeFromCpp<FROM_CPP> {
 // wxDialog
 wxwidgets! {
     /// A dialog box is a window with a title bar and sometimes a system menu, which can be moved around the screen.
-    /// - [`Dialog`] represents a C++ `wxDialog` class instance which your code has ownership, [`DialogFromCpp`]`<false>` represents one which don't own.
+    /// - [`Dialog`] represents a C++ `wxDialog` class instance which your code has ownership, [`DialogFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Dialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dialog.html) for more details.
     #[doc(alias = "wxDialog")]
     #[doc(alias = "Dialog")]
     class Dialog
-        = DialogFromCpp<true>(wxDialog) impl
+        = DialogFromCpp<false>(wxDialog) impl
         DialogMethods,
         // TopLevelWindowMethods,
         NonOwnedWindowMethods,
@@ -2361,7 +2361,7 @@ impl<const FROM_CPP: bool> From<DialogFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DialogFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDialog_CLASSINFO()) }
     }
 }
@@ -2415,13 +2415,13 @@ impl<const FROM_CPP: bool> WindowMethods for DialogFromCpp<FROM_CPP> {
 // wxDialogLayoutAdapter
 wxwidgets! {
     /// This abstract class is the base for classes that help wxWidgets perform run-time layout adaptation of dialogs.
-    /// - [`DialogLayoutAdapter`] represents a C++ `wxDialogLayoutAdapter` class instance which your code has ownership, [`DialogLayoutAdapterFromCpp`]`<false>` represents one which don't own.
+    /// - [`DialogLayoutAdapter`] represents a C++ `wxDialogLayoutAdapter` class instance which your code has ownership, [`DialogLayoutAdapterFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DialogLayoutAdapter`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDialogLayoutAdapter` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dialog_layout_adapter.html) for more details.
     #[doc(alias = "wxDialogLayoutAdapter")]
     #[doc(alias = "DialogLayoutAdapter")]
     class DialogLayoutAdapter
-        = DialogLayoutAdapterFromCpp<true>(wxDialogLayoutAdapter) impl
+        = DialogLayoutAdapterFromCpp<false>(wxDialogLayoutAdapter) impl
         DialogLayoutAdapterMethods
 }
 impl<const FROM_CPP: bool> DialogLayoutAdapterFromCpp<FROM_CPP> {
@@ -2430,14 +2430,14 @@ impl<const FROM_CPP: bool> DialogLayoutAdapterFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DialogLayoutAdapterFromCpp<false> {
+impl Clone for DialogLayoutAdapterFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DialogLayoutAdapterFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDialogLayoutAdapter_delete(self.0) }
         }
     }
@@ -2446,13 +2446,13 @@ impl<const FROM_CPP: bool> Drop for DialogLayoutAdapterFromCpp<FROM_CPP> {
 // wxDirDialog
 wxwidgets! {
     /// This class represents the directory chooser dialog.
-    /// - [`DirDialog`] represents a C++ `wxDirDialog` class instance which your code has ownership, [`DirDialogFromCpp`]`<false>` represents one which don't own.
+    /// - [`DirDialog`] represents a C++ `wxDirDialog` class instance which your code has ownership, [`DirDialogFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DirDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDirDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dir_dialog.html) for more details.
     #[doc(alias = "wxDirDialog")]
     #[doc(alias = "DirDialog")]
     class DirDialog
-        = DirDialogFromCpp<true>(wxDirDialog) impl
+        = DirDialogFromCpp<false>(wxDirDialog) impl
         DirDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -2538,7 +2538,7 @@ impl<const FROM_CPP: bool> From<DirDialogFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DirDialogFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDirDialog_CLASSINFO()) }
     }
 }
@@ -2546,13 +2546,13 @@ impl<const FROM_CPP: bool> DynamicCast for DirDialogFromCpp<FROM_CPP> {
 // wxDirPickerCtrl
 wxwidgets! {
     /// This control allows the user to select a directory.
-    /// - [`DirPickerCtrl`] represents a C++ `wxDirPickerCtrl` class instance which your code has ownership, [`DirPickerCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`DirPickerCtrl`] represents a C++ `wxDirPickerCtrl` class instance which your code has ownership, [`DirPickerCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DirPickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDirPickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_dir_picker_ctrl.html) for more details.
     #[doc(alias = "wxDirPickerCtrl")]
     #[doc(alias = "DirPickerCtrl")]
     class DirPickerCtrl
-        = DirPickerCtrlFromCpp<true>(wxDirPickerCtrl) impl
+        = DirPickerCtrlFromCpp<false>(wxDirPickerCtrl) impl
         DirPickerCtrlMethods,
         PickerBaseMethods,
         ControlMethods,
@@ -2634,7 +2634,7 @@ impl<const FROM_CPP: bool> From<DirPickerCtrlFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DirPickerCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDirPickerCtrl_CLASSINFO()) }
     }
 }
@@ -2642,13 +2642,13 @@ impl<const FROM_CPP: bool> DynamicCast for DirPickerCtrlFromCpp<FROM_CPP> {
 // wxDisplay
 wxwidgets! {
     /// Determines the sizes and locations of displays connected to the system.
-    /// - [`Display`] represents a C++ `wxDisplay` class instance which your code has ownership, [`DisplayFromCpp`]`<false>` represents one which don't own.
+    /// - [`Display`] represents a C++ `wxDisplay` class instance which your code has ownership, [`DisplayFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Display`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDisplay` class's documentation](https://docs.wxwidgets.org/3.2/classwx_display.html) for more details.
     #[doc(alias = "wxDisplay")]
     #[doc(alias = "Display")]
     class Display
-        = DisplayFromCpp<true>(wxDisplay) impl
+        = DisplayFromCpp<false>(wxDisplay) impl
         DisplayMethods
 }
 impl<const FROM_CPP: bool> DisplayFromCpp<FROM_CPP> {
@@ -2680,14 +2680,14 @@ impl<const FROM_CPP: bool> DisplayFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DisplayFromCpp<false> {
+impl Clone for DisplayFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DisplayFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDisplay_delete(self.0) }
         }
     }
@@ -2696,13 +2696,13 @@ impl<const FROM_CPP: bool> Drop for DisplayFromCpp<FROM_CPP> {
 // wxDisplayChangedEvent
 wxwidgets! {
     /// A display changed event is sent to top-level windows when the display resolution has changed.
-    /// - [`DisplayChangedEvent`] represents a C++ `wxDisplayChangedEvent` class instance which your code has ownership, [`DisplayChangedEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`DisplayChangedEvent`] represents a C++ `wxDisplayChangedEvent` class instance which your code has ownership, [`DisplayChangedEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DisplayChangedEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDisplayChangedEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_display_changed_event.html) for more details.
     #[doc(alias = "wxDisplayChangedEvent")]
     #[doc(alias = "DisplayChangedEvent")]
     class DisplayChangedEvent
-        = DisplayChangedEventFromCpp<true>(wxDisplayChangedEvent) impl
+        = DisplayChangedEventFromCpp<false>(wxDisplayChangedEvent) impl
         DisplayChangedEventMethods,
         EventMethods,
         ObjectMethods
@@ -2717,7 +2717,7 @@ impl<const FROM_CPP: bool> DisplayChangedEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DisplayChangedEventFromCpp<false> {
+impl Clone for DisplayChangedEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2733,13 +2733,13 @@ impl<const FROM_CPP: bool> From<DisplayChangedEventFromCpp<FROM_CPP>> for Object
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DisplayChangedEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDisplayChangedEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DisplayChangedEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2748,13 +2748,13 @@ impl<const FROM_CPP: bool> Drop for DisplayChangedEventFromCpp<FROM_CPP> {
 // wxDragImage
 wxwidgets! {
     /// This class is used when you wish to drag an object on the screen, and a simple cursor is not enough.
-    /// - [`DragImage`] represents a C++ `wxDragImage` class instance which your code has ownership, [`DragImageFromCpp`]`<false>` represents one which don't own.
+    /// - [`DragImage`] represents a C++ `wxDragImage` class instance which your code has ownership, [`DragImageFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DragImage`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDragImage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drag_image.html) for more details.
     #[doc(alias = "wxDragImage")]
     #[doc(alias = "DragImage")]
     class DragImage
-        = DragImageFromCpp<true>(wxDragImage) impl
+        = DragImageFromCpp<false>(wxDragImage) impl
         DragImageMethods,
         ObjectMethods
 }
@@ -2831,7 +2831,7 @@ impl<const FROM_CPP: bool> DragImageFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DragImageFromCpp<false> {
+impl Clone for DragImageFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2842,13 +2842,13 @@ impl<const FROM_CPP: bool> From<DragImageFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DragImageFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDragImage_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DragImageFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2857,13 +2857,13 @@ impl<const FROM_CPP: bool> Drop for DragImageFromCpp<FROM_CPP> {
 // wxDropFilesEvent
 wxwidgets! {
     /// This class is used for drop files events, that is, when files have been dropped onto the window.
-    /// - [`DropFilesEvent`] represents a C++ `wxDropFilesEvent` class instance which your code has ownership, [`DropFilesEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`DropFilesEvent`] represents a C++ `wxDropFilesEvent` class instance which your code has ownership, [`DropFilesEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DropFilesEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDropFilesEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_files_event.html) for more details.
     #[doc(alias = "wxDropFilesEvent")]
     #[doc(alias = "DropFilesEvent")]
     class DropFilesEvent
-        = DropFilesEventFromCpp<true>(wxDropFilesEvent) impl
+        = DropFilesEventFromCpp<false>(wxDropFilesEvent) impl
         DropFilesEventMethods,
         EventMethods,
         ObjectMethods
@@ -2874,7 +2874,7 @@ impl<const FROM_CPP: bool> DropFilesEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DropFilesEventFromCpp<false> {
+impl Clone for DropFilesEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2890,13 +2890,13 @@ impl<const FROM_CPP: bool> From<DropFilesEventFromCpp<FROM_CPP>> for ObjectFromC
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for DropFilesEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxDropFilesEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for DropFilesEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2905,13 +2905,13 @@ impl<const FROM_CPP: bool> Drop for DropFilesEventFromCpp<FROM_CPP> {
 // wxDropSource
 wxwidgets! {
     /// This class represents a source for a drag and drop operation.
-    /// - [`DropSource`] represents a C++ `wxDropSource` class instance which your code has ownership, [`DropSourceFromCpp`]`<false>` represents one which don't own.
+    /// - [`DropSource`] represents a C++ `wxDropSource` class instance which your code has ownership, [`DropSourceFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DropSource`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDropSource` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_source.html) for more details.
     #[doc(alias = "wxDropSource")]
     #[doc(alias = "DropSource")]
     class DropSource
-        = DropSourceFromCpp<true>(wxDropSource) impl
+        = DropSourceFromCpp<false>(wxDropSource) impl
         DropSourceMethods
 }
 impl<const FROM_CPP: bool> DropSourceFromCpp<FROM_CPP> {
@@ -3029,14 +3029,14 @@ impl<const FROM_CPP: bool> DropSourceFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DropSourceFromCpp<false> {
+impl Clone for DropSourceFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DropSourceFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDropSource_delete(self.0) }
         }
     }
@@ -3045,13 +3045,13 @@ impl<const FROM_CPP: bool> Drop for DropSourceFromCpp<FROM_CPP> {
 // wxDropTarget
 wxwidgets! {
     /// This class represents a target for a drag and drop operation.
-    /// - [`DropTarget`] represents a C++ `wxDropTarget` class instance which your code has ownership, [`DropTargetFromCpp`]`<false>` represents one which don't own.
+    /// - [`DropTarget`] represents a C++ `wxDropTarget` class instance which your code has ownership, [`DropTargetFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DropTarget`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxDropTarget` class's documentation](https://docs.wxwidgets.org/3.2/classwx_drop_target.html) for more details.
     #[doc(alias = "wxDropTarget")]
     #[doc(alias = "DropTarget")]
     class DropTarget
-        = DropTargetFromCpp<true>(wxDropTarget) impl
+        = DropTargetFromCpp<false>(wxDropTarget) impl
         DropTargetMethods
 }
 impl<const FROM_CPP: bool> DropTargetFromCpp<FROM_CPP> {
@@ -3060,14 +3060,14 @@ impl<const FROM_CPP: bool> DropTargetFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for DropTargetFromCpp<false> {
+impl Clone for DropTargetFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for DropTargetFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxDropTarget_delete(self.0) }
         }
     }

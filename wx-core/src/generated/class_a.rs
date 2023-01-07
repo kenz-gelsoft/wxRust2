@@ -3,13 +3,13 @@ use super::*;
 // wxAboutDialogInfo
 wxwidgets! {
     /// wxAboutDialogInfo contains information shown in the standard About dialog displayed by the wxAboutBox() function.
-    /// - [`AboutDialogInfo`] represents a C++ `wxAboutDialogInfo` class instance which your code has ownership, [`AboutDialogInfoFromCpp`]`<false>` represents one which don't own.
+    /// - [`AboutDialogInfo`] represents a C++ `wxAboutDialogInfo` class instance which your code has ownership, [`AboutDialogInfoFromCpp`]`<true>` represents one which don't own.
     /// - Use [`AboutDialogInfo`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAboutDialogInfo` class's documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html) for more details.
     #[doc(alias = "wxAboutDialogInfo")]
     #[doc(alias = "AboutDialogInfo")]
     class AboutDialogInfo
-        = AboutDialogInfoFromCpp<true>(wxAboutDialogInfo) impl
+        = AboutDialogInfoFromCpp<false>(wxAboutDialogInfo) impl
         AboutDialogInfoMethods
 }
 impl<const FROM_CPP: bool> AboutDialogInfoFromCpp<FROM_CPP> {
@@ -23,14 +23,14 @@ impl<const FROM_CPP: bool> AboutDialogInfoFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for AboutDialogInfoFromCpp<false> {
+impl Clone for AboutDialogInfoFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for AboutDialogInfoFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxAboutDialogInfo_delete(self.0) }
         }
     }
@@ -39,13 +39,13 @@ impl<const FROM_CPP: bool> Drop for AboutDialogInfoFromCpp<FROM_CPP> {
 // wxAcceleratorEntry
 wxwidgets! {
     /// An object used by an application wishing to create an accelerator table (see wxAcceleratorTable).
-    /// - [`AcceleratorEntry`] represents a C++ `wxAcceleratorEntry` class instance which your code has ownership, [`AcceleratorEntryFromCpp`]`<false>` represents one which don't own.
+    /// - [`AcceleratorEntry`] represents a C++ `wxAcceleratorEntry` class instance which your code has ownership, [`AcceleratorEntryFromCpp`]`<true>` represents one which don't own.
     /// - Use [`AcceleratorEntry`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAcceleratorEntry` class's documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html) for more details.
     #[doc(alias = "wxAcceleratorEntry")]
     #[doc(alias = "AcceleratorEntry")]
     class AcceleratorEntry
-        = AcceleratorEntryFromCpp<true>(wxAcceleratorEntry) impl
+        = AcceleratorEntryFromCpp<false>(wxAcceleratorEntry) impl
         AcceleratorEntryMethods
 }
 impl<const FROM_CPP: bool> AcceleratorEntryFromCpp<FROM_CPP> {
@@ -81,14 +81,14 @@ impl<const FROM_CPP: bool> AcceleratorEntryFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for AcceleratorEntryFromCpp<false> {
+impl Clone for AcceleratorEntryFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for AcceleratorEntryFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxAcceleratorEntry_delete(self.0) }
         }
     }
@@ -97,13 +97,13 @@ impl<const FROM_CPP: bool> Drop for AcceleratorEntryFromCpp<FROM_CPP> {
 // wxAcceleratorTable
 wxwidgets! {
     /// An accelerator table allows the application to specify a table of keyboard shortcuts for menu or button commands.
-    /// - [`AcceleratorTable`] represents a C++ `wxAcceleratorTable` class instance which your code has ownership, [`AcceleratorTableFromCpp`]`<false>` represents one which don't own.
+    /// - [`AcceleratorTable`] represents a C++ `wxAcceleratorTable` class instance which your code has ownership, [`AcceleratorTableFromCpp`]`<true>` represents one which don't own.
     /// - Use [`AcceleratorTable`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAcceleratorTable` class's documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_table.html) for more details.
     #[doc(alias = "wxAcceleratorTable")]
     #[doc(alias = "AcceleratorTable")]
     class AcceleratorTable
-        = AcceleratorTableFromCpp<true>(wxAcceleratorTable) impl
+        = AcceleratorTableFromCpp<false>(wxAcceleratorTable) impl
         AcceleratorTableMethods,
         ObjectMethods
 }
@@ -120,7 +120,7 @@ impl<const FROM_CPP: bool> AcceleratorTableFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for AcceleratorTableFromCpp<false> {
+impl Clone for AcceleratorTableFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -131,13 +131,13 @@ impl<const FROM_CPP: bool> From<AcceleratorTableFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for AcceleratorTableFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxAcceleratorTable_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for AcceleratorTableFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -146,13 +146,13 @@ impl<const FROM_CPP: bool> Drop for AcceleratorTableFromCpp<FROM_CPP> {
 // wxActivateEvent
 wxwidgets! {
     /// An activate event is sent when a window or application is being activated or deactivated.
-    /// - [`ActivateEvent`] represents a C++ `wxActivateEvent` class instance which your code has ownership, [`ActivateEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`ActivateEvent`] represents a C++ `wxActivateEvent` class instance which your code has ownership, [`ActivateEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ActivateEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxActivateEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_activate_event.html) for more details.
     #[doc(alias = "wxActivateEvent")]
     #[doc(alias = "ActivateEvent")]
     class ActivateEvent
-        = ActivateEventFromCpp<true>(wxActivateEvent) impl
+        = ActivateEventFromCpp<false>(wxActivateEvent) impl
         ActivateEventMethods,
         EventMethods,
         ObjectMethods
@@ -167,7 +167,7 @@ impl<const FROM_CPP: bool> ActivateEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ActivateEventFromCpp<false> {
+impl Clone for ActivateEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -183,13 +183,13 @@ impl<const FROM_CPP: bool> From<ActivateEventFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ActivateEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxActivateEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ActivateEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -198,13 +198,13 @@ impl<const FROM_CPP: bool> Drop for ActivateEventFromCpp<FROM_CPP> {
 // wxAffineMatrix2D
 wxwidgets! {
     /// A 3x2 matrix representing an affine 2D transformation.
-    /// - [`AffineMatrix2D`] represents a C++ `wxAffineMatrix2D` class instance which your code has ownership, [`AffineMatrix2DFromCpp`]`<false>` represents one which don't own.
+    /// - [`AffineMatrix2D`] represents a C++ `wxAffineMatrix2D` class instance which your code has ownership, [`AffineMatrix2DFromCpp`]`<true>` represents one which don't own.
     /// - Use [`AffineMatrix2D`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAffineMatrix2D` class's documentation](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html) for more details.
     #[doc(alias = "wxAffineMatrix2D")]
     #[doc(alias = "AffineMatrix2D")]
     class AffineMatrix2D
-        = AffineMatrix2DFromCpp<true>(wxAffineMatrix2D) impl
+        = AffineMatrix2DFromCpp<false>(wxAffineMatrix2D) impl
         AffineMatrix2DMethods
         // AffineMatrix2DBaseMethods
 }
@@ -219,7 +219,7 @@ impl<const FROM_CPP: bool> AffineMatrix2DFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for AffineMatrix2DFromCpp<false> {
+impl Clone for AffineMatrix2DFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -233,7 +233,7 @@ impl<const FROM_CPP: bool> From<AffineMatrix2DFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for AffineMatrix2DFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxAffineMatrix2D_delete(self.0) }
         }
     }
@@ -264,13 +264,13 @@ impl<const FROM_CPP: bool> AffineMatrix2DBaseMethods for AffineMatrix2DFromCpp<F
 // wxAffineMatrix2DBase
 wxwidgets! {
     /// A 2x3 matrix representing an affine 2D transformation.
-    /// - [`AffineMatrix2DBase`] represents a C++ `wxAffineMatrix2DBase` class instance which your code has ownership, [`AffineMatrix2DBaseFromCpp`]`<false>` represents one which don't own.
+    /// - [`AffineMatrix2DBase`] represents a C++ `wxAffineMatrix2DBase` class instance which your code has ownership, [`AffineMatrix2DBaseFromCpp`]`<true>` represents one which don't own.
     /// - Use [`AffineMatrix2DBase`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAffineMatrix2DBase` class's documentation](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d_base.html) for more details.
     #[doc(alias = "wxAffineMatrix2DBase")]
     #[doc(alias = "AffineMatrix2DBase")]
     class AffineMatrix2DBase
-        = AffineMatrix2DBaseFromCpp<true>(wxAffineMatrix2DBase) impl
+        = AffineMatrix2DBaseFromCpp<false>(wxAffineMatrix2DBase) impl
         AffineMatrix2DBaseMethods
 }
 impl<const FROM_CPP: bool> AffineMatrix2DBaseFromCpp<FROM_CPP> {
@@ -279,14 +279,14 @@ impl<const FROM_CPP: bool> AffineMatrix2DBaseFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for AffineMatrix2DBaseFromCpp<false> {
+impl Clone for AffineMatrix2DBaseFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for AffineMatrix2DBaseFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxAffineMatrix2DBase_delete(self.0) }
         }
     }
@@ -295,13 +295,13 @@ impl<const FROM_CPP: bool> Drop for AffineMatrix2DBaseFromCpp<FROM_CPP> {
 // wxAnimationCtrl
 wxwidgets! {
     /// This is a static control which displays an animation.
-    /// - [`AnimationCtrl`] represents a C++ `wxAnimationCtrl` class instance which your code has ownership, [`AnimationCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`AnimationCtrl`] represents a C++ `wxAnimationCtrl` class instance which your code has ownership, [`AnimationCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`AnimationCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAnimationCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_animation_ctrl.html) for more details.
     #[doc(alias = "wxAnimationCtrl")]
     #[doc(alias = "AnimationCtrl")]
     class AnimationCtrl
-        = AnimationCtrlFromCpp<true>(wxAnimationCtrl) impl
+        = AnimationCtrlFromCpp<false>(wxAnimationCtrl) impl
         AnimationCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -365,7 +365,7 @@ impl<const FROM_CPP: bool> From<AnimationCtrlFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for AnimationCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxAnimationCtrl_CLASSINFO()) }
     }
 }
@@ -373,13 +373,13 @@ impl<const FROM_CPP: bool> DynamicCast for AnimationCtrlFromCpp<FROM_CPP> {
 // wxAnyButton
 wxwidgets! {
     /// A class for common button functionality used as the base for the various button classes.
-    /// - [`AnyButton`] represents a C++ `wxAnyButton` class instance which your code has ownership, [`AnyButtonFromCpp`]`<false>` represents one which don't own.
+    /// - [`AnyButton`] represents a C++ `wxAnyButton` class instance which your code has ownership, [`AnyButtonFromCpp`]`<true>` represents one which don't own.
     /// - Use [`AnyButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAnyButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_any_button.html) for more details.
     #[doc(alias = "wxAnyButton")]
     #[doc(alias = "AnyButton")]
     class AnyButton
-        = AnyButtonFromCpp<true>(wxAnyButton) impl
+        = AnyButtonFromCpp<false>(wxAnyButton) impl
         AnyButtonMethods,
         ControlMethods,
         WindowMethods,
@@ -422,7 +422,7 @@ impl<const FROM_CPP: bool> From<AnyButtonFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for AnyButtonFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxAnyButton_CLASSINFO()) }
     }
 }
@@ -430,13 +430,13 @@ impl<const FROM_CPP: bool> DynamicCast for AnyButtonFromCpp<FROM_CPP> {
 // wxArtProvider
 wxwidgets! {
     /// wxArtProvider class is used to customize the look of wxWidgets application.
-    /// - [`ArtProvider`] represents a C++ `wxArtProvider` class instance which your code has ownership, [`ArtProviderFromCpp`]`<false>` represents one which don't own.
+    /// - [`ArtProvider`] represents a C++ `wxArtProvider` class instance which your code has ownership, [`ArtProviderFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ArtProvider`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxArtProvider` class's documentation](https://docs.wxwidgets.org/3.2/classwx_art_provider.html) for more details.
     #[doc(alias = "wxArtProvider")]
     #[doc(alias = "ArtProvider")]
     class ArtProvider
-        = ArtProviderFromCpp<true>(wxArtProvider) impl
+        = ArtProviderFromCpp<false>(wxArtProvider) impl
         ArtProviderMethods,
         ObjectMethods
 }
@@ -445,7 +445,7 @@ impl<const FROM_CPP: bool> ArtProviderFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ArtProviderFromCpp<false> {
+impl Clone for ArtProviderFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -456,13 +456,13 @@ impl<const FROM_CPP: bool> From<ArtProviderFromCpp<FROM_CPP>> for ObjectFromCpp<
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ArtProviderFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxArtProvider_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ArtProviderFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -471,13 +471,13 @@ impl<const FROM_CPP: bool> Drop for ArtProviderFromCpp<FROM_CPP> {
 // wxAutoBufferedPaintDC
 wxwidgets! {
     /// This wxDC derivative can be used inside of an EVT_PAINT() event handler to achieve double-buffered drawing.
-    /// - [`AutoBufferedPaintDC`] represents a C++ `wxAutoBufferedPaintDC` class instance which your code has ownership, [`AutoBufferedPaintDCFromCpp`]`<false>` represents one which don't own.
+    /// - [`AutoBufferedPaintDC`] represents a C++ `wxAutoBufferedPaintDC` class instance which your code has ownership, [`AutoBufferedPaintDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`AutoBufferedPaintDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxAutoBufferedPaintDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_auto_buffered_paint_d_c.html) for more details.
     #[doc(alias = "wxAutoBufferedPaintDC")]
     #[doc(alias = "AutoBufferedPaintDC")]
     class AutoBufferedPaintDC
-        = AutoBufferedPaintDCFromCpp<true>(wxAutoBufferedPaintDC) impl
+        = AutoBufferedPaintDCFromCpp<false>(wxAutoBufferedPaintDC) impl
         AutoBufferedPaintDCMethods,
         BufferedPaintDCMethods,
         BufferedDCMethods,
@@ -502,7 +502,7 @@ impl<const FROM_CPP: bool> AutoBufferedPaintDCFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for AutoBufferedPaintDCFromCpp<false> {
+impl Clone for AutoBufferedPaintDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -539,13 +539,13 @@ impl<const FROM_CPP: bool> From<AutoBufferedPaintDCFromCpp<FROM_CPP>> for Object
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for AutoBufferedPaintDCFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxAutoBufferedPaintDC_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for AutoBufferedPaintDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

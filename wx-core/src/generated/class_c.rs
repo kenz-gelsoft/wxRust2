@@ -3,13 +3,13 @@ use super::*;
 // wxCalculateLayoutEvent
 wxwidgets! {
     /// This event is sent by wxLayoutAlgorithm to calculate the amount of the remaining client area that the window should occupy.
-    /// - [`CalculateLayoutEvent`] represents a C++ `wxCalculateLayoutEvent` class instance which your code has ownership, [`CalculateLayoutEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`CalculateLayoutEvent`] represents a C++ `wxCalculateLayoutEvent` class instance which your code has ownership, [`CalculateLayoutEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CalculateLayoutEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCalculateLayoutEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html) for more details.
     #[doc(alias = "wxCalculateLayoutEvent")]
     #[doc(alias = "CalculateLayoutEvent")]
     class CalculateLayoutEvent
-        = CalculateLayoutEventFromCpp<true>(wxCalculateLayoutEvent) impl
+        = CalculateLayoutEventFromCpp<false>(wxCalculateLayoutEvent) impl
         CalculateLayoutEventMethods,
         EventMethods,
         ObjectMethods
@@ -25,7 +25,7 @@ impl<const FROM_CPP: bool> CalculateLayoutEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CalculateLayoutEventFromCpp<false> {
+impl Clone for CalculateLayoutEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -41,13 +41,13 @@ impl<const FROM_CPP: bool> From<CalculateLayoutEventFromCpp<FROM_CPP>> for Objec
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CalculateLayoutEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCalculateLayoutEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for CalculateLayoutEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -56,13 +56,13 @@ impl<const FROM_CPP: bool> Drop for CalculateLayoutEventFromCpp<FROM_CPP> {
 // wxCalendarCtrl
 wxwidgets! {
     /// The calendar control allows the user to pick a date.
-    /// - [`CalendarCtrl`] represents a C++ `wxCalendarCtrl` class instance which your code has ownership, [`CalendarCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`CalendarCtrl`] represents a C++ `wxCalendarCtrl` class instance which your code has ownership, [`CalendarCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CalendarCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCalendarCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html) for more details.
     #[doc(alias = "wxCalendarCtrl")]
     #[doc(alias = "CalendarCtrl")]
     class CalendarCtrl
-        = CalendarCtrlFromCpp<true>(wxCalendarCtrl) impl
+        = CalendarCtrlFromCpp<false>(wxCalendarCtrl) impl
         CalendarCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -133,7 +133,7 @@ impl<const FROM_CPP: bool> From<CalendarCtrlFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CalendarCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCalendarCtrl_CLASSINFO()) }
     }
 }
@@ -141,13 +141,13 @@ impl<const FROM_CPP: bool> DynamicCast for CalendarCtrlFromCpp<FROM_CPP> {
 // wxCalendarDateAttr
 wxwidgets! {
     /// wxCalendarDateAttr is a custom attributes for a calendar date.
-    /// - [`CalendarDateAttr`] represents a C++ `wxCalendarDateAttr` class instance which your code has ownership, [`CalendarDateAttrFromCpp`]`<false>` represents one which don't own.
+    /// - [`CalendarDateAttr`] represents a C++ `wxCalendarDateAttr` class instance which your code has ownership, [`CalendarDateAttrFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CalendarDateAttr`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCalendarDateAttr` class's documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html) for more details.
     #[doc(alias = "wxCalendarDateAttr")]
     #[doc(alias = "CalendarDateAttr")]
     class CalendarDateAttr
-        = CalendarDateAttrFromCpp<true>(wxCalendarDateAttr) impl
+        = CalendarDateAttrFromCpp<false>(wxCalendarDateAttr) impl
         CalendarDateAttrMethods
 }
 impl<const FROM_CPP: bool> CalendarDateAttrFromCpp<FROM_CPP> {
@@ -157,14 +157,14 @@ impl<const FROM_CPP: bool> CalendarDateAttrFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CalendarDateAttrFromCpp<false> {
+impl Clone for CalendarDateAttrFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for CalendarDateAttrFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxCalendarDateAttr_delete(self.0) }
         }
     }
@@ -173,13 +173,13 @@ impl<const FROM_CPP: bool> Drop for CalendarDateAttrFromCpp<FROM_CPP> {
 // wxCalendarEvent
 wxwidgets! {
     /// The wxCalendarEvent class is used together with wxCalendarCtrl.
-    /// - [`CalendarEvent`] represents a C++ `wxCalendarEvent` class instance which your code has ownership, [`CalendarEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`CalendarEvent`] represents a C++ `wxCalendarEvent` class instance which your code has ownership, [`CalendarEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CalendarEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCalendarEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_event.html) for more details.
     #[doc(alias = "wxCalendarEvent")]
     #[doc(alias = "CalendarEvent")]
     class CalendarEvent
-        = CalendarEventFromCpp<true>(wxCalendarEvent) impl
+        = CalendarEventFromCpp<false>(wxCalendarEvent) impl
         CalendarEventMethods,
         DateEventMethods,
         CommandEventMethods,
@@ -197,7 +197,7 @@ impl<const FROM_CPP: bool> CalendarEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CalendarEventFromCpp<false> {
+impl Clone for CalendarEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -223,13 +223,13 @@ impl<const FROM_CPP: bool> From<CalendarEventFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CalendarEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCalendarEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for CalendarEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -238,13 +238,13 @@ impl<const FROM_CPP: bool> Drop for CalendarEventFromCpp<FROM_CPP> {
 // wxCaret
 wxwidgets! {
     /// A caret is a blinking cursor showing the position where the typed text will appear.
-    /// - [`Caret`] represents a C++ `wxCaret` class instance which your code has ownership, [`CaretFromCpp`]`<false>` represents one which don't own.
+    /// - [`Caret`] represents a C++ `wxCaret` class instance which your code has ownership, [`CaretFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Caret`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCaret` class's documentation](https://docs.wxwidgets.org/3.2/classwx_caret.html) for more details.
     #[doc(alias = "wxCaret")]
     #[doc(alias = "Caret")]
     class Caret
-        = CaretFromCpp<true>(wxCaret) impl
+        = CaretFromCpp<false>(wxCaret) impl
         CaretMethods
 }
 impl<const FROM_CPP: bool> CaretFromCpp<FROM_CPP> {
@@ -289,14 +289,14 @@ impl<const FROM_CPP: bool> CaretFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CaretFromCpp<false> {
+impl Clone for CaretFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for CaretFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxCaret_delete(self.0) }
         }
     }
@@ -305,13 +305,13 @@ impl<const FROM_CPP: bool> Drop for CaretFromCpp<FROM_CPP> {
 // wxCheckBox
 wxwidgets! {
     /// A checkbox is a labelled box which by default is either on (checkmark is visible) or off (no checkmark).
-    /// - [`CheckBox`] represents a C++ `wxCheckBox` class instance which your code has ownership, [`CheckBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`CheckBox`] represents a C++ `wxCheckBox` class instance which your code has ownership, [`CheckBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CheckBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCheckBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_check_box.html) for more details.
     #[doc(alias = "wxCheckBox")]
     #[doc(alias = "CheckBox")]
     class CheckBox
-        = CheckBoxFromCpp<true>(wxCheckBox) impl
+        = CheckBoxFromCpp<false>(wxCheckBox) impl
         CheckBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -385,7 +385,7 @@ impl<const FROM_CPP: bool> From<CheckBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CheckBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCheckBox_CLASSINFO()) }
     }
 }
@@ -393,13 +393,13 @@ impl<const FROM_CPP: bool> DynamicCast for CheckBoxFromCpp<FROM_CPP> {
 // wxCheckListBox
 wxwidgets! {
     /// A wxCheckListBox is like a wxListBox, but allows items to be checked or unchecked.
-    /// - [`CheckListBox`] represents a C++ `wxCheckListBox` class instance which your code has ownership, [`CheckListBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`CheckListBox`] represents a C++ `wxCheckListBox` class instance which your code has ownership, [`CheckListBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CheckListBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCheckListBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html) for more details.
     #[doc(alias = "wxCheckListBox")]
     #[doc(alias = "CheckListBox")]
     class CheckListBox
-        = CheckListBoxFromCpp<true>(wxCheckListBox) impl
+        = CheckListBoxFromCpp<false>(wxCheckListBox) impl
         CheckListBoxMethods,
         // ListBoxMethods,
         ControlMethods,
@@ -485,7 +485,7 @@ impl<const FROM_CPP: bool> From<CheckListBoxFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CheckListBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCheckListBox_CLASSINFO()) }
     }
 }
@@ -550,13 +550,13 @@ impl<const FROM_CPP: bool> ListBoxMethods for CheckListBoxFromCpp<FROM_CPP> {
 // wxChildFocusEvent
 wxwidgets! {
     /// A child focus event is sent to a (parent-)window when one of its child windows gains focus, so that the window could restore the focus back to its corresponding child if it loses it now and regains later.
-    /// - [`ChildFocusEvent`] represents a C++ `wxChildFocusEvent` class instance which your code has ownership, [`ChildFocusEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`ChildFocusEvent`] represents a C++ `wxChildFocusEvent` class instance which your code has ownership, [`ChildFocusEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ChildFocusEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxChildFocusEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html) for more details.
     #[doc(alias = "wxChildFocusEvent")]
     #[doc(alias = "ChildFocusEvent")]
     class ChildFocusEvent
-        = ChildFocusEventFromCpp<true>(wxChildFocusEvent) impl
+        = ChildFocusEventFromCpp<false>(wxChildFocusEvent) impl
         ChildFocusEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -579,7 +579,7 @@ impl<const FROM_CPP: bool> ChildFocusEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ChildFocusEventFromCpp<false> {
+impl Clone for ChildFocusEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -602,13 +602,13 @@ impl<const FROM_CPP: bool> From<ChildFocusEventFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ChildFocusEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxChildFocusEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ChildFocusEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -617,13 +617,13 @@ impl<const FROM_CPP: bool> Drop for ChildFocusEventFromCpp<FROM_CPP> {
 // wxChoice
 wxwidgets! {
     /// A choice item is used to select one of a list of strings.
-    /// - [`Choice`] represents a C++ `wxChoice` class instance which your code has ownership, [`ChoiceFromCpp`]`<false>` represents one which don't own.
+    /// - [`Choice`] represents a C++ `wxChoice` class instance which your code has ownership, [`ChoiceFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Choice`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxChoice` class's documentation](https://docs.wxwidgets.org/3.2/classwx_choice.html) for more details.
     #[doc(alias = "wxChoice")]
     #[doc(alias = "Choice")]
     class Choice
-        = ChoiceFromCpp<true>(wxChoice) impl
+        = ChoiceFromCpp<false>(wxChoice) impl
         ChoiceMethods,
         ControlMethods,
         WindowMethods,
@@ -703,7 +703,7 @@ impl<const FROM_CPP: bool> From<ChoiceFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ChoiceFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxChoice_CLASSINFO()) }
     }
 }
@@ -722,13 +722,13 @@ impl<const FROM_CPP: bool> ItemContainerImmutableMethods for ChoiceFromCpp<FROM_
 // wxChoicebook
 wxwidgets! {
     /// wxChoicebook is a class similar to wxNotebook, but uses a wxChoice control to show the labels instead of the tabs.
-    /// - [`Choicebook`] represents a C++ `wxChoicebook` class instance which your code has ownership, [`ChoicebookFromCpp`]`<false>` represents one which don't own.
+    /// - [`Choicebook`] represents a C++ `wxChoicebook` class instance which your code has ownership, [`ChoicebookFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Choicebook`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxChoicebook` class's documentation](https://docs.wxwidgets.org/3.2/classwx_choicebook.html) for more details.
     #[doc(alias = "wxChoicebook")]
     #[doc(alias = "Choicebook")]
     class Choicebook
-        = ChoicebookFromCpp<true>(wxChoicebook) impl
+        = ChoicebookFromCpp<false>(wxChoicebook) impl
         ChoicebookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -800,7 +800,7 @@ impl<const FROM_CPP: bool> From<ChoicebookFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ChoicebookFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxChoicebook_CLASSINFO()) }
     }
 }
@@ -834,13 +834,13 @@ impl<const FROM_CPP: bool> WindowMethods for ChoicebookFromCpp<FROM_CPP> {
 // wxClientDC
 wxwidgets! {
     /// wxClientDC is primarily useful for obtaining information about the window from outside EVT_PAINT() handler.
-    /// - [`ClientDC`] represents a C++ `wxClientDC` class instance which your code has ownership, [`ClientDCFromCpp`]`<false>` represents one which don't own.
+    /// - [`ClientDC`] represents a C++ `wxClientDC` class instance which your code has ownership, [`ClientDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ClientDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxClientDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_client_d_c.html) for more details.
     #[doc(alias = "wxClientDC")]
     #[doc(alias = "ClientDC")]
     class ClientDC
-        = ClientDCFromCpp<true>(wxClientDC) impl
+        = ClientDCFromCpp<false>(wxClientDC) impl
         ClientDCMethods,
         WindowDCMethods,
         DCMethods,
@@ -863,7 +863,7 @@ impl<const FROM_CPP: bool> ClientDCFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ClientDCFromCpp<false> {
+impl Clone for ClientDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -884,13 +884,13 @@ impl<const FROM_CPP: bool> From<ClientDCFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ClientDCFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxClientDC_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ClientDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -899,13 +899,13 @@ impl<const FROM_CPP: bool> Drop for ClientDCFromCpp<FROM_CPP> {
 // wxClipboard
 wxwidgets! {
     /// A class for manipulating the clipboard.
-    /// - [`Clipboard`] represents a C++ `wxClipboard` class instance which your code has ownership, [`ClipboardFromCpp`]`<false>` represents one which don't own.
+    /// - [`Clipboard`] represents a C++ `wxClipboard` class instance which your code has ownership, [`ClipboardFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Clipboard`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxClipboard` class's documentation](https://docs.wxwidgets.org/3.2/classwx_clipboard.html) for more details.
     #[doc(alias = "wxClipboard")]
     #[doc(alias = "Clipboard")]
     class Clipboard
-        = ClipboardFromCpp<true>(wxClipboard) impl
+        = ClipboardFromCpp<false>(wxClipboard) impl
         ClipboardMethods,
         ObjectMethods
 }
@@ -920,7 +920,7 @@ impl<const FROM_CPP: bool> ClipboardFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ClipboardFromCpp<false> {
+impl Clone for ClipboardFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -931,13 +931,13 @@ impl<const FROM_CPP: bool> From<ClipboardFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ClipboardFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxClipboard_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ClipboardFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -946,13 +946,13 @@ impl<const FROM_CPP: bool> Drop for ClipboardFromCpp<FROM_CPP> {
 // wxClipboardTextEvent
 wxwidgets! {
     /// This class represents the events generated by a control (typically a wxTextCtrl but other windows can generate these events as well) when its content gets copied or cut to, or pasted from the clipboard.
-    /// - [`ClipboardTextEvent`] represents a C++ `wxClipboardTextEvent` class instance which your code has ownership, [`ClipboardTextEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`ClipboardTextEvent`] represents a C++ `wxClipboardTextEvent` class instance which your code has ownership, [`ClipboardTextEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ClipboardTextEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxClipboardTextEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_clipboard_text_event.html) for more details.
     #[doc(alias = "wxClipboardTextEvent")]
     #[doc(alias = "ClipboardTextEvent")]
     class ClipboardTextEvent
-        = ClipboardTextEventFromCpp<true>(wxClipboardTextEvent) impl
+        = ClipboardTextEventFromCpp<false>(wxClipboardTextEvent) impl
         ClipboardTextEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -964,7 +964,7 @@ impl<const FROM_CPP: bool> ClipboardTextEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ClipboardTextEventFromCpp<false> {
+impl Clone for ClipboardTextEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -987,13 +987,13 @@ impl<const FROM_CPP: bool> From<ClipboardTextEventFromCpp<FROM_CPP>> for ObjectF
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ClipboardTextEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxClipboardTextEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ClipboardTextEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1002,13 +1002,13 @@ impl<const FROM_CPP: bool> Drop for ClipboardTextEventFromCpp<FROM_CPP> {
 // wxCloseEvent
 wxwidgets! {
     /// This event class contains information about window and session close events.
-    /// - [`CloseEvent`] represents a C++ `wxCloseEvent` class instance which your code has ownership, [`CloseEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`CloseEvent`] represents a C++ `wxCloseEvent` class instance which your code has ownership, [`CloseEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CloseEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCloseEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_close_event.html) for more details.
     #[doc(alias = "wxCloseEvent")]
     #[doc(alias = "CloseEvent")]
     class CloseEvent
-        = CloseEventFromCpp<true>(wxCloseEvent) impl
+        = CloseEventFromCpp<false>(wxCloseEvent) impl
         CloseEventMethods,
         EventMethods,
         ObjectMethods
@@ -1019,7 +1019,7 @@ impl<const FROM_CPP: bool> CloseEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CloseEventFromCpp<false> {
+impl Clone for CloseEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1035,13 +1035,13 @@ impl<const FROM_CPP: bool> From<CloseEventFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CloseEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCloseEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for CloseEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1050,13 +1050,13 @@ impl<const FROM_CPP: bool> Drop for CloseEventFromCpp<FROM_CPP> {
 // wxCollapsiblePane
 wxwidgets! {
     /// A collapsible pane is a container with an embedded button-like control which can be used by the user to collapse or expand the pane's contents.
-    /// - [`CollapsiblePane`] represents a C++ `wxCollapsiblePane` class instance which your code has ownership, [`CollapsiblePaneFromCpp`]`<false>` represents one which don't own.
+    /// - [`CollapsiblePane`] represents a C++ `wxCollapsiblePane` class instance which your code has ownership, [`CollapsiblePaneFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CollapsiblePane`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCollapsiblePane` class's documentation](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html) for more details.
     #[doc(alias = "wxCollapsiblePane")]
     #[doc(alias = "CollapsiblePane")]
     class CollapsiblePane
-        = CollapsiblePaneFromCpp<true>(wxCollapsiblePane) impl
+        = CollapsiblePaneFromCpp<false>(wxCollapsiblePane) impl
         CollapsiblePaneMethods,
         ControlMethods,
         WindowMethods,
@@ -1130,7 +1130,7 @@ impl<const FROM_CPP: bool> From<CollapsiblePaneFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CollapsiblePaneFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCollapsiblePane_CLASSINFO()) }
     }
 }
@@ -1138,13 +1138,13 @@ impl<const FROM_CPP: bool> DynamicCast for CollapsiblePaneFromCpp<FROM_CPP> {
 // wxCollapsiblePaneEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxCollapsiblePane.
-    /// - [`CollapsiblePaneEvent`] represents a C++ `wxCollapsiblePaneEvent` class instance which your code has ownership, [`CollapsiblePaneEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`CollapsiblePaneEvent`] represents a C++ `wxCollapsiblePaneEvent` class instance which your code has ownership, [`CollapsiblePaneEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CollapsiblePaneEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCollapsiblePaneEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html) for more details.
     #[doc(alias = "wxCollapsiblePaneEvent")]
     #[doc(alias = "CollapsiblePaneEvent")]
     class CollapsiblePaneEvent
-        = CollapsiblePaneEventFromCpp<true>(wxCollapsiblePaneEvent) impl
+        = CollapsiblePaneEventFromCpp<false>(wxCollapsiblePaneEvent) impl
         CollapsiblePaneEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -1171,7 +1171,7 @@ impl<const FROM_CPP: bool> CollapsiblePaneEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CollapsiblePaneEventFromCpp<false> {
+impl Clone for CollapsiblePaneEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1194,13 +1194,13 @@ impl<const FROM_CPP: bool> From<CollapsiblePaneEventFromCpp<FROM_CPP>> for Objec
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CollapsiblePaneEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCollapsiblePaneEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for CollapsiblePaneEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1209,13 +1209,13 @@ impl<const FROM_CPP: bool> Drop for CollapsiblePaneEventFromCpp<FROM_CPP> {
 // wxColour
 wxwidgets! {
     /// A colour is an object representing a combination of Red, Green, and Blue (RGB) intensity values and an Alpha value, and is used to determine drawing colours.
-    /// - [`Colour`] represents a C++ `wxColour` class instance which your code has ownership, [`ColourFromCpp`]`<false>` represents one which don't own.
+    /// - [`Colour`] represents a C++ `wxColour` class instance which your code has ownership, [`ColourFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Colour`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColour` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour.html) for more details.
     #[doc(alias = "wxColour")]
     #[doc(alias = "Colour")]
     class Colour
-        = ColourFromCpp<true>(wxColour) impl
+        = ColourFromCpp<false>(wxColour) impl
         ColourMethods,
         ObjectMethods
 }
@@ -1250,7 +1250,7 @@ impl<const FROM_CPP: bool> ColourFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ColourFromCpp<false> {
+impl Clone for ColourFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1261,13 +1261,13 @@ impl<const FROM_CPP: bool> From<ColourFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ColourFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColour_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ColourFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1276,13 +1276,13 @@ impl<const FROM_CPP: bool> Drop for ColourFromCpp<FROM_CPP> {
 // wxColourData
 wxwidgets! {
     /// This class holds a variety of information related to colour dialogs.
-    /// - [`ColourData`] represents a C++ `wxColourData` class instance which your code has ownership, [`ColourDataFromCpp`]`<false>` represents one which don't own.
+    /// - [`ColourData`] represents a C++ `wxColourData` class instance which your code has ownership, [`ColourDataFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ColourData`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourData` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_data.html) for more details.
     #[doc(alias = "wxColourData")]
     #[doc(alias = "ColourData")]
     class ColourData
-        = ColourDataFromCpp<true>(wxColourData) impl
+        = ColourDataFromCpp<false>(wxColourData) impl
         ColourDataMethods,
         ObjectMethods
 }
@@ -1300,7 +1300,7 @@ impl<const FROM_CPP: bool> ColourDataFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ColourDataFromCpp<false> {
+impl Clone for ColourDataFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1311,13 +1311,13 @@ impl<const FROM_CPP: bool> From<ColourDataFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ColourDataFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColourData_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ColourDataFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1326,13 +1326,13 @@ impl<const FROM_CPP: bool> Drop for ColourDataFromCpp<FROM_CPP> {
 // wxColourDatabase
 wxwidgets! {
     /// wxWidgets maintains a database of standard RGB colours for a predefined set of named colours.
-    /// - [`ColourDatabase`] represents a C++ `wxColourDatabase` class instance which your code has ownership, [`ColourDatabaseFromCpp`]`<false>` represents one which don't own.
+    /// - [`ColourDatabase`] represents a C++ `wxColourDatabase` class instance which your code has ownership, [`ColourDatabaseFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ColourDatabase`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourDatabase` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_database.html) for more details.
     #[doc(alias = "wxColourDatabase")]
     #[doc(alias = "ColourDatabase")]
     class ColourDatabase
-        = ColourDatabaseFromCpp<true>(wxColourDatabase) impl
+        = ColourDatabaseFromCpp<false>(wxColourDatabase) impl
         ColourDatabaseMethods
 }
 impl<const FROM_CPP: bool> ColourDatabaseFromCpp<FROM_CPP> {
@@ -1346,14 +1346,14 @@ impl<const FROM_CPP: bool> ColourDatabaseFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ColourDatabaseFromCpp<false> {
+impl Clone for ColourDatabaseFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for ColourDatabaseFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxColourDatabase_delete(self.0) }
         }
     }
@@ -1362,13 +1362,13 @@ impl<const FROM_CPP: bool> Drop for ColourDatabaseFromCpp<FROM_CPP> {
 // wxColourDialog
 wxwidgets! {
     /// This class represents the colour chooser dialog.
-    /// - [`ColourDialog`] represents a C++ `wxColourDialog` class instance which your code has ownership, [`ColourDialogFromCpp`]`<false>` represents one which don't own.
+    /// - [`ColourDialog`] represents a C++ `wxColourDialog` class instance which your code has ownership, [`ColourDialogFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ColourDialog`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourDialog` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html) for more details.
     #[doc(alias = "wxColourDialog")]
     #[doc(alias = "ColourDialog")]
     class ColourDialog
-        = ColourDialogFromCpp<true>(wxColourDialog) impl
+        = ColourDialogFromCpp<false>(wxColourDialog) impl
         ColourDialogMethods,
         DialogMethods,
         TopLevelWindowMethods,
@@ -1437,7 +1437,7 @@ impl<const FROM_CPP: bool> From<ColourDialogFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ColourDialogFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColourDialog_CLASSINFO()) }
     }
 }
@@ -1445,13 +1445,13 @@ impl<const FROM_CPP: bool> DynamicCast for ColourDialogFromCpp<FROM_CPP> {
 // wxColourPickerCtrl
 wxwidgets! {
     /// This control allows the user to select a colour.
-    /// - [`ColourPickerCtrl`] represents a C++ `wxColourPickerCtrl` class instance which your code has ownership, [`ColourPickerCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`ColourPickerCtrl`] represents a C++ `wxColourPickerCtrl` class instance which your code has ownership, [`ColourPickerCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ColourPickerCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourPickerCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html) for more details.
     #[doc(alias = "wxColourPickerCtrl")]
     #[doc(alias = "ColourPickerCtrl")]
     class ColourPickerCtrl
-        = ColourPickerCtrlFromCpp<true>(wxColourPickerCtrl) impl
+        = ColourPickerCtrlFromCpp<false>(wxColourPickerCtrl) impl
         ColourPickerCtrlMethods,
         PickerBaseMethods,
         ControlMethods,
@@ -1535,7 +1535,7 @@ impl<const FROM_CPP: bool> From<ColourPickerCtrlFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ColourPickerCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColourPickerCtrl_CLASSINFO()) }
     }
 }
@@ -1543,13 +1543,13 @@ impl<const FROM_CPP: bool> DynamicCast for ColourPickerCtrlFromCpp<FROM_CPP> {
 // wxColourPickerEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxColourPickerCtrl.
-    /// - [`ColourPickerEvent`] represents a C++ `wxColourPickerEvent` class instance which your code has ownership, [`ColourPickerEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`ColourPickerEvent`] represents a C++ `wxColourPickerEvent` class instance which your code has ownership, [`ColourPickerEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ColourPickerEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxColourPickerEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html) for more details.
     #[doc(alias = "wxColourPickerEvent")]
     #[doc(alias = "ColourPickerEvent")]
     class ColourPickerEvent
-        = ColourPickerEventFromCpp<true>(wxColourPickerEvent) impl
+        = ColourPickerEventFromCpp<false>(wxColourPickerEvent) impl
         ColourPickerEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -1582,7 +1582,7 @@ impl<const FROM_CPP: bool> ColourPickerEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ColourPickerEventFromCpp<false> {
+impl Clone for ColourPickerEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1605,13 +1605,13 @@ impl<const FROM_CPP: bool> From<ColourPickerEventFromCpp<FROM_CPP>> for ObjectFr
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ColourPickerEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxColourPickerEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ColourPickerEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1620,13 +1620,13 @@ impl<const FROM_CPP: bool> Drop for ColourPickerEventFromCpp<FROM_CPP> {
 // wxComboBox
 wxwidgets! {
     /// A combobox is like a combination of an edit control and a listbox.
-    /// - [`ComboBox`] represents a C++ `wxComboBox` class instance which your code has ownership, [`ComboBoxFromCpp`]`<false>` represents one which don't own.
+    /// - [`ComboBox`] represents a C++ `wxComboBox` class instance which your code has ownership, [`ComboBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ComboBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxComboBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_combo_box.html) for more details.
     #[doc(alias = "wxComboBox")]
     #[doc(alias = "ComboBox")]
     class ComboBox
-        = ComboBoxFromCpp<true>(wxComboBox) impl
+        = ComboBoxFromCpp<false>(wxComboBox) impl
         ComboBoxMethods,
         ControlMethods,
         WindowMethods,
@@ -1709,7 +1709,7 @@ impl<const FROM_CPP: bool> From<ComboBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FRO
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ComboBoxFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxComboBox_CLASSINFO()) }
     }
 }
@@ -1733,13 +1733,13 @@ impl<const FROM_CPP: bool> TextEntryMethods for ComboBoxFromCpp<FROM_CPP> {
 // wxComboCtrl
 wxwidgets! {
     /// A combo control is a generic combobox that allows totally custom popup.
-    /// - [`ComboCtrl`] represents a C++ `wxComboCtrl` class instance which your code has ownership, [`ComboCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`ComboCtrl`] represents a C++ `wxComboCtrl` class instance which your code has ownership, [`ComboCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ComboCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxComboCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html) for more details.
     #[doc(alias = "wxComboCtrl")]
     #[doc(alias = "ComboCtrl")]
     class ComboCtrl
-        = ComboCtrlFromCpp<true>(wxComboCtrl) impl
+        = ComboCtrlFromCpp<false>(wxComboCtrl) impl
         ComboCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -1818,7 +1818,7 @@ impl<const FROM_CPP: bool> From<ComboCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ComboCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxComboCtrl_CLASSINFO()) }
     }
 }
@@ -1832,13 +1832,13 @@ impl<const FROM_CPP: bool> TextEntryMethods for ComboCtrlFromCpp<FROM_CPP> {
 // wxComboPopup
 wxwidgets! {
     /// In order to use a custom popup with wxComboCtrl, an interface class must be derived from wxComboPopup.
-    /// - [`ComboPopup`] represents a C++ `wxComboPopup` class instance which your code has ownership, [`ComboPopupFromCpp`]`<false>` represents one which don't own.
+    /// - [`ComboPopup`] represents a C++ `wxComboPopup` class instance which your code has ownership, [`ComboPopupFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ComboPopup`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxComboPopup` class's documentation](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html) for more details.
     #[doc(alias = "wxComboPopup")]
     #[doc(alias = "ComboPopup")]
     class ComboPopup
-        = ComboPopupFromCpp<true>(wxComboPopup) impl
+        = ComboPopupFromCpp<false>(wxComboPopup) impl
         ComboPopupMethods
 }
 impl<const FROM_CPP: bool> ComboPopupFromCpp<FROM_CPP> {
@@ -1847,14 +1847,14 @@ impl<const FROM_CPP: bool> ComboPopupFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ComboPopupFromCpp<false> {
+impl Clone for ComboPopupFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for ComboPopupFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxComboPopup_delete(self.0) }
         }
     }
@@ -1863,13 +1863,13 @@ impl<const FROM_CPP: bool> Drop for ComboPopupFromCpp<FROM_CPP> {
 // wxCommand
 wxwidgets! {
     /// wxCommand is a base class for modelling an application command, which is an action usually performed by selecting a menu item, pressing a toolbar button or any other means provided by the application to change the data or view.
-    /// - [`Command`] represents a C++ `wxCommand` class instance which your code has ownership, [`CommandFromCpp`]`<false>` represents one which don't own.
+    /// - [`Command`] represents a C++ `wxCommand` class instance which your code has ownership, [`CommandFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Command`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCommand` class's documentation](https://docs.wxwidgets.org/3.2/classwx_command.html) for more details.
     #[doc(alias = "wxCommand")]
     #[doc(alias = "Command")]
     class Command
-        = CommandFromCpp<true>(wxCommand) impl
+        = CommandFromCpp<false>(wxCommand) impl
         CommandMethods,
         ObjectMethods
 }
@@ -1879,7 +1879,7 @@ impl<const FROM_CPP: bool> CommandFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CommandFromCpp<false> {
+impl Clone for CommandFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1890,13 +1890,13 @@ impl<const FROM_CPP: bool> From<CommandFromCpp<FROM_CPP>> for ObjectFromCpp<FROM
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CommandFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCommand_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for CommandFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1905,13 +1905,13 @@ impl<const FROM_CPP: bool> Drop for CommandFromCpp<FROM_CPP> {
 // wxCommandEvent
 wxwidgets! {
     /// This event class contains information about command events, which originate from a variety of simple controls.
-    /// - [`CommandEvent`] represents a C++ `wxCommandEvent` class instance which your code has ownership, [`CommandEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`CommandEvent`] represents a C++ `wxCommandEvent` class instance which your code has ownership, [`CommandEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CommandEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCommandEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_command_event.html) for more details.
     #[doc(alias = "wxCommandEvent")]
     #[doc(alias = "CommandEvent")]
     class CommandEvent
-        = CommandEventFromCpp<true>(wxCommandEvent) impl
+        = CommandEventFromCpp<false>(wxCommandEvent) impl
         CommandEventMethods,
         EventMethods,
         ObjectMethods
@@ -1922,7 +1922,7 @@ impl<const FROM_CPP: bool> CommandEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CommandEventFromCpp<false> {
+impl Clone for CommandEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -1938,13 +1938,13 @@ impl<const FROM_CPP: bool> From<CommandEventFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CommandEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCommandEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for CommandEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1953,13 +1953,13 @@ impl<const FROM_CPP: bool> Drop for CommandEventFromCpp<FROM_CPP> {
 // wxCommandLinkButton
 wxwidgets! {
     /// Objects of this class are similar in appearance to the normal wxButtons but are similar to the links in a web page in functionality.
-    /// - [`CommandLinkButton`] represents a C++ `wxCommandLinkButton` class instance which your code has ownership, [`CommandLinkButtonFromCpp`]`<false>` represents one which don't own.
+    /// - [`CommandLinkButton`] represents a C++ `wxCommandLinkButton` class instance which your code has ownership, [`CommandLinkButtonFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CommandLinkButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCommandLinkButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html) for more details.
     #[doc(alias = "wxCommandLinkButton")]
     #[doc(alias = "CommandLinkButton")]
     class CommandLinkButton
-        = CommandLinkButtonFromCpp<true>(wxCommandLinkButton) impl
+        = CommandLinkButtonFromCpp<false>(wxCommandLinkButton) impl
         CommandLinkButtonMethods,
         ButtonMethods,
         AnyButtonMethods,
@@ -2050,7 +2050,7 @@ impl<const FROM_CPP: bool> From<CommandLinkButtonFromCpp<FROM_CPP>> for ObjectFr
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CommandLinkButtonFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCommandLinkButton_CLASSINFO()) }
     }
 }
@@ -2058,13 +2058,13 @@ impl<const FROM_CPP: bool> DynamicCast for CommandLinkButtonFromCpp<FROM_CPP> {
 // wxCommandProcessor
 wxwidgets! {
     /// wxCommandProcessor is a class that maintains a history of wxCommands, with undo/redo functionality built-in.
-    /// - [`CommandProcessor`] represents a C++ `wxCommandProcessor` class instance which your code has ownership, [`CommandProcessorFromCpp`]`<false>` represents one which don't own.
+    /// - [`CommandProcessor`] represents a C++ `wxCommandProcessor` class instance which your code has ownership, [`CommandProcessorFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CommandProcessor`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCommandProcessor` class's documentation](https://docs.wxwidgets.org/3.2/classwx_command_processor.html) for more details.
     #[doc(alias = "wxCommandProcessor")]
     #[doc(alias = "CommandProcessor")]
     class CommandProcessor
-        = CommandProcessorFromCpp<true>(wxCommandProcessor) impl
+        = CommandProcessorFromCpp<false>(wxCommandProcessor) impl
         CommandProcessorMethods,
         ObjectMethods
 }
@@ -2079,7 +2079,7 @@ impl<const FROM_CPP: bool> CommandProcessorFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CommandProcessorFromCpp<false> {
+impl Clone for CommandProcessorFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2090,13 +2090,13 @@ impl<const FROM_CPP: bool> From<CommandProcessorFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CommandProcessorFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCommandProcessor_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for CommandProcessorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2105,13 +2105,13 @@ impl<const FROM_CPP: bool> Drop for CommandProcessorFromCpp<FROM_CPP> {
 // wxContextMenuEvent
 wxwidgets! {
     /// This class is used for context menu events, sent to give the application a chance to show a context (popup) menu for a wxWindow.
-    /// - [`ContextMenuEvent`] represents a C++ `wxContextMenuEvent` class instance which your code has ownership, [`ContextMenuEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`ContextMenuEvent`] represents a C++ `wxContextMenuEvent` class instance which your code has ownership, [`ContextMenuEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ContextMenuEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxContextMenuEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html) for more details.
     #[doc(alias = "wxContextMenuEvent")]
     #[doc(alias = "ContextMenuEvent")]
     class ContextMenuEvent
-        = ContextMenuEventFromCpp<true>(wxContextMenuEvent) impl
+        = ContextMenuEventFromCpp<false>(wxContextMenuEvent) impl
         ContextMenuEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -2123,7 +2123,7 @@ impl<const FROM_CPP: bool> ContextMenuEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ContextMenuEventFromCpp<false> {
+impl Clone for ContextMenuEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2146,13 +2146,13 @@ impl<const FROM_CPP: bool> From<ContextMenuEventFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ContextMenuEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxContextMenuEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ContextMenuEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2161,13 +2161,13 @@ impl<const FROM_CPP: bool> Drop for ContextMenuEventFromCpp<FROM_CPP> {
 // wxControl
 wxwidgets! {
     /// This is the base class for a control or "widget".
-    /// - [`Control`] represents a C++ `wxControl` class instance which your code has ownership, [`ControlFromCpp`]`<false>` represents one which don't own.
+    /// - [`Control`] represents a C++ `wxControl` class instance which your code has ownership, [`ControlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Control`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxControl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_control.html) for more details.
     #[doc(alias = "wxControl")]
     #[doc(alias = "Control")]
     class Control
-        = ControlFromCpp<true>(wxControl) impl
+        = ControlFromCpp<false>(wxControl) impl
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
@@ -2232,7 +2232,7 @@ impl<const FROM_CPP: bool> From<ControlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ControlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxControl_CLASSINFO()) }
     }
 }
@@ -2240,13 +2240,13 @@ impl<const FROM_CPP: bool> DynamicCast for ControlFromCpp<FROM_CPP> {
 // wxControlWithItems
 wxwidgets! {
     /// This is convenience class that derives from both wxControl and wxItemContainer.
-    /// - [`ControlWithItems`] represents a C++ `wxControlWithItems` class instance which your code has ownership, [`ControlWithItemsFromCpp`]`<false>` represents one which don't own.
+    /// - [`ControlWithItems`] represents a C++ `wxControlWithItems` class instance which your code has ownership, [`ControlWithItemsFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ControlWithItems`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxControlWithItems` class's documentation](https://docs.wxwidgets.org/3.2/classwx_control_with_items.html) for more details.
     #[doc(alias = "wxControlWithItems")]
     #[doc(alias = "ControlWithItems")]
     class ControlWithItems
-        = ControlWithItemsFromCpp<true>(wxControlWithItems) impl
+        = ControlWithItemsFromCpp<false>(wxControlWithItems) impl
         ControlWithItemsMethods,
         ControlMethods,
         WindowMethods,
@@ -2284,7 +2284,7 @@ impl<const FROM_CPP: bool> From<ControlWithItemsFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ControlWithItemsFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxControlWithItems_CLASSINFO()) }
     }
 }
@@ -2303,13 +2303,13 @@ impl<const FROM_CPP: bool> ItemContainerImmutableMethods for ControlWithItemsFro
 // wxCursor
 wxwidgets! {
     /// A cursor is a small bitmap usually used for denoting where the mouse pointer is, with a picture that might indicate the interpretation of a mouse click.
-    /// - [`Cursor`] represents a C++ `wxCursor` class instance which your code has ownership, [`CursorFromCpp`]`<false>` represents one which don't own.
+    /// - [`Cursor`] represents a C++ `wxCursor` class instance which your code has ownership, [`CursorFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Cursor`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCursor` class's documentation](https://docs.wxwidgets.org/3.2/classwx_cursor.html) for more details.
     #[doc(alias = "wxCursor")]
     #[doc(alias = "Cursor")]
     class Cursor
-        = CursorFromCpp<true>(wxCursor) impl
+        = CursorFromCpp<false>(wxCursor) impl
         CursorMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -2352,7 +2352,7 @@ impl<const FROM_CPP: bool> CursorFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CursorFromCpp<false> {
+impl Clone for CursorFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2368,13 +2368,13 @@ impl<const FROM_CPP: bool> From<CursorFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for CursorFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxCursor_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for CursorFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2383,13 +2383,13 @@ impl<const FROM_CPP: bool> Drop for CursorFromCpp<FROM_CPP> {
 // wxCustomDataObject
 wxwidgets! {
     /// wxCustomDataObject is a specialization of wxDataObjectSimple for some application-specific data in arbitrary (either custom or one of the standard ones).
-    /// - [`CustomDataObject`] represents a C++ `wxCustomDataObject` class instance which your code has ownership, [`CustomDataObjectFromCpp`]`<false>` represents one which don't own.
+    /// - [`CustomDataObject`] represents a C++ `wxCustomDataObject` class instance which your code has ownership, [`CustomDataObjectFromCpp`]`<true>` represents one which don't own.
     /// - Use [`CustomDataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxCustomDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html) for more details.
     #[doc(alias = "wxCustomDataObject")]
     #[doc(alias = "CustomDataObject")]
     class CustomDataObject
-        = CustomDataObjectFromCpp<true>(wxCustomDataObject) impl
+        = CustomDataObjectFromCpp<false>(wxCustomDataObject) impl
         CustomDataObjectMethods,
         DataObjectSimpleMethods,
         DataObjectMethods
@@ -2408,7 +2408,7 @@ impl<const FROM_CPP: bool> CustomDataObjectFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for CustomDataObjectFromCpp<false> {
+impl Clone for CustomDataObjectFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -2427,7 +2427,7 @@ impl<const FROM_CPP: bool> From<CustomDataObjectFromCpp<FROM_CPP>> for DataObjec
 }
 impl<const FROM_CPP: bool> Drop for CustomDataObjectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxCustomDataObject_delete(self.0) }
         }
     }

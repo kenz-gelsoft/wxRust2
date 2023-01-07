@@ -3,13 +3,13 @@ use super::*;
 // wxStandardPaths
 wxwidgets! {
     /// wxStandardPaths returns the standard locations in the file system and should be used by applications to find their data files in a portable way.
-    /// - [`StandardPaths`] represents a C++ `wxStandardPaths` class instance which your code has ownership, [`StandardPathsFromCpp`]`<false>` represents one which don't own.
+    /// - [`StandardPaths`] represents a C++ `wxStandardPaths` class instance which your code has ownership, [`StandardPathsFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StandardPaths`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxStandardPaths` class's documentation](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html) for more details.
     #[doc(alias = "wxStandardPaths")]
     #[doc(alias = "StandardPaths")]
     class StandardPaths
-        = StandardPathsFromCpp<true>(wxStandardPaths) impl
+        = StandardPathsFromCpp<false>(wxStandardPaths) impl
         StandardPathsMethods
 }
 impl<const FROM_CPP: bool> StandardPathsFromCpp<FROM_CPP> {
@@ -38,14 +38,14 @@ impl<const FROM_CPP: bool> StandardPathsFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for StandardPathsFromCpp<false> {
+impl Clone for StandardPathsFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for StandardPathsFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxStandardPaths_delete(self.0) }
         }
     }

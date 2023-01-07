@@ -3,13 +3,13 @@ use super::*;
 // wxHScrolledWindow
 wxwidgets! {
     /// In the name of this class, "H" stands for "horizontal" because it can be used for scrolling columns of variable widths.
-    /// - [`HScrolledWindow`] represents a C++ `wxHScrolledWindow` class instance which your code has ownership, [`HScrolledWindowFromCpp`]`<false>` represents one which don't own.
+    /// - [`HScrolledWindow`] represents a C++ `wxHScrolledWindow` class instance which your code has ownership, [`HScrolledWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HScrolledWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHScrolledWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_h_scrolled_window.html) for more details.
     #[doc(alias = "wxHScrolledWindow")]
     #[doc(alias = "HScrolledWindow")]
     class HScrolledWindow
-        = HScrolledWindowFromCpp<true>(wxHScrolledWindow) impl
+        = HScrolledWindowFromCpp<false>(wxHScrolledWindow) impl
         HScrolledWindowMethods,
         PanelMethods,
         // WindowMethods,
@@ -49,7 +49,7 @@ impl<const FROM_CPP: bool> From<HScrolledWindowFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for HScrolledWindowFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHScrolledWindow_CLASSINFO()) }
     }
 }
@@ -83,13 +83,13 @@ impl<const FROM_CPP: bool> WindowMethods for HScrolledWindowFromCpp<FROM_CPP> {
 // wxHTMLDataObject
 wxwidgets! {
     /// wxHTMLDataObject is used for working with HTML-formatted text.
-    /// - [`HTMLDataObject`] represents a C++ `wxHTMLDataObject` class instance which your code has ownership, [`HTMLDataObjectFromCpp`]`<false>` represents one which don't own.
+    /// - [`HTMLDataObject`] represents a C++ `wxHTMLDataObject` class instance which your code has ownership, [`HTMLDataObjectFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HTMLDataObject`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHTMLDataObject` class's documentation](https://docs.wxwidgets.org/3.2/classwx_h_t_m_l_data_object.html) for more details.
     #[doc(alias = "wxHTMLDataObject")]
     #[doc(alias = "HTMLDataObject")]
     class HTMLDataObject
-        = HTMLDataObjectFromCpp<true>(wxHTMLDataObject) impl
+        = HTMLDataObjectFromCpp<false>(wxHTMLDataObject) impl
         HTMLDataObjectMethods,
         DataObjectSimpleMethods,
         DataObjectMethods
@@ -109,7 +109,7 @@ impl<const FROM_CPP: bool> HTMLDataObjectFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for HTMLDataObjectFromCpp<false> {
+impl Clone for HTMLDataObjectFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -128,7 +128,7 @@ impl<const FROM_CPP: bool> From<HTMLDataObjectFromCpp<FROM_CPP>> for DataObjectF
 }
 impl<const FROM_CPP: bool> Drop for HTMLDataObjectFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxHTMLDataObject_delete(self.0) }
         }
     }
@@ -137,13 +137,13 @@ impl<const FROM_CPP: bool> Drop for HTMLDataObjectFromCpp<FROM_CPP> {
 // wxHVScrolledWindow
 wxwidgets! {
     /// This window inherits all functionality of both vertical and horizontal, variable scrolled windows.
-    /// - [`HVScrolledWindow`] represents a C++ `wxHVScrolledWindow` class instance which your code has ownership, [`HVScrolledWindowFromCpp`]`<false>` represents one which don't own.
+    /// - [`HVScrolledWindow`] represents a C++ `wxHVScrolledWindow` class instance which your code has ownership, [`HVScrolledWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HVScrolledWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHVScrolledWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_h_v_scrolled_window.html) for more details.
     #[doc(alias = "wxHVScrolledWindow")]
     #[doc(alias = "HVScrolledWindow")]
     class HVScrolledWindow
-        = HVScrolledWindowFromCpp<true>(wxHVScrolledWindow) impl
+        = HVScrolledWindowFromCpp<false>(wxHVScrolledWindow) impl
         HVScrolledWindowMethods,
         PanelMethods,
         // WindowMethods,
@@ -183,7 +183,7 @@ impl<const FROM_CPP: bool> From<HVScrolledWindowFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for HVScrolledWindowFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHVScrolledWindow_CLASSINFO()) }
     }
 }
@@ -217,13 +217,13 @@ impl<const FROM_CPP: bool> WindowMethods for HVScrolledWindowFromCpp<FROM_CPP> {
 // wxHeaderColumn
 wxwidgets! {
     /// Represents a column header in controls displaying tabular data such as wxDataViewCtrl or wxGrid.
-    /// - [`HeaderColumn`] represents a C++ `wxHeaderColumn` class instance which your code has ownership, [`HeaderColumnFromCpp`]`<false>` represents one which don't own.
+    /// - [`HeaderColumn`] represents a C++ `wxHeaderColumn` class instance which your code has ownership, [`HeaderColumnFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HeaderColumn`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderColumn` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_column.html) for more details.
     #[doc(alias = "wxHeaderColumn")]
     #[doc(alias = "HeaderColumn")]
     class HeaderColumn
-        = HeaderColumnFromCpp<true>(wxHeaderColumn) impl
+        = HeaderColumnFromCpp<false>(wxHeaderColumn) impl
         HeaderColumnMethods
 }
 impl<const FROM_CPP: bool> HeaderColumnFromCpp<FROM_CPP> {
@@ -231,14 +231,14 @@ impl<const FROM_CPP: bool> HeaderColumnFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for HeaderColumnFromCpp<false> {
+impl Clone for HeaderColumnFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for HeaderColumnFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxHeaderColumn_delete(self.0) }
         }
     }
@@ -247,13 +247,13 @@ impl<const FROM_CPP: bool> Drop for HeaderColumnFromCpp<FROM_CPP> {
 // wxHeaderColumnSimple
 wxwidgets! {
     /// Simple container for the information about the column.
-    /// - [`HeaderColumnSimple`] represents a C++ `wxHeaderColumnSimple` class instance which your code has ownership, [`HeaderColumnSimpleFromCpp`]`<false>` represents one which don't own.
+    /// - [`HeaderColumnSimple`] represents a C++ `wxHeaderColumnSimple` class instance which your code has ownership, [`HeaderColumnSimpleFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HeaderColumnSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderColumnSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_column_simple.html) for more details.
     #[doc(alias = "wxHeaderColumnSimple")]
     #[doc(alias = "HeaderColumnSimple")]
     class HeaderColumnSimple
-        = HeaderColumnSimpleFromCpp<true>(wxHeaderColumnSimple) impl
+        = HeaderColumnSimpleFromCpp<false>(wxHeaderColumnSimple) impl
         HeaderColumnSimpleMethods,
         SettableHeaderColumnMethods,
         HeaderColumnMethods
@@ -291,7 +291,7 @@ impl<const FROM_CPP: bool> HeaderColumnSimpleFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for HeaderColumnSimpleFromCpp<false> {
+impl Clone for HeaderColumnSimpleFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -312,7 +312,7 @@ impl<const FROM_CPP: bool> From<HeaderColumnSimpleFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for HeaderColumnSimpleFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxHeaderColumnSimple_delete(self.0) }
         }
     }
@@ -321,13 +321,13 @@ impl<const FROM_CPP: bool> Drop for HeaderColumnSimpleFromCpp<FROM_CPP> {
 // wxHeaderCtrl
 wxwidgets! {
     /// wxHeaderCtrl is the control containing the column headings which is usually used for display of tabular data.
-    /// - [`HeaderCtrl`] represents a C++ `wxHeaderCtrl` class instance which your code has ownership, [`HeaderCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`HeaderCtrl`] represents a C++ `wxHeaderCtrl` class instance which your code has ownership, [`HeaderCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HeaderCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl.html) for more details.
     #[doc(alias = "wxHeaderCtrl")]
     #[doc(alias = "HeaderCtrl")]
     class HeaderCtrl
-        = HeaderCtrlFromCpp<true>(wxHeaderCtrl) impl
+        = HeaderCtrlFromCpp<false>(wxHeaderCtrl) impl
         HeaderCtrlMethods,
         ControlMethods,
         // WindowMethods,
@@ -367,7 +367,7 @@ impl<const FROM_CPP: bool> From<HeaderCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for HeaderCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHeaderCtrl_CLASSINFO()) }
     }
 }
@@ -401,13 +401,13 @@ impl<const FROM_CPP: bool> WindowMethods for HeaderCtrlFromCpp<FROM_CPP> {
 // wxHeaderCtrlEvent
 wxwidgets! {
     /// Event class representing the events generated by wxHeaderCtrl.
-    /// - [`HeaderCtrlEvent`] represents a C++ `wxHeaderCtrlEvent` class instance which your code has ownership, [`HeaderCtrlEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`HeaderCtrlEvent`] represents a C++ `wxHeaderCtrlEvent` class instance which your code has ownership, [`HeaderCtrlEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HeaderCtrlEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderCtrlEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_event.html) for more details.
     #[doc(alias = "wxHeaderCtrlEvent")]
     #[doc(alias = "HeaderCtrlEvent")]
     class HeaderCtrlEvent
-        = HeaderCtrlEventFromCpp<true>(wxHeaderCtrlEvent) impl
+        = HeaderCtrlEventFromCpp<false>(wxHeaderCtrlEvent) impl
         HeaderCtrlEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
@@ -428,7 +428,7 @@ impl<const FROM_CPP: bool> HeaderCtrlEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for HeaderCtrlEventFromCpp<false> {
+impl Clone for HeaderCtrlEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -456,13 +456,13 @@ impl<const FROM_CPP: bool> From<HeaderCtrlEventFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for HeaderCtrlEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHeaderCtrlEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for HeaderCtrlEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -471,13 +471,13 @@ impl<const FROM_CPP: bool> Drop for HeaderCtrlEventFromCpp<FROM_CPP> {
 // wxHeaderCtrlSimple
 wxwidgets! {
     /// wxHeaderCtrlSimple is a concrete header control which can be used directly, without inheriting from it as you need to do when using wxHeaderCtrl itself.
-    /// - [`HeaderCtrlSimple`] represents a C++ `wxHeaderCtrlSimple` class instance which your code has ownership, [`HeaderCtrlSimpleFromCpp`]`<false>` represents one which don't own.
+    /// - [`HeaderCtrlSimple`] represents a C++ `wxHeaderCtrlSimple` class instance which your code has ownership, [`HeaderCtrlSimpleFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HeaderCtrlSimple`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHeaderCtrlSimple` class's documentation](https://docs.wxwidgets.org/3.2/classwx_header_ctrl_simple.html) for more details.
     #[doc(alias = "wxHeaderCtrlSimple")]
     #[doc(alias = "HeaderCtrlSimple")]
     class HeaderCtrlSimple
-        = HeaderCtrlSimpleFromCpp<true>(wxHeaderCtrlSimple) impl
+        = HeaderCtrlSimpleFromCpp<false>(wxHeaderCtrlSimple) impl
         HeaderCtrlSimpleMethods,
         HeaderCtrlMethods,
         ControlMethods,
@@ -552,7 +552,7 @@ impl<const FROM_CPP: bool> From<HeaderCtrlSimpleFromCpp<FROM_CPP>> for ObjectFro
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for HeaderCtrlSimpleFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHeaderCtrlSimple_CLASSINFO()) }
     }
 }
@@ -560,13 +560,13 @@ impl<const FROM_CPP: bool> DynamicCast for HeaderCtrlSimpleFromCpp<FROM_CPP> {
 // wxHelpEvent
 wxwidgets! {
     /// A help event is sent when the user has requested context-sensitive help.
-    /// - [`HelpEvent`] represents a C++ `wxHelpEvent` class instance which your code has ownership, [`HelpEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`HelpEvent`] represents a C++ `wxHelpEvent` class instance which your code has ownership, [`HelpEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HelpEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHelpEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_help_event.html) for more details.
     #[doc(alias = "wxHelpEvent")]
     #[doc(alias = "HelpEvent")]
     class HelpEvent
-        = HelpEventFromCpp<true>(wxHelpEvent) impl
+        = HelpEventFromCpp<false>(wxHelpEvent) impl
         HelpEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -583,7 +583,7 @@ impl<const FROM_CPP: bool> HelpEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for HelpEventFromCpp<false> {
+impl Clone for HelpEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -604,13 +604,13 @@ impl<const FROM_CPP: bool> From<HelpEventFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for HelpEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHelpEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for HelpEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -619,13 +619,13 @@ impl<const FROM_CPP: bool> Drop for HelpEventFromCpp<FROM_CPP> {
 // wxHyperlinkCtrl
 wxwidgets! {
     /// This class shows a static text element which links to an URL.
-    /// - [`HyperlinkCtrl`] represents a C++ `wxHyperlinkCtrl` class instance which your code has ownership, [`HyperlinkCtrlFromCpp`]`<false>` represents one which don't own.
+    /// - [`HyperlinkCtrl`] represents a C++ `wxHyperlinkCtrl` class instance which your code has ownership, [`HyperlinkCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HyperlinkCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHyperlinkCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_hyperlink_ctrl.html) for more details.
     #[doc(alias = "wxHyperlinkCtrl")]
     #[doc(alias = "HyperlinkCtrl")]
     class HyperlinkCtrl
-        = HyperlinkCtrlFromCpp<true>(wxHyperlinkCtrl) impl
+        = HyperlinkCtrlFromCpp<false>(wxHyperlinkCtrl) impl
         HyperlinkCtrlMethods,
         ControlMethods,
         WindowMethods,
@@ -699,7 +699,7 @@ impl<const FROM_CPP: bool> From<HyperlinkCtrlFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for HyperlinkCtrlFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHyperlinkCtrl_CLASSINFO()) }
     }
 }
@@ -707,13 +707,13 @@ impl<const FROM_CPP: bool> DynamicCast for HyperlinkCtrlFromCpp<FROM_CPP> {
 // wxHyperlinkEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxHyperlinkCtrl.
-    /// - [`HyperlinkEvent`] represents a C++ `wxHyperlinkEvent` class instance which your code has ownership, [`HyperlinkEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`HyperlinkEvent`] represents a C++ `wxHyperlinkEvent` class instance which your code has ownership, [`HyperlinkEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`HyperlinkEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxHyperlinkEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_hyperlink_event.html) for more details.
     #[doc(alias = "wxHyperlinkEvent")]
     #[doc(alias = "HyperlinkEvent")]
     class HyperlinkEvent
-        = HyperlinkEventFromCpp<true>(wxHyperlinkEvent) impl
+        = HyperlinkEventFromCpp<false>(wxHyperlinkEvent) impl
         HyperlinkEventMethods,
         CommandEventMethods,
         EventMethods,
@@ -742,7 +742,7 @@ impl<const FROM_CPP: bool> HyperlinkEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for HyperlinkEventFromCpp<false> {
+impl Clone for HyperlinkEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -763,13 +763,13 @@ impl<const FROM_CPP: bool> From<HyperlinkEventFromCpp<FROM_CPP>> for ObjectFromC
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for HyperlinkEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxHyperlinkEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for HyperlinkEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

@@ -379,7 +379,7 @@ pub trait ListCtrlMethods: ControlMethods {
     /// Returns the specified image list.
     ///
     /// See [C++ `wxListCtrl::GetImageList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_ctrl.html#aed8cdb5d1e453c91a764dd202b50b8b6).
-    fn get_image_list(&self, which: c_int) -> Option<ImageListFromCpp<false>> {
+    fn get_image_list(&self, which: c_int) -> Option<ImageListFromCpp<true>> {
         unsafe { ImageList::option_from(ffi::wxListCtrl_GetImageList(self.as_ptr(), which)) }
     }
     /// Gets information about the item.
@@ -889,7 +889,7 @@ pub trait ListEventMethods: NotifyEventMethods {
     /// An item object, used by some events.
     ///
     /// See [C++ `wxListEvent::GetItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_list_event.html#aa855597658bab6bbdf4ab0d85223724d).
-    fn get_item(&self) -> ListItemFromCpp<false> {
+    fn get_item(&self) -> ListItemFromCpp<true> {
         unsafe { ListItemFromCpp::from_ptr(ffi::wxListEvent_GetItem(self.as_ptr())) }
     }
     /// Key code if the event is a keypress event.

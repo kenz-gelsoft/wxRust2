@@ -356,7 +356,7 @@ pub trait HelpEventMethods: CommandEventMethods {
     /// Returns the left-click position of the mouse, in screen coordinates.
     ///
     /// See [C++ `wxHelpEvent::GetPosition()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_help_event.html#a28bd5a0701bb9d0537dced60743a2292).
-    fn get_position(&self) -> PointFromCpp<false> {
+    fn get_position(&self) -> PointFromCpp<true> {
         unsafe { PointFromCpp::from_ptr(ffi::wxHelpEvent_GetPosition(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn SetOrigin()

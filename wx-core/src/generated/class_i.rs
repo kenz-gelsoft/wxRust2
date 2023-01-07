@@ -3,13 +3,13 @@ use super::*;
 // wxIcon
 wxwidgets! {
     /// An icon is a small rectangular bitmap usually used for denoting a minimized application.
-    /// - [`Icon`] represents a C++ `wxIcon` class instance which your code has ownership, [`IconFromCpp`]`<false>` represents one which don't own.
+    /// - [`Icon`] represents a C++ `wxIcon` class instance which your code has ownership, [`IconFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Icon`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxIcon` class's documentation](https://docs.wxwidgets.org/3.2/classwx_icon.html) for more details.
     #[doc(alias = "wxIcon")]
     #[doc(alias = "Icon")]
     class Icon
-        = IconFromCpp<true>(wxIcon) impl
+        = IconFromCpp<false>(wxIcon) impl
         IconMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -48,7 +48,7 @@ impl<const FROM_CPP: bool> IconFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for IconFromCpp<false> {
+impl Clone for IconFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -64,13 +64,13 @@ impl<const FROM_CPP: bool> From<IconFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CP
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for IconFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxIcon_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for IconFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -79,13 +79,13 @@ impl<const FROM_CPP: bool> Drop for IconFromCpp<FROM_CPP> {
 // wxIconBundle
 wxwidgets! {
     /// This class contains multiple copies of an icon in different sizes.
-    /// - [`IconBundle`] represents a C++ `wxIconBundle` class instance which your code has ownership, [`IconBundleFromCpp`]`<false>` represents one which don't own.
+    /// - [`IconBundle`] represents a C++ `wxIconBundle` class instance which your code has ownership, [`IconBundleFromCpp`]`<true>` represents one which don't own.
     /// - Use [`IconBundle`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxIconBundle` class's documentation](https://docs.wxwidgets.org/3.2/classwx_icon_bundle.html) for more details.
     #[doc(alias = "wxIconBundle")]
     #[doc(alias = "IconBundle")]
     class IconBundle
-        = IconBundleFromCpp<true>(wxIconBundle) impl
+        = IconBundleFromCpp<false>(wxIconBundle) impl
         IconBundleMethods,
         GDIObjectMethods,
         ObjectMethods
@@ -127,7 +127,7 @@ impl<const FROM_CPP: bool> IconBundleFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for IconBundleFromCpp<false> {
+impl Clone for IconBundleFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -143,13 +143,13 @@ impl<const FROM_CPP: bool> From<IconBundleFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for IconBundleFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxIconBundle_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for IconBundleFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -158,13 +158,13 @@ impl<const FROM_CPP: bool> Drop for IconBundleFromCpp<FROM_CPP> {
 // wxIconizeEvent
 wxwidgets! {
     /// An event being sent when the frame is iconized (minimized) or restored.
-    /// - [`IconizeEvent`] represents a C++ `wxIconizeEvent` class instance which your code has ownership, [`IconizeEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`IconizeEvent`] represents a C++ `wxIconizeEvent` class instance which your code has ownership, [`IconizeEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`IconizeEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxIconizeEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_iconize_event.html) for more details.
     #[doc(alias = "wxIconizeEvent")]
     #[doc(alias = "IconizeEvent")]
     class IconizeEvent
-        = IconizeEventFromCpp<true>(wxIconizeEvent) impl
+        = IconizeEventFromCpp<false>(wxIconizeEvent) impl
         IconizeEventMethods,
         EventMethods,
         ObjectMethods
@@ -180,7 +180,7 @@ impl<const FROM_CPP: bool> IconizeEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for IconizeEventFromCpp<false> {
+impl Clone for IconizeEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -196,13 +196,13 @@ impl<const FROM_CPP: bool> From<IconizeEventFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for IconizeEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxIconizeEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for IconizeEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -211,13 +211,13 @@ impl<const FROM_CPP: bool> Drop for IconizeEventFromCpp<FROM_CPP> {
 // wxIdManager
 wxwidgets! {
     /// wxIdManager is responsible for allocating and releasing window IDs.
-    /// - [`IdManager`] represents a C++ `wxIdManager` class instance which your code has ownership, [`IdManagerFromCpp`]`<false>` represents one which don't own.
+    /// - [`IdManager`] represents a C++ `wxIdManager` class instance which your code has ownership, [`IdManagerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`IdManager`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxIdManager` class's documentation](https://docs.wxwidgets.org/3.2/classwx_id_manager.html) for more details.
     #[doc(alias = "wxIdManager")]
     #[doc(alias = "IdManager")]
     class IdManager
-        = IdManagerFromCpp<true>(wxIdManager) impl
+        = IdManagerFromCpp<false>(wxIdManager) impl
         IdManagerMethods
 }
 impl<const FROM_CPP: bool> IdManagerFromCpp<FROM_CPP> {
@@ -225,14 +225,14 @@ impl<const FROM_CPP: bool> IdManagerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for IdManagerFromCpp<false> {
+impl Clone for IdManagerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for IdManagerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxIdManager_delete(self.0) }
         }
     }
@@ -241,13 +241,13 @@ impl<const FROM_CPP: bool> Drop for IdManagerFromCpp<FROM_CPP> {
 // wxImage
 wxwidgets! {
     /// This class encapsulates a platform-independent image.
-    /// - [`Image`] represents a C++ `wxImage` class instance which your code has ownership, [`ImageFromCpp`]`<false>` represents one which don't own.
+    /// - [`Image`] represents a C++ `wxImage` class instance which your code has ownership, [`ImageFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Image`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxImage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_image.html) for more details.
     #[doc(alias = "wxImage")]
     #[doc(alias = "Image")]
     class Image
-        = ImageFromCpp<true>(wxImage) impl
+        = ImageFromCpp<false>(wxImage) impl
         ImageMethods,
         ObjectMethods
 }
@@ -361,7 +361,7 @@ impl<const FROM_CPP: bool> ImageFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ImageFromCpp<false> {
+impl Clone for ImageFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -372,13 +372,13 @@ impl<const FROM_CPP: bool> From<ImageFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_C
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ImageFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxImage_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ImageFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -387,13 +387,13 @@ impl<const FROM_CPP: bool> Drop for ImageFromCpp<FROM_CPP> {
 // wxImageHandler
 wxwidgets! {
     /// This is the base class for implementing image file loading/saving, and image creation from data.
-    /// - [`ImageHandler`] represents a C++ `wxImageHandler` class instance which your code has ownership, [`ImageHandlerFromCpp`]`<false>` represents one which don't own.
+    /// - [`ImageHandler`] represents a C++ `wxImageHandler` class instance which your code has ownership, [`ImageHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ImageHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxImageHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_image_handler.html) for more details.
     #[doc(alias = "wxImageHandler")]
     #[doc(alias = "ImageHandler")]
     class ImageHandler
-        = ImageHandlerFromCpp<true>(wxImageHandler) impl
+        = ImageHandlerFromCpp<false>(wxImageHandler) impl
         ImageHandlerMethods,
         ObjectMethods
 }
@@ -403,7 +403,7 @@ impl<const FROM_CPP: bool> ImageHandlerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ImageHandlerFromCpp<false> {
+impl Clone for ImageHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -414,13 +414,13 @@ impl<const FROM_CPP: bool> From<ImageHandlerFromCpp<FROM_CPP>> for ObjectFromCpp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ImageHandlerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxImageHandler_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ImageHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -429,13 +429,13 @@ impl<const FROM_CPP: bool> Drop for ImageHandlerFromCpp<FROM_CPP> {
 // wxImageList
 wxwidgets! {
     /// A wxImageList contains a list of images, which are stored in an unspecified form.
-    /// - [`ImageList`] represents a C++ `wxImageList` class instance which your code has ownership, [`ImageListFromCpp`]`<false>` represents one which don't own.
+    /// - [`ImageList`] represents a C++ `wxImageList` class instance which your code has ownership, [`ImageListFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ImageList`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxImageList` class's documentation](https://docs.wxwidgets.org/3.2/classwx_image_list.html) for more details.
     #[doc(alias = "wxImageList")]
     #[doc(alias = "ImageList")]
     class ImageList
-        = ImageListFromCpp<true>(wxImageList) impl
+        = ImageListFromCpp<false>(wxImageList) impl
         ImageListMethods,
         ObjectMethods
 }
@@ -461,7 +461,7 @@ impl<const FROM_CPP: bool> ImageListFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ImageListFromCpp<false> {
+impl Clone for ImageListFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -472,13 +472,13 @@ impl<const FROM_CPP: bool> From<ImageListFromCpp<FROM_CPP>> for ObjectFromCpp<FR
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for ImageListFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxImageList_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for ImageListFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -487,13 +487,13 @@ impl<const FROM_CPP: bool> Drop for ImageListFromCpp<FROM_CPP> {
 // wxInfoBar
 wxwidgets! {
     /// An info bar is a transient window shown at top or bottom of its parent window to display non-critical information to the user.
-    /// - [`InfoBar`] represents a C++ `wxInfoBar` class instance which your code has ownership, [`InfoBarFromCpp`]`<false>` represents one which don't own.
+    /// - [`InfoBar`] represents a C++ `wxInfoBar` class instance which your code has ownership, [`InfoBarFromCpp`]`<true>` represents one which don't own.
     /// - Use [`InfoBar`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxInfoBar` class's documentation](https://docs.wxwidgets.org/3.2/classwx_info_bar.html) for more details.
     #[doc(alias = "wxInfoBar")]
     #[doc(alias = "InfoBar")]
     class InfoBar
-        = InfoBarFromCpp<true>(wxInfoBar) impl
+        = InfoBarFromCpp<false>(wxInfoBar) impl
         InfoBarMethods,
         ControlMethods,
         WindowMethods,
@@ -549,7 +549,7 @@ impl<const FROM_CPP: bool> From<InfoBarFromCpp<FROM_CPP>> for ObjectFromCpp<FROM
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for InfoBarFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxInfoBar_CLASSINFO()) }
     }
 }
@@ -557,13 +557,13 @@ impl<const FROM_CPP: bool> DynamicCast for InfoBarFromCpp<FROM_CPP> {
 // wxInitDialogEvent
 wxwidgets! {
     /// A wxInitDialogEvent is sent as a dialog or panel is being initialised.
-    /// - [`InitDialogEvent`] represents a C++ `wxInitDialogEvent` class instance which your code has ownership, [`InitDialogEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`InitDialogEvent`] represents a C++ `wxInitDialogEvent` class instance which your code has ownership, [`InitDialogEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`InitDialogEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxInitDialogEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_init_dialog_event.html) for more details.
     #[doc(alias = "wxInitDialogEvent")]
     #[doc(alias = "InitDialogEvent")]
     class InitDialogEvent
-        = InitDialogEventFromCpp<true>(wxInitDialogEvent) impl
+        = InitDialogEventFromCpp<false>(wxInitDialogEvent) impl
         InitDialogEventMethods,
         EventMethods,
         ObjectMethods
@@ -579,7 +579,7 @@ impl<const FROM_CPP: bool> InitDialogEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for InitDialogEventFromCpp<false> {
+impl Clone for InitDialogEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -595,13 +595,13 @@ impl<const FROM_CPP: bool> From<InitDialogEventFromCpp<FROM_CPP>> for ObjectFrom
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for InitDialogEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxInitDialogEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for InitDialogEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -610,13 +610,13 @@ impl<const FROM_CPP: bool> Drop for InitDialogEventFromCpp<FROM_CPP> {
 // wxItemContainer
 wxwidgets! {
     /// This class is an abstract base class for some wxWidgets controls which contain several items such as wxListBox, wxCheckListBox, wxComboBox or wxChoice.
-    /// - [`ItemContainer`] represents a C++ `wxItemContainer` class instance which your code has ownership, [`ItemContainerFromCpp`]`<false>` represents one which don't own.
+    /// - [`ItemContainer`] represents a C++ `wxItemContainer` class instance which your code has ownership, [`ItemContainerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ItemContainer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxItemContainer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_item_container.html) for more details.
     #[doc(alias = "wxItemContainer")]
     #[doc(alias = "ItemContainer")]
     class ItemContainer
-        = ItemContainerFromCpp<true>(wxItemContainer) impl
+        = ItemContainerFromCpp<false>(wxItemContainer) impl
         ItemContainerMethods,
         ItemContainerImmutableMethods
 }
@@ -625,7 +625,7 @@ impl<const FROM_CPP: bool> ItemContainerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ItemContainerFromCpp<false> {
+impl Clone for ItemContainerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -639,7 +639,7 @@ impl<const FROM_CPP: bool> From<ItemContainerFromCpp<FROM_CPP>>
 }
 impl<const FROM_CPP: bool> Drop for ItemContainerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxItemContainer_delete(self.0) }
         }
     }
@@ -648,13 +648,13 @@ impl<const FROM_CPP: bool> Drop for ItemContainerFromCpp<FROM_CPP> {
 // wxItemContainerImmutable
 wxwidgets! {
     /// wxItemContainer defines an interface which is implemented by all controls which have string subitems each of which may be selected.
-    /// - [`ItemContainerImmutable`] represents a C++ `wxItemContainerImmutable` class instance which your code has ownership, [`ItemContainerImmutableFromCpp`]`<false>` represents one which don't own.
+    /// - [`ItemContainerImmutable`] represents a C++ `wxItemContainerImmutable` class instance which your code has ownership, [`ItemContainerImmutableFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ItemContainerImmutable`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxItemContainerImmutable` class's documentation](https://docs.wxwidgets.org/3.2/classwx_item_container_immutable.html) for more details.
     #[doc(alias = "wxItemContainerImmutable")]
     #[doc(alias = "ItemContainerImmutable")]
     class ItemContainerImmutable
-        = ItemContainerImmutableFromCpp<true>(wxItemContainerImmutable) impl
+        = ItemContainerImmutableFromCpp<false>(wxItemContainerImmutable) impl
         ItemContainerImmutableMethods
 }
 impl<const FROM_CPP: bool> ItemContainerImmutableFromCpp<FROM_CPP> {
@@ -663,14 +663,14 @@ impl<const FROM_CPP: bool> ItemContainerImmutableFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ItemContainerImmutableFromCpp<false> {
+impl Clone for ItemContainerImmutableFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for ItemContainerImmutableFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxItemContainerImmutable_delete(self.0) }
         }
     }

@@ -129,7 +129,7 @@ pub trait PenMethods: GDIObjectMethods {
     /// Gets a pointer to the stipple bitmap.
     ///
     /// See [C++ `wxPen::GetStipple()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_pen.html#a7db669184e8e44c2db2d5c7d1549ca51).
-    fn get_stipple(&self) -> Option<BitmapFromCpp<false>> {
+    fn get_stipple(&self) -> Option<BitmapFromCpp<true>> {
         unsafe { Bitmap::option_from(ffi::wxPen_GetStipple(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetStyle()
@@ -222,7 +222,7 @@ pub trait PersistenceManagerMethods: WxRustMethods {
     /// Returns the unique persistence manager object.
     ///
     /// See [C++ `wxPersistenceManager::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_persistence_manager.html#a4a6a946bdd6dc862fb66db774a4b9de7).
-    fn get() -> PersistenceManagerFromCpp<false> {
+    fn get() -> PersistenceManagerFromCpp<true> {
         unsafe { PersistenceManagerFromCpp::from_ptr(ffi::wxPersistenceManager_Get()) }
     }
     /// Globally disable saving the persistence object properties.
@@ -670,7 +670,7 @@ pub trait PropertySheetDialogMethods: DialogMethods {
     /// Returns the inner sizer that contains the book control and button sizer.
     ///
     /// See [C++ `wxPropertySheetDialog::GetInnerSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_property_sheet_dialog.html#a4868b8dcd1786c5bc00ce26a47c19573).
-    fn get_inner_sizer(&self) -> Option<SizerFromCpp<false>> {
+    fn get_inner_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxPropertySheetDialog_GetInnerSizer(self.as_ptr())) }
     }
     /// Set the inner sizer that contains the book control and button sizer.

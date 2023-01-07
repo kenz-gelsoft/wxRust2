@@ -109,7 +109,7 @@ pub trait GBSizerItemMethods: SizerItemMethods {
     }
     ///
     /// See [C++ `wxGBSizerItem::GetGBSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_g_b_sizer_item.html#a50efa3c582e175880242aa00c87ec1d4).
-    fn get_gb_sizer(&self) -> Option<GridBagSizerFromCpp<false>> {
+    fn get_gb_sizer(&self) -> Option<GridBagSizerFromCpp<true>> {
         unsafe { GridBagSizer::option_from(ffi::wxGBSizerItem_GetGBSizer(self.as_ptr())) }
     }
     ///
@@ -617,9 +617,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxWindow.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#ae8720ba0ce3401fe236449858b7cf950).
-    fn create_window<W: WindowMethods>(
-        window: Option<&W>,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_window<W: WindowMethods>(window: Option<&W>) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -631,7 +629,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxWindowDC.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a25dca87b498a8fe9fa23a702fa3a384e).
-    fn create_windowdc<W: WindowDCMethods>(window_dc: &W) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_windowdc<W: WindowDCMethods>(window_dc: &W) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let window_dc = window_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsContext_Create1(window_dc))
@@ -640,7 +638,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxMemoryDC.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#af544047a78a2cb0f1bb216e27ace1d0c).
-    fn create_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_memorydc<M: MemoryDCMethods>(memory_dc: &M) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let memory_dc = memory_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsContext_Create2(memory_dc))
@@ -650,13 +648,13 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a wxEnhMetaFileDC.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a9a5091dadfe615f0b26825d3389ec734).
-    fn create_enhmetafiledc(meta_file_dc: *const c_void) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_enhmetafiledc(meta_file_dc: *const c_void) -> Option<GraphicsContextFromCpp<true>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create4(meta_file_dc)) }
     }
     /// Creates a wxGraphicsContext from a DC of unknown specific type.
     ///
     /// See [C++ `wxGraphicsContext::CreateFromUnknownDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#aa8000f79cb2123da46b31c15246c7383).
-    fn create_from_unknown_dc<D: DCMethods>(dc: &D) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_from_unknown_dc<D: DCMethods>(dc: &D) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let dc = dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromUnknownDC(dc))
@@ -665,7 +663,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext associated with a wxImage.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a91dbb89974c189fa4b743ee7dc9ae7cf).
-    fn create_image<I: ImageMethods>(image: &I) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_image<I: ImageMethods>(image: &I) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let image = image.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsContext_Create5(image))
@@ -674,13 +672,13 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Creates a wxGraphicsContext from a native context.
     ///
     /// See [C++ `wxGraphicsContext::CreateFromNative()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#ad74196005aaf6c1e346a52eb042a623f).
-    fn create_from_native(context: *mut c_void) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_from_native(context: *mut c_void) -> Option<GraphicsContextFromCpp<true>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromNative(context)) }
     }
     /// Creates a wxGraphicsContext from a native window.
     ///
     /// See [C++ `wxGraphicsContext::CreateFromNativeWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a538b8d96804b12f6f32d159eef03d919).
-    fn create_from_native_window(window: *mut c_void) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_from_native_window(window: *mut c_void) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsContext_CreateFromNativeWindow(window))
         }
@@ -689,7 +687,7 @@ pub trait GraphicsContextMethods: GraphicsObjectMethods {
     /// Create a lightweight context that can be used only for measuring text.
     ///
     /// See [C++ `wxGraphicsContext::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_context.html#a5be9099dbe7c3ca825aa55bdcc541cf5).
-    fn create() -> Option<GraphicsContextFromCpp<false>> {
+    fn create() -> Option<GraphicsContextFromCpp<true>> {
         unsafe { GraphicsContext::option_from(ffi::wxGraphicsContext_Create6()) }
     }
     /// Resets the clipping to original shape.
@@ -1120,7 +1118,7 @@ pub trait GraphicsGradientStopMethods: WxRustMethods {
     /// Return the stop colour.
     ///
     /// See [C++ `wxGraphicsGradientStop::GetColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_gradient_stop.html#a3d18a62d5d55701d3b9df7bfad7d72d4).
-    fn get_colour(&self) -> ColourFromCpp<false> {
+    fn get_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxGraphicsGradientStop_GetColour(self.as_ptr())) }
     }
     /// Change the stop colour.
@@ -1260,7 +1258,7 @@ pub trait GraphicsObjectMethods: ObjectMethods {
     /// Returns the renderer that was used to create this instance, or NULL if it has not been initialized yet.
     ///
     /// See [C++ `wxGraphicsObject::GetRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_object.html#a0c39cbf592f20ac90b3718d399210e1e).
-    fn get_renderer(&self) -> Option<GraphicsRendererFromCpp<false>> {
+    fn get_renderer(&self) -> Option<GraphicsRendererFromCpp<true>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsObject_GetRenderer(self.as_ptr())) }
     }
     ///
@@ -1389,7 +1387,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_window<W: WindowMethods>(
         &self,
         window: Option<&W>,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    ) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1407,7 +1405,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_windowdc<W: WindowDCMethods>(
         &self,
         window_dc: &W,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    ) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let window_dc = window_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext1(
@@ -1422,7 +1420,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_memorydc<M: MemoryDCMethods>(
         &self,
         memory_dc: &M,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    ) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let memory_dc = memory_dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext2(
@@ -1438,7 +1436,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_enhmetafiledc(
         &self,
         meta_file_dc: *const c_void,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    ) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContext4(
                 self.as_ptr(),
@@ -1452,7 +1450,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_from_unknown_dc<D: DCMethods>(
         &self,
         dc: &D,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    ) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let dc = dc.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromUnknownDC(
@@ -1467,7 +1465,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_from_image<I: ImageMethods>(
         &self,
         image: &I,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    ) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             let image = image.as_ptr();
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromImage(
@@ -1491,7 +1489,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_from_native_context(
         &self,
         context: *mut c_void,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    ) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromNativeContext(
                 self.as_ptr(),
@@ -1505,7 +1503,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     fn create_context_from_native_window(
         &self,
         window: *mut c_void,
-    ) -> Option<GraphicsContextFromCpp<false>> {
+    ) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateContextFromNativeWindow(
                 self.as_ptr(),
@@ -1516,7 +1514,7 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     /// Creates a wxGraphicsContext that can be used for measuring texts only.
     ///
     /// See [C++ `wxGraphicsRenderer::CreateMeasuringContext()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#a5b0e0b419191ca672f3a043ac20f4228).
-    fn create_measuring_context(&self) -> Option<GraphicsContextFromCpp<false>> {
+    fn create_measuring_context(&self) -> Option<GraphicsContextFromCpp<true>> {
         unsafe {
             GraphicsContext::option_from(ffi::wxGraphicsRenderer_CreateMeasuringContext(
                 self.as_ptr(),
@@ -1613,19 +1611,19 @@ pub trait GraphicsRendererMethods: ObjectMethods {
     /// Returns the default renderer on this platform.
     ///
     /// See [C++ `wxGraphicsRenderer::GetDefaultRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#a45ad50c976863fa5bba7a63d69599b40).
-    fn get_default_renderer() -> Option<GraphicsRendererFromCpp<false>> {
+    fn get_default_renderer() -> Option<GraphicsRendererFromCpp<true>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetDefaultRenderer()) }
     }
     /// Returns Cairo renderer.
     ///
     /// See [C++ `wxGraphicsRenderer::GetCairoRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#a82933112c5ee82ca5bdee0b8cac4a1e2).
-    fn get_cairo_renderer() -> Option<GraphicsRendererFromCpp<false>> {
+    fn get_cairo_renderer() -> Option<GraphicsRendererFromCpp<true>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetCairoRenderer()) }
     }
     /// Returns GDI+ renderer (MSW only).
     ///
     /// See [C++ `wxGraphicsRenderer::GetGDIPlusRenderer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_graphics_renderer.html#a29c172723b5354c64ac0d80b0dfb0037).
-    fn get_gdi_plus_renderer() -> Option<GraphicsRendererFromCpp<false>> {
+    fn get_gdi_plus_renderer() -> Option<GraphicsRendererFromCpp<true>> {
         unsafe { GraphicsRenderer::option_from(ffi::wxGraphicsRenderer_GetGDIPlusRenderer()) }
     }
     // BLOCKED: fn GetDirect2DRenderer()
@@ -1652,7 +1650,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1690,7 +1688,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1718,7 +1716,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn add_gbsizeritem<G: GBSizerItemMethods>(
         &self,
         item: Option<&G>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -1739,7 +1737,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let pos = pos.as_ptr();
             let span = span.as_ptr();
@@ -1807,7 +1805,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn find_item_window<W: WindowMethods>(
         &self,
         window: Option<&W>,
-    ) -> Option<GBSizerItemFromCpp<false>> {
+    ) -> Option<GBSizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1821,7 +1819,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn find_item_sizer<S: SizerMethods>(
         &self,
         sizer: Option<&S>,
-    ) -> Option<GBSizerItemFromCpp<false>> {
+    ) -> Option<GBSizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1833,7 +1831,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     /// Return the sizer item located at the point given in pt, or NULL if there is no item at that point.
     ///
     /// See [C++ `wxGridBagSizer::FindItemAtPoint()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_grid_bag_sizer.html#acc8d171752ad3953802fbd7f586587f3).
-    fn find_item_at_point<P: PointMethods>(&self, pt: &P) -> Option<GBSizerItemFromCpp<false>> {
+    fn find_item_at_point<P: PointMethods>(&self, pt: &P) -> Option<GBSizerItemFromCpp<true>> {
         unsafe {
             let pt = pt.as_ptr();
             GBSizerItem::option_from(ffi::wxGridBagSizer_FindItemAtPoint(self.as_ptr(), pt))
@@ -1845,7 +1843,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn find_item_at_position<G: GBPositionMethods>(
         &self,
         pos: &G,
-    ) -> Option<GBSizerItemFromCpp<false>> {
+    ) -> Option<GBSizerItemFromCpp<true>> {
         unsafe {
             let pos = pos.as_ptr();
             GBSizerItem::option_from(ffi::wxGridBagSizer_FindItemAtPosition(self.as_ptr(), pos))
@@ -1857,7 +1855,7 @@ pub trait GridBagSizerMethods: FlexGridSizerMethods {
     fn find_item_with_data<O: ObjectMethods>(
         &self,
         user_data: Option<&O>,
-    ) -> Option<GBSizerItemFromCpp<false>> {
+    ) -> Option<GBSizerItemFromCpp<true>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),

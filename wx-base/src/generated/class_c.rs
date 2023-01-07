@@ -3,13 +3,13 @@ use super::*;
 // wxClassInfo
 wxwidgets! {
     /// This class stores meta-information about classes.
-    /// - [`ClassInfo`] represents a C++ `wxClassInfo` class instance which your code has ownership, [`ClassInfoFromCpp`]`<false>` represents one which don't own.
+    /// - [`ClassInfo`] represents a C++ `wxClassInfo` class instance which your code has ownership, [`ClassInfoFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ClassInfo`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxClassInfo` class's documentation](https://docs.wxwidgets.org/3.2/classwx_class_info.html) for more details.
     #[doc(alias = "wxClassInfo")]
     #[doc(alias = "ClassInfo")]
     class ClassInfo
-        = ClassInfoFromCpp<true>(wxClassInfo) impl
+        = ClassInfoFromCpp<false>(wxClassInfo) impl
         ClassInfoMethods
 }
 impl<const FROM_CPP: bool> ClassInfoFromCpp<FROM_CPP> {
@@ -18,14 +18,14 @@ impl<const FROM_CPP: bool> ClassInfoFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ClassInfoFromCpp<false> {
+impl Clone for ClassInfoFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for ClassInfoFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxClassInfo_delete(self.0) }
         }
     }
@@ -34,13 +34,13 @@ impl<const FROM_CPP: bool> Drop for ClassInfoFromCpp<FROM_CPP> {
 // wxClientData
 wxwidgets! {
     /// All classes deriving from wxEvtHandler (such as all controls and wxApp) can hold arbitrary data which is here referred to as "client data".
-    /// - [`ClientData`] represents a C++ `wxClientData` class instance which your code has ownership, [`ClientDataFromCpp`]`<false>` represents one which don't own.
+    /// - [`ClientData`] represents a C++ `wxClientData` class instance which your code has ownership, [`ClientDataFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ClientData`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxClientData` class's documentation](https://docs.wxwidgets.org/3.2/classwx_client_data.html) for more details.
     #[doc(alias = "wxClientData")]
     #[doc(alias = "ClientData")]
     class ClientData
-        = ClientDataFromCpp<true>(wxClientData) impl
+        = ClientDataFromCpp<false>(wxClientData) impl
         ClientDataMethods
 }
 impl<const FROM_CPP: bool> ClientDataFromCpp<FROM_CPP> {
@@ -54,14 +54,14 @@ impl<const FROM_CPP: bool> ClientDataFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for ClientDataFromCpp<false> {
+impl Clone for ClientDataFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
 impl<const FROM_CPP: bool> Drop for ClientDataFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxClientData_delete(self.0) }
         }
     }

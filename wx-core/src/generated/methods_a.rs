@@ -259,7 +259,7 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Returns an array of the developer strings set in the dialog info.
     ///
     /// See [C++ `wxAboutDialogInfo::GetDevelopers()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#a17e0b6d92fd9f882660453e7f4fb245a).
-    fn get_developers(&self) -> ArrayStringFromCpp<false> {
+    fn get_developers(&self) -> ArrayStringFromCpp<true> {
         unsafe { ArrayStringFromCpp::from_ptr(ffi::wxAboutDialogInfo_GetDevelopers(self.as_ptr())) }
     }
     /// Returns true if writers have been set in the dialog info.
@@ -271,7 +271,7 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Returns an array of the writer strings set in the dialog info.
     ///
     /// See [C++ `wxAboutDialogInfo::GetDocWriters()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#aa033004a6a61b6b916ea8c1c7fa9391f).
-    fn get_doc_writers(&self) -> ArrayStringFromCpp<false> {
+    fn get_doc_writers(&self) -> ArrayStringFromCpp<true> {
         unsafe { ArrayStringFromCpp::from_ptr(ffi::wxAboutDialogInfo_GetDocWriters(self.as_ptr())) }
     }
     /// Returns true if artists have been set in the dialog info.
@@ -283,7 +283,7 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Returns an array of the artist strings set in the dialog info.
     ///
     /// See [C++ `wxAboutDialogInfo::GetArtists()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#a2cd77196f049420669de335f70bc99fc).
-    fn get_artists(&self) -> ArrayStringFromCpp<false> {
+    fn get_artists(&self) -> ArrayStringFromCpp<true> {
         unsafe { ArrayStringFromCpp::from_ptr(ffi::wxAboutDialogInfo_GetArtists(self.as_ptr())) }
     }
     /// Returns true if translators have been set in the dialog info.
@@ -295,7 +295,7 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Returns an array of the translator strings set in the dialog info.
     ///
     /// See [C++ `wxAboutDialogInfo::GetTranslators()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#ab1533f81dfc5b8768993970f543fc093).
-    fn get_translators(&self) -> ArrayStringFromCpp<false> {
+    fn get_translators(&self) -> ArrayStringFromCpp<true> {
         unsafe {
             ArrayStringFromCpp::from_ptr(ffi::wxAboutDialogInfo_GetTranslators(self.as_ptr()))
         }
@@ -328,7 +328,7 @@ pub trait AcceleratorEntryMethods: WxRustMethods {
     /// Returns the menu item associated with this accelerator entry.
     ///
     /// See [C++ `wxAcceleratorEntry::GetMenuItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html#a4bf52758919312c09be2a7194edcb37d).
-    fn get_menu_item(&self) -> Option<MenuItemFromCpp<false>> {
+    fn get_menu_item(&self) -> Option<MenuItemFromCpp<true>> {
         unsafe { MenuItem::option_from(ffi::wxAcceleratorEntry_GetMenuItem(self.as_ptr())) }
     }
     /// Sets the accelerator entry parameters.

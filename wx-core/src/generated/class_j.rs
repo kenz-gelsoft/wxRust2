@@ -3,13 +3,13 @@ use super::*;
 // wxJPEGHandler
 wxwidgets! {
     /// This is the image handler for the JPEG format.
-    /// - [`JPEGHandler`] represents a C++ `wxJPEGHandler` class instance which your code has ownership, [`JPEGHandlerFromCpp`]`<false>` represents one which don't own.
+    /// - [`JPEGHandler`] represents a C++ `wxJPEGHandler` class instance which your code has ownership, [`JPEGHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`JPEGHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxJPEGHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html) for more details.
     #[doc(alias = "wxJPEGHandler")]
     #[doc(alias = "JPEGHandler")]
     class JPEGHandler
-        = JPEGHandlerFromCpp<true>(wxJPEGHandler) impl
+        = JPEGHandlerFromCpp<false>(wxJPEGHandler) impl
         JPEGHandlerMethods,
         // ImageHandlerMethods,
         ObjectMethods
@@ -25,7 +25,7 @@ impl<const FROM_CPP: bool> JPEGHandlerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for JPEGHandlerFromCpp<false> {
+impl Clone for JPEGHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -41,13 +41,13 @@ impl<const FROM_CPP: bool> From<JPEGHandlerFromCpp<FROM_CPP>> for ObjectFromCpp<
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for JPEGHandlerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxJPEGHandler_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for JPEGHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -59,13 +59,13 @@ impl<const FROM_CPP: bool> ImageHandlerMethods for JPEGHandlerFromCpp<FROM_CPP> 
 // wxJoystickEvent
 wxwidgets! {
     /// This event class contains information about joystick events, particularly events received by windows.
-    /// - [`JoystickEvent`] represents a C++ `wxJoystickEvent` class instance which your code has ownership, [`JoystickEventFromCpp`]`<false>` represents one which don't own.
+    /// - [`JoystickEvent`] represents a C++ `wxJoystickEvent` class instance which your code has ownership, [`JoystickEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`JoystickEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxJoystickEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_joystick_event.html) for more details.
     #[doc(alias = "wxJoystickEvent")]
     #[doc(alias = "JoystickEvent")]
     class JoystickEvent
-        = JoystickEventFromCpp<true>(wxJoystickEvent) impl
+        = JoystickEventFromCpp<false>(wxJoystickEvent) impl
         JoystickEventMethods,
         EventMethods,
         ObjectMethods
@@ -76,7 +76,7 @@ impl<const FROM_CPP: bool> JoystickEventFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for JoystickEventFromCpp<false> {
+impl Clone for JoystickEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -92,13 +92,13 @@ impl<const FROM_CPP: bool> From<JoystickEventFromCpp<FROM_CPP>> for ObjectFromCp
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for JoystickEventFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxJoystickEvent_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for JoystickEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

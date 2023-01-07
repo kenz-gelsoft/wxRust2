@@ -380,7 +380,7 @@ pub trait SetCursorEventMethods: EventMethods {
     /// Returns a reference to the cursor specified by this event.
     ///
     /// See [C++ `wxSetCursorEvent::GetCursor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html#a136861df3000af87e0b6e2363be56886).
-    fn get_cursor(&self) -> CursorFromCpp<false> {
+    fn get_cursor(&self) -> CursorFromCpp<true> {
         unsafe { CursorFromCpp::from_ptr(ffi::wxSetCursorEvent_GetCursor(self.as_ptr())) }
     }
     /// Returns the X coordinate of the mouse in client coordinates.
@@ -755,7 +755,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         flags: &S,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -775,7 +775,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -802,7 +802,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -822,7 +822,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -853,7 +853,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
@@ -878,7 +878,7 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let flags = flags.as_ptr();
             SizerItem::option_from(ffi::wxSizer_Add5(self.as_ptr(), width, height, flags))
@@ -889,7 +889,7 @@ pub trait SizerMethods: ObjectMethods {
     fn add_sizeritem<S: SizerItemMethods>(
         &self,
         item: Option<&S>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -901,13 +901,13 @@ pub trait SizerMethods: ObjectMethods {
     /// This base function adds non-stretchable space to both the horizontal and vertical orientation of the sizer.
     ///
     /// See [C++ `wxSizer::AddSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a977375e316bc8bd2b3ea79f631906906).
-    fn add_spacer(&self, size: c_int) -> Option<SizerItemFromCpp<false>> {
+    fn add_spacer(&self, size: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_AddSpacer(self.as_ptr(), size)) }
     }
     /// Adds stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::AddStretchSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#ae293edd7b7ee07b713ed83cd258b7f18).
-    fn add_stretch_spacer(&self, prop: c_int) -> Option<SizerItemFromCpp<false>> {
+    fn add_stretch_spacer(&self, prop: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_AddStretchSpacer(self.as_ptr(), prop)) }
     }
     /// This method is abstract and has to be overwritten by any derived class.
@@ -1016,7 +1016,7 @@ pub trait SizerMethods: ObjectMethods {
     /// Returns the list of the items in this sizer.
     ///
     /// See [C++ `wxSizer::GetChildren()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#aedb561084d239a2b2588de6c7de5cf69).
-    fn get_children(&self) -> SizerItemListFromCpp<false> {
+    fn get_children(&self) -> SizerItemListFromCpp<true> {
         unsafe { SizerItemListFromCpp::from_ptr(ffi::wxSizer_GetChildren(self.as_ptr())) }
     }
     // BLOCKED: fn GetChildren1()
@@ -1051,7 +1051,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         recursive: bool,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1067,7 +1067,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         sizer: Option<&S>,
         recursive: bool,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1079,13 +1079,13 @@ pub trait SizerMethods: ObjectMethods {
     /// Finds the wxSizerItem which is located in the sizer at position index.
     ///
     /// See [C++ `wxSizer::GetItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a39af8068a1a84fde5f77791bd8ad1aa2).
-    fn get_item_sz(&self, index: usize) -> Option<SizerItemFromCpp<false>> {
+    fn get_item_sz(&self, index: usize) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_GetItem2(self.as_ptr(), index)) }
     }
     /// Finds the item in the sizer which has the given id.
     ///
     /// See [C++ `wxSizer::GetItemById()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a7ef6aa595ad5ead57707cf1a02322976).
-    fn get_item_by_id(&self, id: c_int, recursive: bool) -> Option<SizerItemFromCpp<false>> {
+    fn get_item_by_id(&self, id: c_int, recursive: bool) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive)) }
     }
     /// Returns the minimal size of the sizer.
@@ -1144,7 +1144,7 @@ pub trait SizerMethods: ObjectMethods {
         index: usize,
         window: Option<&W>,
         flags: &S,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1165,7 +1165,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1194,7 +1194,7 @@ pub trait SizerMethods: ObjectMethods {
         index: usize,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1215,7 +1215,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1248,7 +1248,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
@@ -1275,7 +1275,7 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let flags = flags.as_ptr();
             SizerItem::option_from(ffi::wxSizer_Insert5(
@@ -1293,7 +1293,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         index: usize,
         item: Option<&S>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -1305,13 +1305,13 @@ pub trait SizerMethods: ObjectMethods {
     /// Inserts non-stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::InsertSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a2f56855356271576aa79b6d94c84765a).
-    fn insert_spacer(&self, index: usize, size: c_int) -> Option<SizerItemFromCpp<false>> {
+    fn insert_spacer(&self, index: usize, size: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_InsertSpacer(self.as_ptr(), index, size)) }
     }
     /// Inserts stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::InsertStretchSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#ac189f7dbb47d788111bf71bf7f67a46b).
-    fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> Option<SizerItemFromCpp<false>> {
+    fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             SizerItem::option_from(ffi::wxSizer_InsertStretchSpacer(self.as_ptr(), index, prop))
         }
@@ -1365,7 +1365,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         flags: &S,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1385,7 +1385,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1412,7 +1412,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1432,7 +1432,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1463,7 +1463,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
@@ -1488,7 +1488,7 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let flags = flags.as_ptr();
             SizerItem::option_from(ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags))
@@ -1499,7 +1499,7 @@ pub trait SizerMethods: ObjectMethods {
     fn prepend_sizeritem<S: SizerItemMethods>(
         &self,
         item: Option<&S>,
-    ) -> Option<SizerItemFromCpp<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -1511,13 +1511,13 @@ pub trait SizerMethods: ObjectMethods {
     /// Prepends non-stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::PrependSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a0075b0322c99b9b7539db50df1d375db).
-    fn prepend_spacer(&self, size: c_int) -> Option<SizerItemFromCpp<false>> {
+    fn prepend_spacer(&self, size: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_PrependSpacer(self.as_ptr(), size)) }
     }
     /// Prepends stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::PrependStretchSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#afbedb412e858da8615f4535ae803dbd4).
-    fn prepend_stretch_spacer(&self, prop: c_int) -> Option<SizerItemFromCpp<false>> {
+    fn prepend_stretch_spacer(&self, prop: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_PrependStretchSpacer(self.as_ptr(), prop)) }
     }
     /// Method which must be overridden in the derived sizer classes.
@@ -2105,7 +2105,7 @@ pub trait SizerItemMethods: ObjectMethods {
     /// If this item is tracking a sizer, return it.
     ///
     /// See [C++ `wxSizerItem::GetSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#a36f107f2c1298471facd1e040f3ac7e8).
-    fn get_sizer(&self) -> Option<SizerFromCpp<false>> {
+    fn get_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxSizerItem_GetSizer(self.as_ptr())) }
     }
     /// If this item is tracking a spacer, return its size.
@@ -2117,7 +2117,7 @@ pub trait SizerItemMethods: ObjectMethods {
     /// Get the userData item attribute.
     ///
     /// See [C++ `wxSizerItem::GetUserData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#a54c2cebf0aba71694eefe2a39759f1e2).
-    fn get_user_data(&self) -> Option<ObjectFromCpp<false>> {
+    fn get_user_data(&self) -> Option<ObjectFromCpp<true>> {
         unsafe { Object::option_from(ffi::wxSizerItem_GetUserData(self.as_ptr())) }
     }
     /// If this item is tracking a window then return it.
@@ -3252,7 +3252,7 @@ pub trait StatusBarMethods: ControlMethods {
     /// Returns the wxStatusBarPane representing the n-th field.
     ///
     /// See [C++ `wxStatusBar::GetField()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar.html#ad806c2744f1bf7fae7c986c384e601d8).
-    fn get_field(&self, n: c_int) -> StatusBarPaneFromCpp<false> {
+    fn get_field(&self, n: c_int) -> StatusBarPaneFromCpp<true> {
         unsafe { StatusBarPaneFromCpp::from_ptr(ffi::wxStatusBar_GetField(self.as_ptr(), n)) }
     }
     /// Returns the horizontal and vertical borders used when rendering the field text inside the field area.

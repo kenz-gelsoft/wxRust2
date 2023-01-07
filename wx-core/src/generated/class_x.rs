@@ -3,13 +3,13 @@ use super::*;
 // wxXPMHandler
 wxwidgets! {
     /// This is the image handler for the XPM format.
-    /// - [`XPMHandler`] represents a C++ `wxXPMHandler` class instance which your code has ownership, [`XPMHandlerFromCpp`]`<false>` represents one which don't own.
+    /// - [`XPMHandler`] represents a C++ `wxXPMHandler` class instance which your code has ownership, [`XPMHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`XPMHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxXPMHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_x_p_m_handler.html) for more details.
     #[doc(alias = "wxXPMHandler")]
     #[doc(alias = "XPMHandler")]
     class XPMHandler
-        = XPMHandlerFromCpp<true>(wxXPMHandler) impl
+        = XPMHandlerFromCpp<false>(wxXPMHandler) impl
         XPMHandlerMethods,
         ImageHandlerMethods,
         ObjectMethods
@@ -25,7 +25,7 @@ impl<const FROM_CPP: bool> XPMHandlerFromCpp<FROM_CPP> {
         None
     }
 }
-impl Clone for XPMHandlerFromCpp<false> {
+impl Clone for XPMHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
@@ -41,13 +41,13 @@ impl<const FROM_CPP: bool> From<XPMHandlerFromCpp<FROM_CPP>> for ObjectFromCpp<F
     }
 }
 impl<const FROM_CPP: bool> DynamicCast for XPMHandlerFromCpp<FROM_CPP> {
-    fn class_info() -> ClassInfoFromCpp<false> {
+    fn class_info() -> ClassInfoFromCpp<true> {
         unsafe { ClassInfoFromCpp::from_ptr(ffi::wxXPMHandler_CLASSINFO()) }
     }
 }
 impl<const FROM_CPP: bool> Drop for XPMHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if FROM_CPP {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

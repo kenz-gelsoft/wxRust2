@@ -225,7 +225,7 @@ pub trait FileDataObjectMethods: DataObjectSimpleMethods {
     /// Returns the array of file names.
     ///
     /// See [C++ `wxFileDataObject::GetFilenames()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_data_object.html#a40727417bb94728bb759b63314138b5b).
-    fn get_filenames(&self) -> ArrayStringFromCpp<false> {
+    fn get_filenames(&self) -> ArrayStringFromCpp<true> {
         unsafe { ArrayStringFromCpp::from_ptr(ffi::wxFileDataObject_GetFilenames(self.as_ptr())) }
     }
 }
@@ -737,7 +737,7 @@ pub trait FindReplaceDialogMethods: DialogMethods {
     /// Get the wxFindReplaceData object used by this dialog.
     ///
     /// See [C++ `wxFindReplaceDialog::GetData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html#afa6c61f0e1b6af69cc6f2ec062440e68).
-    fn get_data(&self) -> Option<FindReplaceDataFromCpp<false>> {
+    fn get_data(&self) -> Option<FindReplaceDataFromCpp<true>> {
         unsafe { FindReplaceData::option_from(ffi::wxFindReplaceDialog_GetData(self.as_ptr())) }
     }
 }
@@ -800,13 +800,13 @@ pub trait FlexGridSizerMethods: GridSizerMethods {
     /// Returns a read-only array containing the heights of the rows in the sizer.
     ///
     /// See [C++ `wxFlexGridSizer::GetRowHeights()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a6552b94de617ab2c022e2b9758c6e4f4).
-    fn get_row_heights(&self) -> ArrayIntFromCpp<false> {
+    fn get_row_heights(&self) -> ArrayIntFromCpp<true> {
         unsafe { ArrayIntFromCpp::from_ptr(ffi::wxFlexGridSizer_GetRowHeights(self.as_ptr())) }
     }
     /// Returns a read-only array containing the widths of the columns in the sizer.
     ///
     /// See [C++ `wxFlexGridSizer::GetColWidths()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a719895a5bc97030744fdeed198ab6507).
-    fn get_col_widths(&self) -> ArrayIntFromCpp<false> {
+    fn get_col_widths(&self) -> ArrayIntFromCpp<true> {
         unsafe { ArrayIntFromCpp::from_ptr(ffi::wxFlexGridSizer_GetColWidths(self.as_ptr())) }
     }
 }
@@ -869,7 +869,7 @@ pub trait FontMethods: GDIObjectMethods {
     /// Returns a font with the same face/size as the given one but with normal weight and style and not underlined nor stricken through.
     ///
     /// See [C++ `wxFont::GetNativeFontInfo()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a4141a77677772ea283c1ce737695c77d).
-    fn get_native_font_info(&self) -> Option<NativeFontInfoFromCpp<false>> {
+    fn get_native_font_info(&self) -> Option<NativeFontInfoFromCpp<true>> {
         unsafe { NativeFontInfo::option_from(ffi::wxFont_GetNativeFontInfo(self.as_ptr())) }
     }
     /// Gets the point size as an integer number.
@@ -1121,7 +1121,7 @@ pub trait FontMethods: GDIObjectMethods {
     /// Sets the encoding for this font.
     ///
     /// See [C++ `wxFont::New()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a554845d97040706a2c3407dd968e9f62).
-    fn new_nativefontinfo<N: NativeFontInfoMethods>(native_info: &N) -> Option<FontFromCpp<false>> {
+    fn new_nativefontinfo<N: NativeFontInfoMethods>(native_info: &N) -> Option<FontFromCpp<true>> {
         unsafe {
             let native_info = native_info.as_ptr();
             Font::option_from(ffi::wxFont_New4(native_info))
@@ -1130,7 +1130,7 @@ pub trait FontMethods: GDIObjectMethods {
     /// Sets the encoding for this font.
     ///
     /// See [C++ `wxFont::New()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a6cfbe4bb51490bec78637204d3f18edd).
-    fn new_str(native_info_string: &str) -> Option<FontFromCpp<false>> {
+    fn new_str(native_info_string: &str) -> Option<FontFromCpp<true>> {
         unsafe {
             let native_info_string = WxString::from(native_info_string);
             let native_info_string = native_info_string.as_ptr();
@@ -1166,7 +1166,7 @@ pub trait FontDataMethods: ObjectMethods {
     /// Gets the colour associated with the font dialog.
     ///
     /// See [C++ `wxFontData::GetColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_data.html#ab64b3bc54a2c518d2124f93197646ff8).
-    fn get_colour(&self) -> ColourFromCpp<false> {
+    fn get_colour(&self) -> ColourFromCpp<true> {
         unsafe { ColourFromCpp::from_ptr(ffi::wxFontData_GetColour(self.as_ptr())) }
     }
     /// Determines whether "effects" are enabled under Windows.
@@ -1284,7 +1284,7 @@ pub trait FontDialogMethods: DialogMethods {
     // BLOCKED: fn GetFontData()
     ///
     /// See [C++ `wxFontDialog::GetFontData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html#a5c0f427480a66edca8bef13eccd67b2c).
-    fn get_font_data(&self) -> FontDataFromCpp<false> {
+    fn get_font_data(&self) -> FontDataFromCpp<true> {
         unsafe { FontDataFromCpp::from_ptr(ffi::wxFontDialog_GetFontData1(self.as_ptr())) }
     }
 }
@@ -1366,7 +1366,7 @@ pub trait FontListMethods: WxRustMethods {
     /// Finds a font of the given specification, or creates one and adds it to the list.
     ///
     /// See [C++ `wxFontList::FindOrCreateFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_list.html#a13af1bba1c223887cefc59544a91cbcc).
-    fn find_or_create_font(&self, font_info: *const c_void) -> Option<FontFromCpp<false>> {
+    fn find_or_create_font(&self, font_info: *const c_void) -> Option<FontFromCpp<true>> {
         unsafe { Font::option_from(ffi::wxFontList_FindOrCreateFont1(self.as_ptr(), font_info)) }
     }
 }
@@ -1416,7 +1416,7 @@ pub trait FontMapperMethods: WxRustMethods {
     /// Get the current font mapper object.
     ///
     /// See [C++ `wxFontMapper::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html#ae0718e57b4e91c1b2f38cac352c0a9d5).
-    fn get() -> Option<FontMapperFromCpp<false>> {
+    fn get() -> Option<FontMapperFromCpp<true>> {
         unsafe { FontMapper::option_from(ffi::wxFontMapper_Get()) }
     }
     // NOT_SUPPORTED: fn GetAllEncodingNames()
@@ -1433,7 +1433,7 @@ pub trait FontMapperMethods: WxRustMethods {
     /// Set the current font mapper object and return previous one (may be NULL).
     ///
     /// See [C++ `wxFontMapper::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html#a41b0051189bfe57f3fabde0f42c5635c).
-    fn set<F: FontMapperMethods>(mapper: Option<&F>) -> Option<FontMapperFromCpp<false>> {
+    fn set<F: FontMapperMethods>(mapper: Option<&F>) -> Option<FontMapperFromCpp<true>> {
         unsafe {
             let mapper = match mapper {
                 Some(r) => r.as_ptr(),
