@@ -146,7 +146,7 @@ pub mod methods {
         fn class_info() -> ClassInfoInRust<false>;
         fn as_unowned<T: DynamicCast>(&self) -> Option<T::CppManaged> {
             if self.is_kind_of(Some(&T::class_info())) {
-                unsafe { Some(T::from_unowned_ptr(self.as_ptr())) }
+                unsafe { Some(T::from_cpp_managed_ptr(self.as_ptr())) }
             } else {
                 None
             }
@@ -391,7 +391,7 @@ impl<T: WxRustMethods> WeakRef<T> {
             if ptr.is_null() {
                 None
             } else {
-                Some(T::from_unowned_ptr(ptr))
+                Some(T::from_cpp_managed_ptr(ptr))
             }
         }
     }

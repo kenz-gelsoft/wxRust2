@@ -21,7 +21,7 @@ macro_rules! wxwidgets {
             unsafe fn from_ptr(ptr: *mut c_void) -> Self {
                 $typeInRust(ptr)
             }
-            unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::CppManaged {
+            unsafe fn from_cpp_managed_ptr(ptr: *mut c_void) -> Self::CppManaged {
                 $typeInRust::<false>(ptr)
             }
             unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F) {
