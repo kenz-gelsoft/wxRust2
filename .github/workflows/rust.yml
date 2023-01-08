@@ -73,7 +73,7 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - name: Install Prerequisites
-      run: brew update && brew install wxwidgets
+      run: brew update && brew install wxwidgets --overwrite
     - name: Build
       run: cargo build --verbose
     - name: Run tests
