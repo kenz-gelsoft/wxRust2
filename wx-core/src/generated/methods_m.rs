@@ -3,7 +3,7 @@ use super::*;
 // wxMask
 /// This trait represents [C++ `wxMask` class](https://docs.wxwidgets.org/3.2/classwx_mask.html)'s methods and inheritance.
 ///
-/// See [`MaskIsOwned`] documentation for the class usage.
+/// See [`MaskFromCpp`] documentation for the class usage.
 pub trait MaskMethods: ObjectMethods {
     // DTOR: fn ~wxMask()
     /// Constructs a mask from a bitmap and a palette index that indicates the background.
@@ -45,13 +45,13 @@ pub trait MaskMethods: ObjectMethods {
 // wxMaximizeEvent
 /// This trait represents [C++ `wxMaximizeEvent` class](https://docs.wxwidgets.org/3.2/classwx_maximize_event.html)'s methods and inheritance.
 ///
-/// See [`MaximizeEventIsOwned`] documentation for the class usage.
+/// See [`MaximizeEventFromCpp`] documentation for the class usage.
 pub trait MaximizeEventMethods: EventMethods {}
 
 // wxMemoryDC
 /// This trait represents [C++ `wxMemoryDC` class](https://docs.wxwidgets.org/3.2/classwx_memory_d_c.html)'s methods and inheritance.
 ///
-/// See [`MemoryDCIsOwned`] documentation for the class usage.
+/// See [`MemoryDCFromCpp`] documentation for the class usage.
 pub trait MemoryDCMethods: DCMethods {
     /// Allow using this device context object to modify the given bitmap contents.
     ///
@@ -74,8 +74,8 @@ pub trait MemoryDCMethods: DCMethods {
     /// Get the selected bitmap.
     ///
     /// See [C++ `wxMemoryDC::GetSelectedBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_memory_d_c.html#abfc29bdb24e4dba3dad63e8022030c11).
-    fn get_selected_bitmap(&self) -> BitmapIsOwned<false> {
-        unsafe { BitmapIsOwned::from_ptr(ffi::wxMemoryDC_GetSelectedBitmap(self.as_ptr())) }
+    fn get_selected_bitmap(&self) -> BitmapFromCpp<true> {
+        unsafe { BitmapFromCpp::from_ptr(ffi::wxMemoryDC_GetSelectedBitmap(self.as_ptr())) }
     }
     // BLOCKED: fn GetSelectedBitmap1()
 }
@@ -83,7 +83,7 @@ pub trait MemoryDCMethods: DCMethods {
 // wxMenu
 /// This trait represents [C++ `wxMenu` class](https://docs.wxwidgets.org/3.2/classwx_menu.html)'s methods and inheritance.
 ///
-/// See [`MenuIsOwned`] documentation for the class usage.
+/// See [`MenuFromCpp`] documentation for the class usage.
 pub trait MenuMethods: EvtHandlerMethods {
     // DTOR: fn ~wxMenu()
     /// Adds a menu item.
@@ -95,7 +95,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         help_string: &str,
         kind: c_int,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -119,7 +119,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         sub_menu: Option<&M>,
         help_string: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -144,7 +144,7 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn append_menuitem<M: MenuItemMethods>(
         &self,
         menu_item: Option<&M>,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let menu_item = match menu_item {
                 Some(r) => r.as_ptr(),
@@ -161,7 +161,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -178,7 +178,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -190,7 +190,7 @@ pub trait MenuMethods: EvtHandlerMethods {
     /// Adds a separator to the end of the menu.
     ///
     /// See [C++ `wxMenu::AppendSeparator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_menu.html#afdc206877228ad8cc2c9de5b71f5b633).
-    fn append_separator(&self) -> Option<MenuItemIsOwned<false>> {
+    fn append_separator(&self) -> Option<MenuItemFromCpp<true>> {
         unsafe { MenuItem::option_from(ffi::wxMenu_AppendSeparator(self.as_ptr())) }
     }
     /// Adds the given submenu to this menu.
@@ -201,7 +201,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         submenu: Option<&M>,
         text: &str,
         help: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let submenu = match submenu {
                 Some(r) => r.as_ptr(),
@@ -276,7 +276,7 @@ pub trait MenuMethods: EvtHandlerMethods {
     /// Finds the menu item object associated with the given menu item identifier and, optionally, the position of the item in the menu.
     ///
     /// See [C++ `wxMenu::FindChildItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_menu.html#a7cf7f66a395364aed26779cbf0d387d5).
-    fn find_child_item(&self, id: c_int, pos: *mut c_void) -> Option<MenuItemIsOwned<false>> {
+    fn find_child_item(&self, id: c_int, pos: *mut c_void) -> Option<MenuItemFromCpp<true>> {
         unsafe { MenuItem::option_from(ffi::wxMenu_FindChildItem(self.as_ptr(), id, pos)) }
     }
     /// Finds the menu id for a menu item string.
@@ -296,7 +296,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         &self,
         id: c_int,
         menu: Option<&M>,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
@@ -308,7 +308,7 @@ pub trait MenuMethods: EvtHandlerMethods {
     /// Returns the wxMenuItem given a position in the menu.
     ///
     /// See [C++ `wxMenu::FindItemByPosition()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_menu.html#a8d91d9b706cd13df799ad8391cb28a2c).
-    fn find_item_by_position(&self, position: usize) -> Option<MenuItemIsOwned<false>> {
+    fn find_item_by_position(&self, position: usize) -> Option<MenuItemFromCpp<true>> {
         unsafe { MenuItem::option_from(ffi::wxMenu_FindItemByPosition(self.as_ptr(), position)) }
     }
     /// Returns the help string associated with a menu item.
@@ -350,7 +350,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         &self,
         pos: usize,
         menu_item: Option<&M>,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let menu_item = match menu_item {
                 Some(r) => r.as_ptr(),
@@ -369,7 +369,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         help_string: &str,
         kind: c_int,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -395,7 +395,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         text: &str,
         submenu: Option<&M>,
         help: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let text = WxString::from(text);
             let text = text.as_ptr();
@@ -424,7 +424,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help_string: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -448,7 +448,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help_string: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -466,7 +466,7 @@ pub trait MenuMethods: EvtHandlerMethods {
     /// Inserts a separator at the given position.
     ///
     /// See [C++ `wxMenu::InsertSeparator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_menu.html#a968684b5237ebdf2d51bedcf66adb2d8).
-    fn insert_separator(&self, pos: usize) -> Option<MenuItemIsOwned<false>> {
+    fn insert_separator(&self, pos: usize) -> Option<MenuItemFromCpp<true>> {
         unsafe { MenuItem::option_from(ffi::wxMenu_InsertSeparator(self.as_ptr(), pos)) }
     }
     /// Determines whether a menu item is checked.
@@ -488,7 +488,7 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn prepend_menuitem<M: MenuItemMethods>(
         &self,
         item: Option<&M>,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -506,7 +506,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         item: &str,
         help_string: &str,
         kind: c_int,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -530,7 +530,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         text: &str,
         submenu: Option<&M>,
         help: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let text = WxString::from(text);
             let text = text.as_ptr();
@@ -551,7 +551,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help_string: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -573,7 +573,7 @@ pub trait MenuMethods: EvtHandlerMethods {
         id: c_int,
         item: &str,
         help_string: &str,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = WxString::from(item);
             let item = item.as_ptr();
@@ -590,13 +590,13 @@ pub trait MenuMethods: EvtHandlerMethods {
     /// Inserts a separator at position 0.
     ///
     /// See [C++ `wxMenu::PrependSeparator()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_menu.html#a13a427147256b2809a103a2874ea5e69).
-    fn prepend_separator(&self) -> Option<MenuItemIsOwned<false>> {
+    fn prepend_separator(&self) -> Option<MenuItemFromCpp<true>> {
         unsafe { MenuItem::option_from(ffi::wxMenu_PrependSeparator(self.as_ptr())) }
     }
     /// Removes the menu item from the menu but doesn't delete the associated C++ object.
     ///
     /// See [C++ `wxMenu::Remove()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_menu.html#a873acedf8a664b574d1f97de9a100bf1).
-    fn remove_int(&self, id: c_int) -> Option<MenuItemIsOwned<false>> {
+    fn remove_int(&self, id: c_int) -> Option<MenuItemFromCpp<true>> {
         unsafe { MenuItem::option_from(ffi::wxMenu_Remove(self.as_ptr(), id)) }
     }
     /// Removes the menu item from the menu but doesn't delete the associated C++ object.
@@ -605,7 +605,7 @@ pub trait MenuMethods: EvtHandlerMethods {
     fn remove_menuitem<M: MenuItemMethods>(
         &self,
         item: Option<&M>,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -724,7 +724,7 @@ pub trait MenuMethods: EvtHandlerMethods {
 // wxMenuBar
 /// This trait represents [C++ `wxMenuBar` class](https://docs.wxwidgets.org/3.2/classwx_menu_bar.html)'s methods and inheritance.
 ///
-/// See [`MenuBarIsOwned`] documentation for the class usage.
+/// See [`MenuBarFromCpp`] documentation for the class usage.
 pub trait MenuBarMethods: WindowMethods {
     // DTOR: fn ~wxMenuBar()
     /// Adds the item to the end of the menu bar.
@@ -772,7 +772,7 @@ pub trait MenuBarMethods: WindowMethods {
         &self,
         id: c_int,
         menu: Option<&M>,
-    ) -> Option<MenuItemIsOwned<false>> {
+    ) -> Option<MenuItemFromCpp<true>> {
         unsafe {
             let menu = match menu {
                 Some(r) => r.as_ptr(),
@@ -972,7 +972,7 @@ pub trait MenuBarMethods: WindowMethods {
 // wxMenuEvent
 /// This trait represents [C++ `wxMenuEvent` class](https://docs.wxwidgets.org/3.2/classwx_menu_event.html)'s methods and inheritance.
 ///
-/// See [`MenuEventIsOwned`] documentation for the class usage.
+/// See [`MenuEventFromCpp`] documentation for the class usage.
 pub trait MenuEventMethods: EventMethods {
     /// Returns the menu which is being opened or closed, or the menu containing the highlighted item.
     ///
@@ -997,7 +997,7 @@ pub trait MenuEventMethods: EventMethods {
 // wxMenuItem
 /// This trait represents [C++ `wxMenuItem` class](https://docs.wxwidgets.org/3.2/classwx_menu_item.html)'s methods and inheritance.
 ///
-/// See [`MenuItemIsOwned`] documentation for the class usage.
+/// See [`MenuItemFromCpp`] documentation for the class usage.
 pub trait MenuItemMethods: ObjectMethods {
     // BLOCKED: fn GetBackgroundColour()
     /// Returns the item bitmap.
@@ -1080,7 +1080,7 @@ pub trait MenuItemMethods: ObjectMethods {
     /// Get our accelerator or NULL (caller must delete the pointer)
     ///
     /// See [C++ `wxMenuItem::GetAccel()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_menu_item.html#a011e5b7a9945b43acc32848612376c2e).
-    fn get_accel(&self) -> Option<AcceleratorEntryIsOwned<false>> {
+    fn get_accel(&self) -> Option<AcceleratorEntryFromCpp<true>> {
         unsafe { AcceleratorEntry::option_from(ffi::wxMenuItem_GetAccel(self.as_ptr())) }
     }
     // BLOCKED: fn GetAccelFromString()
@@ -1301,7 +1301,7 @@ pub trait MenuItemMethods: ObjectMethods {
 // wxMessageDialog
 /// This trait represents [C++ `wxMessageDialog` class](https://docs.wxwidgets.org/3.2/classwx_message_dialog.html)'s methods and inheritance.
 ///
-/// See [`MessageDialogIsOwned`] documentation for the class usage.
+/// See [`MessageDialogFromCpp`] documentation for the class usage.
 pub trait MessageDialogMethods: DialogMethods {
     /// Sets the extended message for the dialog: this message is usually an extension of the short message specified in the constructor or set with SetMessage().
     ///
@@ -1418,13 +1418,13 @@ pub trait MessageDialogMethods: DialogMethods {
 // wxMessageOutputMessageBox
 /// This trait represents [C++ `wxMessageOutputMessageBox` class](https://docs.wxwidgets.org/3.2/classwx_message_output_message_box.html)'s methods and inheritance.
 ///
-/// See [`MessageOutputMessageBoxIsOwned`] documentation for the class usage.
+/// See [`MessageOutputMessageBoxFromCpp`] documentation for the class usage.
 pub trait MessageOutputMessageBoxMethods: MessageOutputMethods {}
 
 // wxMiniFrame
 /// This trait represents [C++ `wxMiniFrame` class](https://docs.wxwidgets.org/3.2/classwx_mini_frame.html)'s methods and inheritance.
 ///
-/// See [`MiniFrameIsOwned`] documentation for the class usage.
+/// See [`MiniFrameFromCpp`] documentation for the class usage.
 pub trait MiniFrameMethods: FrameMethods {
     // DTOR: fn ~wxMiniFrame()
 }
@@ -1432,13 +1432,13 @@ pub trait MiniFrameMethods: FrameMethods {
 // wxMirrorDC
 /// This trait represents [C++ `wxMirrorDC` class](https://docs.wxwidgets.org/3.2/classwx_mirror_d_c.html)'s methods and inheritance.
 ///
-/// See [`MirrorDCIsOwned`] documentation for the class usage.
+/// See [`MirrorDCFromCpp`] documentation for the class usage.
 pub trait MirrorDCMethods: DCMethods {}
 
 // wxMouseCaptureChangedEvent
 /// This trait represents [C++ `wxMouseCaptureChangedEvent` class](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_changed_event.html)'s methods and inheritance.
 ///
-/// See [`MouseCaptureChangedEventIsOwned`] documentation for the class usage.
+/// See [`MouseCaptureChangedEventFromCpp`] documentation for the class usage.
 pub trait MouseCaptureChangedEventMethods: EventMethods {
     /// Returns the window that gained the capture, or NULL if it was a non-wxWidgets window.
     ///
@@ -1455,13 +1455,13 @@ pub trait MouseCaptureChangedEventMethods: EventMethods {
 // wxMouseCaptureLostEvent
 /// This trait represents [C++ `wxMouseCaptureLostEvent` class](https://docs.wxwidgets.org/3.2/classwx_mouse_capture_lost_event.html)'s methods and inheritance.
 ///
-/// See [`MouseCaptureLostEventIsOwned`] documentation for the class usage.
+/// See [`MouseCaptureLostEventFromCpp`] documentation for the class usage.
 pub trait MouseCaptureLostEventMethods: EventMethods {}
 
 // wxMouseEvent
 /// This trait represents [C++ `wxMouseEvent` class](https://docs.wxwidgets.org/3.2/classwx_mouse_event.html)'s methods and inheritance.
 ///
-/// See [`MouseEventIsOwned`] documentation for the class usage.
+/// See [`MouseEventFromCpp`] documentation for the class usage.
 pub trait MouseEventMethods: EventMethods {
     /// Returns true if the event was a first extra button double click.
     ///
@@ -1663,7 +1663,7 @@ pub trait MouseEventMethods: EventMethods {
 // wxMouseEventsManager
 /// This trait represents [C++ `wxMouseEventsManager` class](https://docs.wxwidgets.org/3.2/classwx_mouse_events_manager.html)'s methods and inheritance.
 ///
-/// See [`MouseEventsManagerIsOwned`] documentation for the class usage.
+/// See [`MouseEventsManagerFromCpp`] documentation for the class usage.
 pub trait MouseEventsManagerMethods: EvtHandlerMethods {
     /// Finishes initialization of the object created using default constructor.
     ///
@@ -1682,7 +1682,7 @@ pub trait MouseEventsManagerMethods: EvtHandlerMethods {
 // wxMoveEvent
 /// This trait represents [C++ `wxMoveEvent` class](https://docs.wxwidgets.org/3.2/classwx_move_event.html)'s methods and inheritance.
 ///
-/// See [`MoveEventIsOwned`] documentation for the class usage.
+/// See [`MoveEventFromCpp`] documentation for the class usage.
 pub trait MoveEventMethods: EventMethods {
     /// Returns the position of the window generating the move change event.
     ///

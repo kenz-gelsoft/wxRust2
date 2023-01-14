@@ -55,7 +55,7 @@ class RustClassBinding:
             unprefixed = self.__model.unprefixed()
             yield 'wxwidgets! {'
             yield '    /// %s' % (self.__model.doc,)
-            yield "    /// - [`%s`] represents a C++ `%s` class instance which your code has ownership, [`%sIsOwned`]`<false>` represents one which don't own." % (
+            yield "    /// - [`%s`] represents a C++ `%s` class instance which your code has ownership, [`%sFromCpp`]`<true>` represents one which don't own." % (
                 unprefixed,
                 self.__model.name,
                 unprefixed,
@@ -74,7 +74,7 @@ class RustClassBinding:
             for alias in (self.__model.name, unprefixed):
                 yield '    #[doc(alias = "%s")]' % (alias,)
             yield '    class %s' % (unprefixed,)
-            yield '        = %sIsOwned<true>(%s) impl' % (
+            yield '        = %sFromCpp<false>(%s) impl' % (
                 unprefixed,
                 self.__model.name,
             )
@@ -124,7 +124,7 @@ class RustClassBinding:
 
     def _impl_with_ctors(self):
         unprefixed = self.__model.unprefixed()
-        yield 'impl<const OWNED: bool> %sIsOwned<OWNED> {' % (unprefixed,)
+        yield 'impl<const FROM_CPP: bool> %sFromCpp<FROM_CPP> {' % (unprefixed,)
         for enum in self.__model.enums:
             for line in enum.generate():
                 yield '    %s' % (line,)
@@ -144,11 +144,11 @@ class RustClassBinding:
         return True
 
     def _impl_clone(self):
-        is_owned = '%sIsOwned' % (self.__model.unprefixed(),)
+        from_cpp = '%sFromCpp' % (self.__model.unprefixed(),)
         if self._has_drop():
-            yield 'impl Clone for %s<false> {' % (is_owned,)
+            yield 'impl Clone for %s<true> {' % (from_cpp,)
         else:
-            yield 'impl<const OWNED: bool> Clone for %s<OWNED> {' % (is_owned,)
+            yield 'impl<const FROM_CPP: bool> Clone for %s<FROM_CPP> {' % (from_cpp,)
         yield '    fn clone(&self) -> Self {'
         yield '        Self(self.0)'
         yield '    }'
@@ -160,11 +160,11 @@ class RustClassBinding:
             unprefixed_ancestor = ancestor.name[2:]
             if unprefixed == unprefixed_ancestor:
                 continue
-            yield 'impl<const OWNED: bool> From<%sIsOwned<OWNED>> for %sIsOwned<OWNED> {' % (
+            yield 'impl<const FROM_CPP: bool> From<%sFromCpp<FROM_CPP>> for %sFromCpp<FROM_CPP> {' % (
                 unprefixed,
                 unprefixed_ancestor,
             )
-            yield '    fn from(o: %sIsOwned<OWNED>) -> Self {' % (unprefixed,)
+            yield '    fn from(o: %sFromCpp<FROM_CPP>) -> Self {' % (unprefixed,)
             yield '        unsafe { Self::from_ptr(o.as_ptr()) }'
             yield '    }'
             yield '}'
@@ -172,9 +172,9 @@ class RustClassBinding:
     def _impl_dynamic_cast_if_needed(self):
         if not self.is_a('wxObject'):
             return
-        yield 'impl<const OWNED: bool> DynamicCast for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
-        yield '    fn class_info() -> ClassInfoIsOwned<false> {'
-        yield '        unsafe { ClassInfoIsOwned::from_ptr(ffi::%s_CLASSINFO()) }' % (self.__model.name)
+        yield 'impl<const FROM_CPP: bool> DynamicCast for %sFromCpp<FROM_CPP> {' % (self.__model.unprefixed(),)
+        yield '    fn class_info() -> ClassInfoFromCpp<true> {'
+        yield '        unsafe { ClassInfoFromCpp::from_ptr(ffi::%s_CLASSINFO()) }' % (self.__model.name)
         yield '    }'
         yield '}'
     
@@ -185,9 +185,9 @@ class RustClassBinding:
         deleter_class = self.__model.name
         if self.is_a('wxObject'):
             deleter_class = 'wxObject'
-        yield 'impl<const OWNED: bool> Drop for %sIsOwned<OWNED> {' % (self.__model.unprefixed(),)
+        yield 'impl<const FROM_CPP: bool> Drop for %sFromCpp<FROM_CPP> {' % (self.__model.unprefixed(),)
         yield '    fn drop(&mut self) {'
-        yield '        if OWNED {'
+        yield '        if !FROM_CPP {'
         yield '            unsafe { ffi::%s_delete(self.0) }' % (deleter_class,)
         yield '        }'
         yield '    }'
@@ -213,7 +213,7 @@ class RustClassBinding:
         for mixin in mixins:
             for ancestor in self._ancestors_names_of(mixin):
                 ancestor_unprefixed = ancestor[2:]
-                yield 'impl<const OWNED: bool> %sMethods for %sIsOwned<OWNED> {' % (
+                yield 'impl<const FROM_CPP: bool> %sMethods for %sFromCpp<FROM_CPP> {' % (
                     ancestor_unprefixed,
                     self.__model.unprefixed(),
                 )
@@ -235,7 +235,7 @@ class RustClassBinding:
         for ancestor, overloads in non_virtual_overrides:
             if not overloads:
                 continue
-            yield 'impl<const OWNED: bool> %sMethods for %sIsOwned<OWNED> {' % (
+            yield 'impl<const FROM_CPP: bool> %sMethods for %sFromCpp<FROM_CPP> {' % (
                 ancestor.unprefixed(),
                 self.__model.unprefixed(),
             )
@@ -260,7 +260,7 @@ class RustClassBinding:
             self.__model.doc_url(),
         )
         yield '    ///'
-        yield '    /// See [`%sIsOwned`] documentation for the class usage.' % (
+        yield '    /// See [`%sFromCpp`] documentation for the class usage.' % (
             self.__model.unprefixed(),
         )
         yield 'pub trait %sMethods: %sMethods {' % (

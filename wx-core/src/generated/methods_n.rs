@@ -3,7 +3,7 @@ use super::*;
 // wxNativeFontInfo
 /// This trait represents [C++ `wxNativeFontInfo` class](https://docs.wxwidgets.org/3.2/classwx_native_font_info.html)'s methods and inheritance.
 ///
-/// See [`NativeFontInfoIsOwned`] documentation for the class usage.
+/// See [`NativeFontInfoFromCpp`] documentation for the class usage.
 pub trait NativeFontInfoMethods: WxRustMethods {
     // DTOR: fn ~wxNativeFontInfo()
     // BLOCKED: fn operator=()
@@ -128,7 +128,7 @@ pub trait NativeFontInfoMethods: WxRustMethods {
 // wxNavigationKeyEvent
 /// This trait represents [C++ `wxNavigationKeyEvent` class](https://docs.wxwidgets.org/3.2/classwx_navigation_key_event.html)'s methods and inheritance.
 ///
-/// See [`NavigationKeyEventIsOwned`] documentation for the class usage.
+/// See [`NavigationKeyEventFromCpp`] documentation for the class usage.
 pub trait NavigationKeyEventMethods: EventMethods {
     /// Returns the child that has the focus, or NULL.
     ///
@@ -195,7 +195,7 @@ pub trait NavigationKeyEventMethods: EventMethods {
 // wxNonOwnedWindow
 /// This trait represents [C++ `wxNonOwnedWindow` class](https://docs.wxwidgets.org/3.2/classwx_non_owned_window.html)'s methods and inheritance.
 ///
-/// See [`NonOwnedWindowIsOwned`] documentation for the class usage.
+/// See [`NonOwnedWindowFromCpp`] documentation for the class usage.
 pub trait NonOwnedWindowMethods: WindowMethods {
     /// If the platform supports it, sets the shape of the window to that depicted by region.
     ///
@@ -220,7 +220,7 @@ pub trait NonOwnedWindowMethods: WindowMethods {
 // wxNotebook
 /// This trait represents [C++ `wxNotebook` class](https://docs.wxwidgets.org/3.2/classwx_notebook.html)'s methods and inheritance.
 ///
-/// See [`NotebookIsOwned`] documentation for the class usage.
+/// See [`NotebookFromCpp`] documentation for the class usage.
 pub trait NotebookMethods: BookCtrlBaseMethods {
     // DTOR: fn ~wxNotebook()
     /// Returns the number of rows in the notebook control.
@@ -250,7 +250,7 @@ pub trait NotebookMethods: BookCtrlBaseMethods {
 // wxNotificationMessage
 /// This trait represents [C++ `wxNotificationMessage` class](https://docs.wxwidgets.org/3.2/classwx_notification_message.html)'s methods and inheritance.
 ///
-/// See [`NotificationMessageIsOwned`] documentation for the class usage.
+/// See [`NotificationMessageFromCpp`] documentation for the class usage.
 pub trait NotificationMessageMethods: EvtHandlerMethods {
     // DTOR: fn ~wxNotificationMessage()
     /// Add an action to the notification.
@@ -351,7 +351,7 @@ pub trait NotificationMessageMethods: EvtHandlerMethods {
 // wxNotifyEvent
 /// This trait represents [C++ `wxNotifyEvent` class](https://docs.wxwidgets.org/3.2/classwx_notify_event.html)'s methods and inheritance.
 ///
-/// See [`NotifyEventIsOwned`] documentation for the class usage.
+/// See [`NotifyEventFromCpp`] documentation for the class usage.
 pub trait NotifyEventMethods: CommandEventMethods {
     /// This is the opposite of Veto(): it explicitly allows the event to be processed.
     ///
@@ -376,7 +376,7 @@ pub trait NotifyEventMethods: CommandEventMethods {
 // wxNumberEntryDialog
 /// This trait represents [C++ `wxNumberEntryDialog` class](https://docs.wxwidgets.org/3.2/classwx_number_entry_dialog.html)'s methods and inheritance.
 ///
-/// See [`NumberEntryDialogIsOwned`] documentation for the class usage.
+/// See [`NumberEntryDialogFromCpp`] documentation for the class usage.
 pub trait NumberEntryDialogMethods: DialogMethods {
     ///
     /// See [C++ `wxNumberEntryDialog::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_number_entry_dialog.html#ab7dd25c596d540a0d31b96d04c87f08e).

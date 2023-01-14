@@ -3,16 +3,16 @@ use super::*;
 // wxStandardPaths
 wxwidgets! {
     /// wxStandardPaths returns the standard locations in the file system and should be used by applications to find their data files in a portable way.
-    /// - [`StandardPaths`] represents a C++ `wxStandardPaths` class instance which your code has ownership, [`StandardPathsIsOwned`]`<false>` represents one which don't own.
+    /// - [`StandardPaths`] represents a C++ `wxStandardPaths` class instance which your code has ownership, [`StandardPathsFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StandardPaths`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxStandardPaths` class's documentation](https://docs.wxwidgets.org/3.2/classwx_standard_paths.html) for more details.
     #[doc(alias = "wxStandardPaths")]
     #[doc(alias = "StandardPaths")]
     class StandardPaths
-        = StandardPathsIsOwned<true>(wxStandardPaths) impl
+        = StandardPathsFromCpp<false>(wxStandardPaths) impl
         StandardPathsMethods
 }
-impl<const OWNED: bool> StandardPathsIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StandardPathsFromCpp<FROM_CPP> {
     //  ENUM: ResourceCat
     pub const ResourceCat_None: c_int = 0;
     pub const ResourceCat_Messages: c_int = 0 + 1;
@@ -38,14 +38,14 @@ impl<const OWNED: bool> StandardPathsIsOwned<OWNED> {
         None
     }
 }
-impl Clone for StandardPathsIsOwned<false> {
+impl Clone for StandardPathsFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for StandardPathsIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for StandardPathsFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxStandardPaths_delete(self.0) }
         }
     }

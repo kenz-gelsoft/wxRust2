@@ -3,7 +3,7 @@ use super::*;
 // wxOverlay
 /// This trait represents [C++ `wxOverlay` class](https://docs.wxwidgets.org/3.2/classwx_overlay.html)'s methods and inheritance.
 ///
-/// See [`OverlayIsOwned`] documentation for the class usage.
+/// See [`OverlayFromCpp`] documentation for the class usage.
 pub trait OverlayMethods: WxRustMethods {
     // DTOR: fn ~wxOverlay()
     /// Clears the overlay without restoring the former state.
@@ -17,7 +17,7 @@ pub trait OverlayMethods: WxRustMethods {
 // wxOwnerDrawnComboBox
 /// This trait represents [C++ `wxOwnerDrawnComboBox` class](https://docs.wxwidgets.org/3.2/classwx_owner_drawn_combo_box.html)'s methods and inheritance.
 ///
-/// See [`OwnerDrawnComboBoxIsOwned`] documentation for the class usage.
+/// See [`OwnerDrawnComboBoxFromCpp`] documentation for the class usage.
 pub trait OwnerDrawnComboBoxMethods: ComboCtrlMethods {
     // DTOR: fn ~wxOwnerDrawnComboBox()
     // NOT_SUPPORTED: fn Create1()

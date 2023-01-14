@@ -3,7 +3,7 @@ use super::*;
 // wxAboutDialogInfo
 /// This trait represents [C++ `wxAboutDialogInfo` class](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html)'s methods and inheritance.
 ///
-/// See [`AboutDialogInfoIsOwned`] documentation for the class usage.
+/// See [`AboutDialogInfoFromCpp`] documentation for the class usage.
 pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Adds an artist name to be shown in the program credits.
     ///
@@ -259,8 +259,8 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Returns an array of the developer strings set in the dialog info.
     ///
     /// See [C++ `wxAboutDialogInfo::GetDevelopers()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#a17e0b6d92fd9f882660453e7f4fb245a).
-    fn get_developers(&self) -> ArrayStringIsOwned<false> {
-        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxAboutDialogInfo_GetDevelopers(self.as_ptr())) }
+    fn get_developers(&self) -> ArrayStringFromCpp<true> {
+        unsafe { ArrayStringFromCpp::from_ptr(ffi::wxAboutDialogInfo_GetDevelopers(self.as_ptr())) }
     }
     /// Returns true if writers have been set in the dialog info.
     ///
@@ -271,8 +271,8 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Returns an array of the writer strings set in the dialog info.
     ///
     /// See [C++ `wxAboutDialogInfo::GetDocWriters()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#aa033004a6a61b6b916ea8c1c7fa9391f).
-    fn get_doc_writers(&self) -> ArrayStringIsOwned<false> {
-        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxAboutDialogInfo_GetDocWriters(self.as_ptr())) }
+    fn get_doc_writers(&self) -> ArrayStringFromCpp<true> {
+        unsafe { ArrayStringFromCpp::from_ptr(ffi::wxAboutDialogInfo_GetDocWriters(self.as_ptr())) }
     }
     /// Returns true if artists have been set in the dialog info.
     ///
@@ -283,8 +283,8 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Returns an array of the artist strings set in the dialog info.
     ///
     /// See [C++ `wxAboutDialogInfo::GetArtists()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#a2cd77196f049420669de335f70bc99fc).
-    fn get_artists(&self) -> ArrayStringIsOwned<false> {
-        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxAboutDialogInfo_GetArtists(self.as_ptr())) }
+    fn get_artists(&self) -> ArrayStringFromCpp<true> {
+        unsafe { ArrayStringFromCpp::from_ptr(ffi::wxAboutDialogInfo_GetArtists(self.as_ptr())) }
     }
     /// Returns true if translators have been set in the dialog info.
     ///
@@ -295,9 +295,9 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
     /// Returns an array of the translator strings set in the dialog info.
     ///
     /// See [C++ `wxAboutDialogInfo::GetTranslators()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_about_dialog_info.html#ab1533f81dfc5b8768993970f543fc093).
-    fn get_translators(&self) -> ArrayStringIsOwned<false> {
+    fn get_translators(&self) -> ArrayStringFromCpp<true> {
         unsafe {
-            ArrayStringIsOwned::from_ptr(ffi::wxAboutDialogInfo_GetTranslators(self.as_ptr()))
+            ArrayStringFromCpp::from_ptr(ffi::wxAboutDialogInfo_GetTranslators(self.as_ptr()))
         }
     }
 }
@@ -305,7 +305,7 @@ pub trait AboutDialogInfoMethods: WxRustMethods {
 // wxAcceleratorEntry
 /// This trait represents [C++ `wxAcceleratorEntry` class](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html)'s methods and inheritance.
 ///
-/// See [`AcceleratorEntryIsOwned`] documentation for the class usage.
+/// See [`AcceleratorEntryFromCpp`] documentation for the class usage.
 pub trait AcceleratorEntryMethods: WxRustMethods {
     /// Returns the command identifier for the accelerator table entry.
     ///
@@ -328,7 +328,7 @@ pub trait AcceleratorEntryMethods: WxRustMethods {
     /// Returns the menu item associated with this accelerator entry.
     ///
     /// See [C++ `wxAcceleratorEntry::GetMenuItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_accelerator_entry.html#a4bf52758919312c09be2a7194edcb37d).
-    fn get_menu_item(&self) -> Option<MenuItemIsOwned<false>> {
+    fn get_menu_item(&self) -> Option<MenuItemFromCpp<true>> {
         unsafe { MenuItem::option_from(ffi::wxAcceleratorEntry_GetMenuItem(self.as_ptr())) }
     }
     /// Sets the accelerator entry parameters.
@@ -379,7 +379,7 @@ pub trait AcceleratorEntryMethods: WxRustMethods {
 // wxAcceleratorTable
 /// This trait represents [C++ `wxAcceleratorTable` class](https://docs.wxwidgets.org/3.2/classwx_accelerator_table.html)'s methods and inheritance.
 ///
-/// See [`AcceleratorTableIsOwned`] documentation for the class usage.
+/// See [`AcceleratorTableFromCpp`] documentation for the class usage.
 pub trait AcceleratorTableMethods: ObjectMethods {
     // DTOR: fn ~wxAcceleratorTable()
     /// Returns true if the accelerator table is valid.
@@ -393,7 +393,7 @@ pub trait AcceleratorTableMethods: ObjectMethods {
 // wxActivateEvent
 /// This trait represents [C++ `wxActivateEvent` class](https://docs.wxwidgets.org/3.2/classwx_activate_event.html)'s methods and inheritance.
 ///
-/// See [`ActivateEventIsOwned`] documentation for the class usage.
+/// See [`ActivateEventFromCpp`] documentation for the class usage.
 pub trait ActivateEventMethods: EventMethods {
     /// Returns true if the application or window is being activated, false otherwise.
     ///
@@ -407,7 +407,7 @@ pub trait ActivateEventMethods: EventMethods {
 // wxAffineMatrix2D
 /// This trait represents [C++ `wxAffineMatrix2D` class](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d.html)'s methods and inheritance.
 ///
-/// See [`AffineMatrix2DIsOwned`] documentation for the class usage.
+/// See [`AffineMatrix2DFromCpp`] documentation for the class usage.
 pub trait AffineMatrix2DMethods: AffineMatrix2DBaseMethods {
     // BLOCKED: fn IsEqual()
 }
@@ -415,7 +415,7 @@ pub trait AffineMatrix2DMethods: AffineMatrix2DBaseMethods {
 // wxAffineMatrix2DBase
 /// This trait represents [C++ `wxAffineMatrix2DBase` class](https://docs.wxwidgets.org/3.2/classwx_affine_matrix2_d_base.html)'s methods and inheritance.
 ///
-/// See [`AffineMatrix2DBaseIsOwned`] documentation for the class usage.
+/// See [`AffineMatrix2DBaseFromCpp`] documentation for the class usage.
 pub trait AffineMatrix2DBaseMethods: WxRustMethods {
     // DTOR: fn ~wxAffineMatrix2DBase()
     /// Set all elements of this matrix.
@@ -488,7 +488,7 @@ pub trait AffineMatrix2DBaseMethods: WxRustMethods {
 // wxAnimationCtrl
 /// This trait represents [C++ `wxAnimationCtrl` class](https://docs.wxwidgets.org/3.2/classwx_animation_ctrl.html)'s methods and inheritance.
 ///
-/// See [`AnimationCtrlIsOwned`] documentation for the class usage.
+/// See [`AnimationCtrlFromCpp`] documentation for the class usage.
 pub trait AnimationCtrlMethods: ControlMethods {
     /// Creates the control with the given anim animation.
     ///
@@ -564,7 +564,7 @@ pub trait AnimationCtrlMethods: ControlMethods {
 // wxAnyButton
 /// This trait represents [C++ `wxAnyButton` class](https://docs.wxwidgets.org/3.2/classwx_any_button.html)'s methods and inheritance.
 ///
-/// See [`AnyButtonIsOwned`] documentation for the class usage.
+/// See [`AnyButtonFromCpp`] documentation for the class usage.
 pub trait AnyButtonMethods: ControlMethods {
     // DTOR: fn ~wxAnyButton()
     /// Return the bitmap shown by the button.
@@ -688,7 +688,7 @@ pub trait AnyButtonMethods: ControlMethods {
 // wxArtProvider
 /// This trait represents [C++ `wxArtProvider` class](https://docs.wxwidgets.org/3.2/classwx_art_provider.html)'s methods and inheritance.
 ///
-/// See [`ArtProviderIsOwned`] documentation for the class usage.
+/// See [`ArtProviderFromCpp`] documentation for the class usage.
 pub trait ArtProviderMethods: ObjectMethods {
     // DTOR: fn ~wxArtProvider()
     /// Delete the given provider.
@@ -868,5 +868,5 @@ pub trait ArtProviderMethods: ObjectMethods {
 // wxAutoBufferedPaintDC
 /// This trait represents [C++ `wxAutoBufferedPaintDC` class](https://docs.wxwidgets.org/3.2/classwx_auto_buffered_paint_d_c.html)'s methods and inheritance.
 ///
-/// See [`AutoBufferedPaintDCIsOwned`] documentation for the class usage.
+/// See [`AutoBufferedPaintDCFromCpp`] documentation for the class usage.
 pub trait AutoBufferedPaintDCMethods: BufferedPaintDCMethods {}

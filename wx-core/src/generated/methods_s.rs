@@ -3,7 +3,7 @@ use super::*;
 // wxSVGFileDC
 /// This trait represents [C++ `wxSVGFileDC` class](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html)'s methods and inheritance.
 ///
-/// See [`SVGFileDCIsOwned`] documentation for the class usage.
+/// See [`SVGFileDCFromCpp`] documentation for the class usage.
 pub trait SVGFileDCMethods: DCMethods {
     /// Replaces the default bitmap handler with handler.
     ///
@@ -17,7 +17,7 @@ pub trait SVGFileDCMethods: DCMethods {
 // wxSashEvent
 /// This trait represents [C++ `wxSashEvent` class](https://docs.wxwidgets.org/3.2/classwx_sash_event.html)'s methods and inheritance.
 ///
-/// See [`SashEventIsOwned`] documentation for the class usage.
+/// See [`SashEventFromCpp`] documentation for the class usage.
 pub trait SashEventMethods: CommandEventMethods {
     /// Returns the rectangle representing the new size the window would be if the resize was applied.
     ///
@@ -42,7 +42,7 @@ pub trait SashEventMethods: CommandEventMethods {
 // wxSashLayoutWindow
 /// This trait represents [C++ `wxSashLayoutWindow` class](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html)'s methods and inheritance.
 ///
-/// See [`SashLayoutWindowIsOwned`] documentation for the class usage.
+/// See [`SashLayoutWindowFromCpp`] documentation for the class usage.
 pub trait SashLayoutWindowMethods: SashWindowMethods {
     // NOT_SUPPORTED: fn GetAlignment()
     // NOT_SUPPORTED: fn GetOrientation()
@@ -80,7 +80,7 @@ pub trait SashLayoutWindowMethods: SashWindowMethods {
 // wxSashWindow
 /// This trait represents [C++ `wxSashWindow` class](https://docs.wxwidgets.org/3.2/classwx_sash_window.html)'s methods and inheritance.
 ///
-/// See [`SashWindowIsOwned`] documentation for the class usage.
+/// See [`SashWindowFromCpp`] documentation for the class usage.
 pub trait SashWindowMethods: WindowMethods {
     // DTOR: fn ~wxSashWindow()
     /// Gets the maximum window size in the x direction.
@@ -170,7 +170,7 @@ pub trait SashWindowMethods: WindowMethods {
 // wxScreenDC
 /// This trait represents [C++ `wxScreenDC` class](https://docs.wxwidgets.org/3.2/classwx_screen_d_c.html)'s methods and inheritance.
 ///
-/// See [`ScreenDCIsOwned`] documentation for the class usage.
+/// See [`ScreenDCFromCpp`] documentation for the class usage.
 pub trait ScreenDCMethods: DCMethods {
     /// Use this in conjunction with StartDrawingOnTop().
     ///
@@ -207,7 +207,7 @@ pub trait ScreenDCMethods: DCMethods {
 // wxScrollBar
 /// This trait represents [C++ `wxScrollBar` class](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html)'s methods and inheritance.
 ///
-/// See [`ScrollBarIsOwned`] documentation for the class usage.
+/// See [`ScrollBarFromCpp`] documentation for the class usage.
 pub trait ScrollBarMethods: ControlMethods {
     // DTOR: fn ~wxScrollBar()
     /// Returns the page size of the scrollbar.
@@ -251,7 +251,7 @@ pub trait ScrollBarMethods: ControlMethods {
 // wxScrollEvent
 /// This trait represents [C++ `wxScrollEvent` class](https://docs.wxwidgets.org/3.2/classwx_scroll_event.html)'s methods and inheritance.
 ///
-/// See [`ScrollEventIsOwned`] documentation for the class usage.
+/// See [`ScrollEventFromCpp`] documentation for the class usage.
 pub trait ScrollEventMethods: CommandEventMethods {
     /// Returns wxHORIZONTAL or wxVERTICAL, depending on the orientation of the scrollbar.
     ///
@@ -280,7 +280,7 @@ pub trait ScrollEventMethods: CommandEventMethods {
 // wxScrollWinEvent
 /// This trait represents [C++ `wxScrollWinEvent` class](https://docs.wxwidgets.org/3.2/classwx_scroll_win_event.html)'s methods and inheritance.
 ///
-/// See [`ScrollWinEventIsOwned`] documentation for the class usage.
+/// See [`ScrollWinEventFromCpp`] documentation for the class usage.
 pub trait ScrollWinEventMethods: EventMethods {
     /// Returns wxHORIZONTAL or wxVERTICAL, depending on the orientation of the scrollbar.
     ///
@@ -309,7 +309,7 @@ pub trait ScrollWinEventMethods: EventMethods {
 // wxSearchCtrl
 /// This trait represents [C++ `wxSearchCtrl` class](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html)'s methods and inheritance.
 ///
-/// See [`SearchCtrlIsOwned`] documentation for the class usage.
+/// See [`SearchCtrlFromCpp`] documentation for the class usage.
 pub trait SearchCtrlMethods: TextCtrlMethods {
     // DTOR: fn ~wxSearchCtrl()
     /// Returns a pointer to the search control's menu object or NULL if there is no menu attached.
@@ -375,13 +375,13 @@ pub trait SearchCtrlMethods: TextCtrlMethods {
 // wxSetCursorEvent
 /// This trait represents [C++ `wxSetCursorEvent` class](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html)'s methods and inheritance.
 ///
-/// See [`SetCursorEventIsOwned`] documentation for the class usage.
+/// See [`SetCursorEventFromCpp`] documentation for the class usage.
 pub trait SetCursorEventMethods: EventMethods {
     /// Returns a reference to the cursor specified by this event.
     ///
     /// See [C++ `wxSetCursorEvent::GetCursor()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html#a136861df3000af87e0b6e2363be56886).
-    fn get_cursor(&self) -> CursorIsOwned<false> {
-        unsafe { CursorIsOwned::from_ptr(ffi::wxSetCursorEvent_GetCursor(self.as_ptr())) }
+    fn get_cursor(&self) -> CursorFromCpp<true> {
+        unsafe { CursorFromCpp::from_ptr(ffi::wxSetCursorEvent_GetCursor(self.as_ptr())) }
     }
     /// Returns the X coordinate of the mouse in client coordinates.
     ///
@@ -415,7 +415,7 @@ pub trait SetCursorEventMethods: EventMethods {
 // wxSettableHeaderColumn
 /// This trait represents [C++ `wxSettableHeaderColumn` class](https://docs.wxwidgets.org/3.2/classwx_settable_header_column.html)'s methods and inheritance.
 ///
-/// See [`SettableHeaderColumnIsOwned`] documentation for the class usage.
+/// See [`SettableHeaderColumnFromCpp`] documentation for the class usage.
 pub trait SettableHeaderColumnMethods: HeaderColumnMethods {
     /// Set the text to display in the column header.
     ///
@@ -531,7 +531,7 @@ pub trait SettableHeaderColumnMethods: HeaderColumnMethods {
 // wxShowEvent
 /// This trait represents [C++ `wxShowEvent` class](https://docs.wxwidgets.org/3.2/classwx_show_event.html)'s methods and inheritance.
 ///
-/// See [`ShowEventIsOwned`] documentation for the class usage.
+/// See [`ShowEventFromCpp`] documentation for the class usage.
 pub trait ShowEventMethods: EventMethods {
     /// Set whether the windows was shown or hidden.
     ///
@@ -551,7 +551,7 @@ pub trait ShowEventMethods: EventMethods {
 // wxSimplebook
 /// This trait represents [C++ `wxSimplebook` class](https://docs.wxwidgets.org/3.2/classwx_simplebook.html)'s methods and inheritance.
 ///
-/// See [`SimplebookIsOwned`] documentation for the class usage.
+/// See [`SimplebookFromCpp`] documentation for the class usage.
 pub trait SimplebookMethods: BookCtrlBaseMethods {
     // NOT_SUPPORTED: fn SetEffects()
     // NOT_SUPPORTED: fn SetEffect()
@@ -574,7 +574,7 @@ pub trait SimplebookMethods: BookCtrlBaseMethods {
 // wxSize
 /// This trait represents [C++ `wxSize` class](https://docs.wxwidgets.org/3.2/classwx_size.html)'s methods and inheritance.
 ///
-/// See [`SizeIsOwned`] documentation for the class usage.
+/// See [`SizeFromCpp`] documentation for the class usage.
 pub trait SizeMethods: WxRustMethods {
     // BLOCKED: fn operator=()
     // BLOCKED: fn operator==()
@@ -725,7 +725,7 @@ pub trait SizeMethods: WxRustMethods {
 // wxSizeEvent
 /// This trait represents [C++ `wxSizeEvent` class](https://docs.wxwidgets.org/3.2/classwx_size_event.html)'s methods and inheritance.
 ///
-/// See [`SizeEventIsOwned`] documentation for the class usage.
+/// See [`SizeEventFromCpp`] documentation for the class usage.
 pub trait SizeEventMethods: EventMethods {
     /// Returns the entire size of the window generating the size change event.
     ///
@@ -745,7 +745,7 @@ pub trait SizeEventMethods: EventMethods {
 // wxSizer
 /// This trait represents [C++ `wxSizer` class](https://docs.wxwidgets.org/3.2/classwx_sizer.html)'s methods and inheritance.
 ///
-/// See [`SizerIsOwned`] documentation for the class usage.
+/// See [`SizerFromCpp`] documentation for the class usage.
 pub trait SizerMethods: ObjectMethods {
     // DTOR: fn ~wxSizer()
     /// Appends a child to the sizer.
@@ -755,7 +755,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         flags: &S,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -775,7 +775,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -802,7 +802,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -822,7 +822,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -853,7 +853,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
@@ -878,7 +878,7 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let flags = flags.as_ptr();
             SizerItem::option_from(ffi::wxSizer_Add5(self.as_ptr(), width, height, flags))
@@ -889,7 +889,7 @@ pub trait SizerMethods: ObjectMethods {
     fn add_sizeritem<S: SizerItemMethods>(
         &self,
         item: Option<&S>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -901,13 +901,13 @@ pub trait SizerMethods: ObjectMethods {
     /// This base function adds non-stretchable space to both the horizontal and vertical orientation of the sizer.
     ///
     /// See [C++ `wxSizer::AddSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a977375e316bc8bd2b3ea79f631906906).
-    fn add_spacer(&self, size: c_int) -> Option<SizerItemIsOwned<false>> {
+    fn add_spacer(&self, size: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_AddSpacer(self.as_ptr(), size)) }
     }
     /// Adds stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::AddStretchSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#ae293edd7b7ee07b713ed83cd258b7f18).
-    fn add_stretch_spacer(&self, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+    fn add_stretch_spacer(&self, prop: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_AddStretchSpacer(self.as_ptr(), prop)) }
     }
     /// This method is abstract and has to be overwritten by any derived class.
@@ -1016,8 +1016,8 @@ pub trait SizerMethods: ObjectMethods {
     /// Returns the list of the items in this sizer.
     ///
     /// See [C++ `wxSizer::GetChildren()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#aedb561084d239a2b2588de6c7de5cf69).
-    fn get_children(&self) -> SizerItemListIsOwned<false> {
-        unsafe { SizerItemListIsOwned::from_ptr(ffi::wxSizer_GetChildren(self.as_ptr())) }
+    fn get_children(&self) -> SizerItemListFromCpp<true> {
+        unsafe { SizerItemListFromCpp::from_ptr(ffi::wxSizer_GetChildren(self.as_ptr())) }
     }
     // BLOCKED: fn GetChildren1()
     /// Returns the window this sizer is used in or NULL if none.
@@ -1051,7 +1051,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         recursive: bool,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1067,7 +1067,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         sizer: Option<&S>,
         recursive: bool,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1079,13 +1079,13 @@ pub trait SizerMethods: ObjectMethods {
     /// Finds the wxSizerItem which is located in the sizer at position index.
     ///
     /// See [C++ `wxSizer::GetItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a39af8068a1a84fde5f77791bd8ad1aa2).
-    fn get_item_sz(&self, index: usize) -> Option<SizerItemIsOwned<false>> {
+    fn get_item_sz(&self, index: usize) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_GetItem2(self.as_ptr(), index)) }
     }
     /// Finds the item in the sizer which has the given id.
     ///
     /// See [C++ `wxSizer::GetItemById()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a7ef6aa595ad5ead57707cf1a02322976).
-    fn get_item_by_id(&self, id: c_int, recursive: bool) -> Option<SizerItemIsOwned<false>> {
+    fn get_item_by_id(&self, id: c_int, recursive: bool) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_GetItemById(self.as_ptr(), id, recursive)) }
     }
     /// Returns the minimal size of the sizer.
@@ -1144,7 +1144,7 @@ pub trait SizerMethods: ObjectMethods {
         index: usize,
         window: Option<&W>,
         flags: &S,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1165,7 +1165,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1194,7 +1194,7 @@ pub trait SizerMethods: ObjectMethods {
         index: usize,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1215,7 +1215,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1248,7 +1248,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
@@ -1275,7 +1275,7 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let flags = flags.as_ptr();
             SizerItem::option_from(ffi::wxSizer_Insert5(
@@ -1293,7 +1293,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         index: usize,
         item: Option<&S>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -1305,13 +1305,13 @@ pub trait SizerMethods: ObjectMethods {
     /// Inserts non-stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::InsertSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a2f56855356271576aa79b6d94c84765a).
-    fn insert_spacer(&self, index: usize, size: c_int) -> Option<SizerItemIsOwned<false>> {
+    fn insert_spacer(&self, index: usize, size: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_InsertSpacer(self.as_ptr(), index, size)) }
     }
     /// Inserts stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::InsertStretchSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#ac189f7dbb47d788111bf71bf7f67a46b).
-    fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+    fn insert_stretch_spacer(&self, index: usize, prop: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             SizerItem::option_from(ffi::wxSizer_InsertStretchSpacer(self.as_ptr(), index, prop))
         }
@@ -1365,7 +1365,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         window: Option<&W>,
         flags: &S,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1385,7 +1385,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1412,7 +1412,7 @@ pub trait SizerMethods: ObjectMethods {
         &self,
         sizer: Option<&S>,
         flags: &S2,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1432,7 +1432,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1463,7 +1463,7 @@ pub trait SizerMethods: ObjectMethods {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
@@ -1488,7 +1488,7 @@ pub trait SizerMethods: ObjectMethods {
         width: c_int,
         height: c_int,
         flags: &S,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let flags = flags.as_ptr();
             SizerItem::option_from(ffi::wxSizer_Prepend5(self.as_ptr(), width, height, flags))
@@ -1499,7 +1499,7 @@ pub trait SizerMethods: ObjectMethods {
     fn prepend_sizeritem<S: SizerItemMethods>(
         &self,
         item: Option<&S>,
-    ) -> Option<SizerItemIsOwned<false>> {
+    ) -> Option<SizerItemFromCpp<true>> {
         unsafe {
             let item = match item {
                 Some(r) => r.as_ptr(),
@@ -1511,13 +1511,13 @@ pub trait SizerMethods: ObjectMethods {
     /// Prepends non-stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::PrependSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#a0075b0322c99b9b7539db50df1d375db).
-    fn prepend_spacer(&self, size: c_int) -> Option<SizerItemIsOwned<false>> {
+    fn prepend_spacer(&self, size: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_PrependSpacer(self.as_ptr(), size)) }
     }
     /// Prepends stretchable space to the sizer.
     ///
     /// See [C++ `wxSizer::PrependStretchSpacer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html#afbedb412e858da8615f4535ae803dbd4).
-    fn prepend_stretch_spacer(&self, prop: c_int) -> Option<SizerItemIsOwned<false>> {
+    fn prepend_stretch_spacer(&self, prop: c_int) -> Option<SizerItemFromCpp<true>> {
         unsafe { SizerItem::option_from(ffi::wxSizer_PrependStretchSpacer(self.as_ptr(), prop)) }
     }
     /// Method which must be overridden in the derived sizer classes.
@@ -1770,7 +1770,7 @@ pub trait SizerMethods: ObjectMethods {
 // wxSizerFlags
 /// This trait represents [C++ `wxSizerFlags` class](https://docs.wxwidgets.org/3.2/classwx_sizer_flags.html)'s methods and inheritance.
 ///
-/// See [`SizerFlagsIsOwned`] documentation for the class usage.
+/// See [`SizerFlagsFromCpp`] documentation for the class usage.
 pub trait SizerFlagsMethods: WxRustMethods {
     /// Sets the alignment of this wxSizerFlags to align.
     ///
@@ -1979,7 +1979,7 @@ pub trait SizerFlagsMethods: WxRustMethods {
 // wxSizerItem
 /// This trait represents [C++ `wxSizerItem` class](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html)'s methods and inheritance.
 ///
-/// See [`SizerItemIsOwned`] documentation for the class usage.
+/// See [`SizerItemFromCpp`] documentation for the class usage.
 pub trait SizerItemMethods: ObjectMethods {
     // DTOR: fn ~wxSizerItem()
     /// Set the window to be tracked by this item.
@@ -2105,7 +2105,7 @@ pub trait SizerItemMethods: ObjectMethods {
     /// If this item is tracking a sizer, return it.
     ///
     /// See [C++ `wxSizerItem::GetSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#a36f107f2c1298471facd1e040f3ac7e8).
-    fn get_sizer(&self) -> Option<SizerIsOwned<false>> {
+    fn get_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxSizerItem_GetSizer(self.as_ptr())) }
     }
     /// If this item is tracking a spacer, return its size.
@@ -2117,7 +2117,7 @@ pub trait SizerItemMethods: ObjectMethods {
     /// Get the userData item attribute.
     ///
     /// See [C++ `wxSizerItem::GetUserData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#a54c2cebf0aba71694eefe2a39759f1e2).
-    fn get_user_data(&self) -> Option<ObjectIsOwned<false>> {
+    fn get_user_data(&self) -> Option<ObjectFromCpp<true>> {
         unsafe { Object::option_from(ffi::wxSizerItem_GetUserData(self.as_ptr())) }
     }
     /// If this item is tracking a window then return it.
@@ -2223,7 +2223,7 @@ pub trait SizerItemMethods: ObjectMethods {
 // wxSlider
 /// This trait represents [C++ `wxSlider` class](https://docs.wxwidgets.org/3.2/classwx_slider.html)'s methods and inheritance.
 ///
-/// See [`SliderIsOwned`] documentation for the class usage.
+/// See [`SliderFromCpp`] documentation for the class usage.
 pub trait SliderMethods: ControlMethods {
     // DTOR: fn ~wxSlider()
     /// Clears the selection, for a slider with the wxSL_SELRANGE style.
@@ -2398,7 +2398,7 @@ pub trait SliderMethods: ControlMethods {
 // wxSpinButton
 /// This trait represents [C++ `wxSpinButton` class](https://docs.wxwidgets.org/3.2/classwx_spin_button.html)'s methods and inheritance.
 ///
-/// See [`SpinButtonIsOwned`] documentation for the class usage.
+/// See [`SpinButtonFromCpp`] documentation for the class usage.
 pub trait SpinButtonMethods: ControlMethods {
     // DTOR: fn ~wxSpinButton()
     /// Get the value for increment for a spin control.
@@ -2448,7 +2448,7 @@ pub trait SpinButtonMethods: ControlMethods {
 // wxSpinCtrl
 /// This trait represents [C++ `wxSpinCtrl` class](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html)'s methods and inheritance.
 ///
-/// See [`SpinCtrlIsOwned`] documentation for the class usage.
+/// See [`SpinCtrlFromCpp`] documentation for the class usage.
 pub trait SpinCtrlMethods: ControlMethods {
     /// Creation function called by the spin control constructor.
     ///
@@ -2573,7 +2573,7 @@ pub trait SpinCtrlMethods: ControlMethods {
 // wxSpinCtrlDouble
 /// This trait represents [C++ `wxSpinCtrlDouble` class](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html)'s methods and inheritance.
 ///
-/// See [`SpinCtrlDoubleIsOwned`] documentation for the class usage.
+/// See [`SpinCtrlDoubleFromCpp`] documentation for the class usage.
 pub trait SpinCtrlDoubleMethods: ControlMethods {
     /// Creation function called by the spin control constructor.
     ///
@@ -2694,7 +2694,7 @@ pub trait SpinCtrlDoubleMethods: ControlMethods {
 // wxSpinDoubleEvent
 /// This trait represents [C++ `wxSpinDoubleEvent` class](https://docs.wxwidgets.org/3.2/classwx_spin_double_event.html)'s methods and inheritance.
 ///
-/// See [`SpinDoubleEventIsOwned`] documentation for the class usage.
+/// See [`SpinDoubleEventFromCpp`] documentation for the class usage.
 pub trait SpinDoubleEventMethods: NotifyEventMethods {
     /// Returns the value associated with this spin control event.
     ///
@@ -2713,7 +2713,7 @@ pub trait SpinDoubleEventMethods: NotifyEventMethods {
 // wxSpinEvent
 /// This trait represents [C++ `wxSpinEvent` class](https://docs.wxwidgets.org/3.2/classwx_spin_event.html)'s methods and inheritance.
 ///
-/// See [`SpinEventIsOwned`] documentation for the class usage.
+/// See [`SpinEventFromCpp`] documentation for the class usage.
 pub trait SpinEventMethods: NotifyEventMethods {
     /// Retrieve the current spin button or control value.
     ///
@@ -2732,7 +2732,7 @@ pub trait SpinEventMethods: NotifyEventMethods {
 // wxSplashScreen
 /// This trait represents [C++ `wxSplashScreen` class](https://docs.wxwidgets.org/3.2/classwx_splash_screen.html)'s methods and inheritance.
 ///
-/// See [`SplashScreenIsOwned`] documentation for the class usage.
+/// See [`SplashScreenFromCpp`] documentation for the class usage.
 pub trait SplashScreenMethods: FrameMethods {
     // DTOR: fn ~wxSplashScreen()
     /// Returns the splash style (see wxSplashScreen() for details).
@@ -2767,7 +2767,7 @@ pub trait SplashScreenMethods: FrameMethods {
 // wxSplitterEvent
 /// This trait represents [C++ `wxSplitterEvent` class](https://docs.wxwidgets.org/3.2/classwx_splitter_event.html)'s methods and inheritance.
 ///
-/// See [`SplitterEventIsOwned`] documentation for the class usage.
+/// See [`SplitterEventFromCpp`] documentation for the class usage.
 pub trait SplitterEventMethods: NotifyEventMethods {
     /// Returns the new sash position.
     ///
@@ -2818,7 +2818,7 @@ pub trait SplitterEventMethods: NotifyEventMethods {
 // wxSplitterWindow
 /// This trait represents [C++ `wxSplitterWindow` class](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html)'s methods and inheritance.
 ///
-/// See [`SplitterWindowIsOwned`] documentation for the class usage.
+/// See [`SplitterWindowFromCpp`] documentation for the class usage.
 pub trait SplitterWindowMethods: WindowMethods {
     // DTOR: fn ~wxSplitterWindow()
     /// Returns the current minimum pane size (defaults to zero).
@@ -3027,7 +3027,7 @@ pub trait SplitterWindowMethods: WindowMethods {
 // wxStaticBitmap
 /// This trait represents [C++ `wxStaticBitmap` class](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html)'s methods and inheritance.
 ///
-/// See [`StaticBitmapIsOwned`] documentation for the class usage.
+/// See [`StaticBitmapFromCpp`] documentation for the class usage.
 pub trait StaticBitmapMethods: ControlMethods {
     /// Creation function, for two-step construction.
     ///
@@ -3097,7 +3097,7 @@ pub trait StaticBitmapMethods: ControlMethods {
 // wxStaticBox
 /// This trait represents [C++ `wxStaticBox` class](https://docs.wxwidgets.org/3.2/classwx_static_box.html)'s methods and inheritance.
 ///
-/// See [`StaticBoxIsOwned`] documentation for the class usage.
+/// See [`StaticBoxFromCpp`] documentation for the class usage.
 pub trait StaticBoxMethods: ControlMethods {
     // DTOR: fn ~wxStaticBox()
     /// Creates the static box for two-step construction.
@@ -3133,7 +3133,7 @@ pub trait StaticBoxMethods: ControlMethods {
 // wxStaticBoxSizer
 /// This trait represents [C++ `wxStaticBoxSizer` class](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html)'s methods and inheritance.
 ///
-/// See [`StaticBoxSizerIsOwned`] documentation for the class usage.
+/// See [`StaticBoxSizerFromCpp`] documentation for the class usage.
 pub trait StaticBoxSizerMethods: BoxSizerMethods {
     /// Returns the static box associated with the sizer.
     ///
@@ -3146,7 +3146,7 @@ pub trait StaticBoxSizerMethods: BoxSizerMethods {
 // wxStaticLine
 /// This trait represents [C++ `wxStaticLine` class](https://docs.wxwidgets.org/3.2/classwx_static_line.html)'s methods and inheritance.
 ///
-/// See [`StaticLineIsOwned`] documentation for the class usage.
+/// See [`StaticLineFromCpp`] documentation for the class usage.
 pub trait StaticLineMethods: ControlMethods {
     /// Returns true if the line is vertical, false if horizontal.
     ///
@@ -3165,7 +3165,7 @@ pub trait StaticLineMethods: ControlMethods {
 // wxStaticText
 /// This trait represents [C++ `wxStaticText` class](https://docs.wxwidgets.org/3.2/classwx_static_text.html)'s methods and inheritance.
 ///
-/// See [`StaticTextIsOwned`] documentation for the class usage.
+/// See [`StaticTextFromCpp`] documentation for the class usage.
 pub trait StaticTextMethods: ControlMethods {
     /// Creation function, for two-step construction.
     ///
@@ -3211,7 +3211,7 @@ pub trait StaticTextMethods: ControlMethods {
 // wxStatusBar
 /// This trait represents [C++ `wxStatusBar` class](https://docs.wxwidgets.org/3.2/classwx_status_bar.html)'s methods and inheritance.
 ///
-/// See [`StatusBarIsOwned`] documentation for the class usage.
+/// See [`StatusBarFromCpp`] documentation for the class usage.
 pub trait StatusBarMethods: ControlMethods {
     // DTOR: fn ~wxStatusBar()
     /// Creates the window, for two-step construction.
@@ -3252,8 +3252,8 @@ pub trait StatusBarMethods: ControlMethods {
     /// Returns the wxStatusBarPane representing the n-th field.
     ///
     /// See [C++ `wxStatusBar::GetField()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar.html#ad806c2744f1bf7fae7c986c384e601d8).
-    fn get_field(&self, n: c_int) -> StatusBarPaneIsOwned<false> {
-        unsafe { StatusBarPaneIsOwned::from_ptr(ffi::wxStatusBar_GetField(self.as_ptr(), n)) }
+    fn get_field(&self, n: c_int) -> StatusBarPaneFromCpp<true> {
+        unsafe { StatusBarPaneFromCpp::from_ptr(ffi::wxStatusBar_GetField(self.as_ptr(), n)) }
     }
     /// Returns the horizontal and vertical borders used when rendering the field text inside the field area.
     ///
@@ -3334,7 +3334,7 @@ pub trait StatusBarMethods: ControlMethods {
 // wxStatusBarPane
 /// This trait represents [C++ `wxStatusBarPane` class](https://docs.wxwidgets.org/3.2/classwx_status_bar_pane.html)'s methods and inheritance.
 ///
-/// See [`StatusBarPaneIsOwned`] documentation for the class usage.
+/// See [`StatusBarPaneFromCpp`] documentation for the class usage.
 pub trait StatusBarPaneMethods: WxRustMethods {
     /// Returns the pane width; it maybe negative, indicating a variable-width field.
     ///
@@ -3359,7 +3359,7 @@ pub trait StatusBarPaneMethods: WxRustMethods {
 // wxStdDialogButtonSizer
 /// This trait represents [C++ `wxStdDialogButtonSizer` class](https://docs.wxwidgets.org/3.2/classwx_std_dialog_button_sizer.html)'s methods and inheritance.
 ///
-/// See [`StdDialogButtonSizerIsOwned`] documentation for the class usage.
+/// See [`StdDialogButtonSizerFromCpp`] documentation for the class usage.
 pub trait StdDialogButtonSizerMethods: BoxSizerMethods {
     /// Adds a button to the wxStdDialogButtonSizer.
     ///
@@ -3420,7 +3420,7 @@ pub trait StdDialogButtonSizerMethods: BoxSizerMethods {
 // wxStockPreferencesPage
 /// This trait represents [C++ `wxStockPreferencesPage` class](https://docs.wxwidgets.org/3.2/classwx_stock_preferences_page.html)'s methods and inheritance.
 ///
-/// See [`StockPreferencesPageIsOwned`] documentation for the class usage.
+/// See [`StockPreferencesPageFromCpp`] documentation for the class usage.
 pub trait StockPreferencesPageMethods: PreferencesPageMethods {
     // NOT_SUPPORTED: fn GetKind()
 }
@@ -3428,13 +3428,13 @@ pub trait StockPreferencesPageMethods: PreferencesPageMethods {
 // wxSysColourChangedEvent
 /// This trait represents [C++ `wxSysColourChangedEvent` class](https://docs.wxwidgets.org/3.2/classwx_sys_colour_changed_event.html)'s methods and inheritance.
 ///
-/// See [`SysColourChangedEventIsOwned`] documentation for the class usage.
+/// See [`SysColourChangedEventFromCpp`] documentation for the class usage.
 pub trait SysColourChangedEventMethods: EventMethods {}
 
 // wxSystemSettings
 /// This trait represents [C++ `wxSystemSettings` class](https://docs.wxwidgets.org/3.2/classwx_system_settings.html)'s methods and inheritance.
 ///
-/// See [`SystemSettingsIsOwned`] documentation for the class usage.
+/// See [`SystemSettingsFromCpp`] documentation for the class usage.
 pub trait SystemSettingsMethods: WxRustMethods {
     // NOT_SUPPORTED: fn GetColour()
     // NOT_SUPPORTED: fn GetFont()

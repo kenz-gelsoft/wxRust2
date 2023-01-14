@@ -4,25 +4,25 @@ macro_rules! wxwidgets {
         $(#[doc = $docComment:tt])*
         $(#[doc($docAttrKey:ident = $docAttrValue:tt)])*
         class $type:ident
-            = $typeIsOwned:ident<true>($wxType:ident) impl
+            = $typeFromCpp:ident<false>($wxType:ident) impl
             $($methods:ident),*
     ) => {
         $(#[doc = $docComment])*
         $(#[doc($docAttrKey = $docAttrValue)])*
-        pub struct $typeIsOwned<const OWNED: bool>(*mut c_void);
+        pub struct $typeFromCpp<const FROM_CPP: bool>(*mut c_void);
         $(#[doc = $docComment])*
-        pub type $type = $typeIsOwned<true>;
+        pub type $type = $typeFromCpp<false>;
         $(
-            impl<const OWNED: bool> $methods for $typeIsOwned<OWNED> {}
+            impl<const FROM_CPP: bool> $methods for $typeFromCpp<FROM_CPP> {}
         )*
-        impl<const OWNED: bool> WxRustMethods for $typeIsOwned<OWNED> {
-            type Unowned = $typeIsOwned<false>;
+        impl<const FROM_CPP: bool> WxRustMethods for $typeFromCpp<FROM_CPP> {
+            type CppManaged = $typeFromCpp<true>;
             unsafe fn as_ptr(&self) -> *mut c_void { self.0 }
             unsafe fn from_ptr(ptr: *mut c_void) -> Self {
-                $typeIsOwned(ptr)
+                $typeFromCpp(ptr)
             }
-            unsafe fn from_unowned_ptr(ptr: *mut c_void) -> Self::Unowned {
-                $typeIsOwned::<false>(ptr)
+            unsafe fn from_cpp_managed_ptr(ptr: *mut c_void) -> Self::CppManaged {
+                $typeFromCpp::<true>(ptr)
             }
             unsafe fn with_ptr<F: Fn(&Self)>(ptr: *mut c_void, closure: F) {
                 let tmp = Self(ptr);

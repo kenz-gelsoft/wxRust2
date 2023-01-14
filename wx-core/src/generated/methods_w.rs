@@ -3,7 +3,7 @@ use super::*;
 // wxWindow
 /// This trait represents [C++ `wxWindow` class](https://docs.wxwidgets.org/3.2/classwx_window.html)'s methods and inheritance.
 ///
-/// See [`WindowIsOwned`] documentation for the class usage.
+/// See [`WindowFromCpp`] documentation for the class usage.
 pub trait WindowMethods: EvtHandlerMethods {
     /// This method may be overridden in the derived classes to return false to indicate that this control doesn't accept input at all (i.e. behaves like e.g. wxStaticText) and so doesn't need focus.
     ///
@@ -115,8 +115,8 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Returns a const reference to the list of the window's children.
     ///
     /// See [C++ `wxWindow::GetChildren()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#aba31a46e73a980313da20b6277eb8c93).
-    fn get_children(&self) -> WindowListIsOwned<false> {
-        unsafe { WindowListIsOwned::from_ptr(ffi::wxWindow_GetChildren1(self.as_ptr())) }
+    fn get_children(&self) -> WindowListFromCpp<true> {
+        unsafe { WindowListFromCpp::from_ptr(ffi::wxWindow_GetChildren1(self.as_ptr())) }
     }
     /// Removes a child window.
     ///
@@ -1641,7 +1641,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Get the associated tooltip or NULL if none.
     ///
     /// See [C++ `wxWindow::GetToolTip()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a5192577a8c6d35a73a1cde9acfe03dd4).
-    fn get_tool_tip(&self) -> Option<ToolTipIsOwned<false>> {
+    fn get_tool_tip(&self) -> Option<ToolTipFromCpp<true>> {
         unsafe { ToolTip::option_from(ffi::wxWindow_GetToolTip(self.as_ptr())) }
     }
     /// Get the text of the associated tooltip or empty string if none.
@@ -1831,7 +1831,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Gets the accelerator table for this window.
     ///
     /// See [C++ `wxWindow::GetAcceleratorTable()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a9cf3fd71ffab949cdf06f8f8e2646d56).
-    fn get_accelerator_table(&self) -> Option<AcceleratorTableIsOwned<false>> {
+    fn get_accelerator_table(&self) -> Option<AcceleratorTableFromCpp<true>> {
         unsafe { AcceleratorTable::option_from(ffi::wxWindow_GetAcceleratorTable(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetAccessible()
@@ -1866,7 +1866,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Returns the associated drop target, which may be NULL.
     ///
     /// See [C++ `wxWindow::GetDropTarget()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a9303a2de5ad692557b7db9fb3e651549).
-    fn get_drop_target(&self) -> Option<DropTargetIsOwned<false>> {
+    fn get_drop_target(&self) -> Option<DropTargetFromCpp<true>> {
         unsafe { DropTarget::option_from(ffi::wxWindow_GetDropTarget(self.as_ptr())) }
     }
     /// Associates a drop target with this window.
@@ -1890,13 +1890,13 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Returns the sizer of which this window is a member, if any, otherwise NULL.
     ///
     /// See [C++ `wxWindow::GetContainingSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#ad9e45e32ec75f3288f065d83263194a3).
-    fn get_containing_sizer(&self) -> Option<SizerIsOwned<false>> {
+    fn get_containing_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxWindow_GetContainingSizer(self.as_ptr())) }
     }
     /// Returns the sizer associated with the window by a previous call to SetSizer(), or NULL.
     ///
     /// See [C++ `wxWindow::GetSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#ae05f09350b273af1c47a82253538c5c4).
-    fn get_sizer(&self) -> Option<SizerIsOwned<false>> {
+    fn get_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxWindow_GetSizer(self.as_ptr())) }
     }
     /// Sets the window to have the given layout sizer.
@@ -1962,7 +1962,7 @@ pub trait WindowMethods: EvtHandlerMethods {
     /// Returns the caret() associated with the window.
     ///
     /// See [C++ `wxWindow::GetCaret()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_window.html#a147ceedef6bd261d7a0ddf709f536233).
-    fn get_caret(&self) -> Option<CaretIsOwned<false>> {
+    fn get_caret(&self) -> Option<CaretFromCpp<true>> {
         unsafe { Caret::option_from(ffi::wxWindow_GetCaret(self.as_ptr())) }
     }
     // BLOCKED: fn GetCursor()
@@ -2205,7 +2205,7 @@ pub trait WindowMethods: EvtHandlerMethods {
 // wxWindowCreateEvent
 /// This trait represents [C++ `wxWindowCreateEvent` class](https://docs.wxwidgets.org/3.2/classwx_window_create_event.html)'s methods and inheritance.
 ///
-/// See [`WindowCreateEventIsOwned`] documentation for the class usage.
+/// See [`WindowCreateEventFromCpp`] documentation for the class usage.
 pub trait WindowCreateEventMethods: CommandEventMethods {
     /// Return the window being created.
     ///
@@ -2218,13 +2218,13 @@ pub trait WindowCreateEventMethods: CommandEventMethods {
 // wxWindowDC
 /// This trait represents [C++ `wxWindowDC` class](https://docs.wxwidgets.org/3.2/classwx_window_d_c.html)'s methods and inheritance.
 ///
-/// See [`WindowDCIsOwned`] documentation for the class usage.
+/// See [`WindowDCFromCpp`] documentation for the class usage.
 pub trait WindowDCMethods: DCMethods {}
 
 // wxWindowDestroyEvent
 /// This trait represents [C++ `wxWindowDestroyEvent` class](https://docs.wxwidgets.org/3.2/classwx_window_destroy_event.html)'s methods and inheritance.
 ///
-/// See [`WindowDestroyEventIsOwned`] documentation for the class usage.
+/// See [`WindowDestroyEventFromCpp`] documentation for the class usage.
 pub trait WindowDestroyEventMethods: CommandEventMethods {
     /// Return the window being destroyed.
     ///
@@ -2237,7 +2237,7 @@ pub trait WindowDestroyEventMethods: CommandEventMethods {
 // wxWindowDisabler
 /// This trait represents [C++ `wxWindowDisabler` class](https://docs.wxwidgets.org/3.2/classwx_window_disabler.html)'s methods and inheritance.
 ///
-/// See [`WindowDisablerIsOwned`] documentation for the class usage.
+/// See [`WindowDisablerFromCpp`] documentation for the class usage.
 pub trait WindowDisablerMethods: WxRustMethods {
     // DTOR: fn ~wxWindowDisabler()
 }
@@ -2245,7 +2245,7 @@ pub trait WindowDisablerMethods: WxRustMethods {
 // wxWizard
 /// This trait represents [C++ `wxWizard` class](https://docs.wxwidgets.org/3.2/classwx_wizard.html)'s methods and inheritance.
 ///
-/// See [`WizardIsOwned`] documentation for the class usage.
+/// See [`WizardFromCpp`] documentation for the class usage.
 pub trait WizardMethods: DialogMethods {
     /// Creates the wizard dialog.
     ///
@@ -2286,14 +2286,14 @@ pub trait WizardMethods: DialogMethods {
     /// Returns the bitmap used for the wizard.
     ///
     /// See [C++ `wxWizard::GetBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html#a7183729eb9e8992298b944da87d7bdc5).
-    fn get_bitmap(&self) -> BitmapIsOwned<false> {
-        unsafe { BitmapIsOwned::from_ptr(ffi::wxWizard_GetBitmap(self.as_ptr())) }
+    fn get_bitmap(&self) -> BitmapFromCpp<true> {
+        unsafe { BitmapFromCpp::from_ptr(ffi::wxWizard_GetBitmap(self.as_ptr())) }
     }
     /// Returns the colour that should be used to fill the area not taken up by the wizard or page bitmap, if a non-zero bitmap placement flag has been set.
     ///
     /// See [C++ `wxWizard::GetBitmapBackgroundColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html#ac75615eb0b2808b3cb22e2ffdd661eef).
-    fn get_bitmap_background_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxWizard_GetBitmapBackgroundColour(self.as_ptr())) }
+    fn get_bitmap_background_colour(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxWizard_GetBitmapBackgroundColour(self.as_ptr())) }
     }
     /// Returns the flags indicating how the wizard or page bitmap should be expanded and positioned to fit the page height.
     ///
@@ -2316,7 +2316,7 @@ pub trait WizardMethods: DialogMethods {
     /// Returns pointer to page area sizer.
     ///
     /// See [C++ `wxWizard::GetPageAreaSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_wizard.html#a0af838517d05fc40293edfff6bfe93ce).
-    fn get_page_area_sizer(&self) -> Option<SizerIsOwned<false>> {
+    fn get_page_area_sizer(&self) -> Option<SizerFromCpp<true>> {
         unsafe { Sizer::option_from(ffi::wxWizard_GetPageAreaSizer(self.as_ptr())) }
     }
     /// Returns the size available for the pages.
@@ -2411,7 +2411,7 @@ pub trait WizardMethods: DialogMethods {
 // wxWizardEvent
 /// This trait represents [C++ `wxWizardEvent` class](https://docs.wxwidgets.org/3.2/classwx_wizard_event.html)'s methods and inheritance.
 ///
-/// See [`WizardEventIsOwned`] documentation for the class usage.
+/// See [`WizardEventFromCpp`] documentation for the class usage.
 pub trait WizardEventMethods: NotifyEventMethods {
     /// Return the direction in which the page is changing: for EVT_WIZARD_PAGE_CHANGING, return true if we're going forward or false otherwise and for EVT_WIZARD_PAGE_CHANGED return true if we came from the previous page and false if we returned from the next one.
     ///
@@ -2430,7 +2430,7 @@ pub trait WizardEventMethods: NotifyEventMethods {
 // wxWizardPage
 /// This trait represents [C++ `wxWizardPage` class](https://docs.wxwidgets.org/3.2/classwx_wizard_page.html)'s methods and inheritance.
 ///
-/// See [`WizardPageIsOwned`] documentation for the class usage.
+/// See [`WizardPageFromCpp`] documentation for the class usage.
 pub trait WizardPageMethods: PanelMethods {
     /// Creates the wizard page.
     ///
@@ -2472,7 +2472,7 @@ pub trait WizardPageMethods: PanelMethods {
 // wxWizardPageSimple
 /// This trait represents [C++ `wxWizardPageSimple` class](https://docs.wxwidgets.org/3.2/classwx_wizard_page_simple.html)'s methods and inheritance.
 ///
-/// See [`WizardPageSimpleIsOwned`] documentation for the class usage.
+/// See [`WizardPageSimpleFromCpp`] documentation for the class usage.
 pub trait WizardPageSimpleMethods: WizardPageMethods {
     /// Creates the wizard page.
     ///
@@ -2567,5 +2567,5 @@ pub trait WizardPageSimpleMethods: WizardPageMethods {
 // wxWrapSizer
 /// This trait represents [C++ `wxWrapSizer` class](https://docs.wxwidgets.org/3.2/classwx_wrap_sizer.html)'s methods and inheritance.
 ///
-/// See [`WrapSizerIsOwned`] documentation for the class usage.
+/// See [`WrapSizerFromCpp`] documentation for the class usage.
 pub trait WrapSizerMethods: BoxSizerMethods {}

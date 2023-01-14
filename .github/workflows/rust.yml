@@ -8,6 +8,8 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  # workaround for macOS CI
+  HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
 
 jobs:
   build-wx30gtk:
@@ -25,7 +27,9 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - name: Install Prerequisites
-      run: sudo apt install libwxgtk3.0-gtk3-dev
+      run: |
+        sudo apt update
+        sudo apt install libwxgtk3.0-gtk3-dev
     - name: Check fmt
       run: cargo fmt --check --all
     - name: Build

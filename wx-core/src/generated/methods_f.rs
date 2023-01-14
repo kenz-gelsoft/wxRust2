@@ -3,7 +3,7 @@ use super::*;
 // wxFileCtrl
 /// This trait represents [C++ `wxFileCtrl` class](https://docs.wxwidgets.org/3.2/classwx_file_ctrl.html)'s methods and inheritance.
 ///
-/// See [`FileCtrlIsOwned`] documentation for the class usage.
+/// See [`FileCtrlFromCpp`] documentation for the class usage.
 pub trait FileCtrlMethods: ControlMethods {
     /// Create function for two-step construction.
     ///
@@ -154,7 +154,7 @@ pub trait FileCtrlMethods: ControlMethods {
 // wxFileCtrlEvent
 /// This trait represents [C++ `wxFileCtrlEvent` class](https://docs.wxwidgets.org/3.2/classwx_file_ctrl_event.html)'s methods and inheritance.
 ///
-/// See [`FileCtrlEventIsOwned`] documentation for the class usage.
+/// See [`FileCtrlEventFromCpp`] documentation for the class usage.
 pub trait FileCtrlEventMethods: CommandEventMethods {
     /// Returns the current directory.
     ///
@@ -210,7 +210,7 @@ pub trait FileCtrlEventMethods: CommandEventMethods {
 // wxFileDataObject
 /// This trait represents [C++ `wxFileDataObject` class](https://docs.wxwidgets.org/3.2/classwx_file_data_object.html)'s methods and inheritance.
 ///
-/// See [`FileDataObjectIsOwned`] documentation for the class usage.
+/// See [`FileDataObjectFromCpp`] documentation for the class usage.
 pub trait FileDataObjectMethods: DataObjectSimpleMethods {
     /// Adds a file to the file list represented by this data object (Windows only).
     ///
@@ -225,15 +225,15 @@ pub trait FileDataObjectMethods: DataObjectSimpleMethods {
     /// Returns the array of file names.
     ///
     /// See [C++ `wxFileDataObject::GetFilenames()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_file_data_object.html#a40727417bb94728bb759b63314138b5b).
-    fn get_filenames(&self) -> ArrayStringIsOwned<false> {
-        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxFileDataObject_GetFilenames(self.as_ptr())) }
+    fn get_filenames(&self) -> ArrayStringFromCpp<true> {
+        unsafe { ArrayStringFromCpp::from_ptr(ffi::wxFileDataObject_GetFilenames(self.as_ptr())) }
     }
 }
 
 // wxFileDialog
 /// This trait represents [C++ `wxFileDialog` class](https://docs.wxwidgets.org/3.2/classwx_file_dialog.html)'s methods and inheritance.
 ///
-/// See [`FileDialogIsOwned`] documentation for the class usage.
+/// See [`FileDialogFromCpp`] documentation for the class usage.
 pub trait FileDialogMethods: DialogMethods {
     // DTOR: fn ~wxFileDialog()
     /// Returns the path of the file currently selected in dialog.
@@ -381,7 +381,7 @@ pub trait FileDialogMethods: DialogMethods {
 // wxFileDirPickerEvent
 /// This trait represents [C++ `wxFileDirPickerEvent` class](https://docs.wxwidgets.org/3.2/classwx_file_dir_picker_event.html)'s methods and inheritance.
 ///
-/// See [`FileDirPickerEventIsOwned`] documentation for the class usage.
+/// See [`FileDirPickerEventFromCpp`] documentation for the class usage.
 pub trait FileDirPickerEventMethods: CommandEventMethods {
     /// Retrieve the absolute path of the file/directory the user has just selected.
     ///
@@ -404,7 +404,7 @@ pub trait FileDirPickerEventMethods: CommandEventMethods {
 // wxFileDropTarget
 /// This trait represents [C++ `wxFileDropTarget` class](https://docs.wxwidgets.org/3.2/classwx_file_drop_target.html)'s methods and inheritance.
 ///
-/// See [`FileDropTargetIsOwned`] documentation for the class usage.
+/// See [`FileDropTargetFromCpp`] documentation for the class usage.
 pub trait FileDropTargetMethods: DropTargetMethods {
     /// Override this function to receive dropped files.
     ///
@@ -420,7 +420,7 @@ pub trait FileDropTargetMethods: DropTargetMethods {
 // wxFileHistory
 /// This trait represents [C++ `wxFileHistory` class](https://docs.wxwidgets.org/3.2/classwx_file_history.html)'s methods and inheritance.
 ///
-/// See [`FileHistoryIsOwned`] documentation for the class usage.
+/// See [`FileHistoryFromCpp`] documentation for the class usage.
 pub trait FileHistoryMethods: ObjectMethods {
     // DTOR: fn ~wxFileHistory()
     /// Adds a file to the file history list, if the object has a pointer to an appropriate file menu.
@@ -533,7 +533,7 @@ pub trait FileHistoryMethods: ObjectMethods {
 // wxFilePickerCtrl
 /// This trait represents [C++ `wxFilePickerCtrl` class](https://docs.wxwidgets.org/3.2/classwx_file_picker_ctrl.html)'s methods and inheritance.
 ///
-/// See [`FilePickerCtrlIsOwned`] documentation for the class usage.
+/// See [`FilePickerCtrlFromCpp`] documentation for the class usage.
 pub trait FilePickerCtrlMethods: PickerBaseMethods {
     /// Creates this widget with the given parameters.
     ///
@@ -628,7 +628,7 @@ pub trait FilePickerCtrlMethods: PickerBaseMethods {
 // wxFindDialogEvent
 /// This trait represents [C++ `wxFindDialogEvent` class](https://docs.wxwidgets.org/3.2/classwx_find_dialog_event.html)'s methods and inheritance.
 ///
-/// See [`FindDialogEventIsOwned`] documentation for the class usage.
+/// See [`FindDialogEventFromCpp`] documentation for the class usage.
 pub trait FindDialogEventMethods: CommandEventMethods {
     /// Return the pointer to the dialog which generated this event.
     ///
@@ -661,7 +661,7 @@ pub trait FindDialogEventMethods: CommandEventMethods {
 // wxFindReplaceData
 /// This trait represents [C++ `wxFindReplaceData` class](https://docs.wxwidgets.org/3.2/classwx_find_replace_data.html)'s methods and inheritance.
 ///
-/// See [`FindReplaceDataIsOwned`] documentation for the class usage.
+/// See [`FindReplaceDataFromCpp`] documentation for the class usage.
 pub trait FindReplaceDataMethods: ObjectMethods {
     /// Get the string to find.
     ///
@@ -707,7 +707,7 @@ pub trait FindReplaceDataMethods: ObjectMethods {
 // wxFindReplaceDialog
 /// This trait represents [C++ `wxFindReplaceDialog` class](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html)'s methods and inheritance.
 ///
-/// See [`FindReplaceDialogIsOwned`] documentation for the class usage.
+/// See [`FindReplaceDialogFromCpp`] documentation for the class usage.
 pub trait FindReplaceDialogMethods: DialogMethods {
     // DTOR: fn ~wxFindReplaceDialog()
     /// Creates the dialog; use wxWindow::Show to show it on screen.
@@ -737,7 +737,7 @@ pub trait FindReplaceDialogMethods: DialogMethods {
     /// Get the wxFindReplaceData object used by this dialog.
     ///
     /// See [C++ `wxFindReplaceDialog::GetData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_find_replace_dialog.html#afa6c61f0e1b6af69cc6f2ec062440e68).
-    fn get_data(&self) -> Option<FindReplaceDataIsOwned<false>> {
+    fn get_data(&self) -> Option<FindReplaceDataFromCpp<true>> {
         unsafe { FindReplaceData::option_from(ffi::wxFindReplaceDialog_GetData(self.as_ptr())) }
     }
 }
@@ -745,7 +745,7 @@ pub trait FindReplaceDialogMethods: DialogMethods {
 // wxFlexGridSizer
 /// This trait represents [C++ `wxFlexGridSizer` class](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html)'s methods and inheritance.
 ///
-/// See [`FlexGridSizerIsOwned`] documentation for the class usage.
+/// See [`FlexGridSizerFromCpp`] documentation for the class usage.
 pub trait FlexGridSizerMethods: GridSizerMethods {
     /// Specifies that column idx (starting from zero) should be grown if there is extra space available to the sizer.
     ///
@@ -800,21 +800,21 @@ pub trait FlexGridSizerMethods: GridSizerMethods {
     /// Returns a read-only array containing the heights of the rows in the sizer.
     ///
     /// See [C++ `wxFlexGridSizer::GetRowHeights()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a6552b94de617ab2c022e2b9758c6e4f4).
-    fn get_row_heights(&self) -> ArrayIntIsOwned<false> {
-        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxFlexGridSizer_GetRowHeights(self.as_ptr())) }
+    fn get_row_heights(&self) -> ArrayIntFromCpp<true> {
+        unsafe { ArrayIntFromCpp::from_ptr(ffi::wxFlexGridSizer_GetRowHeights(self.as_ptr())) }
     }
     /// Returns a read-only array containing the widths of the columns in the sizer.
     ///
     /// See [C++ `wxFlexGridSizer::GetColWidths()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_flex_grid_sizer.html#a719895a5bc97030744fdeed198ab6507).
-    fn get_col_widths(&self) -> ArrayIntIsOwned<false> {
-        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxFlexGridSizer_GetColWidths(self.as_ptr())) }
+    fn get_col_widths(&self) -> ArrayIntFromCpp<true> {
+        unsafe { ArrayIntFromCpp::from_ptr(ffi::wxFlexGridSizer_GetColWidths(self.as_ptr())) }
     }
 }
 
 // wxFocusEvent
 /// This trait represents [C++ `wxFocusEvent` class](https://docs.wxwidgets.org/3.2/classwx_focus_event.html)'s methods and inheritance.
 ///
-/// See [`FocusEventIsOwned`] documentation for the class usage.
+/// See [`FocusEventFromCpp`] documentation for the class usage.
 pub trait FocusEventMethods: EventMethods {
     /// Returns the window associated with this event, that is the window which had the focus before for the wxEVT_SET_FOCUS event and the window which is going to receive focus for the wxEVT_KILL_FOCUS one.
     ///
@@ -838,7 +838,7 @@ pub trait FocusEventMethods: EventMethods {
 // wxFont
 /// This trait represents [C++ `wxFont` class](https://docs.wxwidgets.org/3.2/classwx_font.html)'s methods and inheritance.
 ///
-/// See [`FontIsOwned`] documentation for the class usage.
+/// See [`FontFromCpp`] documentation for the class usage.
 pub trait FontMethods: GDIObjectMethods {
     /// Returns a font with the same face/size as the given one but with normal weight and style and not underlined nor stricken through.
     ///
@@ -869,7 +869,7 @@ pub trait FontMethods: GDIObjectMethods {
     /// Returns a font with the same face/size as the given one but with normal weight and style and not underlined nor stricken through.
     ///
     /// See [C++ `wxFont::GetNativeFontInfo()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a4141a77677772ea283c1ce737695c77d).
-    fn get_native_font_info(&self) -> Option<NativeFontInfoIsOwned<false>> {
+    fn get_native_font_info(&self) -> Option<NativeFontInfoFromCpp<true>> {
         unsafe { NativeFontInfo::option_from(ffi::wxFont_GetNativeFontInfo(self.as_ptr())) }
     }
     /// Gets the point size as an integer number.
@@ -1121,7 +1121,7 @@ pub trait FontMethods: GDIObjectMethods {
     /// Sets the encoding for this font.
     ///
     /// See [C++ `wxFont::New()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a554845d97040706a2c3407dd968e9f62).
-    fn new_nativefontinfo<N: NativeFontInfoMethods>(native_info: &N) -> Option<FontIsOwned<false>> {
+    fn new_nativefontinfo<N: NativeFontInfoMethods>(native_info: &N) -> Option<FontFromCpp<true>> {
         unsafe {
             let native_info = native_info.as_ptr();
             Font::option_from(ffi::wxFont_New4(native_info))
@@ -1130,7 +1130,7 @@ pub trait FontMethods: GDIObjectMethods {
     /// Sets the encoding for this font.
     ///
     /// See [C++ `wxFont::New()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font.html#a6cfbe4bb51490bec78637204d3f18edd).
-    fn new_str(native_info_string: &str) -> Option<FontIsOwned<false>> {
+    fn new_str(native_info_string: &str) -> Option<FontFromCpp<true>> {
         unsafe {
             let native_info_string = WxString::from(native_info_string);
             let native_info_string = native_info_string.as_ptr();
@@ -1143,7 +1143,7 @@ pub trait FontMethods: GDIObjectMethods {
 // wxFontData
 /// This trait represents [C++ `wxFontData` class](https://docs.wxwidgets.org/3.2/classwx_font_data.html)'s methods and inheritance.
 ///
-/// See [`FontDataIsOwned`] documentation for the class usage.
+/// See [`FontDataFromCpp`] documentation for the class usage.
 pub trait FontDataMethods: ObjectMethods {
     /// Enables or disables "effects" under Windows or generic only.
     ///
@@ -1166,8 +1166,8 @@ pub trait FontDataMethods: ObjectMethods {
     /// Gets the colour associated with the font dialog.
     ///
     /// See [C++ `wxFontData::GetColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_data.html#ab64b3bc54a2c518d2124f93197646ff8).
-    fn get_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxFontData_GetColour(self.as_ptr())) }
+    fn get_colour(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxFontData_GetColour(self.as_ptr())) }
     }
     /// Determines whether "effects" are enabled under Windows.
     ///
@@ -1250,7 +1250,7 @@ pub trait FontDataMethods: ObjectMethods {
 // wxFontDialog
 /// This trait represents [C++ `wxFontDialog` class](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html)'s methods and inheritance.
 ///
-/// See [`FontDialogIsOwned`] documentation for the class usage.
+/// See [`FontDialogFromCpp`] documentation for the class usage.
 pub trait FontDialogMethods: DialogMethods {
     /// Creates the dialog if the wxFontDialog object had been initialized using the default constructor.
     ///
@@ -1284,15 +1284,15 @@ pub trait FontDialogMethods: DialogMethods {
     // BLOCKED: fn GetFontData()
     ///
     /// See [C++ `wxFontDialog::GetFontData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_dialog.html#a5c0f427480a66edca8bef13eccd67b2c).
-    fn get_font_data(&self) -> FontDataIsOwned<false> {
-        unsafe { FontDataIsOwned::from_ptr(ffi::wxFontDialog_GetFontData1(self.as_ptr())) }
+    fn get_font_data(&self) -> FontDataFromCpp<true> {
+        unsafe { FontDataFromCpp::from_ptr(ffi::wxFontDialog_GetFontData1(self.as_ptr())) }
     }
 }
 
 // wxFontEnumerator
 /// This trait represents [C++ `wxFontEnumerator` class](https://docs.wxwidgets.org/3.2/classwx_font_enumerator.html)'s methods and inheritance.
 ///
-/// See [`FontEnumeratorIsOwned`] documentation for the class usage.
+/// See [`FontEnumeratorFromCpp`] documentation for the class usage.
 pub trait FontEnumeratorMethods: WxRustMethods {
     // DTOR: fn ~wxFontEnumerator()
     /// Call OnFontEncoding() for each encoding supported by the given font - or for each encoding supported by at least some font if font is not specified.
@@ -1360,13 +1360,13 @@ pub trait FontEnumeratorMethods: WxRustMethods {
 // wxFontList
 /// This trait represents [C++ `wxFontList` class](https://docs.wxwidgets.org/3.2/classwx_font_list.html)'s methods and inheritance.
 ///
-/// See [`FontListIsOwned`] documentation for the class usage.
+/// See [`FontListFromCpp`] documentation for the class usage.
 pub trait FontListMethods: WxRustMethods {
     // NOT_SUPPORTED: fn FindOrCreateFont()
     /// Finds a font of the given specification, or creates one and adds it to the list.
     ///
     /// See [C++ `wxFontList::FindOrCreateFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_list.html#a13af1bba1c223887cefc59544a91cbcc).
-    fn find_or_create_font(&self, font_info: *const c_void) -> Option<FontIsOwned<false>> {
+    fn find_or_create_font(&self, font_info: *const c_void) -> Option<FontFromCpp<true>> {
         unsafe { Font::option_from(ffi::wxFontList_FindOrCreateFont1(self.as_ptr(), font_info)) }
     }
 }
@@ -1374,7 +1374,7 @@ pub trait FontListMethods: WxRustMethods {
 // wxFontMapper
 /// This trait represents [C++ `wxFontMapper` class](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html)'s methods and inheritance.
 ///
-/// See [`FontMapperIsOwned`] documentation for the class usage.
+/// See [`FontMapperFromCpp`] documentation for the class usage.
 pub trait FontMapperMethods: WxRustMethods {
     // DTOR: fn ~wxFontMapper()
     // NOT_SUPPORTED: fn CharsetToEncoding()
@@ -1416,7 +1416,7 @@ pub trait FontMapperMethods: WxRustMethods {
     /// Get the current font mapper object.
     ///
     /// See [C++ `wxFontMapper::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html#ae0718e57b4e91c1b2f38cac352c0a9d5).
-    fn get() -> Option<FontMapperIsOwned<false>> {
+    fn get() -> Option<FontMapperFromCpp<true>> {
         unsafe { FontMapper::option_from(ffi::wxFontMapper_Get()) }
     }
     // NOT_SUPPORTED: fn GetAllEncodingNames()
@@ -1433,7 +1433,7 @@ pub trait FontMapperMethods: WxRustMethods {
     /// Set the current font mapper object and return previous one (may be NULL).
     ///
     /// See [C++ `wxFontMapper::Set()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_font_mapper.html#a41b0051189bfe57f3fabde0f42c5635c).
-    fn set<F: FontMapperMethods>(mapper: Option<&F>) -> Option<FontMapperIsOwned<false>> {
+    fn set<F: FontMapperMethods>(mapper: Option<&F>) -> Option<FontMapperFromCpp<true>> {
         unsafe {
             let mapper = match mapper {
                 Some(r) => r.as_ptr(),
@@ -1447,7 +1447,7 @@ pub trait FontMapperMethods: WxRustMethods {
 // wxFontPickerCtrl
 /// This trait represents [C++ `wxFontPickerCtrl` class](https://docs.wxwidgets.org/3.2/classwx_font_picker_ctrl.html)'s methods and inheritance.
 ///
-/// See [`FontPickerCtrlIsOwned`] documentation for the class usage.
+/// See [`FontPickerCtrlFromCpp`] documentation for the class usage.
 pub trait FontPickerCtrlMethods: PickerBaseMethods {
     /// Creates this widget with given parameters.
     ///
@@ -1552,7 +1552,7 @@ pub trait FontPickerCtrlMethods: PickerBaseMethods {
 // wxFontPickerEvent
 /// This trait represents [C++ `wxFontPickerEvent` class](https://docs.wxwidgets.org/3.2/classwx_font_picker_event.html)'s methods and inheritance.
 ///
-/// See [`FontPickerEventIsOwned`] documentation for the class usage.
+/// See [`FontPickerEventFromCpp`] documentation for the class usage.
 pub trait FontPickerEventMethods: CommandEventMethods {
     /// Retrieve the font the user has just selected.
     ///
@@ -1574,7 +1574,7 @@ pub trait FontPickerEventMethods: CommandEventMethods {
 // wxFrame
 /// This trait represents [C++ `wxFrame` class](https://docs.wxwidgets.org/3.2/classwx_frame.html)'s methods and inheritance.
 ///
-/// See [`FrameIsOwned`] documentation for the class usage.
+/// See [`FrameFromCpp`] documentation for the class usage.
 pub trait FrameMethods: TopLevelWindowMethods {
     // DTOR: fn ~wxFrame()
     /// Creates a status bar at the bottom of the frame.

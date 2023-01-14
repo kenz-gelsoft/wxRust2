@@ -539,7 +539,7 @@ impl ListboxWidgetsPage {
                 items.add(&lbox.get_string(n));
             }
 
-            if let Some(check_lbox) = lbox.as_unowned::<wx::CheckListBox>() {
+            if let Some(check_lbox) = lbox.dynamic_cast::<wx::CheckListBox>() {
                 for n in 0..count {
                     order.push(check_lbox.is_checked(n));
                 }

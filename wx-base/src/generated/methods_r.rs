@@ -3,7 +3,7 @@ use super::*;
 // wxRefCounter
 /// This trait represents [C++ `wxRefCounter` class](https://docs.wxwidgets.org/3.2/classwx_ref_counter.html)'s methods and inheritance.
 ///
-/// See [`RefCounterIsOwned`] documentation for the class usage.
+/// See [`RefCounterFromCpp`] documentation for the class usage.
 pub trait RefCounterMethods: WxRustMethods {
     /// Decrements the reference count associated with this shared data and, if it reaches zero, destroys this instance of wxRefCounter releasing its memory.
     ///

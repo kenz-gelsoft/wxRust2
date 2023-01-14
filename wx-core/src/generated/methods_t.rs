@@ -3,19 +3,19 @@ use super::*;
 // wxTGAHandler
 /// This trait represents [C++ `wxTGAHandler` class](https://docs.wxwidgets.org/3.2/classwx_t_g_a_handler.html)'s methods and inheritance.
 ///
-/// See [`TGAHandlerIsOwned`] documentation for the class usage.
+/// See [`TGAHandlerFromCpp`] documentation for the class usage.
 pub trait TGAHandlerMethods: ImageHandlerMethods {}
 
 // wxTIFFHandler
 /// This trait represents [C++ `wxTIFFHandler` class](https://docs.wxwidgets.org/3.2/classwx_t_i_f_f_handler.html)'s methods and inheritance.
 ///
-/// See [`TIFFHandlerIsOwned`] documentation for the class usage.
+/// See [`TIFFHandlerFromCpp`] documentation for the class usage.
 pub trait TIFFHandlerMethods: ImageHandlerMethods {}
 
 // wxTaskBarIcon
 /// This trait represents [C++ `wxTaskBarIcon` class](https://docs.wxwidgets.org/3.2/classwx_task_bar_icon.html)'s methods and inheritance.
 ///
-/// See [`TaskBarIconIsOwned`] documentation for the class usage.
+/// See [`TaskBarIconFromCpp`] documentation for the class usage.
 pub trait TaskBarIconMethods: EvtHandlerMethods {
     // DTOR: fn ~wxTaskBarIcon()
     /// This method is similar to wxWindow::Destroy and can be used to schedule the task bar icon object for the delayed destruction: it will be deleted during the next event loop iteration, which allows the task bar icon to process any pending events for it before being destroyed.
@@ -76,20 +76,20 @@ pub trait TaskBarIconMethods: EvtHandlerMethods {
 // wxTaskBarIconEvent
 /// This trait represents [C++ `wxTaskBarIconEvent` class](https://docs.wxwidgets.org/3.2/classwx_task_bar_icon_event.html)'s methods and inheritance.
 ///
-/// See [`TaskBarIconEventIsOwned`] documentation for the class usage.
+/// See [`TaskBarIconEventFromCpp`] documentation for the class usage.
 pub trait TaskBarIconEventMethods: EventMethods {}
 
 // wxTextAttr
 /// This trait represents [C++ `wxTextAttr` class](https://docs.wxwidgets.org/3.2/classwx_text_attr.html)'s methods and inheritance.
 ///
-/// See [`TextAttrIsOwned`] documentation for the class usage.
+/// See [`TextAttrFromCpp`] documentation for the class usage.
 pub trait TextAttrMethods: WxRustMethods {
     // NOT_SUPPORTED: fn GetAlignment()
     /// Returns the background colour.
     ///
     /// See [C++ `wxTextAttr::GetBackgroundColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#a8e4e02b11235e6a907c3dc79c2eaf459).
-    fn get_background_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetBackgroundColour(self.as_ptr())) }
+    fn get_background_colour(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxTextAttr_GetBackgroundColour(self.as_ptr())) }
     }
     /// Returns a string containing the name of the font associated with the bullet symbol.
     ///
@@ -173,8 +173,8 @@ pub trait TextAttrMethods: WxRustMethods {
     /// Returns the underline color used.
     ///
     /// See [C++ `wxTextAttr::GetUnderlineColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#aa7d3a1bd71a4bd65c62d4e07c36bdb3a).
-    fn get_underline_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetUnderlineColour(self.as_ptr())) }
+    fn get_underline_colour(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxTextAttr_GetUnderlineColour(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn GetFontWeight()
     /// Returns the left indent in tenths of a millimetre.
@@ -234,14 +234,14 @@ pub trait TextAttrMethods: WxRustMethods {
     /// Returns an array of tab stops, each expressed in tenths of a millimeter.
     ///
     /// See [C++ `wxTextAttr::GetTabs()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#a58d46d58d8bd430078d86360381d30f1).
-    fn get_tabs(&self) -> ArrayIntIsOwned<false> {
-        unsafe { ArrayIntIsOwned::from_ptr(ffi::wxTextAttr_GetTabs(self.as_ptr())) }
+    fn get_tabs(&self) -> ArrayIntFromCpp<true> {
+        unsafe { ArrayIntFromCpp::from_ptr(ffi::wxTextAttr_GetTabs(self.as_ptr())) }
     }
     /// Returns the text foreground colour.
     ///
     /// See [C++ `wxTextAttr::GetTextColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_attr.html#a3ee332af4536a29a894d202a532f9f89).
-    fn get_text_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxTextAttr_GetTextColour(self.as_ptr())) }
+    fn get_text_colour(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxTextAttr_GetTextColour(self.as_ptr())) }
     }
     /// Returns the text effect bits of interest.
     ///
@@ -734,7 +734,7 @@ pub trait TextAttrMethods: WxRustMethods {
 // wxTextCtrl
 /// This trait represents [C++ `wxTextCtrl` class](https://docs.wxwidgets.org/3.2/classwx_text_ctrl.html)'s methods and inheritance.
 ///
-/// See [`TextCtrlIsOwned`] documentation for the class usage.
+/// See [`TextCtrlFromCpp`] documentation for the class usage.
 pub trait TextCtrlMethods: ControlMethods {
     /// Enable the automatic replacement of new lines characters in a single-line text field with spaces under macOS.
     ///
@@ -819,8 +819,8 @@ pub trait TextCtrlMethods: ControlMethods {
     /// Returns the style currently used for the new text.
     ///
     /// See [C++ `wxTextCtrl::GetDefaultStyle()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_ctrl.html#a922bfcaf404dbaff10837c80b40744bf).
-    fn get_default_style(&self) -> TextAttrIsOwned<false> {
-        unsafe { TextAttrIsOwned::from_ptr(ffi::wxTextCtrl_GetDefaultStyle(self.as_ptr())) }
+    fn get_default_style(&self) -> TextAttrFromCpp<true> {
+        unsafe { TextAttrFromCpp::from_ptr(ffi::wxTextCtrl_GetDefaultStyle(self.as_ptr())) }
     }
     /// Gets the length of the specified line, not including any trailing newline character(s).
     ///
@@ -958,7 +958,7 @@ pub trait TextCtrlMethods: ControlMethods {
 // wxTextDataObject
 /// This trait represents [C++ `wxTextDataObject` class](https://docs.wxwidgets.org/3.2/classwx_text_data_object.html)'s methods and inheritance.
 ///
-/// See [`TextDataObjectIsOwned`] documentation for the class usage.
+/// See [`TextDataObjectFromCpp`] documentation for the class usage.
 pub trait TextDataObjectMethods: DataObjectSimpleMethods {
     /// Returns the text associated with the data object.
     ///
@@ -987,7 +987,7 @@ pub trait TextDataObjectMethods: DataObjectSimpleMethods {
 // wxTextDropTarget
 /// This trait represents [C++ `wxTextDropTarget` class](https://docs.wxwidgets.org/3.2/classwx_text_drop_target.html)'s methods and inheritance.
 ///
-/// See [`TextDropTargetIsOwned`] documentation for the class usage.
+/// See [`TextDropTargetFromCpp`] documentation for the class usage.
 pub trait TextDropTargetMethods: DropTargetMethods {
     /// Override this function to receive dropped text.
     ///
@@ -1004,7 +1004,7 @@ pub trait TextDropTargetMethods: DropTargetMethods {
 // wxTextEntry
 /// This trait represents [C++ `wxTextEntry` class](https://docs.wxwidgets.org/3.2/classwx_text_entry.html)'s methods and inheritance.
 ///
-/// See [`TextEntryIsOwned`] documentation for the class usage.
+/// See [`TextEntryFromCpp`] documentation for the class usage.
 pub trait TextEntryMethods: WxRustMethods {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { self.as_ptr() }
@@ -1289,7 +1289,7 @@ pub trait TextEntryMethods: WxRustMethods {
 // wxTextEntryDialog
 /// This trait represents [C++ `wxTextEntryDialog` class](https://docs.wxwidgets.org/3.2/classwx_text_entry_dialog.html)'s methods and inheritance.
 ///
-/// See [`TextEntryDialogIsOwned`] documentation for the class usage.
+/// See [`TextEntryDialogFromCpp`] documentation for the class usage.
 pub trait TextEntryDialogMethods: DialogMethods {
     ///
     /// See [C++ `wxTextEntryDialog::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_entry_dialog.html#a765b5d5cfca07be990d787a381c165f3).
@@ -1364,7 +1364,7 @@ pub trait TextEntryDialogMethods: DialogMethods {
 // wxTextValidator
 /// This trait represents [C++ `wxTextValidator` class](https://docs.wxwidgets.org/3.2/classwx_text_validator.html)'s methods and inheritance.
 ///
-/// See [`TextValidatorIsOwned`] documentation for the class usage.
+/// See [`TextValidatorFromCpp`] documentation for the class usage.
 pub trait TextValidatorMethods: ValidatorMethods {
     /// Returns a copy of the exclude char list (the list of invalid characters).
     ///
@@ -1381,14 +1381,14 @@ pub trait TextValidatorMethods: ValidatorMethods {
     /// Returns a const reference to the exclude list (the list of invalid values).
     ///
     /// See [C++ `wxTextValidator::GetExcludes()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_validator.html#a470219e1cac3953dc2ff015e43891665).
-    fn get_excludes(&self) -> ArrayStringIsOwned<false> {
-        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxTextValidator_GetExcludes(self.as_ptr())) }
+    fn get_excludes(&self) -> ArrayStringFromCpp<true> {
+        unsafe { ArrayStringFromCpp::from_ptr(ffi::wxTextValidator_GetExcludes(self.as_ptr())) }
     }
     /// Returns a const reference to the include list (the list of valid values).
     ///
     /// See [C++ `wxTextValidator::GetIncludes()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_text_validator.html#a5466e57dff6e7edcd0957ac7a2150beb).
-    fn get_includes(&self) -> ArrayStringIsOwned<false> {
-        unsafe { ArrayStringIsOwned::from_ptr(ffi::wxTextValidator_GetIncludes(self.as_ptr())) }
+    fn get_includes(&self) -> ArrayStringFromCpp<true> {
+        unsafe { ArrayStringFromCpp::from_ptr(ffi::wxTextValidator_GetIncludes(self.as_ptr())) }
     }
     /// Returns the validator style.
     ///
@@ -1505,7 +1505,7 @@ pub trait TextValidatorMethods: ValidatorMethods {
 // wxThreadEvent
 /// This trait represents [C++ `wxThreadEvent` class](https://docs.wxwidgets.org/3.2/classwx_thread_event.html)'s methods and inheritance.
 ///
-/// See [`ThreadEventIsOwned`] documentation for the class usage.
+/// See [`ThreadEventFromCpp`] documentation for the class usage.
 pub trait ThreadEventMethods: EventMethods {
     // BLOCKED: fn SetPayload()
     // NOT_SUPPORTED: fn GetPayload()
@@ -1554,7 +1554,7 @@ pub trait ThreadEventMethods: EventMethods {
 // wxTimePickerCtrl
 /// This trait represents [C++ `wxTimePickerCtrl` class](https://docs.wxwidgets.org/3.2/classwx_time_picker_ctrl.html)'s methods and inheritance.
 ///
-/// See [`TimePickerCtrlIsOwned`] documentation for the class usage.
+/// See [`TimePickerCtrlFromCpp`] documentation for the class usage.
 pub trait TimePickerCtrlMethods: ControlMethods {
     /// Create the control window.
     ///
@@ -1632,7 +1632,7 @@ pub trait TimePickerCtrlMethods: ControlMethods {
 // wxTipProvider
 /// This trait represents [C++ `wxTipProvider` class](https://docs.wxwidgets.org/3.2/classwx_tip_provider.html)'s methods and inheritance.
 ///
-/// See [`TipProviderIsOwned`] documentation for the class usage.
+/// See [`TipProviderFromCpp`] documentation for the class usage.
 pub trait TipProviderMethods: WxRustMethods {
     // DTOR: fn ~wxTipProvider()
     /// Returns the index of the current tip (i.e. the one which would be returned by GetTip()).
@@ -1652,7 +1652,7 @@ pub trait TipProviderMethods: WxRustMethods {
 // wxTipWindow
 /// This trait represents [C++ `wxTipWindow` class](https://docs.wxwidgets.org/3.2/classwx_tip_window.html)'s methods and inheritance.
 ///
-/// See [`TipWindowIsOwned`] documentation for the class usage.
+/// See [`TipWindowFromCpp`] documentation for the class usage.
 pub trait TipWindowMethods: WindowMethods {
     /// By default, the tip window disappears when the user clicks the mouse or presses a keyboard key or if it loses focus in any other way - for example because the user switched to another application window.
     ///
@@ -1680,7 +1680,7 @@ pub trait TipWindowMethods: WindowMethods {
 // wxToggleButton
 /// This trait represents [C++ `wxToggleButton` class](https://docs.wxwidgets.org/3.2/classwx_toggle_button.html)'s methods and inheritance.
 ///
-/// See [`ToggleButtonIsOwned`] documentation for the class usage.
+/// See [`ToggleButtonFromCpp`] documentation for the class usage.
 pub trait ToggleButtonMethods: AnyButtonMethods {
     // DTOR: fn ~wxToggleButton()
     /// Creates the toggle button for two-step construction.
@@ -1739,7 +1739,7 @@ pub trait ToggleButtonMethods: AnyButtonMethods {
 // wxToolBar
 /// This trait represents [C++ `wxToolBar` class](https://docs.wxwidgets.org/3.2/classwx_tool_bar.html)'s methods and inheritance.
 ///
-/// See [`ToolBarIsOwned`] documentation for the class usage.
+/// See [`ToolBarFromCpp`] documentation for the class usage.
 pub trait ToolBarMethods: ControlMethods {
     // DTOR: fn ~wxToolBar()
     /// Adds a new check (or toggle) tool to the toolbar.
@@ -1977,7 +1977,7 @@ pub trait ToolBarMethods: ControlMethods {
     /// Get any client data associated with the tool.
     ///
     /// See [C++ `wxToolBar::GetToolClientData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tool_bar.html#a7b4027b1a5f6e91f356a7bc4dc024e32).
-    fn get_tool_client_data(&self, tool_id: c_int) -> Option<ObjectIsOwned<false>> {
+    fn get_tool_client_data(&self, tool_id: c_int) -> Option<ObjectFromCpp<true>> {
         unsafe { Object::option_from(ffi::wxToolBar_GetToolClientData(self.as_ptr(), tool_id)) }
     }
     /// Called to determine whether a tool is enabled (responds to user input).
@@ -2316,7 +2316,7 @@ pub trait ToolBarMethods: ControlMethods {
 // wxToolTip
 /// This trait represents [C++ `wxToolTip` class](https://docs.wxwidgets.org/3.2/classwx_tool_tip.html)'s methods and inheritance.
 ///
-/// See [`ToolTipIsOwned`] documentation for the class usage.
+/// See [`ToolTipFromCpp`] documentation for the class usage.
 pub trait ToolTipMethods: ObjectMethods {
     /// Get the tooltip text.
     ///
@@ -2375,7 +2375,7 @@ pub trait ToolTipMethods: ObjectMethods {
 // wxToolbook
 /// This trait represents [C++ `wxToolbook` class](https://docs.wxwidgets.org/3.2/classwx_toolbook.html)'s methods and inheritance.
 ///
-/// See [`ToolbookIsOwned`] documentation for the class usage.
+/// See [`ToolbookFromCpp`] documentation for the class usage.
 pub trait ToolbookMethods: BookCtrlBaseMethods {
     /// Returns the wxToolBarBase associated with the control.
     ///
@@ -2406,7 +2406,7 @@ pub trait ToolbookMethods: BookCtrlBaseMethods {
 // wxTopLevelWindow
 /// This trait represents [C++ `wxTopLevelWindow` class](https://docs.wxwidgets.org/3.2/classwx_top_level_window.html)'s methods and inheritance.
 ///
-/// See [`TopLevelWindowIsOwned`] documentation for the class usage.
+/// See [`TopLevelWindowFromCpp`] documentation for the class usage.
 pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
     // DTOR: fn ~wxTopLevelWindow()
     /// Creates the top level window.
@@ -2665,7 +2665,7 @@ pub trait TopLevelWindowMethods: NonOwnedWindowMethods {
 // wxTreeCtrl
 /// This trait represents [C++ `wxTreeCtrl` class](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html)'s methods and inheritance.
 ///
-/// See [`TreeCtrlIsOwned`] documentation for the class usage.
+/// See [`TreeCtrlFromCpp`] documentation for the class usage.
 pub trait TreeCtrlMethods: ControlMethods {
     // DTOR: fn ~wxTreeCtrl()
     /// Adds the root node to the tree, returning the new item.
@@ -2891,7 +2891,7 @@ pub trait TreeCtrlMethods: ControlMethods {
     /// Returns the buttons image list (from which application-defined button images are taken).
     ///
     /// See [C++ `wxTreeCtrl::GetButtonsImageList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#a439e5fe7606b5b33f04655edcad45760).
-    fn get_buttons_image_list(&self) -> Option<ImageListIsOwned<false>> {
+    fn get_buttons_image_list(&self) -> Option<ImageListFromCpp<true>> {
         unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetButtonsImageList(self.as_ptr())) }
     }
     /// Returns the number of items in the branch.
@@ -2975,7 +2975,7 @@ pub trait TreeCtrlMethods: ControlMethods {
     /// Returns the tree item data associated with the item.
     ///
     /// See [C++ `wxTreeCtrl::GetItemData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#ae87589185698639e796b166aeeaaacb6).
-    fn get_item_data<T: TreeItemIdMethods>(&self, item: &T) -> Option<TreeItemDataIsOwned<false>> {
+    fn get_item_data<T: TreeItemIdMethods>(&self, item: &T) -> Option<TreeItemDataFromCpp<true>> {
         unsafe {
             let item = item.as_ptr();
             TreeItemData::option_from(ffi::wxTreeCtrl_GetItemData(self.as_ptr(), item))
@@ -3108,7 +3108,7 @@ pub trait TreeCtrlMethods: ControlMethods {
     /// Returns the state image list (from which application-defined state images are taken).
     ///
     /// See [C++ `wxTreeCtrl::GetStateImageList()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_ctrl.html#aeb27fd93365bb9cd9a9b88f32c386941).
-    fn get_state_image_list(&self) -> Option<ImageListIsOwned<false>> {
+    fn get_state_image_list(&self) -> Option<ImageListFromCpp<true>> {
         unsafe { ImageList::option_from(ffi::wxTreeCtrl_GetStateImageList(self.as_ptr())) }
     }
     /// Calculates which (if any) item is under the given point, returning the tree item id at this point plus extra information flags.
@@ -3502,7 +3502,7 @@ pub trait TreeCtrlMethods: ControlMethods {
 // wxTreeEvent
 /// This trait represents [C++ `wxTreeEvent` class](https://docs.wxwidgets.org/3.2/classwx_tree_event.html)'s methods and inheritance.
 ///
-/// See [`TreeEventIsOwned`] documentation for the class usage.
+/// See [`TreeEventFromCpp`] documentation for the class usage.
 pub trait TreeEventMethods: NotifyEventMethods {
     /// Returns the item.
     ///
@@ -3519,8 +3519,8 @@ pub trait TreeEventMethods: NotifyEventMethods {
     /// Returns the key event for EVT_TREE_KEY_DOWN events.
     ///
     /// See [C++ `wxTreeEvent::GetKeyEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_event.html#a7d37b3a4be2c44a4640b193fad237a6f).
-    fn get_key_event(&self) -> KeyEventIsOwned<false> {
-        unsafe { KeyEventIsOwned::from_ptr(ffi::wxTreeEvent_GetKeyEvent(self.as_ptr())) }
+    fn get_key_event(&self) -> KeyEventFromCpp<true> {
+        unsafe { KeyEventFromCpp::from_ptr(ffi::wxTreeEvent_GetKeyEvent(self.as_ptr())) }
     }
     /// Returns the label if the event is a begin or end edit label event.
     ///
@@ -3561,14 +3561,14 @@ pub trait TreeEventMethods: NotifyEventMethods {
 // wxTreeItemData
 /// This trait represents [C++ `wxTreeItemData` class](https://docs.wxwidgets.org/3.2/classwx_tree_item_data.html)'s methods and inheritance.
 ///
-/// See [`TreeItemDataIsOwned`] documentation for the class usage.
+/// See [`TreeItemDataFromCpp`] documentation for the class usage.
 pub trait TreeItemDataMethods: ClientDataMethods {
     // DTOR: fn ~wxTreeItemData()
     /// Returns the item associated with this node.
     ///
     /// See [C++ `wxTreeItemData::GetId()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_tree_item_data.html#ad29ad85ec3390e8900a3c3f5b2b22eb0).
-    fn get_id(&self) -> TreeItemIdIsOwned<false> {
-        unsafe { TreeItemIdIsOwned::from_ptr(ffi::wxTreeItemData_GetId(self.as_ptr())) }
+    fn get_id(&self) -> TreeItemIdFromCpp<true> {
+        unsafe { TreeItemIdFromCpp::from_ptr(ffi::wxTreeItemData_GetId(self.as_ptr())) }
     }
     /// Sets the item associated with this node.
     ///
@@ -3584,7 +3584,7 @@ pub trait TreeItemDataMethods: ClientDataMethods {
 // wxTreeItemId
 /// This trait represents [C++ `wxTreeItemId` class](https://docs.wxwidgets.org/3.2/classwx_tree_item_id.html)'s methods and inheritance.
 ///
-/// See [`TreeItemIdIsOwned`] documentation for the class usage.
+/// See [`TreeItemIdFromCpp`] documentation for the class usage.
 pub trait TreeItemIdMethods: WxRustMethods {
     /// Returns true if this instance is referencing a valid tree item.
     ///
@@ -3607,7 +3607,7 @@ pub trait TreeItemIdMethods: WxRustMethods {
 // wxTreeListCtrl
 /// This trait represents [C++ `wxTreeListCtrl` class](https://docs.wxwidgets.org/3.2/classwx_tree_list_ctrl.html)'s methods and inheritance.
 ///
-/// See [`TreeListCtrlIsOwned`] documentation for the class usage.
+/// See [`TreeListCtrlFromCpp`] documentation for the class usage.
 pub trait TreeListCtrlMethods: WindowMethods {
     /// Sets the image list and gives its ownership to the control.
     ///
@@ -3763,7 +3763,7 @@ pub trait TreeListCtrlMethods: WindowMethods {
 // wxTreeListItem
 /// This trait represents [C++ `wxTreeListItem` class](https://docs.wxwidgets.org/3.2/classwx_tree_list_item.html)'s methods and inheritance.
 ///
-/// See [`TreeListItemIsOwned`] documentation for the class usage.
+/// See [`TreeListItemFromCpp`] documentation for the class usage.
 pub trait TreeListItemMethods: WxRustMethods {
     /// Return true if the item is valid.
     ///
@@ -3776,7 +3776,7 @@ pub trait TreeListItemMethods: WxRustMethods {
 // wxTreeListItemComparator
 /// This trait represents [C++ `wxTreeListItemComparator` class](https://docs.wxwidgets.org/3.2/classwx_tree_list_item_comparator.html)'s methods and inheritance.
 ///
-/// See [`TreeListItemComparatorIsOwned`] documentation for the class usage.
+/// See [`TreeListItemComparatorFromCpp`] documentation for the class usage.
 pub trait TreeListItemComparatorMethods: WxRustMethods {
     // NOT_SUPPORTED: fn Compare()
     // DTOR: fn ~wxTreeListItemComparator()
@@ -3785,7 +3785,7 @@ pub trait TreeListItemComparatorMethods: WxRustMethods {
 // wxTreebook
 /// This trait represents [C++ `wxTreebook` class](https://docs.wxwidgets.org/3.2/classwx_treebook.html)'s methods and inheritance.
 ///
-/// See [`TreebookIsOwned`] documentation for the class usage.
+/// See [`TreebookFromCpp`] documentation for the class usage.
 pub trait TreebookMethods: BookCtrlBaseMethods {
     // DTOR: fn ~wxTreebook()
     /// Adds a new child-page to the last top-level page.

@@ -3,102 +3,102 @@ use super::*;
 // wxJPEGHandler
 wxwidgets! {
     /// This is the image handler for the JPEG format.
-    /// - [`JPEGHandler`] represents a C++ `wxJPEGHandler` class instance which your code has ownership, [`JPEGHandlerIsOwned`]`<false>` represents one which don't own.
+    /// - [`JPEGHandler`] represents a C++ `wxJPEGHandler` class instance which your code has ownership, [`JPEGHandlerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`JPEGHandler`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxJPEGHandler` class's documentation](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html) for more details.
     #[doc(alias = "wxJPEGHandler")]
     #[doc(alias = "JPEGHandler")]
     class JPEGHandler
-        = JPEGHandlerIsOwned<true>(wxJPEGHandler) impl
+        = JPEGHandlerFromCpp<false>(wxJPEGHandler) impl
         JPEGHandlerMethods,
         // ImageHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> JPEGHandlerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> JPEGHandlerFromCpp<FROM_CPP> {
     /// Default constructor for wxJPEGHandler.
     ///
     /// See [C++ `wxJPEGHandler::wxJPEGHandler()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_j_p_e_g_handler.html#a2935d0b968967a673b0b6cef75dcbc04).
-    pub fn new() -> JPEGHandlerIsOwned<OWNED> {
-        unsafe { JPEGHandlerIsOwned(ffi::wxJPEGHandler_new()) }
+    pub fn new() -> JPEGHandlerFromCpp<FROM_CPP> {
+        unsafe { JPEGHandlerFromCpp(ffi::wxJPEGHandler_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for JPEGHandlerIsOwned<false> {
+impl Clone for JPEGHandlerFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<JPEGHandlerIsOwned<OWNED>> for ImageHandlerIsOwned<OWNED> {
-    fn from(o: JPEGHandlerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<JPEGHandlerFromCpp<FROM_CPP>> for ImageHandlerFromCpp<FROM_CPP> {
+    fn from(o: JPEGHandlerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<JPEGHandlerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: JPEGHandlerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<JPEGHandlerFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: JPEGHandlerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for JPEGHandlerIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxJPEGHandler_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for JPEGHandlerFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxJPEGHandler_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for JPEGHandlerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for JPEGHandlerFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }
-impl<const OWNED: bool> ImageHandlerMethods for JPEGHandlerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> ImageHandlerMethods for JPEGHandlerFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn GetLibraryVersionInfo()
 }
 
 // wxJoystickEvent
 wxwidgets! {
     /// This event class contains information about joystick events, particularly events received by windows.
-    /// - [`JoystickEvent`] represents a C++ `wxJoystickEvent` class instance which your code has ownership, [`JoystickEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`JoystickEvent`] represents a C++ `wxJoystickEvent` class instance which your code has ownership, [`JoystickEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`JoystickEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxJoystickEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_joystick_event.html) for more details.
     #[doc(alias = "wxJoystickEvent")]
     #[doc(alias = "JoystickEvent")]
     class JoystickEvent
-        = JoystickEventIsOwned<true>(wxJoystickEvent) impl
+        = JoystickEventFromCpp<false>(wxJoystickEvent) impl
         JoystickEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> JoystickEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> JoystickEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxJoystickEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for JoystickEventIsOwned<false> {
+impl Clone for JoystickEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<JoystickEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: JoystickEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<JoystickEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: JoystickEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<JoystickEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: JoystickEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<JoystickEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: JoystickEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for JoystickEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxJoystickEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for JoystickEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxJoystickEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for JoystickEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for JoystickEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }

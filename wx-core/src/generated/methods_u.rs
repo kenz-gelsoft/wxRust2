@@ -3,7 +3,7 @@ use super::*;
 // wxUIActionSimulator
 /// This trait represents [C++ `wxUIActionSimulator` class](https://docs.wxwidgets.org/3.2/classwx_u_i_action_simulator.html)'s methods and inheritance.
 ///
-/// See [`UIActionSimulatorIsOwned`] documentation for the class usage.
+/// See [`UIActionSimulatorFromCpp`] documentation for the class usage.
 pub trait UIActionSimulatorMethods: WxRustMethods {
     /// Move the mouse to the specified coordinates.
     ///
@@ -96,7 +96,7 @@ pub trait UIActionSimulatorMethods: WxRustMethods {
 // wxURLDataObject
 /// This trait represents [C++ `wxURLDataObject` class](https://docs.wxwidgets.org/3.2/classwx_u_r_l_data_object.html)'s methods and inheritance.
 ///
-/// See [`URLDataObjectIsOwned`] documentation for the class usage.
+/// See [`URLDataObjectFromCpp`] documentation for the class usage.
 pub trait URLDataObjectMethods: DataObjectMethods {
     /// Returns the URL stored by this object, as a string.
     ///
@@ -119,7 +119,7 @@ pub trait URLDataObjectMethods: DataObjectMethods {
 // wxUpdateUIEvent
 /// This trait represents [C++ `wxUpdateUIEvent` class](https://docs.wxwidgets.org/3.2/classwx_update_u_i_event.html)'s methods and inheritance.
 ///
-/// See [`UpdateUIEventIsOwned`] documentation for the class usage.
+/// See [`UpdateUIEventFromCpp`] documentation for the class usage.
 pub trait UpdateUIEventMethods: CommandEventMethods {
     /// Check or uncheck the UI element.
     ///

@@ -3,18 +3,18 @@ use super::*;
 // wxSVGFileDC
 wxwidgets! {
     /// A wxSVGFileDC is a device context onto which graphics and text can be drawn, and the output produced as a vector file, in SVG format.
-    /// - [`SVGFileDC`] represents a C++ `wxSVGFileDC` class instance which your code has ownership, [`SVGFileDCIsOwned`]`<false>` represents one which don't own.
+    /// - [`SVGFileDC`] represents a C++ `wxSVGFileDC` class instance which your code has ownership, [`SVGFileDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SVGFileDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSVGFileDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html) for more details.
     #[doc(alias = "wxSVGFileDC")]
     #[doc(alias = "SVGFileDC")]
     class SVGFileDC
-        = SVGFileDCIsOwned<true>(wxSVGFileDC) impl
+        = SVGFileDCFromCpp<false>(wxSVGFileDC) impl
         SVGFileDCMethods,
         // DCMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SVGFileDCIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SVGFileDCFromCpp<FROM_CPP> {
     /// Initializes a wxSVGFileDC with the given filename, width and height at dpi resolution, and an optional title.
     ///
     /// See [C++ `wxSVGFileDC::wxSVGFileDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#ab7b8446a6dff6f1533343f16ca4dec9e).
@@ -24,47 +24,47 @@ impl<const OWNED: bool> SVGFileDCIsOwned<OWNED> {
         height: c_int,
         dpi: c_double,
         title: &str,
-    ) -> SVGFileDCIsOwned<OWNED> {
+    ) -> SVGFileDCFromCpp<FROM_CPP> {
         unsafe {
             let filename = WxString::from(filename);
             let filename = filename.as_ptr();
             let title = WxString::from(title);
             let title = title.as_ptr();
-            SVGFileDCIsOwned(ffi::wxSVGFileDC_new(filename, width, height, dpi, title))
+            SVGFileDCFromCpp(ffi::wxSVGFileDC_new(filename, width, height, dpi, title))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SVGFileDCIsOwned<false> {
+impl Clone for SVGFileDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SVGFileDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
-    fn from(o: SVGFileDCIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SVGFileDCFromCpp<FROM_CPP>> for DCFromCpp<FROM_CPP> {
+    fn from(o: SVGFileDCFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SVGFileDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SVGFileDCIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SVGFileDCFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SVGFileDCFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SVGFileDCIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSVGFileDC_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SVGFileDCFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSVGFileDC_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SVGFileDCIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SVGFileDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
 }
-impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
+impl<const FROM_CPP: bool> DCMethods for SVGFileDCFromCpp<FROM_CPP> {
     /// Draws a rectangle the size of the SVG using the wxDC::SetBackground() brush.
     ///
     /// See [C++ `wxSVGFileDC::Clear()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_s_v_g_file_d_c.html#a88eb12ff20b15f2e7d91483394a2ed16).
@@ -139,52 +139,52 @@ impl<const OWNED: bool> DCMethods for SVGFileDCIsOwned<OWNED> {
 // wxSashEvent
 wxwidgets! {
     /// A sash event is sent when the sash of a wxSashWindow has been dragged by the user.
-    /// - [`SashEvent`] represents a C++ `wxSashEvent` class instance which your code has ownership, [`SashEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`SashEvent`] represents a C++ `wxSashEvent` class instance which your code has ownership, [`SashEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SashEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSashEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sash_event.html) for more details.
     #[doc(alias = "wxSashEvent")]
     #[doc(alias = "SashEvent")]
     class SashEvent
-        = SashEventIsOwned<true>(wxSashEvent) impl
+        = SashEventFromCpp<false>(wxSashEvent) impl
         SashEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SashEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SashEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxSashEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SashEventIsOwned<false> {
+impl Clone for SashEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SashEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: SashEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashEventFromCpp<FROM_CPP>> for CommandEventFromCpp<FROM_CPP> {
+    fn from(o: SashEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SashEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: SashEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: SashEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SashEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SashEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SashEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SashEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SashEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSashEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SashEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SashEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -193,25 +193,25 @@ impl<const OWNED: bool> Drop for SashEventIsOwned<OWNED> {
 // wxSashLayoutWindow
 wxwidgets! {
     /// wxSashLayoutWindow responds to OnCalculateLayout events generated by wxLayoutAlgorithm.
-    /// - [`SashLayoutWindow`] represents a C++ `wxSashLayoutWindow` class instance which your code has ownership, [`SashLayoutWindowIsOwned`]`<false>` represents one which don't own.
+    /// - [`SashLayoutWindow`] represents a C++ `wxSashLayoutWindow` class instance which your code has ownership, [`SashLayoutWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SashLayoutWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSashLayoutWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html) for more details.
     #[doc(alias = "wxSashLayoutWindow")]
     #[doc(alias = "SashLayoutWindow")]
     class SashLayoutWindow
-        = SashLayoutWindowIsOwned<true>(wxSashLayoutWindow) impl
+        = SashLayoutWindowFromCpp<false>(wxSashLayoutWindow) impl
         SashLayoutWindowMethods,
         SashWindowMethods,
         // WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SashLayoutWindowIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SashLayoutWindowFromCpp<FROM_CPP> {
     /// Default ctor.
     ///
     /// See [C++ `wxSashLayoutWindow::wxSashLayoutWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html#a842e094abe06cbd25f645c32d24b5a3e).
-    pub fn new_2step() -> SashLayoutWindowIsOwned<OWNED> {
-        unsafe { SashLayoutWindowIsOwned(ffi::wxSashLayoutWindow_new()) }
+    pub fn new_2step() -> SashLayoutWindowFromCpp<FROM_CPP> {
+        unsafe { SashLayoutWindowFromCpp(ffi::wxSashLayoutWindow_new()) }
     }
     /// Constructs a sash layout window, which can be a child of a frame, dialog or any other non-control window.
     ///
@@ -223,7 +223,7 @@ impl<const OWNED: bool> SashLayoutWindowIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> SashLayoutWindowIsOwned<OWNED> {
+    ) -> SashLayoutWindowFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -233,7 +233,7 @@ impl<const OWNED: bool> SashLayoutWindowIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SashLayoutWindowIsOwned(ffi::wxSashLayoutWindow_new1(
+            SashLayoutWindowFromCpp(ffi::wxSashLayoutWindow_new1(
                 parent, id, pos, size, style, name,
             ))
         }
@@ -242,37 +242,37 @@ impl<const OWNED: bool> SashLayoutWindowIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SashLayoutWindowIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SashLayoutWindowFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for SashWindowIsOwned<OWNED> {
-    fn from(o: SashLayoutWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashLayoutWindowFromCpp<FROM_CPP>> for SashWindowFromCpp<FROM_CPP> {
+    fn from(o: SashLayoutWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SashLayoutWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashLayoutWindowFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SashLayoutWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SashLayoutWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashLayoutWindowFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SashLayoutWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SashLayoutWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SashLayoutWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashLayoutWindowFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SashLayoutWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SashLayoutWindowIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashLayoutWindow_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SashLayoutWindowFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSashLayoutWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
+impl<const FROM_CPP: bool> WindowMethods for SashLayoutWindowFromCpp<FROM_CPP> {
     /// Initializes a sash layout window, which can be a child of a frame, dialog or any other non-control window.
     ///
     /// See [C++ `wxSashLayoutWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sash_layout_window.html#a01ab3e617deb3a4ca348b2bfcd0ab26e).
@@ -302,24 +302,24 @@ impl<const OWNED: bool> WindowMethods for SashLayoutWindowIsOwned<OWNED> {
 // wxSashWindow
 wxwidgets! {
     /// wxSashWindow allows any of its edges to have a sash which can be dragged to resize the window.
-    /// - [`SashWindow`] represents a C++ `wxSashWindow` class instance which your code has ownership, [`SashWindowIsOwned`]`<false>` represents one which don't own.
+    /// - [`SashWindow`] represents a C++ `wxSashWindow` class instance which your code has ownership, [`SashWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SashWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSashWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sash_window.html) for more details.
     #[doc(alias = "wxSashWindow")]
     #[doc(alias = "SashWindow")]
     class SashWindow
-        = SashWindowIsOwned<true>(wxSashWindow) impl
+        = SashWindowFromCpp<false>(wxSashWindow) impl
         SashWindowMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SashWindowIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SashWindowFromCpp<FROM_CPP> {
     /// Default ctor.
     ///
     /// See [C++ `wxSashWindow::wxSashWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sash_window.html#a49c7b9a829ab48237bbe479e5011f297).
-    pub fn new_2step() -> SashWindowIsOwned<OWNED> {
-        unsafe { SashWindowIsOwned(ffi::wxSashWindow_new()) }
+    pub fn new_2step() -> SashWindowFromCpp<FROM_CPP> {
+        unsafe { SashWindowFromCpp(ffi::wxSashWindow_new()) }
     }
     /// Constructs a sash window, which can be a child of a frame, dialog or any other non-control window.
     ///
@@ -331,7 +331,7 @@ impl<const OWNED: bool> SashWindowIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> SashWindowIsOwned<OWNED> {
+    ) -> SashWindowFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -341,87 +341,87 @@ impl<const OWNED: bool> SashWindowIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SashWindowIsOwned(ffi::wxSashWindow_new1(parent, id, pos, size, style, name))
+            SashWindowFromCpp(ffi::wxSashWindow_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SashWindowIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SashWindowFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SashWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashWindowFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SashWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SashWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashWindowFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SashWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SashWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SashWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SashWindowFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SashWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SashWindowIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSashWindow_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SashWindowFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSashWindow_CLASSINFO()) }
     }
 }
 
 // wxScreenDC
 wxwidgets! {
     /// A wxScreenDC can be used to paint on the screen.
-    /// - [`ScreenDC`] represents a C++ `wxScreenDC` class instance which your code has ownership, [`ScreenDCIsOwned`]`<false>` represents one which don't own.
+    /// - [`ScreenDC`] represents a C++ `wxScreenDC` class instance which your code has ownership, [`ScreenDCFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ScreenDC`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxScreenDC` class's documentation](https://docs.wxwidgets.org/3.2/classwx_screen_d_c.html) for more details.
     #[doc(alias = "wxScreenDC")]
     #[doc(alias = "ScreenDC")]
     class ScreenDC
-        = ScreenDCIsOwned<true>(wxScreenDC) impl
+        = ScreenDCFromCpp<false>(wxScreenDC) impl
         ScreenDCMethods,
         DCMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ScreenDCIsOwned<OWNED> {
+impl<const FROM_CPP: bool> ScreenDCFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxScreenDC::wxScreenDC()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_screen_d_c.html#a05147c9296ea7012f345f0803f52c020).
-    pub fn new() -> ScreenDCIsOwned<OWNED> {
-        unsafe { ScreenDCIsOwned(ffi::wxScreenDC_new()) }
+    pub fn new() -> ScreenDCFromCpp<FROM_CPP> {
+        unsafe { ScreenDCFromCpp(ffi::wxScreenDC_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ScreenDCIsOwned<false> {
+impl Clone for ScreenDCFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ScreenDCIsOwned<OWNED>> for DCIsOwned<OWNED> {
-    fn from(o: ScreenDCIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScreenDCFromCpp<FROM_CPP>> for DCFromCpp<FROM_CPP> {
+    fn from(o: ScreenDCFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ScreenDCIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ScreenDCIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScreenDCFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ScreenDCFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ScreenDCIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScreenDC_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ScreenDCFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxScreenDC_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ScreenDCIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for ScreenDCFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -430,25 +430,25 @@ impl<const OWNED: bool> Drop for ScreenDCIsOwned<OWNED> {
 // wxScrollBar
 wxwidgets! {
     /// A wxScrollBar is a control that represents a horizontal or vertical scrollbar.
-    /// - [`ScrollBar`] represents a C++ `wxScrollBar` class instance which your code has ownership, [`ScrollBarIsOwned`]`<false>` represents one which don't own.
+    /// - [`ScrollBar`] represents a C++ `wxScrollBar` class instance which your code has ownership, [`ScrollBarFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ScrollBar`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxScrollBar` class's documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html) for more details.
     #[doc(alias = "wxScrollBar")]
     #[doc(alias = "ScrollBar")]
     class ScrollBar
-        = ScrollBarIsOwned<true>(wxScrollBar) impl
+        = ScrollBarFromCpp<false>(wxScrollBar) impl
         ScrollBarMethods,
         // ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ScrollBarIsOwned<OWNED> {
+impl<const FROM_CPP: bool> ScrollBarFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxScrollBar::wxScrollBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html#a8c38e80a7c369efa77ed166f01d6d86c).
-    pub fn new_2step() -> ScrollBarIsOwned<OWNED> {
-        unsafe { ScrollBarIsOwned(ffi::wxScrollBar_new()) }
+    pub fn new_2step() -> ScrollBarFromCpp<FROM_CPP> {
+        unsafe { ScrollBarFromCpp(ffi::wxScrollBar_new()) }
     }
     /// Constructor, creating and showing a scrollbar.
     ///
@@ -461,7 +461,7 @@ impl<const OWNED: bool> ScrollBarIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> ScrollBarIsOwned<OWNED> {
+    ) -> ScrollBarFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -472,7 +472,7 @@ impl<const OWNED: bool> ScrollBarIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            ScrollBarIsOwned(ffi::wxScrollBar_new1(
+            ScrollBarFromCpp(ffi::wxScrollBar_new1(
                 parent, id, pos, size, style, validator, name,
             ))
         }
@@ -481,37 +481,37 @@ impl<const OWNED: bool> ScrollBarIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for ScrollBarIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for ScrollBarFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: ScrollBarIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollBarFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: ScrollBarFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: ScrollBarIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollBarFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: ScrollBarFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: ScrollBarIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollBarFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: ScrollBarFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ScrollBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ScrollBarIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollBarFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ScrollBarFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ScrollBarIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScrollBar_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ScrollBarFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxScrollBar_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
+impl<const FROM_CPP: bool> ControlMethods for ScrollBarFromCpp<FROM_CPP> {
     /// Scrollbar creation function called by the scrollbar constructor.
     ///
     /// See [C++ `wxScrollBar::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_bar.html#a7a677f2a9d40b7aaa5a25cf72123a56f).
@@ -543,52 +543,52 @@ impl<const OWNED: bool> ControlMethods for ScrollBarIsOwned<OWNED> {
 // wxScrollEvent
 wxwidgets! {
     /// A scroll event holds information about events sent from stand-alone scrollbars (see wxScrollBar) and sliders (see wxSlider).
-    /// - [`ScrollEvent`] represents a C++ `wxScrollEvent` class instance which your code has ownership, [`ScrollEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`ScrollEvent`] represents a C++ `wxScrollEvent` class instance which your code has ownership, [`ScrollEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ScrollEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxScrollEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_event.html) for more details.
     #[doc(alias = "wxScrollEvent")]
     #[doc(alias = "ScrollEvent")]
     class ScrollEvent
-        = ScrollEventIsOwned<true>(wxScrollEvent) impl
+        = ScrollEventFromCpp<false>(wxScrollEvent) impl
         ScrollEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ScrollEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> ScrollEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxScrollEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ScrollEventIsOwned<false> {
+impl Clone for ScrollEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ScrollEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: ScrollEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollEventFromCpp<FROM_CPP>> for CommandEventFromCpp<FROM_CPP> {
+    fn from(o: ScrollEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ScrollEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: ScrollEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: ScrollEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ScrollEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ScrollEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ScrollEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ScrollEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScrollEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ScrollEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxScrollEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ScrollEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for ScrollEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -597,46 +597,46 @@ impl<const OWNED: bool> Drop for ScrollEventIsOwned<OWNED> {
 // wxScrollWinEvent
 wxwidgets! {
     /// A scroll event holds information about events sent from scrolling windows.
-    /// - [`ScrollWinEvent`] represents a C++ `wxScrollWinEvent` class instance which your code has ownership, [`ScrollWinEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`ScrollWinEvent`] represents a C++ `wxScrollWinEvent` class instance which your code has ownership, [`ScrollWinEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ScrollWinEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxScrollWinEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_scroll_win_event.html) for more details.
     #[doc(alias = "wxScrollWinEvent")]
     #[doc(alias = "ScrollWinEvent")]
     class ScrollWinEvent
-        = ScrollWinEventIsOwned<true>(wxScrollWinEvent) impl
+        = ScrollWinEventFromCpp<false>(wxScrollWinEvent) impl
         ScrollWinEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ScrollWinEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> ScrollWinEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxScrollWinEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ScrollWinEventIsOwned<false> {
+impl Clone for ScrollWinEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ScrollWinEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: ScrollWinEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollWinEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: ScrollWinEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ScrollWinEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ScrollWinEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ScrollWinEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ScrollWinEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ScrollWinEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxScrollWinEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ScrollWinEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxScrollWinEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ScrollWinEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for ScrollWinEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -645,13 +645,13 @@ impl<const OWNED: bool> Drop for ScrollWinEventIsOwned<OWNED> {
 // wxSearchCtrl
 wxwidgets! {
     /// A search control is a composite control with a search button, a text control, and a cancel button.
-    /// - [`SearchCtrl`] represents a C++ `wxSearchCtrl` class instance which your code has ownership, [`SearchCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`SearchCtrl`] represents a C++ `wxSearchCtrl` class instance which your code has ownership, [`SearchCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SearchCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSearchCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html) for more details.
     #[doc(alias = "wxSearchCtrl")]
     #[doc(alias = "SearchCtrl")]
     class SearchCtrl
-        = SearchCtrlIsOwned<true>(wxSearchCtrl) impl
+        = SearchCtrlFromCpp<false>(wxSearchCtrl) impl
         SearchCtrlMethods,
         // TextCtrlMethods,
         ControlMethods,
@@ -659,12 +659,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SearchCtrlIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SearchCtrlFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxSearchCtrl::wxSearchCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html#afce4a40295a3b98eee43cc191ff3a48f).
-    pub fn new_2step() -> SearchCtrlIsOwned<OWNED> {
-        unsafe { SearchCtrlIsOwned(ffi::wxSearchCtrl_new()) }
+    pub fn new_2step() -> SearchCtrlFromCpp<FROM_CPP> {
+        unsafe { SearchCtrlFromCpp(ffi::wxSearchCtrl_new()) }
     }
     /// Constructor, creating and showing a text control.
     ///
@@ -678,7 +678,7 @@ impl<const OWNED: bool> SearchCtrlIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> SearchCtrlIsOwned<OWNED> {
+    ) -> SearchCtrlFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -691,7 +691,7 @@ impl<const OWNED: bool> SearchCtrlIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SearchCtrlIsOwned(ffi::wxSearchCtrl_new1(
+            SearchCtrlFromCpp(ffi::wxSearchCtrl_new1(
                 parent, id, value, pos, size, style, validator, name,
             ))
         }
@@ -700,48 +700,48 @@ impl<const OWNED: bool> SearchCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SearchCtrlIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SearchCtrlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for TextCtrlIsOwned<OWNED> {
-    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SearchCtrlFromCpp<FROM_CPP>> for TextCtrlFromCpp<FROM_CPP> {
+    fn from(o: SearchCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SearchCtrlFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: SearchCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SearchCtrlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SearchCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SearchCtrlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SearchCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SearchCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SearchCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SearchCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SearchCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SearchCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSearchCtrl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SearchCtrlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSearchCtrl_CLASSINFO()) }
     }
 }
 // Mix-in(s) to wxSearchCtrl
-impl<const OWNED: bool> TextEntryMethods for SearchCtrlIsOwned<OWNED> {
+impl<const FROM_CPP: bool> TextEntryMethods for SearchCtrlFromCpp<FROM_CPP> {
     fn as_text_entry(&self) -> *mut c_void {
         unsafe { ffi::wxSearchCtrl_AsTextEntry(self.as_ptr()) }
     }
 }
-impl<const OWNED: bool> TextCtrlMethods for SearchCtrlIsOwned<OWNED> {
+impl<const FROM_CPP: bool> TextCtrlMethods for SearchCtrlFromCpp<FROM_CPP> {
     ///
     /// See [C++ `wxSearchCtrl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_search_ctrl.html#a6a438d8cb2a837e62f4e60cf264c72ae).
     fn create_str<W: WindowMethods, P: PointMethods, S: SizeMethods, V: ValidatorMethods>(
@@ -785,51 +785,51 @@ impl<const OWNED: bool> TextCtrlMethods for SearchCtrlIsOwned<OWNED> {
 // wxSetCursorEvent
 wxwidgets! {
     /// A wxSetCursorEvent is generated from wxWindow when the mouse cursor is about to be set as a result of mouse motion.
-    /// - [`SetCursorEvent`] represents a C++ `wxSetCursorEvent` class instance which your code has ownership, [`SetCursorEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`SetCursorEvent`] represents a C++ `wxSetCursorEvent` class instance which your code has ownership, [`SetCursorEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SetCursorEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSetCursorEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html) for more details.
     #[doc(alias = "wxSetCursorEvent")]
     #[doc(alias = "SetCursorEvent")]
     class SetCursorEvent
-        = SetCursorEventIsOwned<true>(wxSetCursorEvent) impl
+        = SetCursorEventFromCpp<false>(wxSetCursorEvent) impl
         SetCursorEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SetCursorEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SetCursorEventFromCpp<FROM_CPP> {
     /// Constructor, used by the library itself internally to initialize the event object.
     ///
     /// See [C++ `wxSetCursorEvent::wxSetCursorEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_set_cursor_event.html#a862a2635ac71d7a652100027ae85fa6a).
-    pub fn new(x: c_int, y: c_int) -> SetCursorEventIsOwned<OWNED> {
-        unsafe { SetCursorEventIsOwned(ffi::wxSetCursorEvent_new(x, y)) }
+    pub fn new(x: c_int, y: c_int) -> SetCursorEventFromCpp<FROM_CPP> {
+        unsafe { SetCursorEventFromCpp(ffi::wxSetCursorEvent_new(x, y)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SetCursorEventIsOwned<false> {
+impl Clone for SetCursorEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SetCursorEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: SetCursorEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SetCursorEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: SetCursorEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SetCursorEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SetCursorEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SetCursorEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SetCursorEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SetCursorEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSetCursorEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SetCursorEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSetCursorEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SetCursorEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SetCursorEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -838,34 +838,36 @@ impl<const OWNED: bool> Drop for SetCursorEventIsOwned<OWNED> {
 // wxSettableHeaderColumn
 wxwidgets! {
     /// Adds methods to set the column attributes to wxHeaderColumn.
-    /// - [`SettableHeaderColumn`] represents a C++ `wxSettableHeaderColumn` class instance which your code has ownership, [`SettableHeaderColumnIsOwned`]`<false>` represents one which don't own.
+    /// - [`SettableHeaderColumn`] represents a C++ `wxSettableHeaderColumn` class instance which your code has ownership, [`SettableHeaderColumnFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SettableHeaderColumn`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSettableHeaderColumn` class's documentation](https://docs.wxwidgets.org/3.2/classwx_settable_header_column.html) for more details.
     #[doc(alias = "wxSettableHeaderColumn")]
     #[doc(alias = "SettableHeaderColumn")]
     class SettableHeaderColumn
-        = SettableHeaderColumnIsOwned<true>(wxSettableHeaderColumn) impl
+        = SettableHeaderColumnFromCpp<false>(wxSettableHeaderColumn) impl
         SettableHeaderColumnMethods,
         HeaderColumnMethods
 }
-impl<const OWNED: bool> SettableHeaderColumnIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SettableHeaderColumnFromCpp<FROM_CPP> {
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SettableHeaderColumnIsOwned<false> {
+impl Clone for SettableHeaderColumnFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SettableHeaderColumnIsOwned<OWNED>> for HeaderColumnIsOwned<OWNED> {
-    fn from(o: SettableHeaderColumnIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SettableHeaderColumnFromCpp<FROM_CPP>>
+    for HeaderColumnFromCpp<FROM_CPP>
+{
+    fn from(o: SettableHeaderColumnFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for SettableHeaderColumnIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SettableHeaderColumnFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxSettableHeaderColumn_delete(self.0) }
         }
     }
@@ -874,51 +876,51 @@ impl<const OWNED: bool> Drop for SettableHeaderColumnIsOwned<OWNED> {
 // wxShowEvent
 wxwidgets! {
     /// An event being sent when the window is shown or hidden.
-    /// - [`ShowEvent`] represents a C++ `wxShowEvent` class instance which your code has ownership, [`ShowEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`ShowEvent`] represents a C++ `wxShowEvent` class instance which your code has ownership, [`ShowEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`ShowEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxShowEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_show_event.html) for more details.
     #[doc(alias = "wxShowEvent")]
     #[doc(alias = "ShowEvent")]
     class ShowEvent
-        = ShowEventIsOwned<true>(wxShowEvent) impl
+        = ShowEventFromCpp<false>(wxShowEvent) impl
         ShowEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> ShowEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> ShowEventFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxShowEvent::wxShowEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_show_event.html#a67164260c2e02eb6809192fe50cc5d1c).
-    pub fn new(winid: c_int, show: bool) -> ShowEventIsOwned<OWNED> {
-        unsafe { ShowEventIsOwned(ffi::wxShowEvent_new(winid, show)) }
+    pub fn new(winid: c_int, show: bool) -> ShowEventFromCpp<FROM_CPP> {
+        unsafe { ShowEventFromCpp(ffi::wxShowEvent_new(winid, show)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for ShowEventIsOwned<false> {
+impl Clone for ShowEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<ShowEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: ShowEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ShowEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: ShowEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<ShowEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: ShowEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<ShowEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: ShowEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for ShowEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxShowEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for ShowEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxShowEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for ShowEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for ShowEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -927,13 +929,13 @@ impl<const OWNED: bool> Drop for ShowEventIsOwned<OWNED> {
 // wxSimplebook
 wxwidgets! {
     /// wxSimplebook is a control showing exactly one of its several pages.
-    /// - [`Simplebook`] represents a C++ `wxSimplebook` class instance which your code has ownership, [`SimplebookIsOwned`]`<false>` represents one which don't own.
+    /// - [`Simplebook`] represents a C++ `wxSimplebook` class instance which your code has ownership, [`SimplebookFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Simplebook`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSimplebook` class's documentation](https://docs.wxwidgets.org/3.2/classwx_simplebook.html) for more details.
     #[doc(alias = "wxSimplebook")]
     #[doc(alias = "Simplebook")]
     class Simplebook
-        = SimplebookIsOwned<true>(wxSimplebook) impl
+        = SimplebookFromCpp<false>(wxSimplebook) impl
         SimplebookMethods,
         BookCtrlBaseMethods,
         ControlMethods,
@@ -941,12 +943,12 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SimplebookIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SimplebookFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxSimplebook::wxSimplebook()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_simplebook.html#a7912157673b19a8ee7b9f02e4523dab9).
-    pub fn new_2step() -> SimplebookIsOwned<OWNED> {
-        unsafe { SimplebookIsOwned(ffi::wxSimplebook_new()) }
+    pub fn new_2step() -> SimplebookFromCpp<FROM_CPP> {
+        unsafe { SimplebookFromCpp(ffi::wxSimplebook_new()) }
     }
     /// Constructs a simple book control.
     ///
@@ -958,7 +960,7 @@ impl<const OWNED: bool> SimplebookIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> SimplebookIsOwned<OWNED> {
+    ) -> SimplebookFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -968,49 +970,49 @@ impl<const OWNED: bool> SimplebookIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SimplebookIsOwned(ffi::wxSimplebook_new1(parent, id, pos, size, style, name))
+            SimplebookFromCpp(ffi::wxSimplebook_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SimplebookIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SimplebookFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for BookCtrlBaseIsOwned<OWNED> {
-    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SimplebookFromCpp<FROM_CPP>> for BookCtrlBaseFromCpp<FROM_CPP> {
+    fn from(o: SimplebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SimplebookFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: SimplebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SimplebookFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SimplebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SimplebookFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SimplebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SimplebookIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SimplebookIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SimplebookFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SimplebookFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SimplebookIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSimplebook_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SimplebookFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSimplebook_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for SimplebookIsOwned<OWNED> {
+impl<const FROM_CPP: bool> WindowMethods for SimplebookFromCpp<FROM_CPP> {
     /// Really create the window of an object created using default constructor.
     ///
     /// See [C++ `wxSimplebook::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_simplebook.html#a7ead9e1f4612887b5eb274f6ddfb93ff).
@@ -1040,40 +1042,40 @@ impl<const OWNED: bool> WindowMethods for SimplebookIsOwned<OWNED> {
 // wxSize
 wxwidgets! {
     /// A wxSize is a useful data structure for graphics operations.
-    /// - [`Size`] represents a C++ `wxSize` class instance which your code has ownership, [`SizeIsOwned`]`<false>` represents one which don't own.
+    /// - [`Size`] represents a C++ `wxSize` class instance which your code has ownership, [`SizeFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Size`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSize` class's documentation](https://docs.wxwidgets.org/3.2/classwx_size.html) for more details.
     #[doc(alias = "wxSize")]
     #[doc(alias = "Size")]
     class Size
-        = SizeIsOwned<true>(wxSize) impl
+        = SizeFromCpp<false>(wxSize) impl
         SizeMethods
 }
-impl<const OWNED: bool> SizeIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SizeFromCpp<FROM_CPP> {
     /// Initializes this size object with zero width and height.
     ///
     /// See [C++ `wxSize::wxSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_size.html#a89bbb1a42ad12573ff42809221e243a7).
-    pub fn new() -> SizeIsOwned<OWNED> {
-        unsafe { SizeIsOwned(ffi::wxSize_new()) }
+    pub fn new() -> SizeFromCpp<FROM_CPP> {
+        unsafe { SizeFromCpp(ffi::wxSize_new()) }
     }
     /// Initializes this size object with the given width and height.
     ///
     /// See [C++ `wxSize::wxSize()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_size.html#aaa5ee9cd2943878582267508255c5bc8).
-    pub fn new_with_int(width: c_int, height: c_int) -> SizeIsOwned<OWNED> {
-        unsafe { SizeIsOwned(ffi::wxSize_new1(width, height)) }
+    pub fn new_with_int(width: c_int, height: c_int) -> SizeFromCpp<FROM_CPP> {
+        unsafe { SizeFromCpp(ffi::wxSize_new1(width, height)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SizeIsOwned<false> {
+impl Clone for SizeFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SizeFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxSize_delete(self.0) }
         }
     }
@@ -1082,54 +1084,54 @@ impl<const OWNED: bool> Drop for SizeIsOwned<OWNED> {
 // wxSizeEvent
 wxwidgets! {
     /// A size event holds information about size change events of wxWindow.
-    /// - [`SizeEvent`] represents a C++ `wxSizeEvent` class instance which your code has ownership, [`SizeEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`SizeEvent`] represents a C++ `wxSizeEvent` class instance which your code has ownership, [`SizeEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SizeEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSizeEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_size_event.html) for more details.
     #[doc(alias = "wxSizeEvent")]
     #[doc(alias = "SizeEvent")]
     class SizeEvent
-        = SizeEventIsOwned<true>(wxSizeEvent) impl
+        = SizeEventFromCpp<false>(wxSizeEvent) impl
         SizeEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SizeEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SizeEventFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxSizeEvent::wxSizeEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_size_event.html#acce432b5d8aa28bd845022fa44a868cc).
-    pub fn new<S: SizeMethods>(sz: &S, id: c_int) -> SizeEventIsOwned<OWNED> {
+    pub fn new<S: SizeMethods>(sz: &S, id: c_int) -> SizeEventFromCpp<FROM_CPP> {
         unsafe {
             let sz = sz.as_ptr();
-            SizeEventIsOwned(ffi::wxSizeEvent_new(sz, id))
+            SizeEventFromCpp(ffi::wxSizeEvent_new(sz, id))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SizeEventIsOwned<false> {
+impl Clone for SizeEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SizeEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: SizeEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SizeEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: SizeEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SizeEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SizeEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SizeEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SizeEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SizeEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSizeEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SizeEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSizeEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SizeEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SizeEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1138,69 +1140,69 @@ impl<const OWNED: bool> Drop for SizeEventIsOwned<OWNED> {
 // wxSizer
 wxwidgets! {
     /// wxSizer is the abstract base class used for laying out subwindows in a window.
-    /// - [`Sizer`] represents a C++ `wxSizer` class instance which your code has ownership, [`SizerIsOwned`]`<false>` represents one which don't own.
+    /// - [`Sizer`] represents a C++ `wxSizer` class instance which your code has ownership, [`SizerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Sizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sizer.html) for more details.
     #[doc(alias = "wxSizer")]
     #[doc(alias = "Sizer")]
     class Sizer
-        = SizerIsOwned<true>(wxSizer) impl
+        = SizerFromCpp<false>(wxSizer) impl
         SizerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SizerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SizerFromCpp<FROM_CPP> {
     // BLOCKED: fn wxSizer()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SizerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SizerFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SizerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SizerFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SizerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SizerIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSizer_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SizerFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSizer_CLASSINFO()) }
     }
 }
 
 // wxSizerFlags
 wxwidgets! {
     /// Container for sizer items flags providing readable names for them.
-    /// - [`SizerFlags`] represents a C++ `wxSizerFlags` class instance which your code has ownership, [`SizerFlagsIsOwned`]`<false>` represents one which don't own.
+    /// - [`SizerFlags`] represents a C++ `wxSizerFlags` class instance which your code has ownership, [`SizerFlagsFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SizerFlags`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSizerFlags` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_flags.html) for more details.
     #[doc(alias = "wxSizerFlags")]
     #[doc(alias = "SizerFlags")]
     class SizerFlags
-        = SizerFlagsIsOwned<true>(wxSizerFlags) impl
+        = SizerFlagsFromCpp<false>(wxSizerFlags) impl
         SizerFlagsMethods
 }
-impl<const OWNED: bool> SizerFlagsIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SizerFlagsFromCpp<FROM_CPP> {
     /// Creates the wxSizer with the proportion specified by proportion.
     ///
     /// See [C++ `wxSizerFlags::wxSizerFlags()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_flags.html#a2fe0499abe5461a2b8b4fe5fa2c054d4).
-    pub fn new(proportion: c_int) -> SizerFlagsIsOwned<OWNED> {
-        unsafe { SizerFlagsIsOwned(ffi::wxSizerFlags_new(proportion)) }
+    pub fn new(proportion: c_int) -> SizerFlagsFromCpp<FROM_CPP> {
+        unsafe { SizerFlagsFromCpp(ffi::wxSizerFlags_new(proportion)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SizerFlagsIsOwned<false> {
+impl Clone for SizerFlagsFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SizerFlagsFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxSizerFlags_delete(self.0) }
         }
     }
@@ -1209,17 +1211,17 @@ impl<const OWNED: bool> Drop for SizerFlagsIsOwned<OWNED> {
 // wxSizerItem
 wxwidgets! {
     /// The wxSizerItem class is used to track the position, size and other attributes of each item managed by a wxSizer.
-    /// - [`SizerItem`] represents a C++ `wxSizerItem` class instance which your code has ownership, [`SizerItemIsOwned`]`<false>` represents one which don't own.
+    /// - [`SizerItem`] represents a C++ `wxSizerItem` class instance which your code has ownership, [`SizerItemFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SizerItem`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSizerItem` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html) for more details.
     #[doc(alias = "wxSizerItem")]
     #[doc(alias = "SizerItem")]
     class SizerItem
-        = SizerItemIsOwned<true>(wxSizerItem) impl
+        = SizerItemFromCpp<false>(wxSizerItem) impl
         SizerItemMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SizerItemFromCpp<FROM_CPP> {
     /// Construct a sizer item for tracking a spacer.
     ///
     /// See [C++ `wxSizerItem::wxSizerItem()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sizer_item.html#ab07c608bd56283df5847c1e9bd4ebfa9).
@@ -1230,13 +1232,13 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> SizerItemIsOwned<OWNED> {
+    ) -> SizerItemFromCpp<FROM_CPP> {
         unsafe {
             let user_data = match user_data {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            SizerItemIsOwned(ffi::wxSizerItem_new(
+            SizerItemFromCpp(ffi::wxSizerItem_new(
                 width, height, proportion, flag, border, user_data,
             ))
         }
@@ -1247,14 +1249,14 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
     pub fn new_with_window_sizerflags<W: WindowMethods, S: SizerFlagsMethods>(
         window: Option<&W>,
         flags: &S,
-    ) -> SizerItemIsOwned<OWNED> {
+    ) -> SizerItemFromCpp<FROM_CPP> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            SizerItemIsOwned(ffi::wxSizerItem_new1(window, flags))
+            SizerItemFromCpp(ffi::wxSizerItem_new1(window, flags))
         }
     }
     ///
@@ -1265,7 +1267,7 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> SizerItemIsOwned<OWNED> {
+    ) -> SizerItemFromCpp<FROM_CPP> {
         unsafe {
             let window = match window {
                 Some(r) => r.as_ptr(),
@@ -1275,7 +1277,7 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            SizerItemIsOwned(ffi::wxSizerItem_new2(
+            SizerItemFromCpp(ffi::wxSizerItem_new2(
                 window, proportion, flag, border, user_data,
             ))
         }
@@ -1286,14 +1288,14 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
     pub fn new_with_sizer_sizerflags<S: SizerMethods, S2: SizerFlagsMethods>(
         sizer: Option<&S>,
         flags: &S2,
-    ) -> SizerItemIsOwned<OWNED> {
+    ) -> SizerItemFromCpp<FROM_CPP> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
             let flags = flags.as_ptr();
-            SizerItemIsOwned(ffi::wxSizerItem_new3(sizer, flags))
+            SizerItemFromCpp(ffi::wxSizerItem_new3(sizer, flags))
         }
     }
     ///
@@ -1304,7 +1306,7 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
         flag: c_int,
         border: c_int,
         user_data: Option<&O>,
-    ) -> SizerItemIsOwned<OWNED> {
+    ) -> SizerItemFromCpp<FROM_CPP> {
         unsafe {
             let sizer = match sizer {
                 Some(r) => r.as_ptr(),
@@ -1314,7 +1316,7 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            SizerItemIsOwned(ffi::wxSizerItem_new4(
+            SizerItemFromCpp(ffi::wxSizerItem_new4(
                 sizer, proportion, flag, border, user_data,
             ))
         }
@@ -1323,24 +1325,24 @@ impl<const OWNED: bool> SizerItemIsOwned<OWNED> {
         None
     }
 }
-impl Clone for SizerItemIsOwned<false> {
+impl Clone for SizerItemFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SizerItemIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SizerItemIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SizerItemFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SizerItemFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SizerItemIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSizerItem_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SizerItemFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSizerItem_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SizerItemIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SizerItemFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1349,25 +1351,25 @@ impl<const OWNED: bool> Drop for SizerItemIsOwned<OWNED> {
 // wxSlider
 wxwidgets! {
     /// A slider is a control with a handle which can be pulled back and forth to change the value.
-    /// - [`Slider`] represents a C++ `wxSlider` class instance which your code has ownership, [`SliderIsOwned`]`<false>` represents one which don't own.
+    /// - [`Slider`] represents a C++ `wxSlider` class instance which your code has ownership, [`SliderFromCpp`]`<true>` represents one which don't own.
     /// - Use [`Slider`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSlider` class's documentation](https://docs.wxwidgets.org/3.2/classwx_slider.html) for more details.
     #[doc(alias = "wxSlider")]
     #[doc(alias = "Slider")]
     class Slider
-        = SliderIsOwned<true>(wxSlider) impl
+        = SliderFromCpp<false>(wxSlider) impl
         SliderMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SliderIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SliderFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxSlider::wxSlider()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_slider.html#a2173af74dec187f971f43ff76ce5fda4).
-    pub fn new_2step() -> SliderIsOwned<OWNED> {
-        unsafe { SliderIsOwned(ffi::wxSlider_new()) }
+    pub fn new_2step() -> SliderFromCpp<FROM_CPP> {
+        unsafe { SliderFromCpp(ffi::wxSlider_new()) }
     }
     /// Constructor, creating and showing a slider.
     ///
@@ -1383,7 +1385,7 @@ impl<const OWNED: bool> SliderIsOwned<OWNED> {
         style: c_long,
         validator: &V,
         name: &str,
-    ) -> SliderIsOwned<OWNED> {
+    ) -> SliderFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1394,7 +1396,7 @@ impl<const OWNED: bool> SliderIsOwned<OWNED> {
             let validator = validator.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SliderIsOwned(ffi::wxSlider_new1(
+            SliderFromCpp(ffi::wxSlider_new1(
                 parent, id, value, min_value, max_value, pos, size, style, validator, name,
             ))
         }
@@ -1403,59 +1405,59 @@ impl<const OWNED: bool> SliderIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SliderIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SliderFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SliderIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: SliderIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SliderFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: SliderFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SliderIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SliderIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SliderFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SliderFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SliderIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SliderIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SliderFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SliderFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SliderIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SliderIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SliderFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SliderFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SliderIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSlider_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SliderFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSlider_CLASSINFO()) }
     }
 }
 
 // wxSpinButton
 wxwidgets! {
     /// A wxSpinButton has two small up and down (or left and right) arrow buttons.
-    /// - [`SpinButton`] represents a C++ `wxSpinButton` class instance which your code has ownership, [`SpinButtonIsOwned`]`<false>` represents one which don't own.
+    /// - [`SpinButton`] represents a C++ `wxSpinButton` class instance which your code has ownership, [`SpinButtonFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SpinButton`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSpinButton` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_button.html) for more details.
     #[doc(alias = "wxSpinButton")]
     #[doc(alias = "SpinButton")]
     class SpinButton
-        = SpinButtonIsOwned<true>(wxSpinButton) impl
+        = SpinButtonFromCpp<false>(wxSpinButton) impl
         SpinButtonMethods,
         ControlMethods,
         // WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SpinButtonIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SpinButtonFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxSpinButton::wxSpinButton()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_button.html#aa4eba752e564f360bcc58b3f54ccc513).
-    pub fn new_2step() -> SpinButtonIsOwned<OWNED> {
-        unsafe { SpinButtonIsOwned(ffi::wxSpinButton_new()) }
+    pub fn new_2step() -> SpinButtonFromCpp<FROM_CPP> {
+        unsafe { SpinButtonFromCpp(ffi::wxSpinButton_new()) }
     }
     /// Constructor, creating and showing a spin button.
     ///
@@ -1467,7 +1469,7 @@ impl<const OWNED: bool> SpinButtonIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> SpinButtonIsOwned<OWNED> {
+    ) -> SpinButtonFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1477,44 +1479,44 @@ impl<const OWNED: bool> SpinButtonIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SpinButtonIsOwned(ffi::wxSpinButton_new1(parent, id, pos, size, style, name))
+            SpinButtonFromCpp(ffi::wxSpinButton_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SpinButtonIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SpinButtonFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: SpinButtonIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinButtonFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: SpinButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SpinButtonIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinButtonFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SpinButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SpinButtonIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinButtonFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SpinButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinButtonIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SpinButtonIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinButtonFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SpinButtonFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SpinButtonIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinButton_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SpinButtonFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSpinButton_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
+impl<const FROM_CPP: bool> WindowMethods for SpinButtonFromCpp<FROM_CPP> {
     /// Scrollbar creation function called by the spin button constructor.
     ///
     /// See [C++ `wxSpinButton::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_button.html#a49a34a60952c5f9319da9379887ca10e).
@@ -1544,25 +1546,25 @@ impl<const OWNED: bool> WindowMethods for SpinButtonIsOwned<OWNED> {
 // wxSpinCtrl
 wxwidgets! {
     /// wxSpinCtrl combines wxTextCtrl and wxSpinButton in one control.
-    /// - [`SpinCtrl`] represents a C++ `wxSpinCtrl` class instance which your code has ownership, [`SpinCtrlIsOwned`]`<false>` represents one which don't own.
+    /// - [`SpinCtrl`] represents a C++ `wxSpinCtrl` class instance which your code has ownership, [`SpinCtrlFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SpinCtrl`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSpinCtrl` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html) for more details.
     #[doc(alias = "wxSpinCtrl")]
     #[doc(alias = "SpinCtrl")]
     class SpinCtrl
-        = SpinCtrlIsOwned<true>(wxSpinCtrl) impl
+        = SpinCtrlFromCpp<false>(wxSpinCtrl) impl
         SpinCtrlMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SpinCtrlIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SpinCtrlFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxSpinCtrl::wxSpinCtrl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl.html#ac5defa94e938dd00380f551502c20a4e).
-    pub fn new_2step() -> SpinCtrlIsOwned<OWNED> {
-        unsafe { SpinCtrlIsOwned(ffi::wxSpinCtrl_new()) }
+    pub fn new_2step() -> SpinCtrlFromCpp<FROM_CPP> {
+        unsafe { SpinCtrlFromCpp(ffi::wxSpinCtrl_new()) }
     }
     /// Constructor, creating and showing a spin control.
     ///
@@ -1578,7 +1580,7 @@ impl<const OWNED: bool> SpinCtrlIsOwned<OWNED> {
         max: c_int,
         initial: c_int,
         name: &str,
-    ) -> SpinCtrlIsOwned<OWNED> {
+    ) -> SpinCtrlFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1590,7 +1592,7 @@ impl<const OWNED: bool> SpinCtrlIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SpinCtrlIsOwned(ffi::wxSpinCtrl_new1(
+            SpinCtrlFromCpp(ffi::wxSpinCtrl_new1(
                 parent, id, value, pos, size, style, min, max, initial, name,
             ))
         }
@@ -1599,59 +1601,59 @@ impl<const OWNED: bool> SpinCtrlIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SpinCtrlIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SpinCtrlFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinCtrlFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: SpinCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinCtrlFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SpinCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinCtrlFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SpinCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinCtrlIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SpinCtrlIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinCtrlFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SpinCtrlFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SpinCtrlIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinCtrl_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SpinCtrlFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSpinCtrl_CLASSINFO()) }
     }
 }
 
 // wxSpinCtrlDouble
 wxwidgets! {
     /// wxSpinCtrlDouble combines wxTextCtrl and wxSpinButton in one control and displays a real number.
-    /// - [`SpinCtrlDouble`] represents a C++ `wxSpinCtrlDouble` class instance which your code has ownership, [`SpinCtrlDoubleIsOwned`]`<false>` represents one which don't own.
+    /// - [`SpinCtrlDouble`] represents a C++ `wxSpinCtrlDouble` class instance which your code has ownership, [`SpinCtrlDoubleFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SpinCtrlDouble`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSpinCtrlDouble` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html) for more details.
     #[doc(alias = "wxSpinCtrlDouble")]
     #[doc(alias = "SpinCtrlDouble")]
     class SpinCtrlDouble
-        = SpinCtrlDoubleIsOwned<true>(wxSpinCtrlDouble) impl
+        = SpinCtrlDoubleFromCpp<false>(wxSpinCtrlDouble) impl
         SpinCtrlDoubleMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SpinCtrlDoubleIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SpinCtrlDoubleFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxSpinCtrlDouble::wxSpinCtrlDouble()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_ctrl_double.html#a7448457351183b00b4393b38f0f992b2).
-    pub fn new_2step() -> SpinCtrlDoubleIsOwned<OWNED> {
-        unsafe { SpinCtrlDoubleIsOwned(ffi::wxSpinCtrlDouble_new()) }
+    pub fn new_2step() -> SpinCtrlDoubleFromCpp<FROM_CPP> {
+        unsafe { SpinCtrlDoubleFromCpp(ffi::wxSpinCtrlDouble_new()) }
     }
     /// Constructor, creating and showing a spin control.
     ///
@@ -1668,7 +1670,7 @@ impl<const OWNED: bool> SpinCtrlDoubleIsOwned<OWNED> {
         initial: c_double,
         inc: c_double,
         name: &str,
-    ) -> SpinCtrlDoubleIsOwned<OWNED> {
+    ) -> SpinCtrlDoubleFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -1680,7 +1682,7 @@ impl<const OWNED: bool> SpinCtrlDoubleIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SpinCtrlDoubleIsOwned(ffi::wxSpinCtrlDouble_new1(
+            SpinCtrlDoubleFromCpp(ffi::wxSpinCtrlDouble_new1(
                 parent, id, value, pos, size, style, min, max, initial, inc, name,
             ))
         }
@@ -1689,101 +1691,103 @@ impl<const OWNED: bool> SpinCtrlDoubleIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SpinCtrlDoubleIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SpinCtrlDoubleFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinCtrlDoubleFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: SpinCtrlDoubleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinCtrlDoubleFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SpinCtrlDoubleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinCtrlDoubleFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SpinCtrlDoubleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinCtrlDoubleIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SpinCtrlDoubleIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinCtrlDoubleFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SpinCtrlDoubleFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SpinCtrlDoubleIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinCtrlDouble_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SpinCtrlDoubleFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSpinCtrlDouble_CLASSINFO()) }
     }
 }
 
 // wxSpinDoubleEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxSpinCtrlDouble.
-    /// - [`SpinDoubleEvent`] represents a C++ `wxSpinDoubleEvent` class instance which your code has ownership, [`SpinDoubleEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`SpinDoubleEvent`] represents a C++ `wxSpinDoubleEvent` class instance which your code has ownership, [`SpinDoubleEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SpinDoubleEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSpinDoubleEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_double_event.html) for more details.
     #[doc(alias = "wxSpinDoubleEvent")]
     #[doc(alias = "SpinDoubleEvent")]
     class SpinDoubleEvent
-        = SpinDoubleEventIsOwned<true>(wxSpinDoubleEvent) impl
+        = SpinDoubleEventFromCpp<false>(wxSpinDoubleEvent) impl
         SpinDoubleEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SpinDoubleEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SpinDoubleEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxSpinDoubleEvent()
     /// The copy constructor.
     ///
     /// See [C++ `wxSpinDoubleEvent::wxSpinDoubleEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_spin_double_event.html#a53a641a6232fe880ca13fad00d136b62).
-    pub fn new<S: SpinDoubleEventMethods>(event: &S) -> SpinDoubleEventIsOwned<OWNED> {
+    pub fn new<S: SpinDoubleEventMethods>(event: &S) -> SpinDoubleEventFromCpp<FROM_CPP> {
         unsafe {
             let event = event.as_ptr();
-            SpinDoubleEventIsOwned(ffi::wxSpinDoubleEvent_new1(event))
+            SpinDoubleEventFromCpp(ffi::wxSpinDoubleEvent_new1(event))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SpinDoubleEventIsOwned<false> {
+impl Clone for SpinDoubleEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
-    fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinDoubleEventFromCpp<FROM_CPP>> for NotifyEventFromCpp<FROM_CPP> {
+    fn from(o: SpinDoubleEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinDoubleEventFromCpp<FROM_CPP>>
+    for CommandEventFromCpp<FROM_CPP>
+{
+    fn from(o: SpinDoubleEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinDoubleEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: SpinDoubleEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinDoubleEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SpinDoubleEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinDoubleEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SpinDoubleEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SpinDoubleEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinDoubleEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SpinDoubleEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSpinDoubleEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SpinDoubleEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SpinDoubleEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1792,58 +1796,58 @@ impl<const OWNED: bool> Drop for SpinDoubleEventIsOwned<OWNED> {
 // wxSpinEvent
 wxwidgets! {
     /// This event class is used for the events generated by wxSpinButton and wxSpinCtrl.
-    /// - [`SpinEvent`] represents a C++ `wxSpinEvent` class instance which your code has ownership, [`SpinEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`SpinEvent`] represents a C++ `wxSpinEvent` class instance which your code has ownership, [`SpinEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SpinEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSpinEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_spin_event.html) for more details.
     #[doc(alias = "wxSpinEvent")]
     #[doc(alias = "SpinEvent")]
     class SpinEvent
-        = SpinEventIsOwned<true>(wxSpinEvent) impl
+        = SpinEventFromCpp<false>(wxSpinEvent) impl
         SpinEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SpinEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SpinEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxSpinEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SpinEventIsOwned<false> {
+impl Clone for SpinEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
-    fn from(o: SpinEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinEventFromCpp<FROM_CPP>> for NotifyEventFromCpp<FROM_CPP> {
+    fn from(o: SpinEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: SpinEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinEventFromCpp<FROM_CPP>> for CommandEventFromCpp<FROM_CPP> {
+    fn from(o: SpinEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: SpinEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: SpinEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SpinEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SpinEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SpinEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SpinEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SpinEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSpinEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SpinEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSpinEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SpinEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SpinEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -1852,13 +1856,13 @@ impl<const OWNED: bool> Drop for SpinEventIsOwned<OWNED> {
 // wxSplashScreen
 wxwidgets! {
     /// wxSplashScreen shows a window with a thin border, displaying a bitmap describing your application.
-    /// - [`SplashScreen`] represents a C++ `wxSplashScreen` class instance which your code has ownership, [`SplashScreenIsOwned`]`<false>` represents one which don't own.
+    /// - [`SplashScreen`] represents a C++ `wxSplashScreen` class instance which your code has ownership, [`SplashScreenFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SplashScreen`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSplashScreen` class's documentation](https://docs.wxwidgets.org/3.2/classwx_splash_screen.html) for more details.
     #[doc(alias = "wxSplashScreen")]
     #[doc(alias = "SplashScreen")]
     class SplashScreen
-        = SplashScreenIsOwned<true>(wxSplashScreen) impl
+        = SplashScreenFromCpp<false>(wxSplashScreen) impl
         SplashScreenMethods,
         FrameMethods,
         TopLevelWindowMethods,
@@ -1867,7 +1871,7 @@ wxwidgets! {
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SplashScreenIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SplashScreenFromCpp<FROM_CPP> {
     /// Construct the splash screen passing a bitmap, a style, a timeout, a window id, optional position and size, and a window style.
     ///
     /// See [C++ `wxSplashScreen::wxSplashScreen()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_splash_screen.html#a05a1d1af1dac400c659d41bd033d8566).
@@ -1880,7 +1884,7 @@ impl<const OWNED: bool> SplashScreenIsOwned<OWNED> {
         pos: &P,
         size: &S,
         style: c_long,
-    ) -> SplashScreenIsOwned<OWNED> {
+    ) -> SplashScreenFromCpp<FROM_CPP> {
         unsafe {
             let bitmap = bitmap.as_ptr();
             let parent = match parent {
@@ -1889,7 +1893,7 @@ impl<const OWNED: bool> SplashScreenIsOwned<OWNED> {
             };
             let pos = pos.as_ptr();
             let size = size.as_ptr();
-            SplashScreenIsOwned(ffi::wxSplashScreen_new(
+            SplashScreenFromCpp(ffi::wxSplashScreen_new(
                 bitmap,
                 splash_style,
                 milliseconds,
@@ -1905,102 +1909,102 @@ impl<const OWNED: bool> SplashScreenIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SplashScreenIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SplashScreenFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for FrameIsOwned<OWNED> {
-    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplashScreenFromCpp<FROM_CPP>> for FrameFromCpp<FROM_CPP> {
+    fn from(o: SplashScreenFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for TopLevelWindowIsOwned<OWNED> {
-    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplashScreenFromCpp<FROM_CPP>> for TopLevelWindowFromCpp<FROM_CPP> {
+    fn from(o: SplashScreenFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for NonOwnedWindowIsOwned<OWNED> {
-    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplashScreenFromCpp<FROM_CPP>> for NonOwnedWindowFromCpp<FROM_CPP> {
+    fn from(o: SplashScreenFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplashScreenFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SplashScreenFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplashScreenFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SplashScreenFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplashScreenIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SplashScreenIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplashScreenFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SplashScreenFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SplashScreenIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplashScreen_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SplashScreenFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSplashScreen_CLASSINFO()) }
     }
 }
 
 // wxSplitterEvent
 wxwidgets! {
     /// This class represents the events generated by a splitter control.
-    /// - [`SplitterEvent`] represents a C++ `wxSplitterEvent` class instance which your code has ownership, [`SplitterEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`SplitterEvent`] represents a C++ `wxSplitterEvent` class instance which your code has ownership, [`SplitterEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SplitterEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSplitterEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_event.html) for more details.
     #[doc(alias = "wxSplitterEvent")]
     #[doc(alias = "SplitterEvent")]
     class SplitterEvent
-        = SplitterEventIsOwned<true>(wxSplitterEvent) impl
+        = SplitterEventFromCpp<false>(wxSplitterEvent) impl
         SplitterEventMethods,
         NotifyEventMethods,
         CommandEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SplitterEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SplitterEventFromCpp<FROM_CPP> {
     // NOT_SUPPORTED: fn wxSplitterEvent()
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SplitterEventIsOwned<false> {
+impl Clone for SplitterEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for NotifyEventIsOwned<OWNED> {
-    fn from(o: SplitterEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplitterEventFromCpp<FROM_CPP>> for NotifyEventFromCpp<FROM_CPP> {
+    fn from(o: SplitterEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for CommandEventIsOwned<OWNED> {
-    fn from(o: SplitterEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplitterEventFromCpp<FROM_CPP>> for CommandEventFromCpp<FROM_CPP> {
+    fn from(o: SplitterEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: SplitterEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplitterEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: SplitterEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplitterEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SplitterEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplitterEventFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SplitterEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SplitterEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplitterEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SplitterEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSplitterEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SplitterEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SplitterEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2009,24 +2013,24 @@ impl<const OWNED: bool> Drop for SplitterEventIsOwned<OWNED> {
 // wxSplitterWindow
 wxwidgets! {
     /// This class manages up to two subwindows.
-    /// - [`SplitterWindow`] represents a C++ `wxSplitterWindow` class instance which your code has ownership, [`SplitterWindowIsOwned`]`<false>` represents one which don't own.
+    /// - [`SplitterWindow`] represents a C++ `wxSplitterWindow` class instance which your code has ownership, [`SplitterWindowFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SplitterWindow`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSplitterWindow` class's documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html) for more details.
     #[doc(alias = "wxSplitterWindow")]
     #[doc(alias = "SplitterWindow")]
     class SplitterWindow
-        = SplitterWindowIsOwned<true>(wxSplitterWindow) impl
+        = SplitterWindowFromCpp<false>(wxSplitterWindow) impl
         SplitterWindowMethods,
         // WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SplitterWindowIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SplitterWindowFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxSplitterWindow::wxSplitterWindow()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html#a311c33909f1164ccdf9a11f5be45ecdc).
-    pub fn new_2step() -> SplitterWindowIsOwned<OWNED> {
-        unsafe { SplitterWindowIsOwned(ffi::wxSplitterWindow_new()) }
+    pub fn new_2step() -> SplitterWindowFromCpp<FROM_CPP> {
+        unsafe { SplitterWindowFromCpp(ffi::wxSplitterWindow_new()) }
     }
     /// Constructor for creating the window.
     ///
@@ -2038,7 +2042,7 @@ impl<const OWNED: bool> SplitterWindowIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> SplitterWindowIsOwned<OWNED> {
+    ) -> SplitterWindowFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2048,7 +2052,7 @@ impl<const OWNED: bool> SplitterWindowIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            SplitterWindowIsOwned(ffi::wxSplitterWindow_new1(
+            SplitterWindowFromCpp(ffi::wxSplitterWindow_new1(
                 parent, id, pos, size, style, name,
             ))
         }
@@ -2057,32 +2061,32 @@ impl<const OWNED: bool> SplitterWindowIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for SplitterWindowIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for SplitterWindowFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SplitterWindowIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: SplitterWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplitterWindowFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: SplitterWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplitterWindowIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: SplitterWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplitterWindowFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: SplitterWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SplitterWindowIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SplitterWindowIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SplitterWindowFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: SplitterWindowFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SplitterWindowIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSplitterWindow_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SplitterWindowFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSplitterWindow_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
+impl<const FROM_CPP: bool> WindowMethods for SplitterWindowFromCpp<FROM_CPP> {
     /// Creation function, for two-step construction.
     ///
     /// See [C++ `wxSplitterWindow::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_splitter_window.html#a40bd4e468a9c71a837e8de40b4c983db).
@@ -2112,20 +2116,20 @@ impl<const OWNED: bool> WindowMethods for SplitterWindowIsOwned<OWNED> {
 // wxStaticBitmap
 wxwidgets! {
     /// A static bitmap control displays a bitmap.
-    /// - [`StaticBitmap`] represents a C++ `wxStaticBitmap` class instance which your code has ownership, [`StaticBitmapIsOwned`]`<false>` represents one which don't own.
+    /// - [`StaticBitmap`] represents a C++ `wxStaticBitmap` class instance which your code has ownership, [`StaticBitmapFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StaticBitmap`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStaticBitmap` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html) for more details.
     #[doc(alias = "wxStaticBitmap")]
     #[doc(alias = "StaticBitmap")]
     class StaticBitmap
-        = StaticBitmapIsOwned<true>(wxStaticBitmap) impl
+        = StaticBitmapFromCpp<false>(wxStaticBitmap) impl
         StaticBitmapMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StaticBitmapFromCpp<FROM_CPP> {
     //  ENUM: ScaleMode
     pub const Scale_None: c_int = 0;
     pub const Scale_Fill: c_int = 0 + 1;
@@ -2135,8 +2139,8 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxStaticBitmap::wxStaticBitmap()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_bitmap.html#a291d7a90496e62b907eae9e1b55bee9a).
-    pub fn new_2step() -> StaticBitmapIsOwned<OWNED> {
-        unsafe { StaticBitmapIsOwned(ffi::wxStaticBitmap_new()) }
+    pub fn new_2step() -> StaticBitmapFromCpp<FROM_CPP> {
+        unsafe { StaticBitmapFromCpp(ffi::wxStaticBitmap_new()) }
     }
     /// Constructor, creating and showing a static bitmap control.
     ///
@@ -2149,7 +2153,7 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> StaticBitmapIsOwned<OWNED> {
+    ) -> StaticBitmapFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2160,7 +2164,7 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            StaticBitmapIsOwned(ffi::wxStaticBitmap_new1(
+            StaticBitmapFromCpp(ffi::wxStaticBitmap_new1(
                 parent, id, label, pos, size, style, name,
             ))
         }
@@ -2169,59 +2173,59 @@ impl<const OWNED: bool> StaticBitmapIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for StaticBitmapIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for StaticBitmapFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBitmapFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: StaticBitmapFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBitmapFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: StaticBitmapFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBitmapFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: StaticBitmapFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticBitmapIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: StaticBitmapIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBitmapFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: StaticBitmapFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for StaticBitmapIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBitmap_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for StaticBitmapFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxStaticBitmap_CLASSINFO()) }
     }
 }
 
 // wxStaticBox
 wxwidgets! {
     /// A static box is a rectangle drawn around other windows to denote a logical grouping of items.
-    /// - [`StaticBox`] represents a C++ `wxStaticBox` class instance which your code has ownership, [`StaticBoxIsOwned`]`<false>` represents one which don't own.
+    /// - [`StaticBox`] represents a C++ `wxStaticBox` class instance which your code has ownership, [`StaticBoxFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StaticBox`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStaticBox` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_box.html) for more details.
     #[doc(alias = "wxStaticBox")]
     #[doc(alias = "StaticBox")]
     class StaticBox
-        = StaticBoxIsOwned<true>(wxStaticBox) impl
+        = StaticBoxFromCpp<false>(wxStaticBox) impl
         StaticBoxMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StaticBoxFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxStaticBox::wxStaticBox()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_box.html#aa96250d5fbd5864d041ef878def4e474).
-    pub fn new_2step() -> StaticBoxIsOwned<OWNED> {
-        unsafe { StaticBoxIsOwned(ffi::wxStaticBox_new()) }
+    pub fn new_2step() -> StaticBoxFromCpp<FROM_CPP> {
+        unsafe { StaticBoxFromCpp(ffi::wxStaticBox_new()) }
     }
     /// Constructor, creating and showing a static box.
     ///
@@ -2234,7 +2238,7 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> StaticBoxIsOwned<OWNED> {
+    ) -> StaticBoxFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2246,7 +2250,7 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            StaticBoxIsOwned(ffi::wxStaticBox_new1(
+            StaticBoxFromCpp(ffi::wxStaticBox_new1(
                 parent, id, label, pos, size, style, name,
             ))
         }
@@ -2256,66 +2260,66 @@ impl<const OWNED: bool> StaticBoxIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for StaticBoxIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for StaticBoxFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBoxFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: StaticBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBoxFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: StaticBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBoxFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: StaticBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticBoxIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: StaticBoxIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBoxFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: StaticBoxFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for StaticBoxIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBox_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for StaticBoxFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxStaticBox_CLASSINFO()) }
     }
 }
 
 // wxStaticBoxSizer
 wxwidgets! {
     /// wxStaticBoxSizer is a sizer derived from wxBoxSizer but adds a static box around the sizer.
-    /// - [`StaticBoxSizer`] represents a C++ `wxStaticBoxSizer` class instance which your code has ownership, [`StaticBoxSizerIsOwned`]`<false>` represents one which don't own.
+    /// - [`StaticBoxSizer`] represents a C++ `wxStaticBoxSizer` class instance which your code has ownership, [`StaticBoxSizerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StaticBoxSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStaticBoxSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html) for more details.
     #[doc(alias = "wxStaticBoxSizer")]
     #[doc(alias = "StaticBoxSizer")]
     class StaticBoxSizer
-        = StaticBoxSizerIsOwned<true>(wxStaticBoxSizer) impl
+        = StaticBoxSizerFromCpp<false>(wxStaticBoxSizer) impl
         StaticBoxSizerMethods,
         BoxSizerMethods,
         SizerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StaticBoxSizerFromCpp<FROM_CPP> {
     /// This constructor uses an already existing static box.
     ///
     /// See [C++ `wxStaticBoxSizer::wxStaticBoxSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_box_sizer.html#a8c2af376122e1093b95331ec1dd17ba5).
     pub fn new_with_staticbox<S: StaticBoxMethods>(
         box_: Option<&S>,
         orient: c_int,
-    ) -> StaticBoxSizerIsOwned<OWNED> {
+    ) -> StaticBoxSizerFromCpp<FROM_CPP> {
         unsafe {
             let box_ = match box_ {
                 Some(r) => r.as_ptr(),
                 None => ptr::null_mut(),
             };
-            StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new(box_, orient))
+            StaticBoxSizerFromCpp(ffi::wxStaticBoxSizer_new(box_, orient))
         }
     }
     /// This constructor creates a new static box with the given label and parent window.
@@ -2325,7 +2329,7 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
         orient: c_int,
         parent: Option<&W>,
         label: &str,
-    ) -> StaticBoxSizerIsOwned<OWNED> {
+    ) -> StaticBoxSizerFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2333,61 +2337,61 @@ impl<const OWNED: bool> StaticBoxSizerIsOwned<OWNED> {
             };
             let label = WxString::from(label);
             let label = label.as_ptr();
-            StaticBoxSizerIsOwned(ffi::wxStaticBoxSizer_new1(orient, parent, label))
+            StaticBoxSizerFromCpp(ffi::wxStaticBoxSizer_new1(orient, parent, label))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for StaticBoxSizerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for StaticBoxSizerFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<StaticBoxSizerIsOwned<OWNED>> for BoxSizerIsOwned<OWNED> {
-    fn from(o: StaticBoxSizerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBoxSizerFromCpp<FROM_CPP>> for BoxSizerFromCpp<FROM_CPP> {
+    fn from(o: StaticBoxSizerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticBoxSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
-    fn from(o: StaticBoxSizerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBoxSizerFromCpp<FROM_CPP>> for SizerFromCpp<FROM_CPP> {
+    fn from(o: StaticBoxSizerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticBoxSizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: StaticBoxSizerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticBoxSizerFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: StaticBoxSizerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for StaticBoxSizerIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticBoxSizer_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for StaticBoxSizerFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxStaticBoxSizer_CLASSINFO()) }
     }
 }
 
 // wxStaticLine
 wxwidgets! {
     /// A static line is just a line which may be used in a dialog to separate the groups of controls.
-    /// - [`StaticLine`] represents a C++ `wxStaticLine` class instance which your code has ownership, [`StaticLineIsOwned`]`<false>` represents one which don't own.
+    /// - [`StaticLine`] represents a C++ `wxStaticLine` class instance which your code has ownership, [`StaticLineFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StaticLine`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStaticLine` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_line.html) for more details.
     #[doc(alias = "wxStaticLine")]
     #[doc(alias = "StaticLine")]
     class StaticLine
-        = StaticLineIsOwned<true>(wxStaticLine) impl
+        = StaticLineFromCpp<false>(wxStaticLine) impl
         StaticLineMethods,
         ControlMethods,
         // WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> StaticLineIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StaticLineFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxStaticLine::wxStaticLine()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_line.html#a0b3436879b2193445a34bad6e2fc5086).
-    pub fn new_2step() -> StaticLineIsOwned<OWNED> {
-        unsafe { StaticLineIsOwned(ffi::wxStaticLine_new()) }
+    pub fn new_2step() -> StaticLineFromCpp<FROM_CPP> {
+        unsafe { StaticLineFromCpp(ffi::wxStaticLine_new()) }
     }
     /// Constructor, creating and showing a static line.
     ///
@@ -2399,7 +2403,7 @@ impl<const OWNED: bool> StaticLineIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> StaticLineIsOwned<OWNED> {
+    ) -> StaticLineFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2409,44 +2413,44 @@ impl<const OWNED: bool> StaticLineIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            StaticLineIsOwned(ffi::wxStaticLine_new1(parent, id, pos, size, style, name))
+            StaticLineFromCpp(ffi::wxStaticLine_new1(parent, id, pos, size, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for StaticLineIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for StaticLineFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: StaticLineIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticLineFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: StaticLineFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: StaticLineIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticLineFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: StaticLineFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: StaticLineIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticLineFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: StaticLineFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticLineIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: StaticLineIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticLineFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: StaticLineFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for StaticLineIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticLine_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for StaticLineFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxStaticLine_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
+impl<const FROM_CPP: bool> WindowMethods for StaticLineFromCpp<FROM_CPP> {
     /// Creates the static line for two-step construction.
     ///
     /// See [C++ `wxStaticLine::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_line.html#ac2e6c54b896563e2ff87da22a4361161).
@@ -2476,25 +2480,25 @@ impl<const OWNED: bool> WindowMethods for StaticLineIsOwned<OWNED> {
 // wxStaticText
 wxwidgets! {
     /// A static text control displays one or more lines of read-only text.
-    /// - [`StaticText`] represents a C++ `wxStaticText` class instance which your code has ownership, [`StaticTextIsOwned`]`<false>` represents one which don't own.
+    /// - [`StaticText`] represents a C++ `wxStaticText` class instance which your code has ownership, [`StaticTextFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StaticText`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStaticText` class's documentation](https://docs.wxwidgets.org/3.2/classwx_static_text.html) for more details.
     #[doc(alias = "wxStaticText")]
     #[doc(alias = "StaticText")]
     class StaticText
-        = StaticTextIsOwned<true>(wxStaticText) impl
+        = StaticTextFromCpp<false>(wxStaticText) impl
         StaticTextMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StaticTextFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxStaticText::wxStaticText()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_static_text.html#a9291a72fe2317f4a9e30c6eb7d02e014).
-    pub fn new_2step() -> StaticTextIsOwned<OWNED> {
-        unsafe { StaticTextIsOwned(ffi::wxStaticText_new()) }
+    pub fn new_2step() -> StaticTextFromCpp<FROM_CPP> {
+        unsafe { StaticTextFromCpp(ffi::wxStaticText_new()) }
     }
     /// Constructor, creating and showing a text control.
     ///
@@ -2507,7 +2511,7 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
         size: &S,
         style: c_long,
         name: &str,
-    ) -> StaticTextIsOwned<OWNED> {
+    ) -> StaticTextFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2519,7 +2523,7 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
             let size = size.as_ptr();
             let name = WxString::from(name);
             let name = name.as_ptr();
-            StaticTextIsOwned(ffi::wxStaticText_new1(
+            StaticTextFromCpp(ffi::wxStaticText_new1(
                 parent, id, label, pos, size, style, name,
             ))
         }
@@ -2528,59 +2532,59 @@ impl<const OWNED: bool> StaticTextIsOwned<OWNED> {
         None
     }
 }
-impl<const OWNED: bool> Clone for StaticTextIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for StaticTextFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: StaticTextIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticTextFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: StaticTextFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: StaticTextIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticTextFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: StaticTextFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: StaticTextIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticTextFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: StaticTextFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StaticTextIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: StaticTextIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StaticTextFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: StaticTextFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for StaticTextIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStaticText_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for StaticTextFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxStaticText_CLASSINFO()) }
     }
 }
 
 // wxStatusBar
 wxwidgets! {
     /// A status bar is a narrow window that can be placed along the bottom of a frame to give small amounts of status information.
-    /// - [`StatusBar`] represents a C++ `wxStatusBar` class instance which your code has ownership, [`StatusBarIsOwned`]`<false>` represents one which don't own.
+    /// - [`StatusBar`] represents a C++ `wxStatusBar` class instance which your code has ownership, [`StatusBarFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StatusBar`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStatusBar` class's documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar.html) for more details.
     #[doc(alias = "wxStatusBar")]
     #[doc(alias = "StatusBar")]
     class StatusBar
-        = StatusBarIsOwned<true>(wxStatusBar) impl
+        = StatusBarFromCpp<false>(wxStatusBar) impl
         StatusBarMethods,
         ControlMethods,
         WindowMethods,
         EvtHandlerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> StatusBarIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StatusBarFromCpp<FROM_CPP> {
     /// Default ctor.
     ///
     /// See [C++ `wxStatusBar::wxStatusBar()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar.html#a0518ffafb51b3e050df1a0477cd9e0c8).
-    pub fn new_2step() -> StatusBarIsOwned<OWNED> {
-        unsafe { StatusBarIsOwned(ffi::wxStatusBar_new()) }
+    pub fn new_2step() -> StatusBarFromCpp<FROM_CPP> {
+        unsafe { StatusBarFromCpp(ffi::wxStatusBar_new()) }
     }
     /// Constructor, creating the window.
     ///
@@ -2590,7 +2594,7 @@ impl<const OWNED: bool> StatusBarIsOwned<OWNED> {
         id: c_int,
         style: c_long,
         name: &str,
-    ) -> StatusBarIsOwned<OWNED> {
+    ) -> StatusBarFromCpp<FROM_CPP> {
         unsafe {
             let parent = match parent {
                 Some(r) => r.as_ptr(),
@@ -2598,75 +2602,75 @@ impl<const OWNED: bool> StatusBarIsOwned<OWNED> {
             };
             let name = WxString::from(name);
             let name = name.as_ptr();
-            StatusBarIsOwned(ffi::wxStatusBar_new1(parent, id, style, name))
+            StatusBarFromCpp(ffi::wxStatusBar_new1(parent, id, style, name))
         }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for StatusBarIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for StatusBarFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for ControlIsOwned<OWNED> {
-    fn from(o: StatusBarIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StatusBarFromCpp<FROM_CPP>> for ControlFromCpp<FROM_CPP> {
+    fn from(o: StatusBarFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for WindowIsOwned<OWNED> {
-    fn from(o: StatusBarIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StatusBarFromCpp<FROM_CPP>> for WindowFromCpp<FROM_CPP> {
+    fn from(o: StatusBarFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for EvtHandlerIsOwned<OWNED> {
-    fn from(o: StatusBarIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StatusBarFromCpp<FROM_CPP>> for EvtHandlerFromCpp<FROM_CPP> {
+    fn from(o: StatusBarFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StatusBarIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: StatusBarIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StatusBarFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: StatusBarFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for StatusBarIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStatusBar_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for StatusBarFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxStatusBar_CLASSINFO()) }
     }
 }
 
 // wxStatusBarPane
 wxwidgets! {
     /// A status bar pane data container used by wxStatusBar.
-    /// - [`StatusBarPane`] represents a C++ `wxStatusBarPane` class instance which your code has ownership, [`StatusBarPaneIsOwned`]`<false>` represents one which don't own.
+    /// - [`StatusBarPane`] represents a C++ `wxStatusBarPane` class instance which your code has ownership, [`StatusBarPaneFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StatusBarPane`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStatusBarPane` class's documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar_pane.html) for more details.
     #[doc(alias = "wxStatusBarPane")]
     #[doc(alias = "StatusBarPane")]
     class StatusBarPane
-        = StatusBarPaneIsOwned<true>(wxStatusBarPane) impl
+        = StatusBarPaneFromCpp<false>(wxStatusBarPane) impl
         StatusBarPaneMethods
 }
-impl<const OWNED: bool> StatusBarPaneIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StatusBarPaneFromCpp<FROM_CPP> {
     /// Constructs the pane with the given style and width.
     ///
     /// See [C++ `wxStatusBarPane::wxStatusBarPane()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_status_bar_pane.html#a09de0e3d124479f91b27048845ef6761).
-    pub fn new(style: c_int, width: c_int) -> StatusBarPaneIsOwned<OWNED> {
-        unsafe { StatusBarPaneIsOwned(ffi::wxStatusBarPane_new(style, width)) }
+    pub fn new(style: c_int, width: c_int) -> StatusBarPaneFromCpp<FROM_CPP> {
+        unsafe { StatusBarPaneFromCpp(ffi::wxStatusBarPane_new(style, width)) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for StatusBarPaneIsOwned<false> {
+impl Clone for StatusBarPaneFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for StatusBarPaneIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for StatusBarPaneFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxStatusBarPane_delete(self.0) }
         }
     }
@@ -2675,69 +2679,71 @@ impl<const OWNED: bool> Drop for StatusBarPaneIsOwned<OWNED> {
 // wxStdDialogButtonSizer
 wxwidgets! {
     /// This class creates button layouts which conform to the standard button spacing and ordering defined by the platform or toolkit's user interface guidelines (if such things exist).
-    /// - [`StdDialogButtonSizer`] represents a C++ `wxStdDialogButtonSizer` class instance which your code has ownership, [`StdDialogButtonSizerIsOwned`]`<false>` represents one which don't own.
+    /// - [`StdDialogButtonSizer`] represents a C++ `wxStdDialogButtonSizer` class instance which your code has ownership, [`StdDialogButtonSizerFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StdDialogButtonSizer`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStdDialogButtonSizer` class's documentation](https://docs.wxwidgets.org/3.2/classwx_std_dialog_button_sizer.html) for more details.
     #[doc(alias = "wxStdDialogButtonSizer")]
     #[doc(alias = "StdDialogButtonSizer")]
     class StdDialogButtonSizer
-        = StdDialogButtonSizerIsOwned<true>(wxStdDialogButtonSizer) impl
+        = StdDialogButtonSizerFromCpp<false>(wxStdDialogButtonSizer) impl
         StdDialogButtonSizerMethods,
         BoxSizerMethods,
         SizerMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> StdDialogButtonSizerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StdDialogButtonSizerFromCpp<FROM_CPP> {
     /// Constructor for a wxStdDialogButtonSizer.
     ///
     /// See [C++ `wxStdDialogButtonSizer::wxStdDialogButtonSizer()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_std_dialog_button_sizer.html#a468d2d4e9882c13caad28e06b2ddb873).
-    pub fn new() -> StdDialogButtonSizerIsOwned<OWNED> {
-        unsafe { StdDialogButtonSizerIsOwned(ffi::wxStdDialogButtonSizer_new()) }
+    pub fn new() -> StdDialogButtonSizerFromCpp<FROM_CPP> {
+        unsafe { StdDialogButtonSizerFromCpp(ffi::wxStdDialogButtonSizer_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl<const OWNED: bool> Clone for StdDialogButtonSizerIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Clone for StdDialogButtonSizerFromCpp<FROM_CPP> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<StdDialogButtonSizerIsOwned<OWNED>> for BoxSizerIsOwned<OWNED> {
-    fn from(o: StdDialogButtonSizerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StdDialogButtonSizerFromCpp<FROM_CPP>>
+    for BoxSizerFromCpp<FROM_CPP>
+{
+    fn from(o: StdDialogButtonSizerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StdDialogButtonSizerIsOwned<OWNED>> for SizerIsOwned<OWNED> {
-    fn from(o: StdDialogButtonSizerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StdDialogButtonSizerFromCpp<FROM_CPP>> for SizerFromCpp<FROM_CPP> {
+    fn from(o: StdDialogButtonSizerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<StdDialogButtonSizerIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: StdDialogButtonSizerIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StdDialogButtonSizerFromCpp<FROM_CPP>> for ObjectFromCpp<FROM_CPP> {
+    fn from(o: StdDialogButtonSizerFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for StdDialogButtonSizerIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxStdDialogButtonSizer_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for StdDialogButtonSizerFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxStdDialogButtonSizer_CLASSINFO()) }
     }
 }
 
 // wxStockPreferencesPage
 wxwidgets! {
     /// Specialization of wxPreferencesPage useful for certain commonly used preferences page.
-    /// - [`StockPreferencesPage`] represents a C++ `wxStockPreferencesPage` class instance which your code has ownership, [`StockPreferencesPageIsOwned`]`<false>` represents one which don't own.
+    /// - [`StockPreferencesPage`] represents a C++ `wxStockPreferencesPage` class instance which your code has ownership, [`StockPreferencesPageFromCpp`]`<true>` represents one which don't own.
     /// - Use [`StockPreferencesPage`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxStockPreferencesPage` class's documentation](https://docs.wxwidgets.org/3.2/classwx_stock_preferences_page.html) for more details.
     #[doc(alias = "wxStockPreferencesPage")]
     #[doc(alias = "StockPreferencesPage")]
     class StockPreferencesPage
-        = StockPreferencesPageIsOwned<true>(wxStockPreferencesPage) impl
+        = StockPreferencesPageFromCpp<false>(wxStockPreferencesPage) impl
         StockPreferencesPageMethods,
         PreferencesPageMethods
 }
-impl<const OWNED: bool> StockPreferencesPageIsOwned<OWNED> {
+impl<const FROM_CPP: bool> StockPreferencesPageFromCpp<FROM_CPP> {
     //  ENUM: Kind
     pub const Kind_General: c_int = 0;
     pub const Kind_Advanced: c_int = 0 + 1;
@@ -2747,19 +2753,21 @@ impl<const OWNED: bool> StockPreferencesPageIsOwned<OWNED> {
         None
     }
 }
-impl Clone for StockPreferencesPageIsOwned<false> {
+impl Clone for StockPreferencesPageFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<StockPreferencesPageIsOwned<OWNED>> for PreferencesPageIsOwned<OWNED> {
-    fn from(o: StockPreferencesPageIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<StockPreferencesPageFromCpp<FROM_CPP>>
+    for PreferencesPageFromCpp<FROM_CPP>
+{
+    fn from(o: StockPreferencesPageFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> Drop for StockPreferencesPageIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for StockPreferencesPageFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxStockPreferencesPage_delete(self.0) }
         }
     }
@@ -2768,51 +2776,53 @@ impl<const OWNED: bool> Drop for StockPreferencesPageIsOwned<OWNED> {
 // wxSysColourChangedEvent
 wxwidgets! {
     /// This class is used for system colour change events, which are generated when the user changes the colour settings or when the system theme changes (e.g.
-    /// - [`SysColourChangedEvent`] represents a C++ `wxSysColourChangedEvent` class instance which your code has ownership, [`SysColourChangedEventIsOwned`]`<false>` represents one which don't own.
+    /// - [`SysColourChangedEvent`] represents a C++ `wxSysColourChangedEvent` class instance which your code has ownership, [`SysColourChangedEventFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SysColourChangedEvent`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSysColourChangedEvent` class's documentation](https://docs.wxwidgets.org/3.2/classwx_sys_colour_changed_event.html) for more details.
     #[doc(alias = "wxSysColourChangedEvent")]
     #[doc(alias = "SysColourChangedEvent")]
     class SysColourChangedEvent
-        = SysColourChangedEventIsOwned<true>(wxSysColourChangedEvent) impl
+        = SysColourChangedEventFromCpp<false>(wxSysColourChangedEvent) impl
         SysColourChangedEventMethods,
         EventMethods,
         ObjectMethods
 }
-impl<const OWNED: bool> SysColourChangedEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SysColourChangedEventFromCpp<FROM_CPP> {
     /// Constructor.
     ///
     /// See [C++ `wxSysColourChangedEvent::wxSysColourChangedEvent()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_sys_colour_changed_event.html#a55442699b065591bccb95d0d73868a57).
-    pub fn new() -> SysColourChangedEventIsOwned<OWNED> {
-        unsafe { SysColourChangedEventIsOwned(ffi::wxSysColourChangedEvent_new()) }
+    pub fn new() -> SysColourChangedEventFromCpp<FROM_CPP> {
+        unsafe { SysColourChangedEventFromCpp(ffi::wxSysColourChangedEvent_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SysColourChangedEventIsOwned<false> {
+impl Clone for SysColourChangedEventFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> From<SysColourChangedEventIsOwned<OWNED>> for EventIsOwned<OWNED> {
-    fn from(o: SysColourChangedEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SysColourChangedEventFromCpp<FROM_CPP>> for EventFromCpp<FROM_CPP> {
+    fn from(o: SysColourChangedEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> From<SysColourChangedEventIsOwned<OWNED>> for ObjectIsOwned<OWNED> {
-    fn from(o: SysColourChangedEventIsOwned<OWNED>) -> Self {
+impl<const FROM_CPP: bool> From<SysColourChangedEventFromCpp<FROM_CPP>>
+    for ObjectFromCpp<FROM_CPP>
+{
+    fn from(o: SysColourChangedEventFromCpp<FROM_CPP>) -> Self {
         unsafe { Self::from_ptr(o.as_ptr()) }
     }
 }
-impl<const OWNED: bool> DynamicCast for SysColourChangedEventIsOwned<OWNED> {
-    fn class_info() -> ClassInfoIsOwned<false> {
-        unsafe { ClassInfoIsOwned::from_ptr(ffi::wxSysColourChangedEvent_CLASSINFO()) }
+impl<const FROM_CPP: bool> DynamicCast for SysColourChangedEventFromCpp<FROM_CPP> {
+    fn class_info() -> ClassInfoFromCpp<true> {
+        unsafe { ClassInfoFromCpp::from_ptr(ffi::wxSysColourChangedEvent_CLASSINFO()) }
     }
 }
-impl<const OWNED: bool> Drop for SysColourChangedEventIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SysColourChangedEventFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxObject_delete(self.0) }
         }
     }
@@ -2821,34 +2831,34 @@ impl<const OWNED: bool> Drop for SysColourChangedEventIsOwned<OWNED> {
 // wxSystemSettings
 wxwidgets! {
     /// wxSystemSettings allows the application to ask for details about the system.
-    /// - [`SystemSettings`] represents a C++ `wxSystemSettings` class instance which your code has ownership, [`SystemSettingsIsOwned`]`<false>` represents one which don't own.
+    /// - [`SystemSettings`] represents a C++ `wxSystemSettings` class instance which your code has ownership, [`SystemSettingsFromCpp`]`<true>` represents one which don't own.
     /// - Use [`SystemSettings`]'s `new()` or [`Buildable::builder()`] (if available) to create an instance of this class.
     /// - See [C++ `wxSystemSettings` class's documentation](https://docs.wxwidgets.org/3.2/classwx_system_settings.html) for more details.
     #[doc(alias = "wxSystemSettings")]
     #[doc(alias = "SystemSettings")]
     class SystemSettings
-        = SystemSettingsIsOwned<true>(wxSystemSettings) impl
+        = SystemSettingsFromCpp<false>(wxSystemSettings) impl
         SystemSettingsMethods
 }
-impl<const OWNED: bool> SystemSettingsIsOwned<OWNED> {
+impl<const FROM_CPP: bool> SystemSettingsFromCpp<FROM_CPP> {
     /// Default constructor.
     ///
     /// See [C++ `wxSystemSettings::wxSystemSettings()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_system_settings.html#a34c3d6ded6a697164682dbfb96481318).
-    pub fn new() -> SystemSettingsIsOwned<OWNED> {
-        unsafe { SystemSettingsIsOwned(ffi::wxSystemSettings_new()) }
+    pub fn new() -> SystemSettingsFromCpp<FROM_CPP> {
+        unsafe { SystemSettingsFromCpp(ffi::wxSystemSettings_new()) }
     }
     pub fn none() -> Option<&'static Self> {
         None
     }
 }
-impl Clone for SystemSettingsIsOwned<false> {
+impl Clone for SystemSettingsFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for SystemSettingsIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for SystemSettingsFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxSystemSettings_delete(self.0) }
         }
     }

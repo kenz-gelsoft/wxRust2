@@ -3,16 +3,16 @@ use super::*;
 // wxDateTime
 wxwidgets! {
     /// wxDateTime class represents an absolute moment in time.
-    /// - [`DateTime`] represents a C++ `wxDateTime` class instance which your code has ownership, [`DateTimeIsOwned`]`<false>` represents one which don't own.
+    /// - [`DateTime`] represents a C++ `wxDateTime` class instance which your code has ownership, [`DateTimeFromCpp`]`<true>` represents one which don't own.
     /// - Use [`DateTime`]'s `new()` to create an instance of this class.
     /// - See [C++ `wxDateTime` class's documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html) for more details.
     #[doc(alias = "wxDateTime")]
     #[doc(alias = "DateTime")]
     class DateTime
-        = DateTimeIsOwned<true>(wxDateTime) impl
+        = DateTimeFromCpp<false>(wxDateTime) impl
         DateTimeMethods
 }
-impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
+impl<const FROM_CPP: bool> DateTimeFromCpp<FROM_CPP> {
     //  ENUM: TZ
     pub const Local: c_int = 0;
     pub const GMT_12: c_int = 0 + 1;
@@ -126,16 +126,16 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     /// Default constructor.
     ///
     /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#a4cc372429453a21632d64f34f635d853).
-    pub fn new() -> DateTimeIsOwned<OWNED> {
-        unsafe { DateTimeIsOwned(ffi::wxDateTime_new()) }
+    pub fn new() -> DateTimeFromCpp<FROM_CPP> {
+        unsafe { DateTimeFromCpp(ffi::wxDateTime_new()) }
     }
     /// Copy constructor.
     ///
     /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#aca2bc3b942d920e01e496841bd759001).
-    pub fn new_with_datetime<D: DateTimeMethods>(date: &D) -> DateTimeIsOwned<OWNED> {
+    pub fn new_with_datetime<D: DateTimeMethods>(date: &D) -> DateTimeFromCpp<FROM_CPP> {
         unsafe {
             let date = date.as_ptr();
-            DateTimeIsOwned(ffi::wxDateTime_new1(date))
+            DateTimeFromCpp(ffi::wxDateTime_new1(date))
         }
     }
     // NOT_SUPPORTED: fn wxDateTime2()
@@ -143,8 +143,8 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
     /// Same as Set().
     ///
     /// See [C++ `wxDateTime::wxDateTime()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_date_time.html#aa2c38922eafec2a94fb5ee9221c0f6b9).
-    pub fn new_with_double(jdn: c_double) -> DateTimeIsOwned<OWNED> {
-        unsafe { DateTimeIsOwned(ffi::wxDateTime_new4(jdn)) }
+    pub fn new_with_double(jdn: c_double) -> DateTimeFromCpp<FROM_CPP> {
+        unsafe { DateTimeFromCpp(ffi::wxDateTime_new4(jdn)) }
     }
     // NOT_SUPPORTED: fn wxDateTime5()
     // NOT_SUPPORTED: fn wxDateTime6()
@@ -153,14 +153,14 @@ impl<const OWNED: bool> DateTimeIsOwned<OWNED> {
         None
     }
 }
-impl Clone for DateTimeIsOwned<false> {
+impl Clone for DateTimeFromCpp<true> {
     fn clone(&self) -> Self {
         Self(self.0)
     }
 }
-impl<const OWNED: bool> Drop for DateTimeIsOwned<OWNED> {
+impl<const FROM_CPP: bool> Drop for DateTimeFromCpp<FROM_CPP> {
     fn drop(&mut self) {
-        if OWNED {
+        if !FROM_CPP {
             unsafe { ffi::wxDateTime_delete(self.0) }
         }
     }

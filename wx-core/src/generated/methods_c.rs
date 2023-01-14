@@ -3,7 +3,7 @@ use super::*;
 // wxCalculateLayoutEvent
 /// This trait represents [C++ `wxCalculateLayoutEvent` class](https://docs.wxwidgets.org/3.2/classwx_calculate_layout_event.html)'s methods and inheritance.
 ///
-/// See [`CalculateLayoutEventIsOwned`] documentation for the class usage.
+/// See [`CalculateLayoutEventFromCpp`] documentation for the class usage.
 pub trait CalculateLayoutEventMethods: EventMethods {
     /// Returns the flags associated with this event.
     ///
@@ -37,7 +37,7 @@ pub trait CalculateLayoutEventMethods: EventMethods {
 // wxCalendarCtrl
 /// This trait represents [C++ `wxCalendarCtrl` class](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html)'s methods and inheritance.
 ///
-/// See [`CalendarCtrlIsOwned`] documentation for the class usage.
+/// See [`CalendarCtrlFromCpp`] documentation for the class usage.
 pub trait CalendarCtrlMethods: ControlMethods {
     /// Restrict the dates that can be selected in the control to the specified range.
     ///
@@ -116,7 +116,7 @@ pub trait CalendarCtrlMethods: ControlMethods {
     /// Returns the attribute for the given date (should be in the range 1...31).
     ///
     /// See [C++ `wxCalendarCtrl::GetAttr()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#afa23290a3f6bbec4496578801e72c159).
-    fn get_attr(&self, day: usize) -> Option<CalendarDateAttrIsOwned<false>> {
+    fn get_attr(&self, day: usize) -> Option<CalendarDateAttrFromCpp<true>> {
         unsafe { CalendarDateAttr::option_from(ffi::wxCalendarCtrl_GetAttr(self.as_ptr(), day)) }
     }
     /// Gets the currently selected date.
@@ -128,38 +128,38 @@ pub trait CalendarCtrlMethods: ControlMethods {
     /// Gets the background colour of the header part of the calendar window.
     ///
     /// See [C++ `wxCalendarCtrl::GetHeaderColourBg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a3db6a6be0d2cec679acabd7e095779e1).
-    fn get_header_colour_bg(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourBg(self.as_ptr())) }
+    fn get_header_colour_bg(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourBg(self.as_ptr())) }
     }
     /// Gets the foreground colour of the header part of the calendar window.
     ///
     /// See [C++ `wxCalendarCtrl::GetHeaderColourFg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ace569b6138e8c37516f214b5492bfb03).
-    fn get_header_colour_fg(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourFg(self.as_ptr())) }
+    fn get_header_colour_fg(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHeaderColourFg(self.as_ptr())) }
     }
     /// Gets the background highlight colour.
     ///
     /// See [C++ `wxCalendarCtrl::GetHighlightColourBg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a59a2dd56e4ffd96e1b9279cf965cf8af).
-    fn get_highlight_colour_bg(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourBg(self.as_ptr())) }
+    fn get_highlight_colour_bg(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourBg(self.as_ptr())) }
     }
     /// Gets the foreground highlight colour.
     ///
     /// See [C++ `wxCalendarCtrl::GetHighlightColourFg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#ad69b653c2bc19eb17b95ad4e1bb8cdd2).
-    fn get_highlight_colour_fg(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourFg(self.as_ptr())) }
+    fn get_highlight_colour_fg(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHighlightColourFg(self.as_ptr())) }
     }
     /// Return the background colour currently used for holiday highlighting.
     ///
     /// See [C++ `wxCalendarCtrl::GetHolidayColourBg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a5bfcd8b7c80b83693aec3a5584c18faa).
-    fn get_holiday_colour_bg(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourBg(self.as_ptr())) }
+    fn get_holiday_colour_bg(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourBg(self.as_ptr())) }
     }
     /// Return the foreground colour currently used for holiday highlighting.
     ///
     /// See [C++ `wxCalendarCtrl::GetHolidayColourFg()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_ctrl.html#a24bb3a3f41f6a4e0059ea5a1cccb6eb8).
-    fn get_holiday_colour_fg(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourFg(self.as_ptr())) }
+    fn get_holiday_colour_fg(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarCtrl_GetHolidayColourFg(self.as_ptr())) }
     }
     // NOT_SUPPORTED: fn HitTest()
     /// Clears any attributes associated with the given day (in the range 1...31).
@@ -236,34 +236,34 @@ pub trait CalendarCtrlMethods: ControlMethods {
 // wxCalendarDateAttr
 /// This trait represents [C++ `wxCalendarDateAttr` class](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html)'s methods and inheritance.
 ///
-/// See [`CalendarDateAttrIsOwned`] documentation for the class usage.
+/// See [`CalendarDateAttrFromCpp`] documentation for the class usage.
 pub trait CalendarDateAttrMethods: WxRustMethods {
     /// Returns the background colour set for the calendar date.
     ///
     /// See [C++ `wxCalendarDateAttr::GetBackgroundColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a2d01d011d63f439566338654aa94e6b7).
-    fn get_background_colour(&self) -> ColourIsOwned<false> {
+    fn get_background_colour(&self) -> ColourFromCpp<true> {
         unsafe {
-            ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetBackgroundColour(self.as_ptr()))
+            ColourFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetBackgroundColour(self.as_ptr()))
         }
     }
     // NOT_SUPPORTED: fn GetBorder()
     /// Returns the border colour set for the calendar date.
     ///
     /// See [C++ `wxCalendarDateAttr::GetBorderColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a5a6dc761f338621ef9aab76d35fbb941).
-    fn get_border_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetBorderColour(self.as_ptr())) }
+    fn get_border_colour(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetBorderColour(self.as_ptr())) }
     }
     /// Returns the font set for the calendar date.
     ///
     /// See [C++ `wxCalendarDateAttr::GetFont()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#aae0094a81cf4d134b866532bdaa48e66).
-    fn get_font(&self) -> FontIsOwned<false> {
-        unsafe { FontIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetFont(self.as_ptr())) }
+    fn get_font(&self) -> FontFromCpp<true> {
+        unsafe { FontFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetFont(self.as_ptr())) }
     }
     /// Returns the text colour set for the calendar date.
     ///
     /// See [C++ `wxCalendarDateAttr::GetTextColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a60a1c912c70d11e17fe79cb29a424477).
-    fn get_text_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetTextColour(self.as_ptr())) }
+    fn get_text_colour(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetTextColour(self.as_ptr())) }
     }
     /// Returns true if a non-default text background colour is set.
     ///
@@ -347,8 +347,8 @@ pub trait CalendarDateAttrMethods: WxRustMethods {
     /// Used (internally) by the generic wxCalendarCtrl::Mark().
     ///
     /// See [C++ `wxCalendarDateAttr::GetMark()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_calendar_date_attr.html#a49e21270d2613902f656c36113f516fd).
-    fn get_mark() -> CalendarDateAttrIsOwned<false> {
-        unsafe { CalendarDateAttrIsOwned::from_ptr(ffi::wxCalendarDateAttr_GetMark()) }
+    fn get_mark() -> CalendarDateAttrFromCpp<true> {
+        unsafe { CalendarDateAttrFromCpp::from_ptr(ffi::wxCalendarDateAttr_GetMark()) }
     }
     /// Set the attributes that will be used to Mark() days on the generic wxCalendarCtrl.
     ///
@@ -364,7 +364,7 @@ pub trait CalendarDateAttrMethods: WxRustMethods {
 // wxCalendarEvent
 /// This trait represents [C++ `wxCalendarEvent` class](https://docs.wxwidgets.org/3.2/classwx_calendar_event.html)'s methods and inheritance.
 ///
-/// See [`CalendarEventIsOwned`] documentation for the class usage.
+/// See [`CalendarEventFromCpp`] documentation for the class usage.
 pub trait CalendarEventMethods: DateEventMethods {
     // NOT_SUPPORTED: fn GetWeekDay()
     // NOT_SUPPORTED: fn SetWeekDay()
@@ -373,7 +373,7 @@ pub trait CalendarEventMethods: DateEventMethods {
 // wxCaret
 /// This trait represents [C++ `wxCaret` class](https://docs.wxwidgets.org/3.2/classwx_caret.html)'s methods and inheritance.
 ///
-/// See [`CaretIsOwned`] documentation for the class usage.
+/// See [`CaretFromCpp`] documentation for the class usage.
 pub trait CaretMethods: WxRustMethods {
     /// Creates a caret with the given size (in pixels) and associates it with the window (same as the equivalent constructors).
     ///
@@ -501,7 +501,7 @@ pub trait CaretMethods: WxRustMethods {
 // wxCheckBox
 /// This trait represents [C++ `wxCheckBox` class](https://docs.wxwidgets.org/3.2/classwx_check_box.html)'s methods and inheritance.
 ///
-/// See [`CheckBoxIsOwned`] documentation for the class usage.
+/// See [`CheckBoxFromCpp`] documentation for the class usage.
 pub trait CheckBoxMethods: ControlMethods {
     // DTOR: fn ~wxCheckBox()
     /// Creates the checkbox for two-step construction.
@@ -590,7 +590,7 @@ pub trait CheckBoxMethods: ControlMethods {
 // wxCheckListBox
 /// This trait represents [C++ `wxCheckListBox` class](https://docs.wxwidgets.org/3.2/classwx_check_list_box.html)'s methods and inheritance.
 ///
-/// See [`CheckListBoxIsOwned`] documentation for the class usage.
+/// See [`CheckListBoxFromCpp`] documentation for the class usage.
 pub trait CheckListBoxMethods: ListBoxMethods {
     // DTOR: fn ~wxCheckListBox()
     /// Checks the given item.
@@ -619,7 +619,7 @@ pub trait CheckListBoxMethods: ListBoxMethods {
 // wxChildFocusEvent
 /// This trait represents [C++ `wxChildFocusEvent` class](https://docs.wxwidgets.org/3.2/classwx_child_focus_event.html)'s methods and inheritance.
 ///
-/// See [`ChildFocusEventIsOwned`] documentation for the class usage.
+/// See [`ChildFocusEventFromCpp`] documentation for the class usage.
 pub trait ChildFocusEventMethods: CommandEventMethods {
     /// Returns the direct child which receives the focus, or a (grand-)parent of the control receiving the focus.
     ///
@@ -632,7 +632,7 @@ pub trait ChildFocusEventMethods: CommandEventMethods {
 // wxChoice
 /// This trait represents [C++ `wxChoice` class](https://docs.wxwidgets.org/3.2/classwx_choice.html)'s methods and inheritance.
 ///
-/// See [`ChoiceIsOwned`] documentation for the class usage.
+/// See [`ChoiceFromCpp`] documentation for the class usage.
 pub trait ChoiceMethods: ControlMethods {
     // DTOR: fn ~wxChoice()
     // NOT_SUPPORTED: fn Create()
@@ -707,7 +707,7 @@ pub trait ChoiceMethods: ControlMethods {
 // wxChoicebook
 /// This trait represents [C++ `wxChoicebook` class](https://docs.wxwidgets.org/3.2/classwx_choicebook.html)'s methods and inheritance.
 ///
-/// See [`ChoicebookIsOwned`] documentation for the class usage.
+/// See [`ChoicebookFromCpp`] documentation for the class usage.
 pub trait ChoicebookMethods: BookCtrlBaseMethods {
     /// Returns the wxChoice associated with the control.
     ///
@@ -720,13 +720,13 @@ pub trait ChoicebookMethods: BookCtrlBaseMethods {
 // wxClientDC
 /// This trait represents [C++ `wxClientDC` class](https://docs.wxwidgets.org/3.2/classwx_client_d_c.html)'s methods and inheritance.
 ///
-/// See [`ClientDCIsOwned`] documentation for the class usage.
+/// See [`ClientDCFromCpp`] documentation for the class usage.
 pub trait ClientDCMethods: WindowDCMethods {}
 
 // wxClipboard
 /// This trait represents [C++ `wxClipboard` class](https://docs.wxwidgets.org/3.2/classwx_clipboard.html)'s methods and inheritance.
 ///
-/// See [`ClipboardIsOwned`] documentation for the class usage.
+/// See [`ClipboardFromCpp`] documentation for the class usage.
 pub trait ClipboardMethods: ObjectMethods {
     // DTOR: fn ~wxClipboard()
     /// Call this function to add the data object to the clipboard.
@@ -816,7 +816,7 @@ pub trait ClipboardMethods: ObjectMethods {
     /// Returns the global instance (wxTheClipboard) of the clipboard object.
     ///
     /// See [C++ `wxClipboard::Get()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_clipboard.html#a6f3a1f27cd3de59bfafd538827bc89a8).
-    fn get() -> Option<ClipboardIsOwned<false>> {
+    fn get() -> Option<ClipboardFromCpp<true>> {
         unsafe { Clipboard::option_from(ffi::wxClipboard_Get()) }
     }
 }
@@ -824,13 +824,13 @@ pub trait ClipboardMethods: ObjectMethods {
 // wxClipboardTextEvent
 /// This trait represents [C++ `wxClipboardTextEvent` class](https://docs.wxwidgets.org/3.2/classwx_clipboard_text_event.html)'s methods and inheritance.
 ///
-/// See [`ClipboardTextEventIsOwned`] documentation for the class usage.
+/// See [`ClipboardTextEventFromCpp`] documentation for the class usage.
 pub trait ClipboardTextEventMethods: CommandEventMethods {}
 
 // wxCloseEvent
 /// This trait represents [C++ `wxCloseEvent` class](https://docs.wxwidgets.org/3.2/classwx_close_event.html)'s methods and inheritance.
 ///
-/// See [`CloseEventIsOwned`] documentation for the class usage.
+/// See [`CloseEventFromCpp`] documentation for the class usage.
 pub trait CloseEventMethods: EventMethods {
     /// Returns true if you can veto a system shutdown or a window close event.
     ///
@@ -873,7 +873,7 @@ pub trait CloseEventMethods: EventMethods {
 // wxCollapsiblePane
 /// This trait represents [C++ `wxCollapsiblePane` class](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html)'s methods and inheritance.
 ///
-/// See [`CollapsiblePaneIsOwned`] documentation for the class usage.
+/// See [`CollapsiblePaneFromCpp`] documentation for the class usage.
 pub trait CollapsiblePaneMethods: ControlMethods {
     ///
     /// See [C++ `wxCollapsiblePane::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane.html#ae609270807e8655796abedfa7397b502).
@@ -948,7 +948,7 @@ pub trait CollapsiblePaneMethods: ControlMethods {
 // wxCollapsiblePaneEvent
 /// This trait represents [C++ `wxCollapsiblePaneEvent` class](https://docs.wxwidgets.org/3.2/classwx_collapsible_pane_event.html)'s methods and inheritance.
 ///
-/// See [`CollapsiblePaneEventIsOwned`] documentation for the class usage.
+/// See [`CollapsiblePaneEventFromCpp`] documentation for the class usage.
 pub trait CollapsiblePaneEventMethods: CommandEventMethods {
     /// Returns true if the pane has been collapsed.
     ///
@@ -967,7 +967,7 @@ pub trait CollapsiblePaneEventMethods: CommandEventMethods {
 // wxColour
 /// This trait represents [C++ `wxColour` class](https://docs.wxwidgets.org/3.2/classwx_colour.html)'s methods and inheritance.
 ///
-/// See [`ColourIsOwned`] documentation for the class usage.
+/// See [`ColourFromCpp`] documentation for the class usage.
 pub trait ColourMethods: ObjectMethods {
     // NOT_SUPPORTED: fn Alpha()
     // NOT_SUPPORTED: fn Blue()
@@ -1080,7 +1080,7 @@ pub trait ColourMethods: ObjectMethods {
 // wxColourData
 /// This trait represents [C++ `wxColourData` class](https://docs.wxwidgets.org/3.2/classwx_colour_data.html)'s methods and inheritance.
 ///
-/// See [`ColourDataIsOwned`] documentation for the class usage.
+/// See [`ColourDataFromCpp`] documentation for the class usage.
 pub trait ColourDataMethods: ObjectMethods {
     // DTOR: fn ~wxColourData()
     /// Under Windows, determines whether the Windows colour dialog will display the full dialog with custom colour selection controls.
@@ -1098,8 +1098,8 @@ pub trait ColourDataMethods: ObjectMethods {
     /// Gets the current colour associated with the colour dialog.
     ///
     /// See [C++ `wxColourData::GetColour()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_data.html#a1e9b73d93d5e49627faa8ce926318606).
-    fn get_colour(&self) -> ColourIsOwned<false> {
-        unsafe { ColourIsOwned::from_ptr(ffi::wxColourData_GetColour(self.as_ptr())) }
+    fn get_colour(&self) -> ColourFromCpp<true> {
+        unsafe { ColourFromCpp::from_ptr(ffi::wxColourData_GetColour(self.as_ptr())) }
     }
     /// Returns custom colours associated with the colour dialog.
     ///
@@ -1159,7 +1159,7 @@ pub trait ColourDataMethods: ObjectMethods {
 // wxColourDatabase
 /// This trait represents [C++ `wxColourDatabase` class](https://docs.wxwidgets.org/3.2/classwx_colour_database.html)'s methods and inheritance.
 ///
-/// See [`ColourDatabaseIsOwned`] documentation for the class usage.
+/// See [`ColourDatabaseFromCpp`] documentation for the class usage.
 pub trait ColourDatabaseMethods: WxRustMethods {
     /// Adds a colour to the database.
     ///
@@ -1196,7 +1196,7 @@ pub trait ColourDatabaseMethods: WxRustMethods {
 // wxColourDialog
 /// This trait represents [C++ `wxColourDialog` class](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html)'s methods and inheritance.
 ///
-/// See [`ColourDialogIsOwned`] documentation for the class usage.
+/// See [`ColourDialogFromCpp`] documentation for the class usage.
 pub trait ColourDialogMethods: DialogMethods {
     // DTOR: fn ~wxColourDialog()
     /// Same as wxColourDialog().
@@ -1222,15 +1222,15 @@ pub trait ColourDialogMethods: DialogMethods {
     /// Returns the colour data associated with the colour dialog.
     ///
     /// See [C++ `wxColourDialog::GetColourData()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_colour_dialog.html#a527d63fdb2b83eb9ee80d1c4b5da5c09).
-    fn get_colour_data(&self) -> ColourDataIsOwned<false> {
-        unsafe { ColourDataIsOwned::from_ptr(ffi::wxColourDialog_GetColourData(self.as_ptr())) }
+    fn get_colour_data(&self) -> ColourDataFromCpp<true> {
+        unsafe { ColourDataFromCpp::from_ptr(ffi::wxColourDialog_GetColourData(self.as_ptr())) }
     }
 }
 
 // wxColourPickerCtrl
 /// This trait represents [C++ `wxColourPickerCtrl` class](https://docs.wxwidgets.org/3.2/classwx_colour_picker_ctrl.html)'s methods and inheritance.
 ///
-/// See [`ColourPickerCtrlIsOwned`] documentation for the class usage.
+/// See [`ColourPickerCtrlFromCpp`] documentation for the class usage.
 pub trait ColourPickerCtrlMethods: PickerBaseMethods {
     /// Creates a colour picker with the given arguments.
     ///
@@ -1297,7 +1297,7 @@ pub trait ColourPickerCtrlMethods: PickerBaseMethods {
 // wxColourPickerEvent
 /// This trait represents [C++ `wxColourPickerEvent` class](https://docs.wxwidgets.org/3.2/classwx_colour_picker_event.html)'s methods and inheritance.
 ///
-/// See [`ColourPickerEventIsOwned`] documentation for the class usage.
+/// See [`ColourPickerEventFromCpp`] documentation for the class usage.
 pub trait ColourPickerEventMethods: CommandEventMethods {
     /// Retrieve the colour the user has just selected.
     ///
@@ -1319,7 +1319,7 @@ pub trait ColourPickerEventMethods: CommandEventMethods {
 // wxComboBox
 /// This trait represents [C++ `wxComboBox` class](https://docs.wxwidgets.org/3.2/classwx_combo_box.html)'s methods and inheritance.
 ///
-/// See [`ComboBoxIsOwned`] documentation for the class usage.
+/// See [`ComboBoxFromCpp`] documentation for the class usage.
 pub trait ComboBoxMethods: ControlMethods {
     // DTOR: fn ~wxComboBox()
     // NOT_SUPPORTED: fn Create()
@@ -1405,7 +1405,7 @@ pub trait ComboBoxMethods: ControlMethods {
 // wxComboCtrl
 /// This trait represents [C++ `wxComboCtrl` class](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html)'s methods and inheritance.
 ///
-/// See [`ComboCtrlIsOwned`] documentation for the class usage.
+/// See [`ComboCtrlFromCpp`] documentation for the class usage.
 pub trait ComboCtrlMethods: ControlMethods {
     // DTOR: fn ~wxComboCtrl()
     /// Creates the combo control for two-step construction.
@@ -1529,7 +1529,7 @@ pub trait ComboCtrlMethods: ControlMethods {
     /// Returns current popup interface that has been set with SetPopupControl().
     ///
     /// See [C++ `wxComboCtrl::GetPopupControl()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ac3d072940f2c6c2c92e6fe629bf4c4a8).
-    fn get_popup_control(&self) -> Option<ComboPopupIsOwned<false>> {
+    fn get_popup_control(&self) -> Option<ComboPopupFromCpp<true>> {
         unsafe { ComboPopup::option_from(ffi::wxComboCtrl_GetPopupControl(self.as_ptr())) }
     }
     /// Returns popup window containing the popup control.
@@ -1548,8 +1548,8 @@ pub trait ComboCtrlMethods: ControlMethods {
     /// Returns area covered by the text field (includes everything except borders and the dropdown button).
     ///
     /// See [C++ `wxComboCtrl::GetTextRect()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_combo_ctrl.html#ac25a4b9b325106dd5ec285ec2b368bdf).
-    fn get_text_rect(&self) -> RectIsOwned<false> {
-        unsafe { RectIsOwned::from_ptr(ffi::wxComboCtrl_GetTextRect(self.as_ptr())) }
+    fn get_text_rect(&self) -> RectFromCpp<true> {
+        unsafe { RectFromCpp::from_ptr(ffi::wxComboCtrl_GetTextRect(self.as_ptr())) }
     }
     /// Dismisses the popup window.
     ///
@@ -1736,7 +1736,7 @@ pub trait ComboCtrlMethods: ControlMethods {
 // wxComboPopup
 /// This trait represents [C++ `wxComboPopup` class](https://docs.wxwidgets.org/3.2/classwx_combo_popup.html)'s methods and inheritance.
 ///
-/// See [`ComboPopupIsOwned`] documentation for the class usage.
+/// See [`ComboPopupFromCpp`] documentation for the class usage.
 pub trait ComboPopupMethods: WxRustMethods {
     /// The derived class must implement this to create the popup control.
     ///
@@ -1873,7 +1873,7 @@ pub trait ComboPopupMethods: WxRustMethods {
 // wxCommand
 /// This trait represents [C++ `wxCommand` class](https://docs.wxwidgets.org/3.2/classwx_command.html)'s methods and inheritance.
 ///
-/// See [`CommandIsOwned`] documentation for the class usage.
+/// See [`CommandFromCpp`] documentation for the class usage.
 pub trait CommandMethods: ObjectMethods {
     // DTOR: fn ~wxCommand()
     /// Returns true if the command can be undone, false otherwise.
@@ -1905,7 +1905,7 @@ pub trait CommandMethods: ObjectMethods {
 // wxCommandEvent
 /// This trait represents [C++ `wxCommandEvent` class](https://docs.wxwidgets.org/3.2/classwx_command_event.html)'s methods and inheritance.
 ///
-/// See [`CommandEventIsOwned`] documentation for the class usage.
+/// See [`CommandEventFromCpp`] documentation for the class usage.
 pub trait CommandEventMethods: EventMethods {
     /// Returns client data pointer for a listbox or choice selection event (not valid for a deselection).
     ///
@@ -1916,7 +1916,7 @@ pub trait CommandEventMethods: EventMethods {
     /// Returns client object pointer for a listbox or choice selection event (not valid for a deselection).
     ///
     /// See [C++ `wxCommandEvent::GetClientObject()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_command_event.html#a48e7b34762b82cdc9d1b5d58d1e6a17f).
-    fn get_client_object(&self) -> Option<ClientDataIsOwned<false>> {
+    fn get_client_object(&self) -> Option<ClientDataFromCpp<true>> {
         unsafe { ClientData::option_from(ffi::wxCommandEvent_GetClientObject(self.as_ptr())) }
     }
     /// Returns extra information dependent on the event objects type.
@@ -2000,7 +2000,7 @@ pub trait CommandEventMethods: EventMethods {
 // wxCommandLinkButton
 /// This trait represents [C++ `wxCommandLinkButton` class](https://docs.wxwidgets.org/3.2/classwx_command_link_button.html)'s methods and inheritance.
 ///
-/// See [`CommandLinkButtonIsOwned`] documentation for the class usage.
+/// See [`CommandLinkButtonFromCpp`] documentation for the class usage.
 pub trait CommandLinkButtonMethods: ButtonMethods {
     /// Button creation function for two-step creation.
     ///
@@ -2094,7 +2094,7 @@ pub trait CommandLinkButtonMethods: ButtonMethods {
 // wxCommandProcessor
 /// This trait represents [C++ `wxCommandProcessor` class](https://docs.wxwidgets.org/3.2/classwx_command_processor.html)'s methods and inheritance.
 ///
-/// See [`CommandProcessorIsOwned`] documentation for the class usage.
+/// See [`CommandProcessorFromCpp`] documentation for the class usage.
 pub trait CommandProcessorMethods: ObjectMethods {
     // DTOR: fn ~wxCommandProcessor()
     /// Returns true if the currently-active command can be undone, false otherwise.
@@ -2119,7 +2119,7 @@ pub trait CommandProcessorMethods: ObjectMethods {
     /// Returns the current command.
     ///
     /// See [C++ `wxCommandProcessor::GetCurrentCommand()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_command_processor.html#a026a00fa665813b2ae5ffb64d8d90b0e).
-    fn get_current_command(&self) -> Option<CommandIsOwned<false>> {
+    fn get_current_command(&self) -> Option<CommandFromCpp<true>> {
         unsafe { Command::option_from(ffi::wxCommandProcessor_GetCurrentCommand(self.as_ptr())) }
     }
     /// Returns the edit menu associated with the command processor.
@@ -2263,13 +2263,13 @@ pub trait CommandProcessorMethods: ObjectMethods {
 // wxContextMenuEvent
 /// This trait represents [C++ `wxContextMenuEvent` class](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html)'s methods and inheritance.
 ///
-/// See [`ContextMenuEventIsOwned`] documentation for the class usage.
+/// See [`ContextMenuEventFromCpp`] documentation for the class usage.
 pub trait ContextMenuEventMethods: CommandEventMethods {
     /// Returns the position in screen coordinates at which the menu should be shown.
     ///
     /// See [C++ `wxContextMenuEvent::GetPosition()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_context_menu_event.html#a6017c932b59f627bc62dbc2f2347f940).
-    fn get_position(&self) -> PointIsOwned<false> {
-        unsafe { PointIsOwned::from_ptr(ffi::wxContextMenuEvent_GetPosition(self.as_ptr())) }
+    fn get_position(&self) -> PointFromCpp<true> {
+        unsafe { PointFromCpp::from_ptr(ffi::wxContextMenuEvent_GetPosition(self.as_ptr())) }
     }
     /// Sets the position at which the menu should be shown.
     ///
@@ -2285,7 +2285,7 @@ pub trait ContextMenuEventMethods: CommandEventMethods {
 // wxControl
 /// This trait represents [C++ `wxControl` class](https://docs.wxwidgets.org/3.2/classwx_control.html)'s methods and inheritance.
 ///
-/// See [`ControlIsOwned`] documentation for the class usage.
+/// See [`ControlFromCpp`] documentation for the class usage.
 pub trait ControlMethods: WindowMethods {
     ///
     /// See [C++ `wxControl::Create()`'s documentation](https://docs.wxwidgets.org/3.2/classwx_control.html#abe23789c94c86907463a0e8434be822a).
@@ -2430,13 +2430,13 @@ pub trait ControlMethods: WindowMethods {
 // wxControlWithItems
 /// This trait represents [C++ `wxControlWithItems` class](https://docs.wxwidgets.org/3.2/classwx_control_with_items.html)'s methods and inheritance.
 ///
-/// See [`ControlWithItemsIsOwned`] documentation for the class usage.
+/// See [`ControlWithItemsFromCpp`] documentation for the class usage.
 pub trait ControlWithItemsMethods: ControlMethods {}
 
 // wxCursor
 /// This trait represents [C++ `wxCursor` class](https://docs.wxwidgets.org/3.2/classwx_cursor.html)'s methods and inheritance.
 ///
-/// See [`CursorIsOwned`] documentation for the class usage.
+/// See [`CursorFromCpp`] documentation for the class usage.
 pub trait CursorMethods: GDIObjectMethods {
     // DTOR: fn ~wxCursor()
     /// Returns true if cursor data is present.
@@ -2457,7 +2457,7 @@ pub trait CursorMethods: GDIObjectMethods {
 // wxCustomDataObject
 /// This trait represents [C++ `wxCustomDataObject` class](https://docs.wxwidgets.org/3.2/classwx_custom_data_object.html)'s methods and inheritance.
 ///
-/// See [`CustomDataObjectIsOwned`] documentation for the class usage.
+/// See [`CustomDataObjectFromCpp`] documentation for the class usage.
 pub trait CustomDataObjectMethods: DataObjectSimpleMethods {
     // DTOR: fn ~wxCustomDataObject()
     /// This function is called to allocate size bytes of memory from SetData().
