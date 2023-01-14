@@ -8,6 +8,8 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  # workaround for macOS CI
+  HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
 
 jobs:
   build-wx30gtk:
@@ -59,7 +61,7 @@ jobs:
       run: cargo test --verbose
 
   build-mac:
-    runs-on: macos-11
+    runs-on: macOS-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -73,7 +75,7 @@ jobs:
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - name: Install Prerequisites
-      run: rm '/usr/local/bin/2to3' && brew update && brew install wxwidgets || true
+      run: brew update && brew install wxwidgets
     - name: Build
       run: cargo build --verbose
     - name: Run tests
