@@ -75,6 +75,7 @@ class Class:
         self.enums = []
         self.methods = []
         config = config.get(self.name) or {}
+        self.__builder = config.get('builder')
         self.__blocklist = config.get('blocklist') or []
         self.event_types = config.get('event_types') or []
         self.config = config
@@ -122,6 +123,9 @@ class Class:
     def unprefixed(self):
         return self.name[2:]
 
+    def is_builder(self, name):
+        return name == self.__builder
+
     def is_blocked_method(self, name):
         return name in self.__blocklist
 
@@ -148,7 +152,9 @@ class Method:
             is_array = param.find('array') is not None
             ptype = CxxType(cls.manager, param.find('type'), is_array)
             pname = param.findtext('declname')
-            self.params.append(Param(ptype, pname))
+            defval = param.find('defval')
+            defval = ''.join(defval.itertext()) if defval is not None else None
+            self.params.append(Param(ptype, pname, defval))
         is_virtual = e.get('virt') == 'virtual'
         is_override = e.find('reimplements') is not None
         self.is_virtual_override = is_virtual and is_override
@@ -168,6 +174,9 @@ class Method:
         if self.returns.not_supported():
             return True
         return any(p.type.not_supported() for p in self.params)
+
+    def is_builder(self):
+        return self.cls.is_builder(self.name())
 
     def is_blocked(self):
         return self.cls.is_blocked_method(self.name())
@@ -301,9 +310,10 @@ class ReturnTypeWrapper:
                 '%s::from_ptr(%s)' % (returns, call)]
 
 class Param:
-    def __init__(self, type, name):
+    def __init__(self, type, name, defval=None):
         self.type = type
         self.name = non_keyword_name(camel_to_snake(name))
+        self.defval = defval
     
     def is_self(self):
         return self.name == 'self'

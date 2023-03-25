@@ -71,6 +71,7 @@ def generate_library(classes, config, libname, overload_tree_md):
                 if error:
                     print(error)
     to_be_generated = {
+        'src/generated/builder.rs': builder_rs,
         'src/generated/class.rs': class_rs,
         'src/generated/ffi.rs': ffi_rs,
         'src/generated/methods.rs': methods_rs,
@@ -81,11 +82,12 @@ def generate_library(classes, config, libname, overload_tree_md):
     for path, generator in to_be_generated.items():
         progress('.')
         is_rust = path.endswith('.rs')
+        is_builder = path.endswith('builder.rs')
         if libname:
             path = 'wx-%s/%s' % (libname, path)
         with open(path, 'w', newline='\n', encoding='utf-8') as f:
             for chunk in generator(
-                initials,
+                rust_bindings if is_builder else initials,
                 libname
             ):
                 print(chunk, file=f)
@@ -163,6 +165,11 @@ extern "C" {
     yield '''\
 } // extern "C"
 '''
+
+def builder_rs(classes, libname):
+    for cls in classes:
+        for line in cls.lines(for_builder=True):
+            yield line
 
 def class_rs(initials, libname):
     yield '''\

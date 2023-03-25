@@ -29,7 +29,12 @@ class RustClassBinding:
             pascal_to_snake(self.__model.unprefixed()),
         )
 
-    def lines(self, for_ffi=False, for_methods=False):
+    def lines(self, for_ffi=False, for_methods=False, for_builder=False):
+        if for_builder:
+            for line in self._builder_lines():
+                yield line
+            return
+
         yield ''
         yield '// %s' % (
             self.__model.name,
@@ -283,6 +288,11 @@ class RustClassBinding:
                 yield '%s%s' % (indent, line)
         yield '}'
 
+    def _builder_lines(self):
+        unprefixed = self.__model.unprefixed()
+        for builder in (c for c in self._ctors() if c.is_builder):
+            for line in builder.builder_lines(unprefixed):
+                yield line
 
 class Overload:
     def __init__(self, name):
@@ -396,6 +406,7 @@ class RustMethodBinding:
         self.__cls = cls
         self.__model = model
         self.is_ctor = model.is_ctor
+        self.is_builder = model.is_builder()
         self.__self_param = Param(RustType(model.cls.name, model.const), 'self')
         # must be name neither self or this
         self.__ffi_self = Param(RustType(model.cls.name, model.const), 'self_')
@@ -468,6 +479,51 @@ class RustMethodBinding:
             for line in self._wrap_unsafe(body_lines):
                 yield '    %s' % (line,)
             yield '}'
+
+    def builder_lines(self, unprefixed):
+        if not self.is_builder:
+            return
+        cls_name = unprefixed
+        yield "pub struct %sBuilder<'a, P: WindowMethods> {" % (cls_name,)
+        for p in self.__model.params:
+            yield '    %s: %s,' % (p.name, p.type)
+        yield '}'
+        yield "impl<'a, P: WindowMethods> Buildable<'a, P, %sBuilder<'a, P>> for %s {" % (
+            cls_name,
+            cls_name,
+        )
+        yield "    fn builder(parent: Option<&'a P>) -> %sBuilder<'a, P> {" % (cls_name,)
+        yield '        %sBuilder {' % (cls_name,)
+        for p in self.__model.params:
+            yield '            %s: %s,' % (p.name, p.defval)
+        yield '        }'
+        yield '    }'
+        yield '}'
+        yield "impl<'a, P: WindowMethods> %sBuilder<'a, P> {" % (cls_name,)
+        for p in self.__model.params:
+            yield '    pub fn %s(&mut self, %s: %s) -> &mut Self {' % (
+                p.name,
+                p.name,
+                p.type,
+            )
+            yield '        self.%s = %s;' % (p.name, p.name)
+            yield '        self'
+            yield '    }'
+        yield '    pub fn build(&mut self) -> %s {' % (cls_name,)
+        for p in self.__model.params:
+            yield '        let %s = self.%s.take().unwrap_or_else(|| %s::default());' % (
+                p.name,
+                p.name,
+                p.type,
+            )
+        yield '        %s::new(' % (
+            cls_name,
+        )
+        for p in self.__model.params:
+            yield '            %s,' % (p.name,)
+        yield '        )'
+        yield '    }'
+        yield '}'
 
     def _binding_body(self):
         params = self.__model.params
