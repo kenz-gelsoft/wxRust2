@@ -1,5 +1,5 @@
 pub struct SpinButtonBuilder<'a, P: WindowMethods> {
-    parent: Option<Window>,
+    parent: Option<&'a P>,
     id: c_int,
     pos: Option<Point>,
     size: Option<Size>,
@@ -9,7 +9,7 @@ pub struct SpinButtonBuilder<'a, P: WindowMethods> {
 impl<'a, P: WindowMethods> Buildable<'a, P, SpinButtonBuilder<'a, P>> for SpinButton {
     fn builder(parent: Option<&'a P>) -> SpinButtonBuilder<'a, P> {
         SpinButtonBuilder {
-            parent: None,
+            parent: parent,
             id: -1,
             pos: None,
             size: None,
@@ -19,10 +19,6 @@ impl<'a, P: WindowMethods> Buildable<'a, P, SpinButtonBuilder<'a, P>> for SpinBu
     }
 }
 impl<'a, P: WindowMethods> SpinButtonBuilder<'a, P> {
-    pub fn parent(&mut self, parent: Option<Window>) -> &mut Self {
-        self.parent = parent;
-        self
-    }
     pub fn id(&mut self, id: c_int) -> &mut Self {
         self.id = id;
         self

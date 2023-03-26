@@ -487,7 +487,9 @@ class RustMethodBinding:
         yield "pub struct %sBuilder<'a, P: WindowMethods> {" % (cls_name,)
         for p in self.__model.params:
             typename = p.type.in_rust(deref=True)
-            if p.type.is_non_string_ref():
+            if p.name == 'parent':
+                typename = "Option<&'a P>"
+            elif p.type.is_non_string_ref():
                 typename = 'Option<%s>' % (typename,)
             yield '    %s: %s,' % (
                 p.name,
@@ -502,7 +504,9 @@ class RustMethodBinding:
         yield '        %sBuilder {' % (cls_name,)
         for p in self.__model.params:
             value = p.defval
-            if p.type.is_const_ref_to_string():
+            if p.name == 'parent':
+                value = 'parent'
+            elif p.type.is_const_ref_to_string():
                 value = '%s.to_owned()' % (value,)
             elif p.type.is_non_string_ref():
                 value = 'None'
@@ -514,6 +518,8 @@ class RustMethodBinding:
         yield '}'
         yield "impl<'a, P: WindowMethods> %sBuilder<'a, P> {" % (cls_name,)
         for p in self.__model.params:
+            if p.name == 'parent':
+                continue
             yield '    pub fn %s(&mut self, %s: %s) -> &mut Self {' % (
                 p.name,
                 p.name,
