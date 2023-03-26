@@ -1,8 +1,8 @@
 pub struct SpinButtonBuilder<'a, P: WindowMethods> {
     parent: Option<Window>,
     id: c_int,
-    pos: Point,
-    size: Size,
+    pos: Option<Point>,
+    size: Option<Size>,
     style: c_long,
     name: String,
 }
@@ -11,10 +11,10 @@ impl<'a, P: WindowMethods> Buildable<'a, P, SpinButtonBuilder<'a, P>> for SpinBu
         SpinButtonBuilder {
             parent: None,
             id: -1,
-            pos: wxDefaultPosition,
-            size: wxDefaultSize,
-            style: wxSP_VERTICAL,
-            name: "spinButton",
+            pos: None,
+            size: None,
+            style: SP_VERTICAL.into(),
+            name: "spinButton".to_owned(),
         }
     }
 }
@@ -40,15 +40,17 @@ impl<'a, P: WindowMethods> SpinButtonBuilder<'a, P> {
         self
     }
     pub fn name(&mut self, name: String) -> &mut Self {
-        self.name = name;
+        self.name = name.to_owned();
         self
     }
     pub fn build(&mut self) -> SpinButton {
+        let pos = self.pos.take().unwrap_or_else(|| Point::default());
+        let size = self.size.take().unwrap_or_else(|| Size::default());
         SpinButton::new(
             self.parent,
             self.id,
-            &self.pos,
-            &self.size,
+            &pos,
+            &size,
             self.style,
             &self.name,
         )

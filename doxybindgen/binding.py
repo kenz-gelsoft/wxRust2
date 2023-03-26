@@ -486,9 +486,12 @@ class RustMethodBinding:
         cls_name = unprefixed
         yield "pub struct %sBuilder<'a, P: WindowMethods> {" % (cls_name,)
         for p in self.__model.params:
+            typename = p.type.in_rust(deref=True)
+            if p.type.is_non_string_ref():
+                typename = 'Option<%s>' % (typename,)
             yield '    %s: %s,' % (
                 p.name,
-                p.type.in_rust(deref=True),
+                typename,
             )
         yield '}'
         yield "impl<'a, P: WindowMethods> Buildable<'a, P, %sBuilder<'a, P>> for %s {" % (
@@ -498,7 +501,14 @@ class RustMethodBinding:
         yield "    fn builder(parent: Option<&'a P>) -> %sBuilder<'a, P> {" % (cls_name,)
         yield '        %sBuilder {' % (cls_name,)
         for p in self.__model.params:
-            yield '            %s: %s,' % (p.name, p.defval)
+            value = p.defval
+            if p.type.is_const_ref_to_string():
+                value = '%s.to_owned()' % (value,)
+            elif p.type.is_non_string_ref():
+                value = 'None'
+            elif value and value.startswith('wx'):
+                value = '%s.into()' % (value[2:],)
+            yield '            %s: %s,' % (p.name, value)
         yield '        }'
         yield '    }'
         yield '}'
@@ -509,22 +519,29 @@ class RustMethodBinding:
                 p.name,
                 p.type.in_rust(deref=True),
             )
-            yield '        self.%s = %s;' % (p.name, p.name)
+            value = p.name
+            if p.type.is_const_ref_to_string():
+                value = '%s.to_owned()' % (value,)
+            yield '        self.%s = %s;' % (p.name, value)
             yield '        self'
             yield '    }'
         yield '    pub fn build(&mut self) -> %s {' % (cls_name,)
-        # for p in self.__model.params:
-        #     yield '        let %s = self.%s.take().unwrap_or_else(|| %s::default());' % (
-        #         p.name,
-        #         p.name,
-        #         p.type,
-        #     )
+        for p in self.__model.params:
+            if not p.type.is_non_string_ref():
+                continue
+            # TODO: derive `::default()` from `wxDefaultFoo` defval
+            yield '        let %s = self.%s.take().unwrap_or_else(|| %s::default());' % (
+                p.name,
+                p.name,
+                p.type.in_rust(deref=True),
+            )
         yield '        %s::new(' % (
             cls_name,
         )
         for p in self.__model.params:
-            param = '%sself.%s' % (
+            param = '%s%s%s' % (
                 '&' if p.type.is_ref() else '',
+                '' if p.type.is_non_string_ref() else 'self.',
                 p.name,
             )
             yield '            %s,' % (param,)

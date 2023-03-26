@@ -501,7 +501,7 @@ class CxxType:
     
     def marshal(self, param):
         name = camel_to_snake(param.name)
-        if self._is_const_ref_to_string():
+        if self.is_const_ref_to_string():
             # This variable keeps temporary wxString object in this scope.
             yield 'let %s = WxString::from(%s);' % (
                 name,
@@ -509,7 +509,7 @@ class CxxType:
             )
         if (self.is_ref_to_binding() or
             # So, taking pointer must be another expression for its lifetime.
-            self._is_const_ref_to_string()):
+            self.is_const_ref_to_string()):
             yield 'let %s = %s;' % (
                 name,
                 param.rust_ffi_ref(),
@@ -528,7 +528,7 @@ class CxxType:
     def in_rust(self, for_ffi=False, deref=False):
         t = self.typename
         if not for_ffi:
-            if self._is_const_ref_to_string():
+            if self.is_const_ref_to_string():
                 return 'String' if deref else '&str'
             unprefixed = '%s%s' % (
                 '' if deref else '&',
@@ -553,9 +553,13 @@ class CxxType:
     def is_ref_to_binding(self):
         return self.is_ref() and self._is_binding_type()
 
-    def _is_const_ref_to_string(self):
+    def is_const_ref_to_string(self):
         return (self._is_const_ref() and
                 self.typename in STR_TYPES)
+
+    def is_non_string_ref(self):
+        return (self.is_ref() and
+                not self.is_const_ref_to_string())
 
     def is_const_ref_to_binding(self):
         return self._is_const_ref() and self._is_binding_type()
