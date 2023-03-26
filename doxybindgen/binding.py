@@ -481,10 +481,9 @@ class RustMethodBinding:
             yield '}'
 
     def builder_lines(self, unprefixed):
-        yield 'use super::*;'
-        yield ''
         if not self.is_builder:
             return
+        yield ''
         cls_name = unprefixed
         yield "pub struct %sBuilder<'a, P: WindowMethods> {" % (cls_name,)
         for p in self.__model.params:
@@ -508,7 +507,12 @@ class RustMethodBinding:
             value = p.defval
             if p.name == 'parent':
                 value = 'parent'
+            elif p.name == 'id' and not value:
+                value = 'ID_ANY'
             elif p.type.is_const_ref_to_string():
+                if value.endswith('NameStr'):
+                    # FIXME
+                    value = '""'
                 value = '%s.to_owned()' % (value,)
             elif p.type.is_non_string_ref():
                 value = 'None'
@@ -539,11 +543,16 @@ class RustMethodBinding:
         for p in self.__model.params:
             if not p.type.is_non_string_ref():
                 continue
-            # TODO: derive `::default()` from `wxDefaultFoo` defval
-            yield '        let %s = self.%s.take().unwrap_or_else(|| %s::default());' % (
+            defval = p.defval
+            if defval and defval.startswith('wxDefault'):
+                defval = '%s::default()' % (p.type.in_rust(deref=True),)
+            elif defval == '*wxBLACK':
+                # FIXME: special handling
+                defval = 'Colour::new_with_str("BLACK")'
+            yield '        let %s = self.%s.take().unwrap_or_else(|| %s);' % (
                 p.name,
                 p.name,
-                p.type.in_rust(deref=True),
+                defval,
             )
         yield '        %s::new(' % (
             cls_name,

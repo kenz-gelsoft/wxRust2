@@ -715,6 +715,7 @@ wx31 = [
     'Create',
 ]
 [types.wxColourPickerCtrl]
+builder = 'wxColourPickerCtrl1'
 blocklist = [
     'SetColour1',
 ]
