@@ -525,15 +525,19 @@ class CxxType:
             yield '    None => ptr::null_mut(),'
             yield '};'
 
-    def in_rust(self, for_ffi=False):
+    def in_rust(self, for_ffi=False, deref=False):
         t = self.typename
         if not for_ffi:
             if self._is_const_ref_to_string():
-                return '&str'
+                return 'String' if deref else '&str'
+            unprefixed = '%s%s' % (
+                '' if deref else '&',
+                t[2:],
+            )
             if self.is_const_ref_to_binding():
-                return '&%s' % (t[2:])
+                return '%s' % (unprefixed,)
             if self.is_ptr_to_binding():
-                return 'Option<&%s>' % (t[2:])
+                return 'Option<%s>' % (unprefixed,)
         if t in CXX2RUST:
             t = CXX2RUST[t]
         if self.__indirection:

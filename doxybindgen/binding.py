@@ -486,7 +486,10 @@ class RustMethodBinding:
         cls_name = unprefixed
         yield "pub struct %sBuilder<'a, P: WindowMethods> {" % (cls_name,)
         for p in self.__model.params:
-            yield '    %s: %s,' % (p.name, p.type)
+            yield '    %s: %s,' % (
+                p.name,
+                p.type.in_rust(deref=True),
+            )
         yield '}'
         yield "impl<'a, P: WindowMethods> Buildable<'a, P, %sBuilder<'a, P>> for %s {" % (
             cls_name,
@@ -504,23 +507,27 @@ class RustMethodBinding:
             yield '    pub fn %s(&mut self, %s: %s) -> &mut Self {' % (
                 p.name,
                 p.name,
-                p.type,
+                p.type.in_rust(deref=True),
             )
             yield '        self.%s = %s;' % (p.name, p.name)
             yield '        self'
             yield '    }'
         yield '    pub fn build(&mut self) -> %s {' % (cls_name,)
-        for p in self.__model.params:
-            yield '        let %s = self.%s.take().unwrap_or_else(|| %s::default());' % (
-                p.name,
-                p.name,
-                p.type,
-            )
+        # for p in self.__model.params:
+        #     yield '        let %s = self.%s.take().unwrap_or_else(|| %s::default());' % (
+        #         p.name,
+        #         p.name,
+        #         p.type,
+        #     )
         yield '        %s::new(' % (
             cls_name,
         )
         for p in self.__model.params:
-            yield '            %s,' % (p.name,)
+            param = '%sself.%s' % (
+                '&' if p.type.is_ref() else '',
+                p.name,
+            )
+            yield '            %s,' % (param,)
         yield '        )'
         yield '    }'
         yield '}'
