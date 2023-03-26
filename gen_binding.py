@@ -242,6 +242,8 @@ mod events;
     yield 'pub mod class;'
     for i in initials:
         yield 'mod class_%s;' % (i,)
+    yield ''
+    yield 'pub mod builder;'
 
 
 def generated_h(initials, libname):
