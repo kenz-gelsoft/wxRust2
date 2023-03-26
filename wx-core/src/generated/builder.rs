@@ -1,3 +1,5 @@
+use super::*;
+
 pub struct SpinButtonBuilder<'a, P: WindowMethods> {
     parent: Option<&'a P>,
     id: c_int,
@@ -24,11 +26,11 @@ impl<'a, P: WindowMethods> SpinButtonBuilder<'a, P> {
         self
     }
     pub fn pos(&mut self, pos: Point) -> &mut Self {
-        self.pos = pos;
+        self.pos = Some(pos);
         self
     }
     pub fn size(&mut self, size: Size) -> &mut Self {
-        self.size = size;
+        self.size = Some(size);
         self
     }
     pub fn style(&mut self, style: c_long) -> &mut Self {

@@ -481,6 +481,8 @@ class RustMethodBinding:
             yield '}'
 
     def builder_lines(self, unprefixed):
+        yield 'use super::*;'
+        yield ''
         if not self.is_builder:
             return
         cls_name = unprefixed
@@ -528,6 +530,8 @@ class RustMethodBinding:
             value = p.name
             if p.type.is_const_ref_to_string():
                 value = '%s.to_owned()' % (value,)
+            elif p.type.is_non_string_ref():
+                value = 'Some(%s)' % (value,)
             yield '        self.%s = %s;' % (p.name, value)
             yield '        self'
             yield '    }'
