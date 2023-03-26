@@ -411,6 +411,8 @@ class RustMethodBinding:
         # must be name neither self or this
         self.__ffi_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = GenericParams(self.__model.params)
+        if self.is_builder:
+            self.__builder_params = [BuilderParam(p) for p in self.__model.params]
 
     def is_blocked(self):
         return self.__model.is_blocked()
@@ -486,16 +488,8 @@ class RustMethodBinding:
         yield ''
         cls_name = unprefixed
         yield "pub struct %sBuilder<'a, P: WindowMethods> {" % (cls_name,)
-        for p in self.__model.params:
-            typename = p.type.in_rust(deref=True)
-            if p.name == 'parent':
-                typename = "Option<&'a P>"
-            elif p.type.is_non_string_ref():
-                typename = 'Option<%s>' % (typename,)
-            yield '    %s: %s,' % (
-                p.name,
-                typename,
-            )
+        for p in self.__builder_params:
+            yield p.struct_line()
         yield '}'
         yield "impl<'a, P: WindowMethods> Buildable<'a, P, %sBuilder<'a, P>> for %s {" % (
             cls_name,
@@ -503,67 +497,24 @@ class RustMethodBinding:
         )
         yield "    fn builder(parent: Option<&'a P>) -> %sBuilder<'a, P> {" % (cls_name,)
         yield '        %sBuilder {' % (cls_name,)
-        for p in self.__model.params:
-            value = p.defval
-            if p.name == 'parent':
-                value = 'parent'
-            elif p.name == 'id' and not value:
-                value = 'ID_ANY'
-            elif p.type.is_const_ref_to_string():
-                if value.endswith('NameStr'):
-                    # FIXME
-                    value = '""'
-                value = '%s.to_owned()' % (value,)
-            elif p.type.is_non_string_ref():
-                value = 'None'
-            elif value and value.startswith('wx'):
-                value = '%s.into()' % (value[2:],)
-            yield '            %s: %s,' % (p.name, value)
+        for p in self.__builder_params:
+            yield p.factory_line()
         yield '        }'
         yield '    }'
         yield '}'
         yield "impl<'a, P: WindowMethods> %sBuilder<'a, P> {" % (cls_name,)
-        for p in self.__model.params:
-            if p.name == 'parent':
-                continue
-            yield '    pub fn %s(&mut self, %s: %s) -> &mut Self {' % (
-                p.name,
-                p.name,
-                p.type.in_rust(deref=True),
-            )
-            value = p.name
-            if p.type.is_const_ref_to_string():
-                value = '%s.to_owned()' % (value,)
-            elif p.type.is_non_string_ref():
-                value = 'Some(%s)' % (value,)
-            yield '        self.%s = %s;' % (p.name, value)
-            yield '        self'
-            yield '    }'
+        for p in self.__builder_params:
+            for line in p.builder_method_lines():
+                yield line
         yield '    pub fn build(&mut self) -> %s {' % (cls_name,)
-        for p in self.__model.params:
-            if not p.type.is_non_string_ref():
-                continue
-            defval = p.defval
-            if defval and defval.startswith('wxDefault'):
-                defval = '%s::default()' % (p.type.in_rust(deref=True),)
-            elif defval == '*wxBLACK':
-                # FIXME: special handling
-                defval = 'Colour::new_with_str("BLACK")'
-            yield '        let %s = self.%s.take().unwrap_or_else(|| %s);' % (
-                p.name,
-                p.name,
-                defval,
-            )
+        for p in self.__builder_params:
+            for line in p.defval_line_or_not():
+                yield line
         yield '        %s::new(' % (
             cls_name,
         )
-        for p in self.__model.params:
-            param = '%s%s%s' % (
-                '&' if p.type.is_ref() else '',
-                '' if p.type.is_non_string_ref() else 'self.',
-                p.name,
-            )
-            yield '            %s,' % (param,)
+        for p in self.__builder_params:
+            yield p.ctor_line()
         yield '        )'
         yield '    }'
         yield '}'
@@ -692,6 +643,84 @@ class GenericParams:
         if n > 1:
             name = '%s%s' % (name, n)
         return name
+
+
+class BuilderParam:
+    def __init__(self, param):
+        self.__param = param
+    
+    def struct_line(self):
+        p = self.__param
+        typename = p.type.in_rust(deref=True)
+        if p.name == 'parent':
+            typename = "Option<&'a P>"
+        elif p.type.is_non_string_ref():
+            typename = 'Option<%s>' % (typename,)
+        return '    %s: %s,' % (
+            p.name,
+            typename,
+        )
+    
+    def factory_line(self):
+        p = self.__param
+        value = p.defval
+        if p.name == 'parent':
+            value = 'parent'
+        elif p.name == 'id' and not value:
+            value = 'ID_ANY'
+        elif p.type.is_const_ref_to_string():
+            if value.endswith('NameStr'):
+                # FIXME
+                value = '""'
+            value = '%s.to_owned()' % (value,)
+        elif p.type.is_non_string_ref():
+            value = 'None'
+        elif value and value.startswith('wx'):
+            value = '%s.into()' % (value[2:],)
+        return '            %s: %s,' % (p.name, value)
+
+    def builder_method_lines(self):
+        p = self.__param
+        if p.name == 'parent':
+            return
+        yield '    pub fn %s(&mut self, %s: %s) -> &mut Self {' % (
+            p.name,
+            p.name,
+            p.type.in_rust(deref=True),
+        )
+        value = p.name
+        if p.type.is_const_ref_to_string():
+            value = '%s.to_owned()' % (value,)
+        elif p.type.is_non_string_ref():
+            value = 'Some(%s)' % (value,)
+        yield '        self.%s = %s;' % (p.name, value)
+        yield '        self'
+        yield '    }'
+    
+    def defval_line_or_not(self):
+        p = self.__param
+        if not p.type.is_non_string_ref():
+            return
+        defval = p.defval
+        if defval and defval.startswith('wxDefault'):
+            defval = '%s::default()' % (p.type.in_rust(deref=True),)
+        elif defval == '*wxBLACK':
+            # FIXME: special handling
+            defval = 'Colour::new_with_str("BLACK")'
+        yield '        let %s = self.%s.take().unwrap_or_else(|| %s);' % (
+            p.name,
+            p.name,
+            defval,
+        )
+    
+    def ctor_line(self):
+        p = self.__param
+        param = '%s%s%s' % (
+            '&' if p.type.is_ref() else '',
+            '' if p.type.is_non_string_ref() else 'self.',
+            p.name,
+        )
+        return '            %s,' % (param,)
 
 
 class CxxClassBinding:
