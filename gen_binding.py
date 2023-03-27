@@ -67,9 +67,7 @@ def generate_library(classes, config, libname, overload_tree_md):
                 ):
                     print(chunk, file=f)
             if is_rust:
-                error = subprocess.check_output(['rustfmt', path])
-                if error:
-                    print(error)
+                rustfmt(path)
     to_be_generated = {
         'src/generated/builder.rs': builder_rs,
         'src/generated/class.rs': class_rs,
@@ -91,9 +89,16 @@ def generate_library(classes, config, libname, overload_tree_md):
                 libname
             ):
                 print(chunk, file=f)
+        if is_builder:
+            rustfmt(path)
 
 def progress(s):
     print(s, end='', flush=True)
+
+def rustfmt(path):
+    error = subprocess.check_output(['rustfmt', path])
+    if error:
+        print(error)
 
 def ffi_i_rs(classes, libname):
     yield '''\
@@ -292,9 +297,7 @@ def generate_events(classes, config):
             for chunk in generator(event_classes, config):
                 print(chunk, file=f)
         if is_rust:
-            error = subprocess.check_output(['rustfmt', path])
-            if error:
-                print(error)
+            rustfmt(path)
 
 def events_rs(event_classes, config):
     yield '''\

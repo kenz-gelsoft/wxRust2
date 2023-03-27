@@ -54,10 +54,16 @@ impl<'a, P: WindowMethods> ColourPickerCtrlBuilder<'a, P> {
         self
     }
     pub fn build(&mut self) -> ColourPickerCtrl {
-        let colour = self.colour.take().unwrap_or_else(|| Colour::new_with_str("BLACK"));
+        let colour = self
+            .colour
+            .take()
+            .unwrap_or_else(|| Colour::new_with_str("BLACK"));
         let pos = self.pos.take().unwrap_or_else(|| Point::default());
         let size = self.size.take().unwrap_or_else(|| Size::default());
-        let validator = self.validator.take().unwrap_or_else(|| Validator::default());
+        let validator = self
+            .validator
+            .take()
+            .unwrap_or_else(|| Validator::default());
         ColourPickerCtrl::new(
             self.parent,
             self.id,
@@ -115,13 +121,6 @@ impl<'a, P: WindowMethods> SpinButtonBuilder<'a, P> {
     pub fn build(&mut self) -> SpinButton {
         let pos = self.pos.take().unwrap_or_else(|| Point::default());
         let size = self.size.take().unwrap_or_else(|| Size::default());
-        SpinButton::new(
-            self.parent,
-            self.id,
-            &pos,
-            &size,
-            self.style,
-            &self.name,
-        )
+        SpinButton::new(self.parent, self.id, &pos, &size, self.style, &self.name)
     }
 }
