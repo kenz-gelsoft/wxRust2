@@ -489,7 +489,10 @@ class RustMethodBinding:
         cls_name = unprefixed
         yield "pub struct %sBuilder<'a, P: WindowMethods> {" % (cls_name,)
         for p in self.__builder_params:
-            yield p.struct_line()
+            yield '    %s: %s,' % (
+                p.name,
+                p.struct_type(),
+            )
         yield '}'
         yield "impl<'a, P: WindowMethods> Buildable<'a, P, %sBuilder<'a, P>> for %s {" % (
             cls_name,
@@ -498,7 +501,10 @@ class RustMethodBinding:
         yield "    fn builder(parent: Option<&'a P>) -> %sBuilder<'a, P> {" % (cls_name,)
         yield '        %sBuilder {' % (cls_name,)
         for p in self.__builder_params:
-            yield p.factory_line()
+            yield '            %s: %s,' % (
+                p.name, 
+                p.defval(),
+            )
         yield '        }'
         yield '    }'
         yield '}'
@@ -508,13 +514,14 @@ class RustMethodBinding:
                 yield line
         yield '    pub fn build(&mut self) -> %s {' % (cls_name,)
         for p in self.__builder_params:
-            for line in p.defval_line_or_not():
-                yield line
+            defval = p.defval_line()
+            if defval:
+                yield '        %s' % (defval,)
         yield '        %s::new(' % (
             cls_name,
         )
         for p in self.__builder_params:
-            yield p.ctor_line()
+            yield '            %s,' % (p.ctor_param(),)
         yield '        )'
         yield '    }'
         yield '}'
@@ -648,20 +655,18 @@ class GenericParams:
 class BuilderParam:
     def __init__(self, param):
         self.__param = param
+        self.name = param.name
     
-    def struct_line(self):
+    def struct_type(self):
         p = self.__param
         typename = p.type.in_rust(deref=True)
         if p.name == 'parent':
             typename = "Option<&'a P>"
         elif p.type.is_non_string_ref():
             typename = 'Option<%s>' % (typename,)
-        return '    %s: %s,' % (
-            p.name,
-            typename,
-        )
+        return typename
     
-    def factory_line(self):
+    def defval(self):
         p = self.__param
         value = p.defval
         if p.name == 'parent':
@@ -677,7 +682,7 @@ class BuilderParam:
             value = 'None'
         elif value and value.startswith('wx'):
             value = '%s.into()' % (value[2:],)
-        return '            %s: %s,' % (p.name, value)
+        return value
 
     def builder_method_lines(self):
         p = self.__param
@@ -697,30 +702,29 @@ class BuilderParam:
         yield '        self'
         yield '    }'
     
-    def defval_line_or_not(self):
+    def defval_line(self):
         p = self.__param
         if not p.type.is_non_string_ref():
-            return
+            return None
         defval = p.defval
         if defval and defval.startswith('wxDefault'):
             defval = '%s::default()' % (p.type.in_rust(deref=True),)
         elif defval == '*wxBLACK':
             # FIXME: special handling
             defval = 'Colour::new_with_str("BLACK")'
-        yield '        let %s = self.%s.take().unwrap_or_else(|| %s);' % (
+        return 'let %s = self.%s.take().unwrap_or_else(|| %s);' % (
             p.name,
             p.name,
             defval,
         )
     
-    def ctor_line(self):
+    def ctor_param(self):
         p = self.__param
-        param = '%s%s%s' % (
+        return '%s%s%s' % (
             '&' if p.type.is_ref() else '',
             '' if p.type.is_non_string_ref() else 'self.',
             p.name,
         )
-        return '            %s,' % (param,)
 
 
 class CxxClassBinding:
