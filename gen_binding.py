@@ -169,7 +169,7 @@ extern "C" {
 def builder_rs(classes, libname):
     yield 'use super::*;'
     for cls in classes:
-        for line in cls.lines(for_builder=True):
+        for line in cls.builder_lines():
             yield line
 
 def class_rs(initials, libname):

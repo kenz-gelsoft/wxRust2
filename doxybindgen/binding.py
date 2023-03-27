@@ -29,12 +29,7 @@ class RustClassBinding:
             pascal_to_snake(self.__model.unprefixed()),
         )
 
-    def lines(self, for_ffi=False, for_methods=False, for_builder=False):
-        if for_builder:
-            for line in self._builder_lines():
-                yield line
-            return
-
+    def lines(self, for_ffi=False, for_methods=False):
         yield ''
         yield '// %s' % (
             self.__model.name,
@@ -288,7 +283,7 @@ class RustClassBinding:
                 yield '%s%s' % (indent, line)
         yield '}'
 
-    def _builder_lines(self):
+    def builder_lines(self):
         unprefixed = self.__model.unprefixed()
         for builder in (c for c in self._ctors() if c.is_builder):
             for line in builder.builder_lines(unprefixed):
