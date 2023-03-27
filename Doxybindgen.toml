@@ -715,6 +715,7 @@ wx31 = [
     'Create',
 ]
 [types.wxColourPickerCtrl]
+builder = 'wxColourPickerCtrl1'
 blocklist = [
     'SetColour1',
 ]
@@ -1993,6 +1994,7 @@ not_windows = [
     'IsPlaying',
 ]
 [types.wxSpinButton]
+builder = 'wxSpinButton1'
 wx31 = [
     'GetIncrement',
     'SetIncrement',

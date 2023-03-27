@@ -75,6 +75,7 @@ class Class:
         self.enums = []
         self.methods = []
         config = config.get(self.name) or {}
+        self.__builder = config.get('builder')
         self.__blocklist = config.get('blocklist') or []
         self.event_types = config.get('event_types') or []
         self.config = config
@@ -122,6 +123,9 @@ class Class:
     def unprefixed(self):
         return self.name[2:]
 
+    def is_builder(self, name):
+        return name == self.__builder
+
     def is_blocked_method(self, name):
         return name in self.__blocklist
 
@@ -148,7 +152,9 @@ class Method:
             is_array = param.find('array') is not None
             ptype = CxxType(cls.manager, param.find('type'), is_array)
             pname = param.findtext('declname')
-            self.params.append(Param(ptype, pname))
+            defval = param.find('defval')
+            defval = ''.join(defval.itertext()) if defval is not None else None
+            self.params.append(Param(ptype, pname, defval))
         is_virtual = e.get('virt') == 'virtual'
         is_override = e.find('reimplements') is not None
         self.is_virtual_override = is_virtual and is_override
@@ -168,6 +174,9 @@ class Method:
         if self.returns.not_supported():
             return True
         return any(p.type.not_supported() for p in self.params)
+
+    def is_builder(self):
+        return self.cls.is_builder(self.name())
 
     def is_blocked(self):
         return self.cls.is_blocked_method(self.name())
@@ -301,9 +310,10 @@ class ReturnTypeWrapper:
                 '%s::from_ptr(%s)' % (returns, call)]
 
 class Param:
-    def __init__(self, type, name):
+    def __init__(self, type, name, defval=None):
         self.type = type
         self.name = non_keyword_name(camel_to_snake(name))
+        self.defval = defval
     
     def is_self(self):
         return self.name == 'self'
@@ -491,7 +501,7 @@ class CxxType:
     
     def marshal(self, param):
         name = camel_to_snake(param.name)
-        if self._is_const_ref_to_string():
+        if self.is_const_ref_to_string():
             # This variable keeps temporary wxString object in this scope.
             yield 'let %s = WxString::from(%s);' % (
                 name,
@@ -499,7 +509,7 @@ class CxxType:
             )
         if (self.is_ref_to_binding() or
             # So, taking pointer must be another expression for its lifetime.
-            self._is_const_ref_to_string()):
+            self.is_const_ref_to_string()):
             yield 'let %s = %s;' % (
                 name,
                 param.rust_ffi_ref(),
@@ -515,15 +525,19 @@ class CxxType:
             yield '    None => ptr::null_mut(),'
             yield '};'
 
-    def in_rust(self, for_ffi=False):
+    def in_rust(self, for_ffi=False, deref=False):
         t = self.typename
         if not for_ffi:
-            if self._is_const_ref_to_string():
-                return '&str'
+            if self.is_const_ref_to_string():
+                return 'String' if deref else '&str'
+            unprefixed = '%s%s' % (
+                '' if deref else '&',
+                t[2:],
+            )
             if self.is_const_ref_to_binding():
-                return '&%s' % (t[2:])
+                return '%s' % (unprefixed,)
             if self.is_ptr_to_binding():
-                return 'Option<&%s>' % (t[2:])
+                return 'Option<%s>' % (unprefixed,)
         if t in CXX2RUST:
             t = CXX2RUST[t]
         if self.__indirection:
@@ -539,9 +553,13 @@ class CxxType:
     def is_ref_to_binding(self):
         return self.is_ref() and self._is_binding_type()
 
-    def _is_const_ref_to_string(self):
+    def is_const_ref_to_string(self):
         return (self._is_const_ref() and
                 self.typename in STR_TYPES)
+
+    def is_non_string_ref(self):
+        return (self.is_ref() and
+                not self.is_const_ref_to_string())
 
     def is_const_ref_to_binding(self):
         return self._is_const_ref() and self._is_binding_type()
