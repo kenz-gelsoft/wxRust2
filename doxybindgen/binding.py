@@ -407,7 +407,7 @@ class RustMethodBinding:
         self.__ffi_self = Param(RustType(model.cls.name, model.const), 'self_')
         self.__generic_params = GenericParams(self.__model.params)
         if self.is_builder:
-            self.__builder_params = [BuilderParam(p) for p in self.__model.params]
+            self.__builder_params = [BuilderParam(p) for p in self.__model.params if p.name != 'parent']
 
     def is_blocked(self):
         return self.__model.is_blocked()
@@ -483,6 +483,7 @@ class RustMethodBinding:
         yield ''
         cls_name = unprefixed
         yield "pub struct %sBuilder<'a, P: WindowMethods> {" % (cls_name,)
+        yield "    parent: Option<&'a P>,"
         for p in self.__builder_params:
             yield '    %s: %s,' % (
                 p.name,
@@ -495,6 +496,7 @@ class RustMethodBinding:
         )
         yield "    fn builder(parent: Option<&'a P>) -> %sBuilder<'a, P> {" % (cls_name,)
         yield '        %sBuilder {' % (cls_name,)
+        yield '            parent: parent,'
         for p in self.__builder_params:
             yield '            %s: %s,' % (
                 p.name, 
@@ -515,6 +517,7 @@ class RustMethodBinding:
         yield '        %s::new(' % (
             cls_name,
         )
+        yield '            self.parent,'
         for p in self.__builder_params:
             yield '            %s,' % (p.ctor_param(),)
         yield '        )'
@@ -655,18 +658,14 @@ class BuilderParam:
     def struct_type(self):
         p = self.__param
         typename = p.type.in_rust(deref=True)
-        if p.name == 'parent':
-            typename = "Option<&'a P>"
-        elif p.type.is_non_string_ref():
+        if p.type.is_non_string_ref():
             typename = 'Option<%s>' % (typename,)
         return typename
     
     def defval(self):
         p = self.__param
         value = p.defval
-        if p.name == 'parent':
-            value = 'parent'
-        elif p.name == 'id' and not value:
+        if p.name == 'id' and not value:
             value = 'ID_ANY'
         elif p.type.is_const_ref_to_string():
             if value.endswith('NameStr'):
@@ -681,8 +680,6 @@ class BuilderParam:
 
     def builder_method_lines(self):
         p = self.__param
-        if p.name == 'parent':
-            return
         yield '    pub fn %s(&mut self, %s: %s) -> &mut Self {' % (
             p.name,
             p.name,
